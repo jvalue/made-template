@@ -1,4 +1,4 @@
-name: Grading Feedback
+name: Exercise Feedback
 
 on:
   push:
