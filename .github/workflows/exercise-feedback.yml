@@ -1,0 +1,44 @@
+name: Exercise Feedback
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - exercises/**
+
+jobs:
+  exercise-feedback:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        path: main
+
+    - name: Checkout exercise feedback
+      uses: actions/checkout@v3
+      with:
+        repository: jvalue/amse-exercise-feedback
+        path: grading
+
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+
+    # Install jayvee
+    - name: Set up Jayvee
+      run: |
+        ./grading/ci/setup_jayvee.sh
+
+    # Install python
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    # Run exercise feedback
+    - name: Exercise feedback
+      run: |
+        ./grading/ci/run_grading.sh
