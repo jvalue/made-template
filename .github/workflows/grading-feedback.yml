@@ -16,10 +16,10 @@ jobs:
       with:
         path: main
 
-    - name: Checkout grading
+    - name: Checkout exercise feedback
       uses: actions/checkout@v3
       with:
-        repository: jvalue/amse-grading
+        repository: jvalue/amse-exercise-feedback
         path: grading
 
     - name: Set up Node
@@ -38,7 +38,7 @@ jobs:
       with:
         python-version: 3.11
 
-    # Run grading feedback
-    - name: Grading feedback
+    # Run exercise feedback
+    - name: Exercise feedback
       run: |
         ./grading/ci/run_grading.sh
