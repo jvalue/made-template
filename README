@@ -1,6 +1,6 @@
 # AMSE/SAKI 2023 Template Project
 This template project provides some structure for your open data project in the AMSE/SAKI module.
-
+This repository contains (a) a data science project that is developed by the student over the course of the semester, and (b) the exercises that are submitted over the course of the semester.
 Before you begin, make sure you have [Python](https://www.python.org/) and [Jayvee](https://github.com/jvalue/jayvee) installed. We will work with [Jupyter notebooks](https://jupyter.org/). The easiest way to do so is to set up [VSCode](https://code.visualstudio.com/) with the [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter).
 
 ## Project Setup
@@ -21,9 +21,9 @@ During the semester you will need to complete exercises, sometimes using [Python
 5. `./exercises/exercise5.jv` or `./exercises/exercise5.py`
 
 ### Grading Feedback
-We provide automated grading feedback using a GitHub action (that is defined in `.github/workflows/grading-feedback.yml`). To view your grading feedback, navigate to Actions -> Grading Feedback in your repositort (or use the direct link [/actions/workflows/grading-feedback.yml](/actions/workflows/grading-feedback.yml)).
+We provide automated grading feedback using a GitHub action (that is defined in `.github/workflows/grading-feedback.yml`). To view your grading feedback, navigate to Actions -> Grading Feedback in your repository (or use the direct link [/actions/workflows/grading-feedback.yml](/actions/workflows/grading-feedback.yml)).
 
-The grading feedback is executed whenever you make a change in files in the `exercise` folder. To see the feedback, open the lates GitHub Action run, open the `grading-feedback` job and `Grading feedback` step. You should see command line output that contains output like this:
+The grading feedback is executed whenever you make a change in files in the `exercise` folder. To see the feedback, open the latest GitHub Action run, open the `grading-feedback` job and `Grading Feedback` step. You should see command line output that contains output like this:
 
 ```sh
 Found exercises/exercise1.jv, executing model...
