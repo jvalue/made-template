@@ -21,7 +21,7 @@ During the semester you will need to complete exercises, sometimes using [Python
 5. `./exercises/exercise5.jv` or `./exercises/exercise5.py`
 
 ### Grading Feedback
-We provide automated grading feedback using a GitHub action (that is defined in `.github/workflows/grading-feedback.yml`). To view your grading feedback, navigate to Actions -> Grading Feedback in your repositort (or use the direct link [/actions/workflows/grading-feedback.yml](/actions/workflows/grading-feedback.yml)).
+We provide automated grading feedback using a GitHub action (that is defined in `.github/workflows/grading-feedback.yml`). To view your grading feedback, navigate to Actions -> Grading Feedback in your repository (or use the direct link [/actions/workflows/grading-feedback.yml](/actions/workflows/grading-feedback.yml)).
 
 The grading feedback is executed whenever you make a change in files in the `exercise` folder. To see the feedback, open the lates GitHub Action run, open the `grading-feedback` job and `Grading feedback` step. You should see command line output that contains output like this:
 
