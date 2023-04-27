@@ -14,12 +14,13 @@ The analysis helps XY to do YZ.
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+### Datasource1: Benchmarkdatensatz Personen-Auslastung der Regional- und Fernbahnhöfe Deutschlands 
+* Metadata URL: https://mobilithek.info/offers/573351169210855424
+* Data URL: https://mobilithek.info/mdp-api/files/aux/573351169210855424/benchmark_personenauslastung_bahnhoefe_training.csv
 * Data Type: CSV
 
-Short description.
+Dieser Datensatz dient als Benchmark für die Vorhersage von der Personenauslastung an Deutschen Fern- und Regionalbahnhöfen. Die Personenauslastung wurde anhand der auf Floating-Phone-Daten basierenden angezeigten Auslastung auf Google Maps (Daten © 2021 Google) ermittelt. Neben der tatsächlich beobachteten Auslastung enthält der Datensatz außerdem die historisch durchschnittliche Auslastung pro Stunde. Der Datensatz ist aufgeteilt in ein Trainings-, eine Validierungs- und ein Testdatensatz.
+
 
 ## Work Packages
 
