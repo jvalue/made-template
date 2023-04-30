@@ -3,24 +3,34 @@
 ## Summary
 
 <!-- Describe your data science project in max. 5 sentences. -->
-This projects analyzes XY.
+This projects analyzes the amount of cyclist in münster and the weather in münster.
 
 ## Rationale
 
 <!-- Outline the impact of the analysis, e.g. which pains it solves. -->
-The analysis helps XY to do YZ.
+The analysis helps determine how much the weather effects the willingness of people to use their bycicle in münster
 
 ## Datasources
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: Benchmarkdatensatz Personen-Auslastung der Regional- und Fernbahnhöfe Deutschlands 
-* Metadata URL: https://mobilithek.info/offers/573351169210855424
-* Data URL: https://mobilithek.info/mdp-api/files/aux/573351169210855424/benchmark_personenauslastung_bahnhoefe_training.csv
+### Datasource1: Verkehrszählung Fahrradverkehr: Tagesaktuelle Daten 
+* Metadata URL: https://www.govdata.de/web/guest/suchen/-/details/verkehrszahlung-fahrradverkehr-daten-der-zahlstellen-munster-josefsviertel11f62
+* Data URL: https://github.com/od-ms/radverkehr-zaehlstellen
 * Data Type: CSV
 
-Dieser Datensatz dient als Benchmark für die Vorhersage von der Personenauslastung an Deutschen Fern- und Regionalbahnhöfen. Die Personenauslastung wurde anhand der auf Floating-Phone-Daten basierenden angezeigten Auslastung auf Google Maps (Daten © 2021 Google) ermittelt. Neben der tatsächlich beobachteten Auslastung enthält der Datensatz außerdem die historisch durchschnittliche Auslastung pro Stunde. Der Datensatz ist aufgeteilt in ein Trainings-, eine Validierungs- und ein Testdatensatz.
+Im Stadtgebiet Münster gibt es einige Fahrrad-Zählstellen. Das Amt für Mobilität und Tiefbau stellt die Anzahl der täglich gezählten RadfahrerInnen an den Fahrradzählstationen in dem hier verlinkten GIT-Repository tagesaktuell zur Verfügung.
 
+
+
+Die Daten werden jede Nacht aktualisiert und liegen in 15-Minuten-Abständen vor. Die aktuellsten Daten befinden sich immer im Unterverzeichnis der entsprechenden Zählstelle in der Datei, die nach dem aktuellen Monat benannt ist. Beispiel ist “04-2021.csv” für April 2021.
+
+### Datasource1: Historische stündliche Stationsmessungen der Lufttemperatur und Luftfeuchte für Deutschland 
+* Metadata URL: https://mobilithek.info/offers/-4920664365588601619
+* Data URL: https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/moisture/historical/stundenwerte_TF_01766_19891001_20221231_hist.zip
+* Data Type: txt
+
+Diese historischen Daten sind qualitätsgeprüfte Messwerte und Beobachtungen. Sie stammen aus Stationen des DWD und rechtlich und qualitativ gleichgestellten Partnernetzstationen. Umfangreiche Stationsmetadaten (Stationsverlegungen,  Instrumentenwechsel, Wechsel der Bezugszeit, Änderungen in den Algorithmen) werden mitgeliefert.
 
 ## Work Packages
 
