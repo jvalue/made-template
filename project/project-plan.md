@@ -19,7 +19,10 @@ The analysis helps to predict future delays and cancellation. To adjust people's
 * Data URL: https://www.opendata-oepnv.de/ht/de/organisation/delfi/startseite
 * Data Type: GTFS
 
-Short description.
+### Datasource2: DWD
+* Metadata URL: https://www.dwd.de/EN/ourservices/cdc/cdc_ueberblick-klimadaten_en.html
+* Data URL: https://climate-adapt.eea.europa.eu/en/metadata/portals/climate-data-center-cdc-of-the-german-weather-service-dwd
+* Data Type:
 
 ## Work Packages
 
