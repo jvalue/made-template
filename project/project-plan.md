@@ -3,7 +3,7 @@
 ## Summary
 
 <!-- Describe your data science project in max. 5 sentences. -->
-This projects analyzes XY.
+This projects analyzes Hanna Jobst
 
 ## Rationale
 
