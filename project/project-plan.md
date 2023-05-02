@@ -38,11 +38,14 @@ get DATA:"Bevölkerungsentwicklung nach Geschlecht"from Datasource 2
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1.Data Collection and Cleaning: This work package involves collecting data on the type and quantity of vehicles in Münster as well as population and population composition data. The collected data needs to be cleaned and formatted for analysis. (Issue: Data Collection and Cleaning)
+1.Data Collection : This work package involves collecting data on the type and quantity of vehicles in Münster as well as population and population composition data.(Issue: Data ingestion)
 
-2.Exploratory Data Analysis: This work package involves exploring the relationships between the type and quantity of vehicles and the population and population composition using descriptive statistics and visualizations. (Issue: Exploratory Data Analysis)
-3.Statistical Analysis: This work package involves conducting statistical analysis to quantify the relationships between the variables of interest, such as correlation and regression analysis. (Issue: Statistical Analysis)
-4.Interpretation of Results: This work package involves interpreting the results of the statistical analysis and drawing meaningful conclusions about the relationships between the type and quantity of vehicles and the population and population composition. (Issue: Interpretation of Results)
-4.Documentation and Reporting: This work package involves documenting the methodology, results, and recommendations of the analysis in a report that is clear, concise, and accessible to stakeholders. (Issue: Documentation and Reporting)
+2. Data Cleansing & Transformation:This work package involves the collected data that needs to be cleaned and formatted for analysis. (Issue: Data Cleansing &Transformation)
 
-[i1]: 
+3.Data Storage:Save data in the right format in a directory where you can find it again.(Issue: Data Storage) 
+
+4.Exploratory Data Analysis: This work package involves exploring the relationships between the type and quantity of vehicles and the population and population composition using descriptive statistics and visualizations. (Issue: Exploratory Data Analysis)
+
+5.Statistical Analysis: This work package involves conducting statistical analysis to quantify the relationships between the variables of interest, such as correlation and regression analysis. (Issue: Statistical Analysis)
+
+6.Interpretation of Results: This work package involves interpreting the results of the statistical analysis and drawing meaningful conclusions about the relationships between the type and quantity of vehicles and the population and population composition. (Issue: Data Visualization)
