@@ -25,7 +25,14 @@ Short description.
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
+1. gtfs-functions [#1][i1]
+2. Pandas 2.0.1 [#2][i2]
+3. Matplotlib 3.7.1 [#3][i3]
+4. scikit-learn 1.2.2 [#4][i4]
 
-[i1]: https://github.com/jvalue/2023-amse-template/issues/1
+
+[i1]: https://github.com/HassanRady/2023-amse-template/issues/1
+[i2]: https://github.com/HassanRady/2023-amse-template/issues/2
+[i3]: https://github.com/HassanRady/2023-amse-template/issues/3
+[i4]: https://github.com/HassanRady/2023-amse-template/issues/4
+
