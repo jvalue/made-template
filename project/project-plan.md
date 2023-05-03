@@ -1,31 +1,33 @@
 # Project Plan
 
 ## Summary
-
-<!-- Describe your data science project in max. 5 sentences. -->
-This projects analyzes XY.
+This project aims to analyze the correlation between the proximity of public transport stops and the rental prices of apartments in Nuremberg.
 
 ## Rationale
-
-<!-- Outline the impact of the analysis, e.g. which pains it solves. -->
-The analysis helps XY to do YZ.
+By understanding the relationship between public transport stops and rental prices, this analysis can provide valuable insights for renters, landlords, and city planners in optimizing public transportation networks and improving the accessibility of housing in Nuremberg.
 
 ## Datasources
+### Datasource1: Nuremberg Stops: IDs and geodata
+Metadata URL: https://mobilithek.info/offers/-6228947429763481687 <br />
+Data URL: https://opendata.vag.de/dataset/08eb49f9-0f6c-4b76-96fd-5f8e3a0ac593/resource/c66d5b67-6a01-4190-a9cf-1de6359d07ae/download/20170601_haltestellen_id_geo.xlsx <br />
+Data Type: xlsx 
 
-<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
+This dataset provides information on all subway, tram, and bus stops in the VAG area of Nuremberg, including their IDs and geolocation data.
 
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
-* Data Type: CSV
+### Datasource2: Immoscout24 dataset
+Metadata URL: https://www.kaggle.com/datasets/corrieaar/apartment-rental-offers-in-germany <br />
+Data URL: https://www.kaggle.com/datasets/corrieaar/apartment-rental-offers-in-germany/download?datasetVersionNumber=6 <br />
+Data Type: xlsx
 
-Short description.
+This dataset contains rental property listings on Immoscout24, the largest real estate platform in Germany, including information on rental prices, property attributes, and location.
 
 ## Work Packages
-
-<!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
-
-1. Example Issue [#1][i1]
-2. ...
-
-[i1]: https://github.com/jvalue/2023-amse-template/issues/1
+- [x] : Find usable open data sources
+- [ ] : Data cleaning and preprocessing
+- [ ] : Exploratory data analysis
+- [ ] : Spatial analysis
+- [ ] : Visualization and reporting
+- [ ] : Build data pipelines
+- [ ] : Implement automated testing
+- [ ] : Add continous integration
+- [ ] : Deploy project
