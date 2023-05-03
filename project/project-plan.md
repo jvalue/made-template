@@ -19,18 +19,28 @@ Description : RDF (Star) knowledge graph with connection durations between the 1
 
 ### DatasourceY: Citypopulation
 * Data URL: https://citypopulation.de/en/germany/cities/
-* Data Type: Web
+* Data Type: HTML
 
 Description : German cities with population size
 
 ### DatasourceZ: Wikipedia
 * Data URL: https://en.wikipedia.org/wiki/List_of_German_cities_by_GDP
-* Data Type: Web
+* Data Type: HTML
 
-Description : GList of German cities by GDP
+Description : List of German cities by GDP
 
 ## Work Packages
 
-
+1. Convert the HTML data to CSV format
+2. Analyze the transportation connectivity between cities in terms of car, train, and flight durations using the RDF knowledge graph.
+3. Combine RDF Data with CSV file
+4. Cleaning Data 
+5. EDA 
+6. Investigate the relationship between transportation connectivity and economic indicators, such as population size or geographic location. 
 
 [i1]: https://github.com/jvalue/2023-amse-template/issues/1
+[i2]: https://github.com/jvalue/2023-amse-template/issues/2
+[i3]: https://github.com/jvalue/2023-amse-template/issues/3
+[i4]: https://github.com/jvalue/2023-amse-template/issues/4
+[i5]: https://github.com/jvalue/2023-amse-template/issues/5
+[i6]: https://github.com/jvalue/2023-amse-template/issues/6
