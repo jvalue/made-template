@@ -31,12 +31,12 @@ Description : List of German cities by GDP
 
 ## Work Packages
 
-1. Convert the HTML data to CSV format [i1]
-2. Analyze the transportation connectivity between cities in terms of car, train, and flight durations using the RDF knowledge graph. [i2]
-3. Combine RDF Data with CSV file. [i3]
-4. Cleaning Data . [i4]
-5. Exploratory Data Analysis. [i5]
-6. Investigate the relationship between transportation connectivity and economic indicators, such as population size or geographic location. [i6]
+1. Convert the HTML data to CSV format [#1]
+2. Analyze the transportation connectivity between cities in terms of car, train, and flight durations using the RDF knowledge graph. [#2]
+3. Combine RDF Data with CSV file. [#3]
+4. Cleaning Data . [#4]
+5. Exploratory Data Analysis. [#5]
+6. Investigate the relationship between transportation connectivity and economic indicators, such as population size or geographic location. [#6]
 
 [i1]: https://github.com/diganto-deb/2023-AMSE/issues/1
 [i2]: https://github.com/diganto-deb/2023-AMSE/issues/2
