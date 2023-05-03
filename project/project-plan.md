@@ -2,30 +2,32 @@
 
 ## Summary
 
-<!-- Describe your data science project in max. 5 sentences. -->
-This projects analyzes XY.
+This project aims to analyze correlations between popular songs (and their genres) and the weather conditions at the time the songs were popular. The project will attempt to identify possible relationships. Based on these, it will use the current weather conditions to suggest a "weather appropriate" song to the user.
 
 ## Rationale
 
-<!-- Outline the impact of the analysis, e.g. which pains it solves. -->
-The analysis helps XY to do YZ.
+The analysis will provide insights into the possible relationship between music and weather conditions. While the project is primarily intended as an entertaining exploration of these, it could also lead to users discovering new music.
 
 ## Datasources
 
-<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
+### Datasource1: Spotify daily charts per country
 
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+* Metadata URL: https://www.kaggle.com/datasets/pepepython/spotify-huge-database-daily-charts-over-3-years
 * Data Type: CSV
 
-Short description.
+This dataset contains all songs in Spotify's daily top 200 charts over a 3-year period (2017-2020) for 35+1 (global) countries. It includes various metadata such as genre or audio features like acousticness or danceability.
+
+### Datasource2: DWD Climate Data
+
+* Metadata URL: https://mobilithek.info/offers/-4979349128225020802
+* Data URL: https://opendata.dwd.de/climate
+* Data Type: various
+
+The data set is used for weather monitoring and forecasting purposes. It contains standardized meteorological measurement and observation data from various locations in Germany.
 
 ## Work Packages
 
-<!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
+<!-- TODO -->
 
-1. Example Issue [#1][i1]
-2. ...
 
-[i1]: https://github.com/jvalue/2023-amse-template/issues/1
+**:warning: Disclaimer:** This project is intended as an amusing exercise in finding correlations and does not aim to prove a causal relationship between weather conditions and the popularity of particular songs or genres. The analysis is not intended to be scientifically rigorous and should not be construed as such.
