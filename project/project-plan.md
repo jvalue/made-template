@@ -27,7 +27,13 @@ The data set is used for weather monitoring and forecasting purposes. It contain
 
 ## Work Packages
 
-<!-- TODO -->
+- #1
+- #2
+- #3
+- #5
+- #6
+- #4
 
+___
 
 **:warning: Disclaimer:** This project is intended as an amusing exercise in finding correlations and does not aim to prove a causal relationship between weather conditions and the popularity of particular songs or genres. The analysis is not intended to be scientifically rigorous and should not be construed as such.
