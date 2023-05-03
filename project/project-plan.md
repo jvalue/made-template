@@ -31,7 +31,7 @@ Description : List of German cities by GDP
 
 ## Work Packages
 
-1. Convert the HTML data to CSV format
+1. Convert the HTML data to CSV format [i1]
 2. Analyze the transportation connectivity between cities in terms of car, train, and flight durations using the RDF knowledge graph.
 3. Combine RDF Data with CSV file
 4. Cleaning Data 
