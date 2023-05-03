@@ -31,11 +31,6 @@ Description : GList of German cities by GDP
 
 ## Work Packages
 
-<!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
-
-1. Extract data from the web  (scrappping)
-2. Combine the RDF knowledge graph with scrapped data
-3. Analyzing the transportation connectivity between cities in terms of car, train, and flight durations using your RDF knowledge graph. 
 
 
 [i1]: https://github.com/jvalue/2023-amse-template/issues/1
