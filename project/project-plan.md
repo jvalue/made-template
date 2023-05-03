@@ -35,12 +35,12 @@ Description : List of German cities by GDP
 2. Analyze the transportation connectivity between cities in terms of car, train, and flight durations using the RDF knowledge graph.
 3. Combine RDF Data with CSV file
 4. Cleaning Data 
-5. EDA 
+5. Exploratory Data Analysis
 6. Investigate the relationship between transportation connectivity and economic indicators, such as population size or geographic location. 
 
-[i1]: https://github.com/jvalue/2023-amse-template/issues/1
-[i2]: https://github.com/jvalue/2023-amse-template/issues/2
-[i3]: https://github.com/jvalue/2023-amse-template/issues/3
-[i4]: https://github.com/jvalue/2023-amse-template/issues/4
-[i5]: https://github.com/jvalue/2023-amse-template/issues/5
-[i6]: https://github.com/jvalue/2023-amse-template/issues/6
+[i1]: https://github.com/diganto-deb/2023-AMSE/issues/1
+[i2]: https://github.com/diganto-deb/2023-AMSE/issues/2
+[i3]: https://github.com/diganto-deb/2023-AMSE/issues/3
+[i4]: https://github.com/diganto-deb/2023-AMSE/issues/4
+[i5]: https://github.com/diganto-deb/2023-AMSE/issues/5
+[i6]: https://github.com/diganto-deb/2023-AMSE/issues/6
