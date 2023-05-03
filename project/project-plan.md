@@ -23,7 +23,7 @@ Description : RDF (Star) knowledge graph with connection durations between the 1
 
 Description : German cities with population size
 
-### DatasourceY: Wikipedia
+### DatasourceZ: Wikipedia
 * Data URL: https://en.wikipedia.org/wiki/List_of_German_cities_by_GDP
 * Data Type: Web
 
