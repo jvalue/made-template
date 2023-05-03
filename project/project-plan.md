@@ -14,10 +14,15 @@ This analysis could help the cities of münster to analyze in more detail certai
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: ExampleSource
+### Datasource1: 
 * Metadata URL: https://mobilithek.info/offers/-6901989592576801458
 * Data URL: https://raw.githubusercontent.com/OmarFourati/2023-amse-template/combine-csv-files/data/100031297/2019-01.csv
 * Data Type: CSV
+
+### Datasource2: 
+* Metadata URL: https://www.stadt-muenster.de/verkehrsplanung/verkehr-in-zahlen/radverkehrszaehlungen/neutor
+* Data: ../Zaehlstelle_Neutor_Stundenauswertung_2022 (1).xlsx
+* Data Type: xlsx
 
 There are a number of bicycle counting points in the city of Münster. The Office for Mobility and Civil Engineering provides the number of cyclists counted daily at the bicycle counting stations in the GIT repository linked here on a daily basis.
 
