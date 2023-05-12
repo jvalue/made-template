@@ -24,16 +24,30 @@ Excel Sheet provided by the Bundesnetzagentur, which shows the Charging Infrastr
 It includes normal charging points (Normalladepunkte, NLP) and fast charging points (Schnellladepunkte, SLP).
 Important for this project will be especially the sheet "4.1 Ladepunkte je BL", which shows for every german state the amount of NLPs and SLPs at a specific point in time.
 
-### Datasource2: New registrations of motor vehicles with alternative drive systems
-* Metadata URL: https://mobilithek.info/offers/573358160767496192
-* Data URL: https://www.kba.de/DE/Statistik/Fahrzeuge/Neuzulassungen/Umwelt/n_umwelt_node.html
-    * e.g. for January 2022: https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ28/fz28_2022_01.xlsx?__blob=publicationFile
+### Datasource2: New Registrations of Motor Vehicles with Alternative Drive Systems
+* Metadata URL: 
+    * 2021: https://mobilithek.info/offers/573358207202664448
+    * 2022: https://mobilithek.info/offers/573358160767496192
+    * 2023: https://mobilithek.info/offers/573357313572614144
 * Data Format: xlsx
 
-Excel Sheets provided for every Month by the Kraftfahrt-Bundesamt, which shows the new registrations of motor vehicles with alternative drive systems. 
-Important for this project will be especially the sheets "FZ 28.2", which shows the new registration numbers for each month since 2016 and "FZ 28.9", which shows the new registrations for a specific month categorized by the corresponding state
+**Datasource2.1: New Registrations over Time**
+* Data URL: https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ28/fz28_2023_03.xlsx?__blob=publicationFile _(or newer version if available)_
+    * Sheet: FZ 28.2
 
-### Datasource3: German states with capitals by area, population and population density
+Excel Sheet shows the new registrations of motor vehicles with alternative drive systems for each month since January 2016.
+
+**Datasource2.2: New Registrations by German States**
+* Data URL:
+    * 2021: https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ28/fz28_2021_12.xlsx?__blob=publicationFile
+    * 2022: https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ28/fz28_2022_12.xlsx?__blob=publicationFile
+    * Sheet: FZ 28.9
+
+Excel Sheets show the new registrations of motor vehicles with alternative drive systems for each german state summed up over the full year for 2021 and 2022.
+
+
+
+### Datasource3: German States with Capitals by Area, Population and Population Density
 * Metadata URL: https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/02-bundeslaender.html
 * Data URL: https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/02-bundeslaender.xlsx?__blob=publicationFile
 * Data Format: xlsx
@@ -46,8 +60,10 @@ Excel Sheet provided by the Statistisches Bundesamt, which shows the area and po
 
 1. Explore Datasources [#1](https://github.com/nmarkert/amse/issues/1)
 2. Build an Automated Data Pipeline [#2](https://github.com/nmarkert/amse/issues/2)
-3. Explore and Analyze resulting Data [#3](https://github.com/nmarkert/amse/issues/3)
-4. Report Findings [#4](https://github.com/nmarkert/amse/issues/4)
-5. Add Automated Tests [#5](https://github.com/nmarkert/amse/issues/5)
-6. Add Continuous Integration [#6](https://github.com/nmarkert/amse/issues/6)
-7. Deploy using GitHub Pages [#7](https://github.com/nmarkert/amse/issues/7)
+3. Replace Hard-Coded Abbrevations for German States [#8](https://github.com/nmarkert/amse/issues/8)
+4. Explore and Analyze resulting Data [#3](https://github.com/nmarkert/amse/issues/3)
+5. Report Findings [#4](https://github.com/nmarkert/amse/issues/4)
+6. Add Automated Tests [#5](https://github.com/nmarkert/amse/issues/5)
+7. Add Continuous Integration [#6](https://github.com/nmarkert/amse/issues/6)
+8. Refine Datasources Notebook [#9](https://github.com/nmarkert/amse/issues/9)
+9. Deploy using GitHub Pages [#7](https://github.com/nmarkert/amse/issues/7)
