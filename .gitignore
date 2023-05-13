@@ -199,6 +199,4 @@ debug.log
 
 tmp.py
 tmp*
-.venv
 log.txt
-.env
