@@ -200,3 +200,4 @@ debug.log
 tmp.py
 tmp*
 log.txt
+*.sqlite
