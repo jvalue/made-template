@@ -20,4 +20,3 @@ for el in df2.columns:
 df1.to_sql("fahraddverkehr_2018", "sqlite:///./data/fahraddverkehr_2018.sqlite", if_exists="replace", index=False)
 df2.to_sql("fahraddverkehr_2022", "sqlite:///./data/fahraddverkehr_2022.sqlite", if_exists="replace", index=False)
 
-
