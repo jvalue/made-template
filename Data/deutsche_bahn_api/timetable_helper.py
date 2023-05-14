@@ -76,10 +76,15 @@ class TimetableHelper:
 
             if "l" in departure_object:
                 train_object.train_line = departure_object['l']
+            else:
+                train_object.train_line = "N/A"
 
             if arrival_object:
                 train_object.passed_stations = arrival_object['ppth']
                 train_object.arrival = arrival_object['pt']
+            else:
+                train_object.arrival = "N/A"
+                train_object.passed_stations = "N/A"
 
             train_list.append(train_object)
 
