@@ -201,3 +201,4 @@ tmp.py
 tmp*
 log.txt
 *.sqlite
+data.sqlite-journal
