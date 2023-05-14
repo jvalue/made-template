@@ -16,12 +16,12 @@ This analysis could help the cities of münster to analyze in more detail certai
 
 ### Datasource1: 
 * Metadata URL: https://mobilithek.info/offers/-8377471639463689219
-* Data URL: 
+* Data URL: https://raw.githubusercontent.com/OmarFourati/2023-amse-template/main/data/zaehlstelle_weseler_2018_stundenauswertung.csv
 * Data Type: CSV
 
 ### Datasource2: 
 * Metadata URL: https://www.stadt-muenster.de/verkehrsplanung/verkehr-in-zahlen/radverkehrszaehlungen/weseler-strasse
-* Data: 
+* Data: https://raw.githubusercontent.com/OmarFourati/2023-amse-template/main/data/Zaehlstelle_Weseler_Strasse_Stundenauswertung_2022.csv
 * Data Type: CSV
 
 There are a number of bicycle counting points in the city of Münster. The Office for Mobility and Civil Engineering provides the number of cyclists counted daily at the bicycle counting stations in the GIT repository linked here on a daily basis.
