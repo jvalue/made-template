@@ -9,7 +9,7 @@ import xml.etree.ElementTree as elementTree
 from deutsche_bahn_api.api_authentication import ApiAuthentication
 from deutsche_bahn_api.message import Message, resolve_message_by_code
 from deutsche_bahn_api.station import Station
-from Data.deutsche_bahn_api.train_plan import TrainPlan
+from deutsche_bahn_api.train_plan import TrainPlan
 from deutsche_bahn_api.train_changes import TrainChanges
 
 
@@ -47,11 +47,11 @@ class TimetableHelper:
     def get_timetable(self, hour: Optional[int] = None) -> list[TrainPlan]:
         train_list: list[TrainPlan] = []
         trains = elementTree.fromstringlist(self.get_timetable_xml(hour))
-        for TrainPlan in trains:
+        for train in trains:
             trip_label_object: dict[str, str] | None = None
             arrival_object: dict[str, str] | None = None
             departure_object: dict[str, str] | None = None
-            for train_details in TrainPlan:
+            for train_details in train:
                 if train_details.tag == "tl":
                     trip_label_object = train_details.attrib
                 if train_details.tag == "dp":
@@ -64,7 +64,7 @@ class TimetableHelper:
                 continue
 
             train_object: TrainPlan = TrainPlan()
-            train_object.stop_id = TrainPlan.attrib["id"]
+            train_object.stop_id = train.attrib["id"]
             train_object.train_type = trip_label_object["c"]
             train_object.train_number = trip_label_object["n"]
             train_object.platform = departure_object['pp']
