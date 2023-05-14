@@ -202,3 +202,5 @@ tmp*
 log.txt
 *.sqlite
 data.sqlite-journal
+
+*.ipynb
