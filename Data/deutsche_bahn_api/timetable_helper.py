@@ -9,7 +9,7 @@ import xml.etree.ElementTree as elementTree
 from deutsche_bahn_api.api_authentication import ApiAuthentication
 from deutsche_bahn_api.message import Message, resolve_message_by_code
 from deutsche_bahn_api.station import Station
-from deutsche_bahn_api.train import Train
+from Data.deutsche_bahn_api.train_plan import TrainPlan
 from deutsche_bahn_api.train_changes import TrainChanges
 
 
@@ -44,14 +44,14 @@ class TimetableHelper:
                             .format(response.status_code, response.text))
         return response.text
 
-    def get_timetable(self, hour: Optional[int] = None) -> list[Train]:
-        train_list: list[Train] = []
+    def get_timetable(self, hour: Optional[int] = None) -> list[TrainPlan]:
+        train_list: list[TrainPlan] = []
         trains = elementTree.fromstringlist(self.get_timetable_xml(hour))
-        for train in trains:
+        for TrainPlan in trains:
             trip_label_object: dict[str, str] | None = None
             arrival_object: dict[str, str] | None = None
             departure_object: dict[str, str] | None = None
-            for train_details in train:
+            for train_details in TrainPlan:
                 if train_details.tag == "tl":
                     trip_label_object = train_details.attrib
                 if train_details.tag == "dp":
@@ -63,8 +63,8 @@ class TimetableHelper:
                 """ Arrival without department """
                 continue
 
-            train_object: Train = Train()
-            train_object.stop_id = train.attrib["id"]
+            train_object: TrainPlan = TrainPlan()
+            train_object.stop_id = TrainPlan.attrib["id"]
             train_object.train_type = trip_label_object["c"]
             train_object.train_number = trip_label_object["n"]
             train_object.platform = departure_object['pp']
@@ -90,23 +90,23 @@ class TimetableHelper:
 
         return train_list
 
-    def get_timetable_changes(self, trains: list) -> list[Train]:
+    def get_timetable_changes(self, trains: list) -> list[TrainPlan]:
         response = requests.get(
             f"https://apis.deutschebahn.com/db-api-marketplace/apis/timetables/v1/fchg/{self.station.EVA_NR}",
             headers=self.api_authentication.get_headers()
         )
         changed_trains = elementTree.fromstringlist(response.text)
 
-        train_list: list[Train] = []
+        train_list: list[TrainPlan] = []
 
         for changed_train in changed_trains:
-            found_train: Train | None = None
+            found_train: TrainPlan | None = None
             train_changes: TrainChanges = TrainChanges()
             train_changes.messages = []
 
-            for train in trains:
-                if train.stop_id == changed_train.attrib["id"]:
-                    found_train = train
+            for TrainPlan in trains:
+                if TrainPlan.stop_id == changed_train.attrib["id"]:
+                    found_train = TrainPlan
 
             if not found_train:
                 continue
