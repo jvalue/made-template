@@ -23,11 +23,11 @@ This dataset contains rental property listings on Immoscout24, the largest real 
 
 ## Work Packages
 - [x] : Find usable open data sources
-- [ ] : Data cleaning and preprocessing
+- [x] : Build data pipelines
+- [x] : Data cleaning and preprocessing
 - [ ] : Exploratory data analysis
 - [ ] : Spatial analysis
 - [ ] : Visualization and reporting
-- [ ] : Build data pipelines
 - [ ] : Implement automated testing
 - [ ] : Add continous integration
 - [ ] : Deploy project
