@@ -3,13 +3,14 @@
 ## Summary
 
 <!-- Describe your data science project in max. 5 sentences. -->
-This projects analyzes the relationship between the amount of electirc charging stations available and the new registrations of electirc cars in Germany.
-For this, we take a look at the development over time and the situations at different german states.
+The goal of this project is to analyze the relationship between the amount of electric charging stations available and the new registrations of electric cars in Germany.
+For this we take a look at the amount of charging points overall, combining standard charging points (SCP) and fast charging points (FCP), and how they effect the new registrations of electric cars and plug-in-hybrids.
+We will analyze the relationship between these two factors over time for whole germany and at a specific point in time for the different states of germany.
 
 ## Rationale
 
 <!-- Outline the impact of the analysis, e.g. which pains it solves. -->
-The analysis can help to decide if building more electirc charging stations would lead to a higher new registartion rate of electric cars.
+This analysis should show the relationship between electric charging stations and the new registration rate of electric cars, in order to help deciding if building more charging stations for cars would lead to a higher rate of electirc powered cars.
 
 ## Datasources
 
@@ -61,9 +62,11 @@ Excel Sheet provided by the Statistisches Bundesamt, which shows the area and po
 1. Explore Datasources [#1](https://github.com/nmarkert/amse/issues/1)
 2. Build an Automated Data Pipeline [#2](https://github.com/nmarkert/amse/issues/2)
 3. Replace Hard-Coded Abbrevations for German States [#8](https://github.com/nmarkert/amse/issues/8)
-4. Explore and Analyze resulting Data [#3](https://github.com/nmarkert/amse/issues/3)
+4. Explore and Analyze Resulting Data [#3](https://github.com/nmarkert/amse/issues/3)
 5. Report Findings [#4](https://github.com/nmarkert/amse/issues/4)
 6. Add Automated Tests [#5](https://github.com/nmarkert/amse/issues/5)
 7. Add Continuous Integration [#6](https://github.com/nmarkert/amse/issues/6)
 8. Refine Datasources Notebook [#9](https://github.com/nmarkert/amse/issues/9)
-9. Deploy using GitHub Pages [#7](https://github.com/nmarkert/amse/issues/7)
+9. Improve Data Pipeline [#11](https://github.com/nmarkert/amse/issues/11)
+10. Deploy using GitHub Pages [#7](https://github.com/nmarkert/amse/issues/7)
+11. Make Repository Submission-Ready [#12](https://github.com/nmarkert/amse/issues/12) 

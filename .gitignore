@@ -1,0 +1,5 @@
+# Ignore Sqlite databases
+*.sqlite
+
+# Ignore __pycache__
+__pycache__
