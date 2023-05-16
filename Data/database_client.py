@@ -9,8 +9,8 @@ DB_PATH = join(dirname(os.path.abspath('')), os.environ["SQLITE_DB_NAME"])
 
 
 class SqliteClient:
-    conn = sqlite3.connect(DB_PATH)
-    db_engine = conn.cursor()
+    db_engine = sqlite3.connect(DB_PATH)
+    # db_engine = conn.cursor()
 
     db_engine.execute("""
 CREATE TABLE IF NOT EXISTS stations (
