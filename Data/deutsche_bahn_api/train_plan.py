@@ -5,7 +5,8 @@ dotenv_path = join(dirname(os.path.abspath('')), '.env')
 load_dotenv(dotenv_path)
 
 import pandas as pd
-from datetime import datetime
+
+from deutsche_bahn_api.data_processor import DataProcessor
 
 class TrainPlan:
     """A train plan given a station (train in station)."""
@@ -43,8 +44,8 @@ class TrainPlan:
         return f"TrainPlan(train_number={self.train_number}, train_type={self.train_type}, )"
     
     def insert_into_db(self, db_engine, table_name):
-        self.arrival = self.process_date_format(self.arrival)
-        self.departure = self.process_date_format(self.departure)
+        self.arrival = DataProcessor.process_date_format(self.arrival)
+        self.departure = DataProcessor.process_date_format(self.departure)
 
         db_engine.execute(
             f"""

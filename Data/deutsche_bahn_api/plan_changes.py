@@ -1,5 +1,6 @@
-from deutsche_bahn_api.message import Message
 import pandas as pd
+
+from data_processor import DataProcessor
 
 
 class PlanChange:
@@ -15,6 +16,9 @@ class PlanChange:
         self.platform = None
 
     def insert_into_db(self, db_engine, table_name):
+        self.arrival = DataProcessor.process_date_format(self.arrival)
+        self.departure = DataProcessor.process_date_format(self.departure)
+
         db_engine.execute(
             f"""
             INSERT INTO {table_name} VALUES (
