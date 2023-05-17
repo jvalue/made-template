@@ -66,5 +66,4 @@ if __name__ == "__main__":
 
     api = ApiClient(os.environ["DB_CLIENT_ID"], os.environ["DB_API_KEY"])
     response = api.get_current_hour_station_timetable(8000107)
-    print(response.station_number)
 
