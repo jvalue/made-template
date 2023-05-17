@@ -15,7 +15,7 @@ _logger = get_file_logger(__name__, 'debug')
 import xml.etree.ElementTree as elementTree
 
 from deutsche_bahn_api.train_plan import TrainPlan
-from deutsche_bahn_api.plan_changes import PlanChange
+from deutsche_bahn_api.plan_change import PlanChange
 
 class TimeTableHandler:
     def __init__(self) -> None:
