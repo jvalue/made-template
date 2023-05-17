@@ -1,56 +1,58 @@
-from __future__ import annotations
-from deutsche_bahn_api.plan_changes import PlanChange
-import pandas as pd
-
 import os
 from os.path import join, dirname
 from dotenv import load_dotenv
 dotenv_path = join(dirname(os.path.abspath('')), '.env')
 load_dotenv(dotenv_path)
 
+import pandas as pd
+from datetime import datetime
 
 class TrainPlan:
-    """A train given a station (train in station).
+    """A train plan given a station (train in station)."""
 
-    Returns:
-        _type_: _description_
-    """
-    EVA_NR: int
-    stop_id: str
-    trip_type: str
-    train_type: str
-    train_number: str
-    train_line: str | None
-    platform: str
-    passed_stations: str | None
-    next_stations: str
-    arrival: str
-    departure: str | None
-    plan_change: PlanChange | None
+    def __init__(self) -> None:
+        self.station_number: int
+        self.stop_id = None
+        self.trip_type = None
+        self.train_type = None
+        self.train_number = None
+        self.train_line = None
+        self.platform = None
+        self.passed_stations = None
+        self.next_stations = None
+        self.arrival = None
+        self.departure = None
+        self.plan_change = None
 
     def info(self) -> pd.DataFrame:
         df = pd.DataFrame({
+            "Station Number": self.station_number,
+            "Stop ID": self.stop_id,
             "Train Number": self.train_number,
             "Train Type": self.train_type,
-            "Platform": self.platform,
-            "Arrival Time": self.arrival,
             "Train Line": self.train_line,
-            "Departure": self.departure,
+            "Passed Stations": self.passed_stations,
             "Planned Stations": self.next_stations,
-            "Stop ID": self.stop_id,
+            "Arrival Time": self.arrival,
+            "Departure": self.departure,
+            "Platform": self.platform,
         }, index=[0])
         return df
 
     def __str__(self) -> str:
         return f"TrainPlan(train_number={self.train_number}, train_type={self.train_type}, )"
-
+    
     def insert_into_db(self, db_engine, table_name):
+        self.arrival = self.process_date_format(self.arrival)
+        self.departure = self.process_date_format(self.departure)
+
         db_engine.execute(
             f"""
             INSERT INTO {table_name} VALUES (
-                {self.EVA_NR}, '{self.stop_id}', '{self.trip_type}', '{self.train_type}', '{self.train_number}',
+                {self.station_number}, '{self.stop_id}', '{self.trip_type}', '{self.train_type}', '{self.train_number}',
               '{self.train_line}', '{self.platform}', '{self.next_stations}', '{self.passed_stations}', '{self.arrival}', 
               '{self.departure}'
               )
             """
         )
+        db_engine.commit()
