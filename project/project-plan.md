@@ -13,7 +13,7 @@ The analysis helps to predict future delays and cancellation. To adjust people's
 ## Datasources
 ### Datasource1: Mobilithek
 * Metadata URL: https://www.dwd.de/EN/ourservices/cdc/cdc_ueberblick-klimadaten_en.html
-* Data URL: https://climate-adapt.eea.europa.eu/en/metadata/portals/climate-data-center-cdc-of-the-german-weather-service-dwd
+* Data URL: https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/10_minutes/air_temperature/recent/
 * Data Type: CSV
 
 ### Datasource2: DB-API
