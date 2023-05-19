@@ -1,7 +1,6 @@
 import pandas as pd
 
-from data_processor import DataProcessor
-
+from deutsche_bahn_api.data_processor import DataProcessor
 
 class PlanChange:
     """ This class represents changed train attributes. """
