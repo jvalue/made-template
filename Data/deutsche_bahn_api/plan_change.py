@@ -6,13 +6,13 @@ class PlanChange:
     """ This class represents changed train attributes. """
 
     def __init__(self) -> None:
-        self.station_number = None
-        self.stop_id = None
-        self.next_stations = None
-        self.passed_stations = None
-        self.arrival = None
-        self.departure = None
-        self.platform = None
+        self.station_number = "N/A"
+        self.stop_id = "N/A"
+        self.next_stations = "N/A"
+        self.passed_stations = "N/A"
+        self.arrival = "N/A"
+        self.departure = "N/A"
+        self.platform = "N/A"
 
     def insert_into_db(self, db_engine, table_name):
         self.arrival = DataProcessor.process_date_format(self.arrival)

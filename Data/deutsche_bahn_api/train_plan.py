@@ -13,17 +13,17 @@ class TrainPlan:
 
     def __init__(self) -> None:
         self.station_number: int
-        self.stop_id = None
-        self.trip_type = None
-        self.train_type = None
-        self.train_number = None
-        self.train_line = None
-        self.platform = None
-        self.passed_stations = None
-        self.next_stations = None
-        self.arrival = None
-        self.departure = None
-        self.plan_change = None
+        self.stop_id = "N/A"
+        self.trip_type = "N/A"
+        self.train_type = "N/A"
+        self.train_number = "N/A"
+        self.train_line = "N/A"
+        self.platform = "N/A"
+        self.passed_stations = "N/A"
+        self.next_stations = "N/A"
+        self.arrival = "N/A"
+        self.departure = "N/A"
+        self.plan_change = "N/A"
 
     def info(self) -> pd.DataFrame:
         df = pd.DataFrame({
