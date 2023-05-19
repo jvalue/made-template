@@ -49,7 +49,7 @@ class TrainPlan:
 
         db_engine.execute(
             f"""
-            INSERT INTO {table_name} VALUES (
+            INSERT OR REPLACE INTO {table_name} VALUES (
                 {self.station_number}, '{self.stop_id}', '{self.trip_type}', '{self.train_type}', '{self.train_number}',
               '{self.train_line}', '{self.platform}', '{self.next_stations}', '{self.passed_stations}', '{self.arrival}', 
               '{self.departure}'
