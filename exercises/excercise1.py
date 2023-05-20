@@ -6,13 +6,13 @@ from sqlalchemy.types import BIGINT, TEXT, FLOAT
 source_url = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv"
 db_file = "airports.sqlite"
 table_name = "airports"
-column_names = ["id", "name", "city", "country", "iata_code", "icao_code", "latitude", "longitude", "altitude", "timezone"]
+column_names = ["id", "airport_name", "city", "country", "iata_code", "icao_code", "latitude", "longitude", "altitude", "timezone"]
 column_types = [BIGINT, TEXT, TEXT, TEXT, TEXT, TEXT, FLOAT, FLOAT, FLOAT, TEXT]
 
 
 def build_data_pipeline(source_url, db_file, table_name, column_names, column_types):
     # Fetch the data from the source URL into a pandas DataFrame
-    df = pd.read_csv(source_url, error_bad_lines=False)
+    df = pd.read_csv(source_url, delimiter = ';', error_bad_lines=False)
     
     # Create the SQLite engine and connect to the database
     engine = create_engine(f"sqlite:///{db_file}")
