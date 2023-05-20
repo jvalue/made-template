@@ -4,7 +4,7 @@ from sqlalchemy.types import BIGINT, TEXT, FLOAT
 
 
 source_url = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv"
-db_file = "airports.sqlite"
+db_file = "/Users/diganto/Data_Engineering/2023-AMSE/exercises/airports.sqlite"
 table_name = "airports"
 column_names = ["id", "airport_name", "city", "country", "iata_code", "icao_code", "latitude", "longitude", "altitude", "timezone"]
 column_types = [BIGINT, TEXT, TEXT, TEXT, TEXT, TEXT, FLOAT, FLOAT, FLOAT, TEXT]
