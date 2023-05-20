@@ -15,10 +15,10 @@ class DataProcessor:
         Returns:
             str: date in (YYYY-MM-DD-HH-MM) format.
         """
-        if date and not (date == "N/A") :
-            date = datetime.strptime(date, "%y%m%d%H%M").strftime('%Y-%m-%d %H:%M')
+        if date and not (date == "N/A"):
+            date = datetime.strptime(
+                date, "%y%m%d%H%M").strftime('%Y-%m-%d %H:%M')
         return date
-    
 
 
 if __name__ == "__main__":
