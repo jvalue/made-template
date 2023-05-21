@@ -1,3 +1,2 @@
 *.csv
-data.sqlite
-verkehrszaehlung.sqlite
+*.sqlite
