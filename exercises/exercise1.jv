@@ -39,7 +39,7 @@ pipeline airportpipeline{
 
     block db_loader oftype SQLiteLoader {
 		table: "airports";
-		file: "./airports.sqlite";
+		file: "../airports.sqlite";
 	}
 
     data_extractor
