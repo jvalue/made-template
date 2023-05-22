@@ -14,7 +14,7 @@ pipeline airportpipeline{
 
     block header_wrtie oftype CellWriter{
         at: cell A1;
-       	write: "name";
+       	write: ["name"];
     }
 
     block tabele_int oftype TableInterpreter{
