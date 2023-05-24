@@ -12,15 +12,10 @@ pipeline airportpipeline{
         delimiter: ";";
     }
 
-    block header_wrtie oftype CellWriter{
-        at: cell A1;
-       	write: ["name"];
-    }
-
     block tabele_int oftype TableInterpreter{
         header: true;
         columns: [
-            "column_1" oftype integer,
+            		"column_1" oftype integer,
 			"column_2" oftype text,
 			"column_3" oftype text,
 			"column_4" oftype text,
@@ -45,7 +40,6 @@ pipeline airportpipeline{
     data_extractor
     ->text_filt_int
     ->csv_int
-    ->header_wrtie
     ->tabele_int
     ->db_loader;
 
