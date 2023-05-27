@@ -1,6 +1,6 @@
 import pandas as pd
 
-from data_processor import DataProcessor
+from deutsche_bahn_api.data_processor import DataProcessor
 
 
 class PlanChange:
@@ -24,7 +24,7 @@ class PlanChange:
             INSERT INTO {table_name} VALUES (
                 {self.station_number}, '{self.stop_id}', '{self.next_stations}', '{self.passed_stations}', 
                 '{self.arrival}', '{self.departure}', '{self.platform}'
-              )
+              );
             """
         )
         db_engine.commit()

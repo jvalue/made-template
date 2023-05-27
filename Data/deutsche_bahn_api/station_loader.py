@@ -15,7 +15,7 @@ def normalize_lat_or_long_from_station(station: Station) -> dict[str, float]:
     }
 
 
-class StationHelper:
+class StationLoader:
     station_list: list
 
     def __init__(self) -> None:
