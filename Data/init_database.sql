@@ -10,7 +10,7 @@
     Betreiber_Nr int,
     Status text,
     PRIMARY KEY (EVA_NR)
-)
+);
     
 CREATE TABLE IF NOT EXISTS train_plan (
     EVA_NR int,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS train_plan (
     arrival text,
     departure text,
     FOREIGN KEY (EVA_NR) REFERENCES stations(EVA_NR)
-)
+);
    
 CREATE TABLE IF NOT EXISTS plan_change(
         EVA_NR int,
@@ -37,4 +37,4 @@ CREATE TABLE IF NOT EXISTS plan_change(
         platform text,
         FOREIGN KEY (EVA_NR) REFERENCES stations(EVA_NR),
         FOREIGN KEY (stop_id) REFERENCES train_plan(stop_id)
-)
+);
