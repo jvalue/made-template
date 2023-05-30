@@ -6,6 +6,7 @@ import os
 
 
 DATA_DIR = os.path.dirname(__file__)
+DATABASE_PATH = os.path.join(DATA_DIR, 'data.sqlite')
 URL_DS_1 = 'https://www.bundesnetzagentur.de/SharedDocs/Downloads/DE/Sachgebiete/Energie/Unternehmen_Institutionen/E_Mobilitaet/Ladesaeuleninfrastruktur.xlsx?__blob=publicationFile'
 URL_DS_2_BASE = 'https://www.kba.de/SharedDocs/Downloads/DE/Statistik/Fahrzeuge/FZ28/fz28_{year:04}_{month:02}.xlsx?__blob=publicationFile'
 URL_DS_3 = 'https://www.destatis.de/DE/Themen/Laender-Regionen/Regionales/Gemeindeverzeichnis/Administrativ/02-bundeslaender.xlsx?__blob=publicationFile'
@@ -218,7 +219,7 @@ def combine_dataframes(data: list[pd.DataFrame]) -> pd.DataFrame:
 
 
 def store_dataframe(df: pd.DataFrame, table: str):
-    df.to_sql(table, f'sqlite:////{DATA_DIR}/data.sqlite', if_exists='replace')
+    df.to_sql(table, f'sqlite:////{DATABASE_PATH}', if_exists='replace')
 
 
 

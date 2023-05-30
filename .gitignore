@@ -9,3 +9,6 @@ DEU_adm
 
 # Ignore vscode settings
 .vscode
+
+venv
+.pytest_cache

@@ -1,0 +1,6 @@
+pandas
+numpy
+pytest
+pytest-dependency
+openpyxl
+SQLAlchemy==1.4.46
