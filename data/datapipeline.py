@@ -34,6 +34,13 @@ def get_abbreviations_dict() -> dict[str, str]:
     }
 
 
+def get_abbrevations_dataframe() -> pd.DataFrame:
+    abbreviations = get_abbreviations_dict()
+    df = pd.DataFrame(abbreviations.values(), abbreviations.keys(), columns=['Abbreviation'])
+    df.index.name = 'State'
+    return df
+    
+
 def get_datasource_1() -> pd.DataFrame:
     df = pd.read_excel(io=URL_DS_1,
                        sheet_name='4.1 Ladepunkte je BL',
@@ -46,6 +53,9 @@ def get_datasource_1() -> pd.DataFrame:
     # Assign index and column names
     df.columns.names = ['Date', 'Type']
     df.index.name = 'State'
+    
+    # Cast the values to integer
+    df = df.astype(int)
     
     return df
 
@@ -159,90 +169,88 @@ def get_datasource_3() -> pd.DataFrame:
     return df
     
 
-
-# ------------------------------------------------------------------- #
-#                        Relationship over time                       #
-# ------------------------------------------------------------------- #
-
-# -------------- Get Datasource 2.1 -------------------
-
-ds2_1 = get_datasource_2_1()
-
-# -------------- Get Datasource 1 -------------------
-
-ds1 = get_datasource_1()
-
-# --------------   Prep Datasource 1 for 'over time' -------------------
-
-# Take the data for whole Germany
-ds1_time = ds1.loc['Summe'].unstack()
-# Just select the dates which are the fist day of a year
-ds1_time = ds1_time[ds1_time.index.map(lambda d: d.day == 1 and d.month == 1)]
-# Adapt the index
-ds1_time.index = ds1_time.index.map(lambda d: d.year)
-ds1_time.index.name = 'Year'
-ds1_time.columns.name = None
-# Create new dataframe with increase of chargingpoints in one year
-ds1_time_increase = ds1_time.diff(periods=-1) * -1
-# Rename the columns of both dataframes
-# CP = Charging Points (overall), SCP = Standard Charging Points, FCP = Fast Charging Points
-# Increase = Increase of chargning points over the year
-# Amount = Amount at the beginning of the year
-ds1_time_increase.columns = ['Increase SCP', 'Increase FCP', 'Increase CP']
-ds1_time.columns = ['Amount SCP', 'Amount FCP', 'Amount CP']
-# Add the dataframe for the increase to the original dataframe
-ds1_time = pd.concat([ds1_time, ds1_time_increase], axis=1)
-
-# --------------------------  Combine data --------------------------
-
-data_years = pd.concat([ds2_1, ds1_time], axis=1).dropna().astype(int)
+def prep_datasource_1_over_time(df: pd.DataFrame) -> pd.DataFrame:
+    # Take the data for whole Germany
+    df = df.loc['Summe'].unstack()
+    
+    # Just select the dates which are the fist day of a year
+    df = df[df.index.map(lambda d: d.day == 1 and d.month == 1)]
+    
+    # Adapt the index
+    df.index = df.index.map(lambda d: d.year)
+    df.index.name = 'Year'
+    df.columns.name = None
+    
+    # Create new dataframe with increase of chargingpoints in one year
+    df_increase = df.diff(periods=-1) * -1
+    
+    # Rename the columns of both dataframes
+    # CP = Charging Points (overall), SCP = Standard Charging Points, FCP = Fast Charging Points
+    # Increase = Increase of chargning points over the year
+    # Amount = Amount at the beginning of the year
+    df_increase.columns = ['Increase SCP', 'Increase FCP', 'Increase CP']
+    df.columns = ['Amount SCP', 'Amount FCP', 'Amount CP']
+    
+    # Add the dataframe for the increase to the original dataframe
+    df = pd.concat([df, df_increase], axis=1)
+    
+    # Drop NaN entries and cast the values to integer
+    df = df.dropna().astype(int)
+    
+    return df
 
 
+def prep_datasource_1_by_states(df: pd.DataFrame, year: int) -> pd.DataFrame:
+    # Take the amount of charging points at the start of the year
+    df = df[dt.datetime(year=year, month=1, day=1)]
 
-# ------------------------------------------------------------------- #
-#                        Relationship by states                       #
-# ------------------------------------------------------------------- #
+    # Rename the columns
+    df.columns = ['Amount SCP', 'Amount FCP', 'Amount CP']
 
-# use the last year (to get the data for a whole year)
-year = dt.date.today().year - 1
+    # Rename the index for the sum over all states to 'Germany'
+    df.index.values[-1] = 'Germany'
+    
+    return df
+    
 
-# --------------   Prep Datasource 1 for 'by states' -------------------
+def combine_dataframes(data: list[pd.DataFrame]) -> pd.DataFrame:
+    return pd.concat(data, axis=1).dropna()
 
-# Take the amount of charging points at the start of the year
-ds1_states = ds1[dt.datetime(year=year, month=1, day=1)]
 
-# Rename the columns
-ds1_states.columns = ['Amount SCP', 'Amount FCP', 'Amount CP']
-
-# Rename the index for the sum over all states to 'Germany'
-ds1_states.index.values[-1] = 'Germany'
-
-# Cast the values to integer
-ds1_states = ds1_states.astype(int)
-
-# -------------- Get Datasource 2.2 -------------------
-
-ds2_2 = get_datasource_2_2(year=year)
-
-# -------------- Get Datasource 3 ---------------------
-
-ds3 = get_datasource_3()
-
-# ----------- Get Abbreviations Dataframe -------------
-
-abbreviations = get_abbreviations_dict()
-df_abbreviations = pd.DataFrame(abbreviations.values(), abbreviations.keys(), columns=['Abbreviation'])
-df_abbreviations.index.name = 'State'
-
-# ---------------  Combine data ------------------------
-
-data_states = pd.concat([df_abbreviations, ds3, ds2_2, ds1_states], axis=1)
+def store_dataframe(df: pd.DataFrame, table: str):
+    df.to_sql(table, f'sqlite:////{DATA_DIR}/data.sqlite', if_exists='replace')
 
 
 
-# ------------------------------------------------------------------- #
-#                       Store data to database                        #
-# ------------------------------------------------------------------- #
+if __name__ == '__main__':
+    
+    # --------------- Data over time ---------------
+    
+    ds1 = get_datasource_1()
+    ds1_time = prep_datasource_1_over_time(ds1)
+    
+    ds2_1 = get_datasource_2_1()
 
-data_years.to_sql('over_time', f'sqlite:////{DATA_DIR}/data.sqlite', if_exists='replace')
-data_states.to_sql('by_states', f'sqlite:////{DATA_DIR}/data.sqlite', if_exists='replace')
+    data_time = combine_dataframes([ds2_1, ds1_time]).astype(int)
+
+
+    # --------------- Data by states ---------------
+
+    # use the last year (to get the data for a whole year)
+    year = dt.date.today().year - 1
+
+    ds1_states = prep_datasource_1_by_states(ds1, year)
+    
+    ds2_2 = get_datasource_2_2(year=year)
+
+    ds3 = get_datasource_3()
+
+    df_abbreviations = get_abbrevations_dataframe()
+
+    data_states = combine_dataframes([df_abbreviations, ds3, ds2_2, ds1_states])
+
+
+    # ----------- Store data to database ------------
+
+    store_dataframe(data_time, 'over_time')
+    store_dataframe(data_states, 'by_states')

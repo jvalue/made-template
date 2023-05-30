@@ -3,3 +3,9 @@
 
 # Ignore __pycache__
 __pycache__
+
+# Ignore Shape Files for german states
+DEU_adm
+
+# Ignore vscode settings
+.vscode
