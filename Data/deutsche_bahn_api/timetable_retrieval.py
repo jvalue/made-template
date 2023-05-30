@@ -5,8 +5,8 @@ _logger = get_file_logger(__name__, 'debug')
 
 import xml.etree.ElementTree as elementTree
 
-from deutsche_bahn_api.train_plan import TrainPlan
-from deutsche_bahn_api.plan_change import PlanChange
+from Data.deutsche_bahn_api.train_plan import TrainPlan
+from Data.deutsche_bahn_api.plan_change import PlanChange
 
 class TimeTableHandler:
     def __init__(self) -> None:
@@ -16,9 +16,6 @@ class TimeTableHandler:
         train_list = []
         trains = elementTree.fromstringlist(api_response.text)
         for train in trains:
-            trip_label_object: dict[str, str] | None = None
-            arrival_object: dict[str, str] | None = None
-            departure_object: dict[str, str] | None = None
             for train_details in train:
                 if train_details.tag == "tl":
                     trip_label_object = train_details.attrib
@@ -28,11 +25,11 @@ class TimeTableHandler:
                     arrival_object = train_details.attrib
 
             if not departure_object:
-                """ Arrival without department """
+                """ Arrival without departure """
                 continue
 
             train_object = TrainPlan()
-            train_object.station_number = api_response.station_number
+            train_object.EVA_NR = api_response.EVA_NR
             train_object.stop_id = train.attrib["id"]
             train_object.train_type = trip_label_object["c"]
             train_object.train_number = trip_label_object["n"]
@@ -71,7 +68,7 @@ class TimeTableHandler:
             plan_change.messages = []
 
             if "eva" in changed_train.attrib:
-                plan_change.station_number = int(changed_train.attrib["eva"])
+                plan_change.EVA_NR = int(changed_train.attrib["eva"])
             else:
                 continue
 

@@ -2,7 +2,7 @@ import json
 import pkgutil
 import mpu
 
-from deutsche_bahn_api.station import Station
+from Data.deutsche_bahn_api.station import Station
 
 
 def normalize_lat_or_long_from_station(station: Station) -> dict[str, float]:
@@ -16,8 +16,6 @@ def normalize_lat_or_long_from_station(station: Station) -> dict[str, float]:
 
 
 class StationLoader:
-    station_list: list
-
     def __init__(self) -> None:
         self.stations_list = []
 

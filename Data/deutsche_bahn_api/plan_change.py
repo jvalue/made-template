@@ -1,13 +1,13 @@
 import pandas as pd
 
-from deutsche_bahn_api.data_processor import DataProcessor
+from Data.deutsche_bahn_api.data_processor import DataProcessor
 
 
 class PlanChange:
     """ This class represents changed train attributes. """
 
     def __init__(self) -> None:
-        self.station_id = None
+        self.EVA_NR = None
         self.stop_id = None
         self.next_stations = None
         self.passed_stations = None
@@ -22,7 +22,7 @@ class PlanChange:
         db_engine.execute(
             f"""
             INSERT OR REPLACE INTO {table_name} VALUES (
-                {self.station_id}, '{self.stop_id}', '{self.next_stations}', '{self.passed_stations}', 
+                {self.EVA_NR}, '{self.stop_id}', '{self.next_stations}', '{self.passed_stations}', 
                 '{self.arrival}', '{self.departure}', '{self.platform}'
               );
             """
@@ -31,7 +31,7 @@ class PlanChange:
     
     def info(self) -> pd.DataFrame:
         df = pd.DataFrame({
-            "Station Number": self.station_id,
+            "Station Number": self.EVA_NR,
             "Stop ID": self.stop_id,
             "Passed Stations": self.passed_stations,
             "Next Stations": self.next_stations,
