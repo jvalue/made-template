@@ -8,8 +8,8 @@ from deutsche_bahn_api.station_loader import StationLoader
 
 api_client = ApiClient(os.environ["DB_CLIENT_ID"], os.environ["DB_API_KEY"])
 station_helper = StationLoader()
-timetable_handler = TimeTableHandler()
 station_helper.load_stations()
+timetable_handler = TimeTableHandler()
 
 
 # for station in station_helper.stations_list:
