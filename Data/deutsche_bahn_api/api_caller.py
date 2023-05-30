@@ -45,7 +45,7 @@ class ApiClient:
             f"/plan/{station_number}/{current_date}/{current_hour}",
             headers=self.headers
         )
-        response.station_number = station_number
+        response.station_id = station_number
         return response
 
     def get_all_timetable_changes_from_station(self, station_number: int) -> str:
