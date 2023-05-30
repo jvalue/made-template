@@ -1,9 +1,4 @@
 import os
-from os.path import join, dirname
-from dotenv import load_dotenv
-dotenv_path = join(dirname(os.path.abspath('')), '.env')
-load_dotenv(dotenv_path)
-
 import pandas as pd
 
 from deutsche_bahn_api.data_processor import DataProcessor

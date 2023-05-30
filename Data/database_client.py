@@ -1,12 +1,8 @@
 import os
-from os.path import join, dirname
-
 import sqlite3
-import sqlalchemy
 import pandas as pd
 
-DB_PATH = join(dirname(os.path.abspath('')), os.environ["SQLITE_DB_NAME"])
-
+DB_PATH = os.environ["DB_PATH"]
 
 class SqliteClient:
     try:

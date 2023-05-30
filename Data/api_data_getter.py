@@ -1,12 +1,9 @@
+import os
+
 from deutsche_bahn_api.api_caller import ApiClient
 from database_client import SqliteClient
 from deutsche_bahn_api.timetable_retrieval import TimeTableHandler
 from deutsche_bahn_api.station_loader import StationLoader
-import os
-from os.path import join
-from dotenv import load_dotenv
-dotenv_path = join(os.path.abspath(''), '.env')
-load_dotenv(dotenv_path)
 
 
 api_client = ApiClient(os.environ["DB_CLIENT_ID"], os.environ["DB_API_KEY"])

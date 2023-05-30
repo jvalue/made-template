@@ -1,13 +1,4 @@
 from __future__ import annotations
-import os
-import sys
-import inspect
-
-currentdir = os.path.dirname(os.path.abspath(
-    inspect.getfile(inspect.currentframe())))
-parentdir = os.path.dirname(currentdir)
-grand_parentdir = os.path.dirname(parentdir)
-sys.path.insert(0, grand_parentdir)
 
 from logger import get_file_logger
 _logger = get_file_logger(__name__, 'debug')
