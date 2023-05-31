@@ -3,34 +3,87 @@ import numpy as np
 from sqlalchemy import create_engine
 from time import time
 
+# Db_Engine
+db_engine = None
 
-localPath_Immoscout24 = r"D:\Education\MS-AI\Sem-2\Data Engineering [OSS-AMSE]\2023-amse-template/project\datasets\Immoscout24.csv"
-localPath_nuremberg = r"D:\Education\MS-AI\Sem-2\Data Engineering [OSS-AMSE]\2023-amse-template\project\datasets\Nuremberg_Stops_IDs_and_geodata.xlsx"
-
-#url_Immoscout24= "https://drive.google.com/file/d/1-MQG7iSzORQpCtsULyddBFQSWwbLWBA8/view?usp=share_link";
-#url_nuremberg= "https://opendata.vag.de/dataset/08eb49f9-0f6c-4b76-96fd-5f8e3a0ac593/resource/c66d5b67-6a01-4190-a9cf-1de6359d07ae/download/20170601_haltestellen_id_geo.xlsx";
 
 ############################################
 ############### Data Extraction ############
 ############################################
-t1 = time()
-print("Data Extraction in progress...")
-df_nuremberg = pd.read_excel(localPath_nuremberg)
-df_Immoscout24 = pd.read_csv(localPath_Immoscout24)
-t2 = time()
+def data_extraction_xls(path):
+    t1 = time()
+    print("Data Extraction in progress...")
 
-print("Finish: Data Extraction {} s ".format(t2 - t1))
+    try:
+        df = pd.read_excel(path)
+    except Exception as e:
+        print("Error occurred during file reading:", str(e))
+        return None
+    t2 = time()
+    print("Finish: Data Extraction {} s ".format(t2 - t1))
+    return df
+
+
+def data_extraction_csv(path):
+    t1 = time()
+    print("Data Extraction in progress...")
+    try:
+        df = pd.read_csv(path)
+    except Exception as e:
+        print("Error occurred during file reading:", str(e))
+        return None
+    t2 = time()
+    print("Finish: Data Extraction {} s ".format(t2 - t1))
+    return df
+
 
 ############################################
 ############ Data Transformation ###########
 ############################################
-t1 = time()
-print("Data Transformation in progress...")
+def data_transformation(data_frame, rename_col, drop_col):
+    t1 = time()
+    print("Data Transformation in progress...")
+    # Renaming the columns to english titles
+    if rename_col:
+        print("Renaming the columns to english titles...")
+        data_frame = data_frame.rename(columns=rename_col)
 
-print("Renaming the columns to english titles...")
-# Renaming the columns to english titles
-df_nuremberg.rename(
-    columns={
+    print("Removing Unwanted Columns...")
+    if drop_col:
+        data_frame = data_frame.drop(columns=drop_col)
+
+    print("Replacing Nan Values...")
+    # Replace Nan values with 0
+    data_frame = data_frame.replace(np.nan, 0)
+    t2 = time()
+    print("Finish: Data Transformation {} s ".format(t2 - t1))
+    return data_frame
+
+
+############################################
+################# Load Data ################
+############################################
+def data_loader(data_frame, table_name):
+    t1 = time()
+    print("SQLite DB Operations....")
+    # engine = get_engine(db_engine)
+    engine = create_engine("sqlite:///nuremberg_stops_immoscout.db")
+    data_frame.to_sql(table_name, engine, if_exists="replace")
+    t2 = time()
+    print("Finish: Data Loading  {} s ".format(t2 - t1))
+
+
+def main():
+    localPath_Immoscout24 = r"D:\Education\MS-AI\Sem-2\Data_Engineering_[OSS-AMSE]\2023-amse-template\project\datasets\Immoscout24.csv"
+    df1 = data_extraction_csv(localPath_Immoscout24)
+    df1_drop_cols = ["picturecount", "scoutId"]
+    df1 = data_transformation(df1, [], df1_drop_cols)
+    data_loader(df1, "immoscout")
+
+    localPath_nuremberg = r"D:\Education\MS-AI\Sem-2\Data_Engineering_[OSS-AMSE]\2023-amse-template\project\datasets\Nuremberg_Stops_IDs_and_geodata.xlsx"
+    df2 = data_extraction_xls(localPath_nuremberg)
+    df2_drop_cols = {"breakpoint", "GlobalID", "branchOfService", "dataprovider"}
+    df2_rename_cols = {
         "VGNKennung": "VAGIdentifier",
         "VAGKennung": "VAGIdentifierChar",
         "Haltepunkt": "breakpoint",
@@ -40,31 +93,16 @@ df_nuremberg.rename(
         "longitude": "longitude",
         "Betriebszweig": "branchOfService",
         "Dataprovider": "dataprovider",
-    },
-    inplace=True,
-)
-
-print("Removing Unwanted Columns...")
-### Remove Unwanted Columns
-df_nuremberg.drop(columns=["breakpoint", "GlobalID", "branchOfService", "dataprovider"])
-df_Immoscout24.drop(columns=["picturecount", "scoutId"])
-
-print("Replacing Nan Values...")
-# Replace Nan values with 0
-df_nuremberg.replace(np.nan, 0)
-df_Immoscout24.replace(np.nan, 0)
-t2 = time()
-print("Finish: Data Transformation {} s ".format(t2 - t1))
+    }
+    df2 = data_transformation(df2, df2_rename_cols, df2_drop_cols)
+    data_loader(df2, "nuremberg_stops")
 
 
-############################################
-################# Load Data ################
-############################################
-t1 = time()
-print("SQLite DB Creation....")
+# def get_engine(db_engine=None):
+#     if db_engine == None:
+#         db_engine = create_engine("sqlite:///nuremberg_stops_immoscout.db")
+#     return db_engine
 
-engine = create_engine("sqlite:///nuremberg_stops_immoscout.db")
-df_nuremberg.to_sql("nuremberg_stops", engine, if_exists="replace")
-df_Immoscout24.to_sql("immoscout", engine, if_exists="replace")
-t2 = time()
-print("Finish: Data Loading  {} s ".format(t2 - t1))
+
+if __name__ == "__main__":
+    main()
