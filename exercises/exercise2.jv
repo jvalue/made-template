@@ -1,0 +1,71 @@
+valuetype ValidTraffic oftype text{
+
+    constraints: [AllowedTrafficName];
+}
+
+constraint AllowedTrafficName oftype AllowlistConstraint{
+    allowlist: ["FV", "RV","nur DPN"];
+}
+
+valuetype ValidIPORT oftype text{
+
+    constraints: [IFORT_Format];
+}
+
+constraint IFORT_Format oftype RegexConstraint{
+    regex: /[a-z]{2}:\d+:\d+(:\d+)?(:\d+)?/;
+}
+
+valuetype ValidRange oftype decimal{
+
+    constraints: [Allowed_Range];
+}
+
+constraint Allowed_Range oftype RangeConstraint{
+    lowerBound: -90;
+    upperBound: 90;
+}
+
+pipeline DBPipeLine{
+
+    block DataExtractor oftype HttpExtractor
+    {
+        url : "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV";
+    }
+    block DBTextFileInterpreter oftype TextFileInterpreter {}
+    block DBCsvFileInterpreter oftype CSVInterpreter {delimiter: ";";}
+    block DBColumnDeleter oftype ColumnDeleter{
+        delete: [column J];
+    }
+    block DBTableInterpreter oftype TableInterpreter{
+        header: true;
+        columns :[
+            "EVA_NR" oftype integer,
+            "DS100" oftype text,
+            "IFOPT" oftype ValidIPORT,
+            "NAME" oftype text,
+            "Verkehr" oftype ValidTraffic, 
+            "Laenge" oftype ValidRange,
+            "Breite" oftype ValidRange,
+            "Betreiber_Name" oftype text,
+            "Betreiber_Nr" oftype integer,
+
+        ];
+    }
+    
+    block DBDatabaseLoader oftype SQLiteLoader
+    {
+        table : "trainstops";
+        file: "./trainstops.sqlite" ;
+        }
+
+    DataExtractor
+        ->DBTextFileInterpreter
+        ->DBCsvFileInterpreter
+        ->DBColumnDeleter
+        ->DBTableInterpreter
+        ->DBDatabaseLoader;
+
+
+
+}
