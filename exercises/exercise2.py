@@ -39,7 +39,7 @@ def data_transformation(data_frame):
         data_frame['Laenge'] = data_frame['Laenge'].str.replace(',', '.').astype(float)
         data_frame['Breite'] = data_frame['Breite'].str.replace(',', '.').astype(float)
 
-        #Data Validation
+        # Data Validation
         data_frame = data_frame[
             (data_frame["Verkehr"].isin(["FV", "RV", "nur DPN"])) &  # Valid "Verkehr" values
             (data_frame["Laenge"].between(-90, 90)) &  # Valid "Laenge" values
@@ -47,7 +47,7 @@ def data_transformation(data_frame):
             (data_frame["IFOPT"].str.match(r"^[A-Za-z]{2}:\d+:\d+(?::\d+)?$"))  # Valid "IFOPT" values
             ].dropna()  # Drop rows with empty cells
 
-        #Change Data Types
+        # Change Data Types
         data_type = {
             "EVA_NR": int,
             "DS100": str,
@@ -59,12 +59,7 @@ def data_transformation(data_frame):
             "Betreiber_Name": str,
             "Betreiber_Nr": int
         }
-        transformed_df = data_frame.astype(data_type)
-
-        data_frame = data_frame.reset_index(drop=True)
-
-        # Fit appropriate data types using the fitDataType method
-        # data_frame = fitDataType(data_frame)
+        data_frame = data_frame.astype(data_type)
     except Exception as e:
         print("Error occurred during file reading:", str(e))
         return None
@@ -91,8 +86,7 @@ def main():
     path = "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV"
     data_frame = data_extraction_csv(path)
     data_frame = data_transformation(data_frame)
-    data_loader(data_frame,"trainstops")
-
+    data_loader(data_frame, "trainstops")
 
 
 if __name__ == "__main__":
