@@ -78,5 +78,5 @@ trainstopsNew = trainstopsNew.astype(datatypes)
 
 
 #Writing data into SQLite database
-trainstopsNew.to_sql('TrainstopsData', 'sqlite:///trainstops.sqlite', if_exists='replace')
+trainstopsNew.to_sql('trainstops', 'sqlite:///trainstops.sqlite', if_exists='replace')
 
