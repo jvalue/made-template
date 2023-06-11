@@ -46,4 +46,5 @@ jobs:
             - name: Run test
               run: |
                cd project
+               chmod +x tests.sh
                ./tests.sh
