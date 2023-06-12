@@ -24,8 +24,9 @@ jobs:
                 pip install pylint
 
             - name: Analysing the code with pylint
+              # todo: just in data and project, not in exercise
               run: |
-                pylint $(git ls-files '*.py')
+                pylint $(git ls-files 'data/*.py' 'project/*.py') 
     
     test:
         runs-on: ubuntu-latest
