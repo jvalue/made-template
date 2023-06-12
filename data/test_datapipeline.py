@@ -74,5 +74,3 @@ def test_datapipeline():
     assert len(tables) == 2
     assert "over_time" in tables
     assert "by_states" in tables
-    
-    assert 3 == 5
