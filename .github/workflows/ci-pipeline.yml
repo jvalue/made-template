@@ -18,15 +18,18 @@ jobs:
               with:
                 python-version: 3.11
 
-            - name: Install dependencies
+            - name: Install pylint
               run: |
                 python -m pip install --upgrade pip
                 pip install pylint
+            
+            - name: Install dependencies
+              run: |
+                pip install -r ./data/requirements.txt
 
             - name: Analysing the code with pylint
-              # todo: just in data and project, not in exercise
               run: |
-                pylint $(git ls-files 'data/*.py' 'project/*.py') 
+                pylint $(git ls-files 'data/*.py' 'project/*.py') --good-names=df
     
     test:
         runs-on: ubuntu-latest

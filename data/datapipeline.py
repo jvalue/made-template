@@ -98,8 +98,9 @@ def get_datasource_2_1() -> pd.DataFrame:
         raise FileNotFoundError("Couldn't load Datasource 2.1")
 
     # Drop unimportant rows and columns
-    # Note: Besides the amount of all new registrations, we only need the colums for clectric cars and
-    # plug-in-hybrids, because only those are important for the correlation with the charging infrastructure
+    # Note: Besides the amount of all new registrations, we only need the colums for clectric cars
+    # and plug-in-hybrids, because only those are important for the correlation with the charging
+    # infrastructure
     df = df.iloc[:, [1, 6, 8]]
     df.dropna(inplace=True)
 
@@ -113,7 +114,8 @@ def get_datasource_2_1() -> pd.DataFrame:
     df.index = df.index.map(lambda i: int(i.split(" ")[1]))
     df.index.name = "Year"
 
-    # Drop current year, if it isn't complete (we just want data for complete years in the dataframe)
+    # Drop current year, if it isn't complete
+    # (we just want data for complete years in the dataframe)
     if month != 12 and year in df.index:
         df = df.drop(year)
 
