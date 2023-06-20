@@ -27,7 +27,8 @@ class CarDataPipeline:
         
     def validate_data(self):
         
-        self.data = self.data[self.data['CIN'].astype(str).str.len() == 5]
+        self.data['CIN'] = self.data['CIN'].astype(str)
+        self.data = self.data[self.data['CIN'].str.len() == 5]
         numeric_columns = ['petrol', 'diesel', 'gas', 'electro', 'hybrid', 'plugInHybrid', 'others']
         self.data[numeric_columns] = self.data[numeric_columns].apply(pd.to_numeric, errors='coerce')
         self.data = self.data.dropna(subset=numeric_columns)
