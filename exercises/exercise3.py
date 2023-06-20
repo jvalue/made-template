@@ -1,11 +1,12 @@
 import pandas as pd
-import sqlite3
+import sqlalchemy
 
 class CarDataPipeline:
-    def __init__(self, url, database, table_name):
-        self.url = url
-        self.database = database
-        self.table_name = table_name
+    
+    def __init__(self):
+        self.url = 'https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv'
+        self.engine = sqlalchemy.create_engine("sqlite:///cars.sqlite")
+        self.table_name = "cars"
 
     def load_data(self):
         self.data = pd.read_csv(self.url, sep=';', encoding='iso-8859-1', skiprows=6, skipfooter=4, engine='python')
@@ -29,26 +30,36 @@ class CarDataPipeline:
         
         self.data['CIN'] = self.data['CIN'].astype(str).str.zfill(5)
         numeric_columns = ['petrol', 'diesel', 'gas', 'electro', 'hybrid', 'plugInHybrid', 'others']
-        self.data[numeric_columns] = self.data[numeric_columns].apply(pd.to_numeric, errors='coerce')
-        self.data = self.data[(self.data[numeric_columns] > 0)]
+        for col in numeric_columns:
+            self.data[col] = pd.to_numeric(self.data[col], errors='coerce')
+            self.data = self.data[self.data[col] > 0]
         
-    def create_database(self):
+    def store_to_database(self):
         
-        conn = sqlite3.connect(self.database)
-        self.data.to_sql(self.table_name, conn, if_exists='replace', index=False)
-        conn.close()
+        column_types = {
+                    'date': sqlalchemy.String(20),
+                    'CIN': sqlalchemy.String(255),
+                    'name': sqlalchemy.String(255),
+                    'petrol': sqlalchemy.Integer,
+                    'diesel': sqlalchemy.Integer,
+                    'gas': sqlalchemy.Integer,
+                    'electro': sqlalchemy.Integer,
+                    'hybrid': sqlalchemy.Integer,
+                    'plugInHybrid': sqlalchemy.Integer,
+                    'others': sqlalchemy.Integer
+                }
+        
+        self.data.to_sql(name=self.table_name, con=self.engine, if_exists="replace", index=False, dtype=column_types)
+
 
     def run_pipeline(self):
         self.load_data()
         self.transform_data()
         self.validate_data()
-        self.create_database()
+        self.store_to_database()
 
-# Initialize the data pipeline with the necessary parameters
-url = 'https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv'
-database = "cars.sqlite"
-table_name = "cars"
-pipeline = CarDataPipeline(url, database, table_name)
+
+pipeline = CarDataPipeline()
 
 # Run the data pipeline
 pipeline.run_pipeline()
