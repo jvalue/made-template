@@ -30,7 +30,8 @@ class CarDataPipeline:
         self.data['CIN'] = self.data['CIN'].astype(str).str.zfill(5)
         numeric_columns = ['petrol', 'diesel', 'gas', 'electro', 'hybrid', 'plugInHybrid', 'others']
         self.data[numeric_columns] = self.data[numeric_columns].apply(pd.to_numeric, errors='coerce')
-        self.data = self.data[(self.data[numeric_columns] > 0)
+        self.data = self.data[(self.data[numeric_columns] > 0)]
+        
     def create_database(self):
         
         conn = sqlite3.connect(self.database)
