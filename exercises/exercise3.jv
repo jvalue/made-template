@@ -1,0 +1,71 @@
+pipeline CarsPipeline {
+
+    block DataExtractor oftype HttpExtractor {
+		url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv";
+	}
+
+    block TextFileInterpreter oftype TextFileInterpreter {
+        encoding: "ASCII";
+    }
+
+    block TextRangeSelector oftype TextRangeSelector {
+        lineFrom: 7;
+        lineTo: 483;
+    }
+
+    block DataCSVInterpreter oftype CSVInterpreter {
+		delimiter: ';';
+	}
+
+    block ColumnDeleter oftype ColumnDeleter {
+		 delete: [column D, column E, column F, column Q, column H, column I, column J, column K, column L, column N, column O, column P, column Q, column R, column S, column T, column U, column V, column X, column Y, column Z, column AA, column AB, column AC, column AD, column AE, column AF, column AH, column AI, column AJ, column AK, column AL, column AM, column AN, column AO, column AP, column AR, column AS, column AT, column AU, column AV, column AW, column AX, column AY, column AZ, column BB, column BC, column BD, column BE, column BF, column BQ, column BH, column BI, column BJ, column BL, column BM, column BM, column BQ, column BR, column BS, column BT, column BV, column BW, column BX, column BY, column BZ, column CA, column CB, column CC, column CD, column CE];
+	}
+
+    valuetype CIN oftype text {
+        constraints: [CINConstraint];
+    }
+
+    constraint CINConstraint oftype LengthConstraint {
+        minLength: 5;
+        maxLength: 5;
+    }
+
+    valuetype PositiveInteger oftype integer {
+        constraints: [PosIntegerConstraint];
+    }
+
+    constraint PosIntegerConstraint oftype RangeConstraint {
+        lowerBound: 0;
+        lowerBoundInclusive: false;
+    }
+
+    block CarsTableInterpreter oftype TableInterpreter {
+		header: false;
+		columns: [
+			"date" oftype text,
+			"CIN" oftype CIN,
+			"name" oftype text,
+			"petrol" oftype PositiveInteger,
+			"diesel" oftype PositiveInteger,
+			"gas" oftype PositiveInteger,
+			"electro" oftype PositiveInteger,
+			"hybrid" oftype PositiveInteger,
+			"plugInHybrid" oftype PositiveInteger,
+			"others" oftype PositiveInteger
+		];
+	}
+
+    block CarsLoader oftype SQLiteLoader {
+		table: "cars";
+		file: "./cars.sqlite";
+	}
+
+     DataExtractor
+    ->TextFileInterpreter
+	->TextRangeSelector
+    ->DataCSVInterpreter
+	->ColumnDeleter
+    ->CarsTableInterpreter
+    ->CarsLoader;
+
+}
