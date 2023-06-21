@@ -19,7 +19,7 @@ def test_get_datasources():
     ds2_1 = pipe.get_datasource_2_1()
     assert isinstance(ds2_1, pd.DataFrame)
 
-    with pytest.raises(Exception):
+    with pytest.raises(FileNotFoundError):
         ds2_2 = pipe.get_datasource_2_2(year=dt.date.today().year + 1)
 
     ds2_2 = pipe.get_datasource_2_2(year=dt.date.today().year - 1)

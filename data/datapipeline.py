@@ -4,6 +4,7 @@ and also a main funciton which combines all processes into one pipeline
 """
 import datetime as dt
 import os
+import time
 import urllib
 import numpy as np
 import pandas as pd
@@ -58,11 +59,39 @@ def get_abbrevations_dataframe() -> pd.DataFrame:
     return df
 
 
+def load_excel_from_url(url: str, sheet: str, params: dict[str, any] = None, retries: int = 0,
+                        sec_wait: float = 5) -> pd.DataFrame | None:
+    """ 
+    Loads an excel sheet from the given url and returns it as a dataframe
+     - params is a dictionary for the parameters given to the pandas read_excel funciton
+     - retries specifies the amount of retries if loading doesn't work
+     - sec_wait specifies the seconds to wait after each retry
+    Returns None if the excel sheet couldn't be loaded
+    """
+    df = None
+    if params is None:
+        params = {}
+
+    for _ in range(retries+1):
+        try:
+            df = pd.read_excel(io=url, sheet_name=sheet, **params)
+            break
+        except (urllib.error.HTTPError, urllib.error.URLError):
+            time.sleep(sec_wait)
+
+    return df
+
+
 def get_datasource_1() -> pd.DataFrame:
     """ Loads Datasource 1 from the url and returns the cleaned dataframe """
-    df = pd.read_excel(
-        io=URL_DS_1, sheet_name="4.1 Ladepunkte je BL", header=[6, 7], index_col=4
-    )
+    print(" - Loading Datasource 1")
+
+    df = load_excel_from_url(url=URL_DS_1,
+                             sheet="4.1 Ladepunkte je BL",
+                             params={"header": [6, 7], "index_col": 4},
+                             retries=5)
+    if df is None:
+        raise FileNotFoundError("Couldn't load Datasource 1")
 
     # Drop unimportant rows and columns
     df = df.iloc[:-1, 4:]
@@ -79,6 +108,8 @@ def get_datasource_1() -> pd.DataFrame:
 
 def get_datasource_2_1() -> pd.DataFrame:
     """ Loads Datasource 2.1 from the url and returns the cleaned dataframe """
+    print(" - Loading Datasource 2.1")
+
     # Get the latest available version
     today = dt.date.today()
     month, year = today.month, today.year
@@ -88,12 +119,14 @@ def get_datasource_2_1() -> pd.DataFrame:
         if month == 0:
             month = 12
             year -= 1
-        try:
-            url = URL_DS_2_BASE.format(year=year, month=month)
-            df = pd.read_excel(io=url, sheet_name="FZ 28.2", index_col=1)
+        url = URL_DS_2_BASE.format(year=year, month=month)
+        df = load_excel_from_url(url=url,
+                                 sheet="FZ 28.2",
+                                 params={"index_col": 1},
+                                 retries=2, sec_wait=3)
+        if df is not None:
             break
-        except urllib.error.HTTPError:
-            continue
+
     if df is None:
         raise FileNotFoundError("Couldn't load Datasource 2.1")
 
@@ -124,13 +157,15 @@ def get_datasource_2_1() -> pd.DataFrame:
 
 def get_datasource_2_2(year: int, month: int = 12) -> pd.DataFrame:
     """ Loads Datasource 2.2 from the url and returns the cleaned dataframe """
+    print(" - Loading Datasource 2.2")
+
     url = URL_DS_2_BASE.format(year=year, month=month)
-    try:
-        df = pd.read_excel(io=url, sheet_name="FZ 28.9", index_col=1)
-    except urllib.error.HTTPError as exc:
-        raise FileNotFoundError(
-            f"Couldn't load Datasource 2.2 for Year {year} and Month {month}"
-            ) from exc
+    df = load_excel_from_url(url=url,
+                             sheet="FZ 28.9",
+                             params={"index_col": 1},
+                             retries=5)
+    if df is None:
+        raise FileNotFoundError(f"Couldn't load Datasource 2.2 for Year {year} and Month {month}")
 
     # Drop unimportant rows and columns
     # Note: Besides the amount of all new registrations, we only need the colums for clectric cars
@@ -143,7 +178,7 @@ def get_datasource_2_2(year: int, month: int = 12) -> pd.DataFrame:
     df.columns = ["NR Overall", "NR Electric", "NR Plug-in-Hybrid"]
 
     # Just take the rows for the summation over the year
-    idx = int(np.where(df.index.map(lambda i: i.startswith("Januar-")))[0])
+    idx = int(np.where(df.index.map(lambda i: i.startswith("Januar-")))[0][0])
     if month != 1:
         df = df.iloc[idx:]
     else:
@@ -163,13 +198,14 @@ def get_datasource_2_2(year: int, month: int = 12) -> pd.DataFrame:
 
 def get_datasource_3() -> pd.DataFrame:
     """ Loads Datasource 3 from the url and returns the cleaned dataframe """
-    df = pd.read_excel(
-        io=URL_DS_3,
-        sheet_name="Bundesländer_mit_Hauptstädten",
-        usecols=[0, 2],
-        header=None,
-        index_col=None,
-    )
+    print(" - Loading Datasource 3")
+
+    df = load_excel_from_url(url=URL_DS_3,
+                             sheet="Bundesländer_mit_Hauptstädten",
+                             params={"usecols": [0, 2], "header": None, "index_col": None},
+                             retries=5)
+    if df is None:
+        raise FileNotFoundError("Couldn't load Datasource 3")
 
     # Drop unimportant rows
     df = df.iloc[7:-16]
@@ -245,6 +281,7 @@ def combine_dataframes(data: list[pd.DataFrame]) -> pd.DataFrame:
 
 def store_dataframe(df: pd.DataFrame, table: str):
     """ Stores a dataframe as a table in an sqlite database """
+    print(f" - Storing Data into table '{table}' of database '{os.path.basename(DATABASE_PATH)}'")
     df.to_sql(table, f"sqlite:////{DATABASE_PATH}", if_exists="replace")
 
 
@@ -253,34 +290,34 @@ def main():
     Main function of module: 
     Loads in datasources, massages data and stores it to the database 
     """
-    # --------------- Data over time ---------------
-
-    ds1 = get_datasource_1()
-    ds1_time = prep_datasource_1_over_time(ds1)
-
-    ds2_1 = get_datasource_2_1()
-
-    data_time = combine_dataframes([ds2_1, ds1_time]).astype(int)
-
-    # --------------- Data by states ---------------
+    print("----------- Starting Datapipeline -----------")
 
     # use the last year (to get the data for a whole year)
-    last_year = dt.date.today().year - 1
+    year = dt.date.today().year - 1
 
-    ds1_states = prep_datasource_1_by_states(ds1, last_year)
-
-    ds2_2 = get_datasource_2_2(year=last_year)
-
+    # ---------------- Loading data ----------------
+    print("Loading the Data")
+    ds1 = get_datasource_1()
+    ds2_1 = get_datasource_2_1()
+    ds2_2 = get_datasource_2_2(year=year)
     ds3 = get_datasource_3()
 
+    # ------------- Transforming data --------------
+    print("Transforming the Data")
+    # Data over time
+    ds1_time = prep_datasource_1_over_time(ds1)
+    data_time = combine_dataframes([ds2_1, ds1_time]).astype(int)
+    # Data by states
+    ds1_states = prep_datasource_1_by_states(ds1, year)
     df_abbreviations = get_abbrevations_dataframe()
-
     data_states = combine_dataframes([df_abbreviations, ds3, ds2_2, ds1_states])
 
-    # ----------- Store data to database ------------
-
+    # ----------------- Storing data ----------------
+    print("Storing the Data")
     store_dataframe(data_time, "over_time")
     store_dataframe(data_states, "by_states")
+
+    print("----------- Finished Datapipeline -----------")
 
 
 if __name__ == "__main__":
