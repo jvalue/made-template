@@ -41,7 +41,7 @@ class ChargerData:
 url = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-ladesaulen-in-deutschland/exports/csv"
 charger_data = ChargerData(url)
 charger_data.process_data()
-csv_file_path = "./data/mobi_data.csv"
+csv_file_path = "./project/data/mobi_data.csv"
 if charger_data:
     charger_data.save_data(csv_file_path)
     
