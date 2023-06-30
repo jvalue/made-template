@@ -53,7 +53,7 @@ data = open_charge_map_api.fetch_data()
 
 if data:
     # Specify the CSV file path
-    csv_file_path = "./data/EV_Charging_Points_Germany.csv"
+    csv_file_path = "./project/data/EV_Charging_Points_Germany.csv"
     
     # Extract relevant information from the response
     extracted_data = open_charge_map_api.extract_information(data)
