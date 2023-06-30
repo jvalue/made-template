@@ -80,3 +80,23 @@ Grading Exercise 1
         * drop all rows that contain invalid values
     * Use fitting SQLite types (e.g., BIGINT, TEXT or FLOAT) for all columns
 
+## Exercise 4
+* Build an automated data pipeline for the following source:
+    * Link to data offer: <br>https://mobilithek.info/offers/526718847762190336
+    * Direct download link:<br>https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip
+* Goal
+    * Download and unzip data
+        * Use the “data.csv” in the zip file
+    * Reshape data
+        * Only use the columns "Geraet", "Hersteller", "Model", "Monat", "Temperatur in °C (DWD)", "Batterietemperatur in °C", "Geraet aktiv"
+        * Rename "Temperatur in °C (DWD)" to "Temperatur"
+        * Rename "Batterietemperatur in °C" to "Batterietemperatur"
+            * There can be multiple temperature measurements per row
+                * discard all columns to the right of “​​Geraet aktiv”
+   * Transform data
+        * Transform temperatures in Celsius to Fahrenheit (formula is (TemperatureInCelsius * 9/5) + 32) in place (keep the same column names)
+            * Columns Temperatur and Batterietemperatur
+    * Validate data
+        * Use validations as you see fit, e.g., for Geraet to be an id over 0
+    * Use fitting SQLite types (e.g., BIGINT, TEXT or FLOAT) for all columns
+    * Write data into a SQLite database called “temperatures.sqlite”, in the table “temperatures”

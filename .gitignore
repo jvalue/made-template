@@ -12,3 +12,5 @@ DEU_adm
 
 venv
 .pytest_cache
+
+.DS_Store
