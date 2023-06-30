@@ -26,8 +26,8 @@ map_df_new = map_df_new.drop(columns=['Latitude', 'Longitude'])
 merged = pd.merge(df_new, map_df_new, on='State', how='inner')
 
 
-db_file = "./project/data/Charging_Points.sqlite"
-table_name = "CSPx"
+db_file = "./data.sqlite"
+table_name = "CSP"
 # Create the SQLite engine and connect to the database
 engine = create_engine(f"sqlite:///{db_file}")
 conn = engine.connect()
