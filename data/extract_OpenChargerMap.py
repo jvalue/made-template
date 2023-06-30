@@ -8,7 +8,7 @@ class OpenChargeMapAPI:
         self.params = {
             "output": "json",
             "countrycode": "DE",
-            "maxresults": 43000,
+            "maxresults": 40000,
             "key": api_key
         }
     
@@ -26,14 +26,11 @@ class OpenChargeMapAPI:
             usage_type = result['UsageType']['Title'] if result['UsageType'] else 'N/A'
             status = result['StatusType']['Title']
             extracted_data.append({
-                'Title': address_info['Title'],
-                'Town': address_info['Town'],
                 'State': address_info['StateOrProvince'],
-                'Postcode': address_info['Postcode'],
                 'Latitude': address_info['Latitude'],
                 'Longitude': address_info['Longitude'],
                 'Usage_Type': usage_type,
-                'Status': status
+                
             })
         return extracted_data
     
