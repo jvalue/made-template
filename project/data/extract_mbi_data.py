@@ -1,10 +1,5 @@
 import pandas as pd
-import geopy
-import folium
-from folium.plugins import MarkerCluster
 import pandas as pd
-import geopandas as gpd
-from shapely.geometry import Point
 from geopy.geocoders import Nominatim
 
 class ChargerData:
@@ -30,7 +25,7 @@ class ChargerData:
     
     def process_data(self):
         self.preprocess_data()
-        self.df_new = self.df.iloc[:10]
+        self.df_new = self.df
         self.df_new["Coordinates"] = self.df_new["Coordinates"].map(self.get_state_by_coord, na_action='ignore')
         self.df_new.rename(columns={"Coordinates": "State"}, inplace=True)
     
