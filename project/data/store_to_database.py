@@ -20,7 +20,7 @@ df_map = pd.read_csv("./project//data/EV_Charging_Points_Germany.csv")
 map_df_new = df_map.copy()
 map_df_new['coordinates'] = df_map['Latitude'].astype(str) + ", " + df_map['Longitude'].astype(str)
 map_df_new["State"] = map_df_new["coordinates"].map(get_state_by_coord, na_action='ignore')
-map_df_new = map_df_new.drop(columns=['Latitude', 'Longitude'])
+map_df_new = map_df_new.drop(columns=['Latitude', 'Longitude','Title','Town','Postcode','Status'])
 
 # Merge the DataFrames based on the 'State' column
 merged = pd.merge(df_new, map_df_new, on='State', how='inner')
