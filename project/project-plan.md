@@ -4,12 +4,11 @@
 
 ## Summary
 
-The purpose of this research is to investigate the influence of electric vehicle (EV) charging infrastructure on lowering carbon emissions in Germany. The study will look at the country's present EV charging infrastructure and its efficacy in boosting EV adoption. The research will also investigate new ways for extending and enhancing charging infrastructure in order to cut carbon emissions even more.
+The main purpose of this project is to combine the charging station registration information with geospatial data to provide a thorough visualisation of the distribution of electric vehicle (EV) charging stations across different areas in Germany. The study's goal is to give insights on the existing EV charging infrastructure and its spatial distribution, allowing for a better understanding of the present level of EV adoption as well as prospective areas for development in terms of carbon emissions reduction.
 
 ## Rationale
 
-With increased concern about climate change and the need to minimize carbon emissions, electric vehicle adoption is considered as a critical answer. The availability and accessibility of charging infrastructure, on the other hand, is a crucial element in the adoption of EVs. This study can give significant information for policymakers and industry stakeholders in their efforts to promote sustainable mobility by assessing the impact of EV charging infrastructure on lowering carbon emissions in Germany.
-
+Adoption of electric vehicles is viewed as a critical approach to reducing carbon emissions and combating climate change. The accessibility and availability of EV charging infrastructure is critical in increasing EV adoption. This study can provide significant information to policymakers and industry stakeholders by visualising the spatial distribution of charging stations in Germany. It can assist in identifying locations with inadequate charging infrastructure and informing strategic decisions to enhance sustainable transportation and successfully cut carbon emissions.
 
 ## Datasources
 
@@ -27,11 +26,6 @@ Description : It provides data on publicly accessible charging infrastructure in
 * Data Type: CSV
 
 Description : OpenChargeMap is an open-source platform that provides information about electric vehicle charging stations worldwide. It allows users to access data on the location, availability, and types of charging stations.
-
-### Datasource 3 : Global EV Policy Explorer
-* Data URL: https://api.iea.org/evs/?parameter=EV%20sales&mode=Cars&category=Historical&csv=true
-* Data Type: CSV
-Description : The Global EV Outlook is an annual publication that identifies and discusses recent developments in electric mobility across the globe.
 
 
 ## Work Packages
