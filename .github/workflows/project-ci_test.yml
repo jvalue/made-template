@@ -1,0 +1,31 @@
+name: Project CI Checker
+
+on:
+    push:
+      branches:
+      - main
+      paths:
+      - project/**
+      - data/**
+
+jobs:
+    project-ci-test:
+        runs-on: ubuntu-latest
+        # steps to run testcases for ETL pipeline
+        steps:
+            - name : Checkout
+              uses : actions/checkout@v3
+              with :
+                path : main
+
+            # install python
+            - name : Set up Python 3.11
+              uses : actions/setup-python@v4
+              with :
+                python-version : 3.11
+
+            # run ci script
+            - name : Check Integration
+              run : |
+                chmod +x main/scripts/run_ci_test.sh
+                main/scripts/run_ci_test.sh
