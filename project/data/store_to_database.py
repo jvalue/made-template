@@ -5,11 +5,13 @@ from sqlalchemy import create_engine
 
 # Define a function to get the state based on coordinates
 def get_state_by_coord(coord):
-        geolocator = Nominatim(user_agent="geoapi")
-        location = geolocator.reverse(coord, exactly_one=True)
-        address = location.raw['address']
-        state = address.get('state', '')
-        return state
+    geolocator = Nominatim(user_agent="geoapi")
+    location = geolocator.reverse(coord, exactly_one=True)
+    if location is None:
+        return "Unknown"
+    address = location.raw.get('address', {})
+    state = address.get('state', 'Unknown')
+    return state
 
 
 # Read the CSV files
