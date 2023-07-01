@@ -1,4 +1,4 @@
-## Project Title: The Impact of EV Infrastructure on Carbon Emissions in Germany
+## Project Title: Electrifying Germany: Visualizing the Spatial Distribution of EV Charging Stations 
 
 # Project Plan
 
