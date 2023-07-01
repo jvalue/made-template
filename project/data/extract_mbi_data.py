@@ -7,11 +7,14 @@ class ChargerData:
         self.url = url
         self.df = pd.read_csv(url, delimiter=";")
     
-    def get_state_by_coord(self, coord):
+    # Define a function to get the state based on coordinates
+    def get_state_by_coord(coord):
         geolocator = Nominatim(user_agent="geoapi")
         location = geolocator.reverse(coord, exactly_one=True)
-        address = location.raw['address']
-        state = address.get('state', '')
+        if location is None:
+            return "Unknown"
+        address = location.raw.get('address', {})
+        state = address.get('state', 'Unknown')
         return state
     
     def preprocess_data(self):
