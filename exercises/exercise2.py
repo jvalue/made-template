@@ -1,24 +1,23 @@
-import pandas as pd
-from typing import Callable, Any
-import time
 import re
+import time
+from typing import Callable, Any
+import pandas as pd
 import sqlalchemy
 
-def extract_csv_from_url(url: str) -> pd.DataFrame:
-    i = 0
-    max_i = 10
+
+def extract_csv_from_url(url: str,  max_tries: int = 5, sec_wait_before_retry: float = 5) -> pd.DataFrame:
     df = None
-    while (i < 10):
+    for i in range(1, max_tries+1):
         try:
             df = pd.read_csv(url, sep=';', decimal=',')
             break
         except:
-            i += 1
-            print(f"Couldn't extract csv from given url! (Try {i}/{max_i})")
-            time.sleep(2)
+            print(f'Couldn\'t extract csv from given url! (Try {i}/{max_tries})')
+            if i < max_tries: time.sleep(sec_wait_before_retry)
     if df is None:
-        raise Exception(f"Failed to extract csv from given url {url}")
+        raise Exception(f'Failed to extract csv from given url {url}')
     return df
+
 
 def drop_invalid_col(df: pd.DataFrame, column: str, valid: Callable[[Any], bool]) -> pd.DataFrame:
     df = df.loc[df[column].apply(valid)]
@@ -40,7 +39,7 @@ if __name__ == '__main__':
     df = drop_invalid_col(df, 'Verkehr', lambda x: x in ['FV', 'RV', 'nur DPN'])
     df = drop_invalid_col(df, 'Laenge', lambda x: -90 < x < 90)
     df = drop_invalid_col(df, 'Breite', lambda x: -90 < x < 90)
-    df = drop_invalid_col(df, 'IFOPT', lambda x: re.match("^..:[0-9]+:[0-9]+(:[0-9]+)?$", x) is not None)
+    df = drop_invalid_col(df, 'IFOPT', lambda x: re.match('^..:[0-9]+:[0-9]+(:[0-9]+)?$', x) is not None)
     
     # Load dataframe into sqlite database, with matching datatypes
     df.to_sql('trainstops', 'sqlite:///trainstops.sqlite', if_exists='replace', index=False, dtype={

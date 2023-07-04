@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 import shutil
+import time
 from typing import Callable, Any
 import urllib.request
 import zipfile
@@ -8,19 +9,34 @@ import pandas as pd
 from sqlalchemy import BIGINT, FLOAT, TEXT
 
 
-def download_and_extract_zip(url: str) -> str:
+def download_and_extract_zip(url: str, max_tries: int = 5, sec_wait_before_retry: float = 5) -> str:
+    # Filename and -path definitions
     data_name = Path(url).stem
     extract_path = os.path.join(os.curdir, data_name)
     zip_name = data_name + '.zip'
-    urllib.request.urlretrieve(url, zip_name)
+    # Download zip with retries
+    for i in range(1, max_tries+1):
+        try:
+            urllib.request.urlretrieve(url, zip_name)
+            break
+        except:
+            print(f'Couldn\'t load zip from given url! (Try {i}/{max_tries})')
+            if i < max_tries: time.sleep(sec_wait_before_retry)
+    # Check if download was successfull
+    if not os.path.exists(zip_name):
+        raise FileNotFoundError(f'Failed to load zip from url {url}')
+    # Extract and delete zip file
     with zipfile.ZipFile(zip_name, 'r') as zip_ref:
         zip_ref.extractall(extract_path)
     os.remove(zip_name)
+    # Return path to extracted data
     return extract_path
+
 
 def validate(df: pd.DataFrame, column: str, constraint: Callable[[Any], bool]) -> pd.DataFrame:
     df = df.loc[df[column].apply(constraint)]
     return df
+
 
 def celsius_to_fahrenheit(temp_cels: float) -> float:
     return (temp_cels * 9/5) + 32
@@ -58,7 +74,9 @@ if __name__ == '__main__':
     df = validate(df, 'Geraet aktiv', lambda x: x in ['Ja', 'Nein'])
     
     # Write data into SQLite database
-    df.to_sql('temperatures', 'sqlite:///temperatures.sqlite', if_exists='replace', index=False, dtype={
+    table = 'temperatures'
+    database = 'temperatures.sqlite'
+    df.to_sql(table, f'sqlite:///{database}', if_exists='replace', index=False, dtype={
         'Geraet': BIGINT,
         'Hersteller': TEXT,
         'Model': TEXT,
@@ -70,3 +88,6 @@ if __name__ == '__main__':
     
     # Delete downloaded data
     shutil.rmtree(data_path)
+    
+    print('Datapipeline finished successfully')
+    print(f'Data is stored in table "{table}" in database "{database}"')
