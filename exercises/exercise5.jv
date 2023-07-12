@@ -1,0 +1,70 @@
+pipeline StopsPipeline {
+
+    constraint ValidGeoCoordiante oftype RangeConstraint {
+        lowerBound: -90;
+        lowerBoundInclusive: true;
+        upperBound: 90;
+        upperBoundInclusive: true;
+    }
+
+    valuetype GeographicCoordiante oftype decimal {
+        constraints: [ValidGeoCoordiante];
+    }
+
+    // Would have prefered to use AllowListConstraint, but wasn't possible for numerical values
+    constraint Zone2001 oftype RangeConstraint {
+        lowerBound: 2001;
+        lowerBoundInclusive: true;
+        upperBound: 2001;
+        upperBoundInclusive: true;
+    }
+
+    valuetype FilteredZone oftype integer {
+        constraints: [Zone2001];
+    }
+
+    block GTFSZipExtractor oftype HttpExtractor {
+        url: "https://gtfs.rhoenenergie-bus.de/GTFS.zip";
+    }
+
+    block ZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block StopsFilePicker oftype FilePicker {
+        path: "/stops.txt";
+    }
+
+    block StopsTextFileInterpreter oftype TextFileInterpreter {
+        encoding: "utf-8";
+    }
+
+    block StopsCSVInterpreter oftype CSVInterpreter {
+        delimiter: ",";
+        enclosing: '"';
+    }
+
+    block StopsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "stop_id" oftype integer,
+            "stop_name" oftype text,
+            "stop_lat" oftype GeographicCoordiante,
+            "stop_lon" oftype GeographicCoordiante,
+            "zone_id" oftype FilteredZone,
+        ];
+    }
+
+    block StopsSQLiteLoader oftype SQLiteLoader {
+        table: "stops";
+        file: "./gtfs.sqlite";
+    }
+
+    GTFSZipExtractor
+        -> ZipArchiveInterpreter
+        -> StopsFilePicker
+        -> StopsTextFileInterpreter
+        -> StopsCSVInterpreter
+        -> StopsTableInterpreter
+        -> StopsSQLiteLoader;
+}

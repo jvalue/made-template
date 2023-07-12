@@ -100,3 +100,23 @@ Grading Exercise 1
         * Use validations as you see fit, e.g., for Geraet to be an id over 0
     * Use fitting SQLite types (e.g., BIGINT, TEXT or FLOAT) for all columns
     * Write data into a SQLite database called “temperatures.sqlite”, in the table “temperatures”
+
+## Exercise 5
+* Build an automated data pipeline for the following source:
+    * Link to data offer:<br>https://mobilithek.info/offers/110000000002933000
+    * Direct download link:<br>https://gtfs.rhoenenergie-bus.de/GTFS.zip
+* Goal
+    * Work with GTFS data
+    * Pick out only stops (from stops.txt)
+        * Only stop_id, stop_name, stop_lat, stop_lon, zone_id with fitting data types
+    * Filter data
+        * Only keep stops from zone 2001
+    * Validate data
+        * stop_name must be a text and maintain german umlauts
+        * stop_lat/stop_lon must be a geographic coordinates between -90 and 90 including upper/lower bounds
+        * Drop rows containing invalid data
+    * Use fitting SQLite types (e.g., BIGINT, TEXT or FLOAT) for all columns
+    * Write data into a SQLite database called “gtfs.sqlite”, in the table “stops”
+
+
+
