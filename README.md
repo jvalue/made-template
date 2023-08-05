@@ -10,7 +10,7 @@
 
 ## Overview
 The aim of this project is to investigate if there is a relationship betwenn the charging point infrastructure and electromobility in Germany. Therefore it uses open available datasources provided by different institutions to analyze the relationship over time and by states ("Bundesländer"). <br>
-In the `data` folder you can find the [datapipeline](https://github.com/nmarkert/amse/blob/main/data/datapipeline.py) which is used to load the data from the internet, proccesses it and stores it to a database.
+In the `data` folder you can find the [datapipeline](https://github.com/nmarkert/amse/blob/main/data/datapipeline.py) which is used to load the data from the internet, proccesses it and stores it to a database. <br>
 In the `project` folder you find all additional informations about the project, like what datasources where used. The final report about the findings from the processed data you can see in the [report.ipynb](https://github.com/nmarkert/amse/blob/main/project/report.ipynb).
 ## Context
 This repository is the result of my participation in the course [Advanced Methods of Software Engineering](https://oss.cs.fau.de/teaching/specific/amse/) provided by the [Professorship of Open-Source Software](https://oss.cs.fau.de) from FAU. <br>
