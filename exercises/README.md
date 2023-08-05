@@ -1,31 +1,12 @@
 # Exercises
-During the semester you will need to complete exercises, sometimes using [Python](https://www.python.org/), sometimes using [Jayvee](https://github.com/jvalue/jayvee). You **must** place your submission in the `exercises` folder in your repository and name them according to their number from one to five: `exercise<number from 1-5>.<jv or py>`.
+During the course there were also five exercises given to work on. All of them required to build a datapipeline based on a given task and a given dataset. 
+The exercises should be solved alternately [Python](https://www.python.org/) and [Jayvee](https://github.com/jvalue/jayvee). <br>
+Automated Feedback to the exercises was provided using a GitHub action, which is defined in `.github/workflows/exercise-feedback.yml`
 
-In regular intervalls, exercises will be given as homework to complete during the semester. We will divide you into two groups, one completing an exercise in Jayvee, the other in Python, switching each exercise. Details and deadlines will be discussed in the lecture, also see the [course schedule](https://amse.uni1.de/). At the end of the semester, you will therefore have the following files in your repository:
-
-1. `./exercises/exercise1.jv` or `./exercises/exercise1.py`
-2. `./exercises/exercise2.jv` or `./exercises/exercise2.py`
-3. `./exercises/exercise3.jv` or `./exercises/exercise3.py`
-4. `./exercises/exercise4.jv` or `./exercises/exercise4.py`
-5. `./exercises/exercise5.jv` or `./exercises/exercise5.py`
-
-## Exercise Feedback
-We provide automated exercise feedback using a GitHub action (that is defined in `.github/workflows/exercise-feedback.yml`). To view your exercise feedback, navigate to Actions -> Exercise Feedback in your repository (or use the direct link [/actions/workflows/exercise-feedback.yml](/actions/workflows/exercise-feedback.yml)).
-
-The exercise feedback is executed whenever you make a change in files in the `exercise` folder and push your local changes to the repository on GitHub. To see the feedback, open the latest GitHub Action run, open the `exercise-feedback` job and `Exercise Feedback` step. You should see command line output that contains output like this:
-
-```sh
-Found exercises/exercise1.jv, executing model...
-Found output file airports.sqlite, grading...
-Grading Exercise 1
-	Overall points 17 of 17
-	---
-	By category:
-		Shape: 4 of 4
-		Types: 13 of 13
-```
+So this directory contains my solutions to the exercises. The given task descriptions are listed below together with links to the respective file.
 
 ## Exercise 1
+[Link to Solution](https://github.com/nmarkert/amse/blob/main/exercises/exercise1.jv)
 * Build an automated data pipeline for the following source:
     * https://mobilithek.info/offers/-8691940611911586805
     * direct link to CSV:<br>
@@ -36,6 +17,7 @@ Grading Exercise 1
     * No further data validation is required, do not drop any rows or change any data points
 
 ## Exercise 2
+[Link to Solution](https://github.com/nmarkert/amse/blob/main/exercises/exercise2.py)
 * Build an automated data pipeline for the following source:
     * https://mobilithek.info/offers/-8739430008147831066
     * direct link to CSV:<br>
@@ -52,6 +34,7 @@ Grading Exercise 1
     * Use fitting SQLite types (e.g., BIGINT, TEXT or FLOAT) for all columns
 
 ## Exercise 3
+[Link to Solution](https://github.com/nmarkert/amse/blob/main/exercises/exercise3.jv)
 * Build an automated data pipeline for the following source:
     * Link to data offer:<br>https://mobilithek.info/offers/-655945265921899037
     * Direct download link:<br>https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv
@@ -81,6 +64,7 @@ Grading Exercise 1
     * Use fitting SQLite types (e.g., BIGINT, TEXT or FLOAT) for all columns
 
 ## Exercise 4
+[Link to Solution](https://github.com/nmarkert/amse/blob/main/exercises/exercise4.py)
 * Build an automated data pipeline for the following source:
     * Link to data offer: <br>https://mobilithek.info/offers/526718847762190336
     * Direct download link:<br>https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip
@@ -102,6 +86,7 @@ Grading Exercise 1
     * Write data into a SQLite database called “temperatures.sqlite”, in the table “temperatures”
 
 ## Exercise 5
+[Link to Solution](https://github.com/nmarkert/amse/blob/main/exercises/exercise5.jv)
 * Build an automated data pipeline for the following source:
     * Link to data offer:<br>https://mobilithek.info/offers/110000000002933000
     * Direct download link:<br>https://gtfs.rhoenenergie-bus.de/GTFS.zip
