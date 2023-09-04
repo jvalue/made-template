@@ -28,4 +28,4 @@ Short description.
 1. Example Issue [#1][i1]
 2. ...
 
-[i1]: https://github.com/jvalue/2023-amse-template/issues/1
+[i1]: https://github.com/jvalue/made-template/issues/1
