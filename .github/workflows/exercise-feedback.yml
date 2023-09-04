@@ -19,7 +19,7 @@ jobs:
     - name: Checkout exercise feedback
       uses: actions/checkout@v3
       with:
-        repository: jvalue/amse-exercise-feedback
+        repository: jvalue/made-exercise-feedback
         path: grading
 
     - name: Set up Node
