@@ -1,14 +1,18 @@
 # Project Plan
 
-## Summary
+## Title
+<!-- Give your project a short title. -->
+Awesome MADE project.
 
-<!-- Describe your data science project in max. 5 sentences. -->
-This projects analyzes XY.
+## Main Question
 
-## Rationale
+<!-- Think about one main question you want to answer based on the data. -->
+1. Does writing an example question help students write better project plans?
 
-<!-- Outline the impact of the analysis, e.g. which pains it solves. -->
-The analysis helps XY to do YZ.
+## Description
+
+<!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
+XY is an important problem, because... This projects analyzes XY, using method A. The results can give insights into...
 
 ## Datasources
 
@@ -19,7 +23,7 @@ The analysis helps XY to do YZ.
 * Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
 * Data Type: CSV
 
-Short description.
+Short description of the DataSource.
 
 ## Work Packages
 
