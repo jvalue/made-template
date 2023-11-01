@@ -14,18 +14,18 @@ In Munich, we're looking at how the weather affects people using bikes at six sp
 
 ## Datasources
 
-### Datasource1 : Weather data
+### Datasource1 : Weather data in Munich
 * Metadata URL: https://www.visualcrossing.com/weather-history
 * Data URL: https://drive.google.com/file/d/1B4pn56m1ZZNquzql2_Lne5dOde30lBss/view?usp=drive_link
 * Data Type: CSV
 
 This includes historical weather data of munich over a specific period of time.
-### Datasource2: Bike Traffic in Munich
+### Datasource2: Bike Traffic data in Munich
 * Metadata URL: https://www.kaggle.com/datasets/lucafrance/bike-traffic-in-munich
 * Data URL: https://drive.google.com/file/d/1Kukg8Pl6X6FpcMuoSYEiFXT_gI9Qbcr9/view?usp=drive_link
 * Data Type: CSV
 
-It includes data on the number of bikes passing through each station.
+It includes data of the number of bikes passing through each station of muncih.
 
 ## Work Packages
 
