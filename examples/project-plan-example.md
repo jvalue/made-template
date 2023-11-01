@@ -5,7 +5,7 @@
 Weather Impact on Munich Bike Traffic
 ## Main Question
 
-<!-- Think about one main question you want to answer based on the data. -->
+<!-- Think about one main question you want to answer based on the data. --> 
 1. How has the influence of weather on bike traffic patterns evolved over time in Munich ?
 
 ## Description
