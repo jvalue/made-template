@@ -2,8 +2,7 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Awesome MADE project.
-
+Weather Impact on Munich Bike Traffic
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
@@ -11,36 +10,28 @@ Awesome MADE project.
 
 ## Description
 
-<!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-XY is an important problem, because... This projects analyzes XY, using method A. The results can give insights into...
+Certainly, here's the extended version with the added question:
 
-This project aims to use data on bicycle traffic in popular tourist areas of Cologne and Munich to identify patterns in the traffic, such as peak hours and popular locations. The analysis will help improve tourism strategies and enhance the visitor experience by identifying areas for improvement in bicycle infrastructure and services.
-
-
+"In Munich, we're looking at how the weather affects people using bikes at six specific spots. Biking is popular here, but does the weather influence when and how much people ride? This is an important problem because understanding how weather and bike traffic are connected can help us make the city better for biking. This project analyzes this connection, using method A. The results can give insights into how we can improve biking in Munich, encourage more people to ride, and make our city more environmentally friendly."
 
 
 ## Datasources
 
-<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
-
-### Datasource1: ExampleSource
+### Datasource1 : Weather data
 * Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+* Data URL: https://drive.google.com/file/d/1B4pn56m1ZZNquzql2_Lne5dOde30lBss/view?usp=drive_link
 * Data Type: CSV
 
-Short description of the DataSource.
+It includes weather data
 
-
-Datasource1: Bicycle traffic data Cologne
-Metadata URL: https://mobilithek.info/offers/-2236641647976866002
-Data URL: https://offenedaten-koeln.de/sites/default/files/Fahrrad_Zaehlstellen_Koeln_2016.csv
-Data Type: CSV
-The dataset includes the location of each bicycle counter, the direction of bicycle traffic, and the type of bicycle counter used.
-
-Datasource2: Bike Traffic in Munich
+### Datasource2: Bike Traffic in Munich
 Metadata URL: https://www.kaggle.com/datasets/lucafrance/bike-traffic-in-munich
-Data URL: https://shorturl.at/vGNT9
+Data URL: https://drive.google.com/file/d/1Kukg8Pl6X6FpcMuoSYEiFXT_gI9Qbcr9/view?usp=drive_link
 Data Type: CSV
+
+It includes data on the number of bicycles passing through each location per hour, day, and month, along with the location of each counter and the direction of bicycle traffic.
+
+
 
 
 ## Work Packages
