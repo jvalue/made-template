@@ -9,7 +9,7 @@ Weather Impact on Munich Bike Traffic
 1. How has the influence of weather on bike traffic patterns evolved over time in Munich ?
 
 ## Description
-In Munich, we're looking at how the weather affects people using bikes at six specific spots. Biking is popular here, but does the weather influence when and how much people ride? This is an important problem because understanding how weather and bike traffic are connected can help us make the city better for biking. This project analyzes this connection and that results can give insights into how we can improve biking in Munich, encourage more people to ride, and make our city more environmentally friendly.
+In Munich, we're looking at how the weather affects people using bikes at six specific spots back in 2020 entire year. Biking is popular here, but does the weather influence when and how much people ride? This is an important problem because understanding how weather and bike traffic are connected can help us make the city better for biking. This project analyzes this connection and that results can give insights into how we can improve biking in Munich, set proper plans, encourage more people to ride, and make our city more environmentally friendly.
 
 
 ## Datasources
