@@ -25,7 +25,7 @@ This includes historical weather data of munich over a specific period of time.
 * Data URL: https://drive.google.com/file/d/1Kukg8Pl6X6FpcMuoSYEiFXT_gI9Qbcr9/view?usp=drive_link
 * Data Type: CSV
 
-It includes data of the number of bikes passing in the munich.
+It includes data of the number of bikes passing in the subset of munich.
 
 ## Work Packages
 
