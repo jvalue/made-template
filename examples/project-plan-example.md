@@ -2,28 +2,41 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Awesome MADE project.
+Prediction Diabetes and Kidney Diseases for MADE project.
 
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
-1. Does writing an example question help students write better project plans?
+1. How can we predict diabetes and kidney disease and is there a commonality between them?
 
 ## Description
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-XY is an important problem, because... This projects analyzes XY, using method A. The results can give insights into...
+
+ Diabetes and chronic kidney disease are two serious diseases that can cause death. In this project we use two separate datasets to diagnostically predict whether or not a patient has these diseases. 
+ Our goal is to analyze each of these datasets to understand what factors influence the prediction , as well as whether there is a relationship between these diseases.
+
 
 ## Datasources
 
+
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
-* Data Type: CSV
+### Datasource1: Pima Indians Diabetes Database
 
-Short description of the DataSource.
+
+* Metadata URL: https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database/data
+* Data URL: https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database/data?select=diabetes.csv
+* Data Type: CSV
+* Description: The objective of the Pima Indians Diabetes Database is to diagnostically predict whether or not a patient has diabetes, based on  certain diagnostic measurements included in the dataset. In particular, all patients here are females at least 21 years old of Pima Indian heritage.
+
+### Datasource2: Chronic_Kidney_Disease
+
+
+* Metadata URL: https://archive.ics.uci.edu/dataset/336/chronic+kidney+disease
+* Data URL: https://github.com/aiplanethub/Datasets/blob/master/Chronic%20Kidney%20Disease%20(CKD)%20Dataset/ChronicKidneyDisease.csv
+* Data Type: CSV
+* Description: This dataset can be used to predict the chronic kidney disease and it can be collected from the hospital nearly 2 months of period.
 
 ## Work Packages
 
