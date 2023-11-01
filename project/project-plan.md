@@ -22,7 +22,7 @@ Prediction Diabetes and Kidney Diseases for MADE project.
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: Pima Indians Diabetes Database
+### Datasource1: Pima Indians Diabetes Dataset
 
 
 * Metadata URL: https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database/data
@@ -30,7 +30,7 @@ Prediction Diabetes and Kidney Diseases for MADE project.
 * Data Type: CSV
 * Description: The objective of the Pima Indians Diabetes Database is to diagnostically predict whether or not a patient has diabetes, based on  certain diagnostic measurements included in the dataset. In particular, all patients here are females at least 21 years old of Pima Indian heritage.
 
-### Datasource2: Chronic_Kidney_Disease
+### Datasource2: Chronic_Kidney_Disease 
 
 
 * Metadata URL: https://archive.ics.uci.edu/dataset/336/chronic+kidney+disease
@@ -42,7 +42,10 @@ Prediction Diabetes and Kidney Diseases for MADE project.
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
+1. Diabetes Database Analysis [#1][i1]
+2. Chronic_Kidney_Disease Analysis [#2][i2]
+3. Chronic_Kidney_Disease Analysis [#3][i3]
 
-[i1]: https://github.com/jvalue/made-template/issues/1
+[i1]: https://github.com/zeinabaliakbari/made-template-ws2324/issues/1#issue-1972520880
+[i2]: https://github.com/zeinabaliakbari/made-template-ws2324/issues/2#issue-1972526450
+[i3]: https://github.com/zeinabaliakbari/made-template-ws2324/issues/3#issue-1972534877
