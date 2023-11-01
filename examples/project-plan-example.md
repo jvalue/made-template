@@ -15,7 +15,7 @@ In Munich, we're looking at how the weather affects people using bikes at six sp
 ## Datasources
 
 ### Datasource1 : Weather data
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
+* Metadata URL: https://www.visualcrossing.com/weather-history
 * Data URL: https://drive.google.com/file/d/1B4pn56m1ZZNquzql2_Lne5dOde30lBss/view?usp=drive_link
 * Data Type: CSV
 
