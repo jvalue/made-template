@@ -38,7 +38,28 @@ It includes data on the number of  bicycles passing through each location per ho
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
+1. Data Acquisition:
+Set up a mechanism to fetch the parking violation data from the provided data source.
+Set up a mechanism to fetch the street directory data from the provided data source.
+Data Preprocessing:
+Clean and preprocess the parking violation data, removing any irrelevant or inconsistent entries.
+Clean and preprocess the street directory data, ensuring data quality and consistency.
+3. Data Integration:
+Combine the parking violation data with the street directory data based on location information.
+Perform data merging and consolidation to create a unified dataset for analysis.
+4. Exploratory Data Analysis:
+Conduct exploratory data analysis on the merged dataset.
+Identify statistical patterns and trends in parking violations.
+Explore spatial distributions and correlations between parking violations and street characteristics.
+5. Hotspot Identification:
+Apply clustering or spatial analysis techniques to identify areas or streets with the highest frequency of parking violations.
+Determine the criteria for defining parking violation hotspots based on the analysis results.
+6. Visualization and Insights:
+Create visualizations, such as maps or heatmaps, to illustrate the identified parking violation hotspots.
+Generate data-driven insights and recommendations for urban planners, law enforcement agencies, and parking management companies.
+Provide actionable recommendations for addressing parking violations in the identified hotspots.
+7. Documentation and Reporting:
+Document the project process, including data acquisition, preprocessing, analysis, and visualization.
+Prepare a comprehensive report summarizing the findings, insights, and recommendations.
+Present the results to stakeholders, highlighting the significance and potential impact of the analysis.
 
-[i1]: https://github.com/jvalue/made-template/issues/1
