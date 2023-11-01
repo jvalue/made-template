@@ -31,9 +31,9 @@ It includes data of the number of bikes passing in the munich.
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Data Acquisition:
-2. Data Preprocessing:
-3. Exploratory Data Analysis:
+1. Data Acquisition
+2. Data Preprocessing
+3. Exploratory Data Analysis
 4. Integration and Testing
-5. Visualization and Insights:
-6. Documentation and Reporting:
+5. Visualization and Insights
+6. Documentation and Reporting
