@@ -9,7 +9,7 @@ Weather Impact on Munich Bike Traffic
 1. How has the influence of weather on bike traffic patterns evolved over time in Munich ?
 
 ## Description
-In Munich, we're looking at how the weather affects people using bikes at six specific spots back in 2020 entire year. Biking is popular here, but does the weather influenced at that span of time and how much people ride? This is an important problem because understanding how weather and bike traffic are connected can help us make the city better for biking. This project analyzes this connection and that results can give insights into how we can improve biking in Munich, set proper plans, encourage more people to ride, and make our city more environmentally friendly.
+In Munich, we're looking at how the weather affects people using bikes back in 2020 entire year. Biking is popular here, but does the weather influenced at that span of time and how much people ride? This is an important problem because understanding how weather and bike traffic are connected can help us make the city better for biking. This project analyzes this connection and that results can give insights into how we can improve biking in Munich, set proper plans, encourage more people to ride, and make our city more environmentally friendly.
 
 
 ## Datasources
@@ -25,7 +25,7 @@ This includes historical weather data of munich over a specific period of time.
 * Data URL: https://drive.google.com/file/d/1Kukg8Pl6X6FpcMuoSYEiFXT_gI9Qbcr9/view?usp=drive_link
 * Data Type: CSV
 
-It includes data of the number of bikes passing through each station of munich.
+It includes data of the number of bikes passing in the munich.
 
 ## Work Packages
 
@@ -34,8 +34,6 @@ It includes data of the number of bikes passing through each station of munich.
 1. Data Acquisition:
 2. Data Preprocessing:
 3. Exploratory Data Analysis:
-4. Station-Specific Analysis:
+4. Integration and Testing
 5. Visualization and Insights:
 6. Documentation and Reporting:
-
-
