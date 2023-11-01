@@ -44,7 +44,7 @@ Prediction Diabetes and Kidney Diseases for MADE project.
 
 1. Diabetes Database Analysis [#1][i1]
 2. Chronic_Kidney_Disease Analysis [#2][i2]
-3. Chronic_Kidney_Disease Analysis [#3][i3]
+3. Relationship between Chronic Kidney Disease and Diabetes [#3][i3]
 
 [i1]: https://github.com/zeinabaliakbari/made-template-ws2324/issues/1#issue-1972520880
 [i2]: https://github.com/zeinabaliakbari/made-template-ws2324/issues/2#issue-1972526450
