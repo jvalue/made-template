@@ -2,17 +2,19 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Awesome MADE project.
+Correlation analysis between newly registered cars and Greenhouse gas emissions in the European Union.
 
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
-1. Does writing an example question help students write better project plans?
+Is the type of car engine a significant factor contributing to climate change? What other vehicle features play a crucial role in influencing it?
 
 ## Description
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-XY is an important problem, because... This projects analyzes XY, using method A. The results can give insights into...
+*Greenhouse gas emissions from transport account for 25% of the total EU greenhouse gas emissions. In order to achieve climate neutrality by 2050, as specified in the European Green Deal, there is a target to reduce greenhouse gas emissions from the transport sector by 90%.*[^r1]
+
+The goal is to explore the latest Passenger cars[^r2], with a particular focus on engine-related features. We can further refine our research by focusing on specific regions to determine if the same pattern emerges. Depending on the results, we can then consider exploring more databases to enhance our analysis if we find the correlation we are seeking.
 
 ## Datasources
 
@@ -33,3 +35,10 @@ Short description of the DataSource.
 2. ...
 
 [i1]: https://github.com/jvalue/made-template/issues/1
+
+
+## References and footnotes
+
+[^r1]: EC, 2021, Communication from the Commission to the European Parliament, the Council, the European Economic and Social Committee and the Committee of the Regions ‘Fit for 55’: delivering the EU’s 2030 Climate Target on the way to climate neutrality, COM(2021) 550 final
+
+[^r2]: [Glossary:Passenger_car](https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Passenger_car)
