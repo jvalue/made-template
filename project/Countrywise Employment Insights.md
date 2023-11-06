@@ -43,15 +43,11 @@ Short description of the DataSource.
 ## Work Packages
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
-1. Data collection
-2. Data Analysis
-3. Identify patterns, and potential correlations.
+1. Data collection [#1][i1]
+2. Data Analysis [#2][i2]
+3. Identify patterns, and potential correlations [#3][i3]
 4. Summarize findings in comprehensive reports, data visualizations.
 
-
-1. Example Issue [#1][i1]
-2. Example Issue [#2][i2]
-3. Example Issue [#3][i3] 
 
 [i1]: https://github.com/Hafsa70/made_HafsaMateen/issues/1
 [i2]: https://github.com/Hafsa70/made_HafsaMateen/issues/2
