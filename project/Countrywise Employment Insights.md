@@ -50,4 +50,7 @@ Short description of the DataSource.
 
 
 1. Example Issue [#1][i1]
-2. ...     
+2. Example Issue [#2][i2]    
+
+[i1]: https://github.com/Hafsa70/made_HafsaMateen/issues/1
+[i2]: 
