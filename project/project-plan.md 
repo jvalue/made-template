@@ -11,16 +11,38 @@ Supershop sales analysis based on weather.
 
 ## Description
 
-<!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-XY is an important problem, because... This projects analyzes XY, using method A. The results can give insights into...
+The weather can have a significant impact on groceries sales. By understanding how weather affects sales, 
+businesses can better predict demand and make better decisions about inventory management, pricing, and marketing. 
+The objective of this project is to analyze Supershop sales data to identify how weather affects sales. 
+Specifically, the project will:
+
+1. Identify weather factors that are most correlated with sales
+2. Quantify the effect of weather on sales
+3. Develop a model to predict sales based on weather
+
+
 
 ## Datasources
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
+### Datasource1: Daily supermarket sales for Yagon, Mandalay, Naypyitaw
+* Metadata URL: https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales/data
+* Data URL: https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales/download?datasetVersionNumber=3
+* Data Type: CSV
 
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+### Datasource2: Daily Weather data for Yagon
+* Metadata URL: https://dev.meteostat.net/bulk/daily.html
+* Data URL: https://bulk.meteostat.net/v2/daily/48097.csv.gz
+* Data Type: CSV
+
+Datasource3: Daily Weather data for Mandalay
+* Metadata URL: https://dev.meteostat.net/bulk/daily.html
+* Data URL: https://bulk.meteostat.net/v2/daily/48042.csv.gz
+* Data Type: CSV
+
+Datasource4: Daily Weather data for Naypyitaw
+* Metadata URL: https://dev.meteostat.net/bulk/daily.html
+* Data URL: https://bulk.meteostat.net/v2/daily/VYNT0.csv.gz
 * Data Type: CSV
 
 Short description of the DataSource.
@@ -29,7 +51,8 @@ Short description of the DataSource.
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
+1. Findout preferrable datasets [i1]
+2. Write project plan [i2]
 
-[i1]: https://github.com/jvalue/made-template/issues/1
+[i1]: https://github.com/islam15-8789/made-template/issues/1
+[i2]: https://github.com/islam15-8789/made-template/issues/2
