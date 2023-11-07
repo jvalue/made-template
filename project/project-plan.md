@@ -45,22 +45,38 @@ Nutrition, Physical Activity, and Obesity - Behavioral Risk Factor Surveillance 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
 ### Milestone 1: Data inspection, Goal: Data available, conclusion if data is sufficient, side effects of data
-1. Download data packages [#1]
-2. Inspect data packages [#2]
-3. Elaborate on side effects of data [#3]
+1. Download data packages [#1][i1]
+2. Inspect data packages [#2][i2]
+3. Elaborate on side effects of data [#3][i3]
 
 ### Milestone 2: Work on question 1 'Correlation of behavioral risk factors and cancer (primary site 'bronchus and lung')'
-1. Data preprocessing [#4]
-2. Data evaluation [#5]
-3. Report [#6]
+1. Data preprocessing [#4][i4]
+2. Data evaluation [#5][i5]
+3. Report [#6][i6]
 
 ### Milestone 3: Work on question 2: 'Find mutations in genomic data related to behavioral risk factors for cancer primary site 'bronchus and lung''
-1. Data preprocessing [#7]
-2. Implementation of CNN [#8]
-3. Data evaluation [#9]
-4. Report [#10]
+1. Data preprocessing [#7][i7]
+2. Implementation of CNN [#8][i8]
+3. Data evaluation [#9][i9]
+4. Report [#10][i10]
 
 ### Milestone 4: Summarizing
-1. Revise reports [#11]
-2. Conclude [#12]
-3. Poster [#13]
+1. Revise reports [#11][i11]
+2. Conclude [#12][i12]
+3. Poster [#13][i13]
+
+---
+
+[i1]: https://github.com/nilapalin/made-template/issues/1
+[i2]: https://github.com/nilapalin/made-template/issues/2
+[i3]: https://github.com/nilapalin/made-template/issues/3
+[i4]: https://github.com/nilapalin/made-template/issues/4
+[i5]: https://github.com/nilapalin/made-template/issues/5
+[i6]: https://github.com/nilapalin/made-template/issues/6
+[i7]: https://github.com/nilapalin/made-template/issues/7
+[i8]: https://github.com/nilapalin/made-template/issues/8
+[i9]: https://github.com/nilapalin/made-template/issues/9
+[i10]: https://github.com/nilapalin/made-template/issues/10
+[i11]: https://github.com/nilapalin/made-template/issues/11
+[i12]: https://github.com/nilapalin/made-template/issues/12
+[i13]: https://github.com/nilapalin/made-template/issues/13
