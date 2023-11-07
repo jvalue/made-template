@@ -1,35 +1,25 @@
 # Project Plan
 
 ## Title
-<!-- Give your project a short title. -->
-Awesome MADE project.
+Malware Prediction.
 
 ## Main Question
-
-<!-- Think about one main question you want to answer based on the data. -->
-1. Does writing an example question help students write better project plans?
+1. How can we predict a Windows machine’s probability of getting infected by various families of malware, based on different properties of that machine.?
 
 ## Description
-
-<!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-XY is an important problem, because... This projects analyzes XY, using method A. The results can give insights into...
+Malware attacks against windows operating system has been a long time problem. Main reason for this is the ease of usage of windows and lack of
+technical understanding of the user. This project starts with cleaning, feature engineering, structuring the data for machine learning algorithm 
+usage and apply them to predict the probability for infectious machine detection.
 
 ## Datasources
+Data source for this specific problem is Kaggle, a well-known platform for data science competitions and datasets.
 
-<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
-
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+### Datasource1: Kaggle
+*  Train Data URL: https://www.kaggle.com/competitions/microsoft-malware-prediction/data?select=train.csv
+*  Test Data URL : https://www.kaggle.com/competitions/microsoft-malware-prediction/data?select=test.csv
 * Data Type: CSV
 
-Short description of the DataSource.
+Datasource1, referred to as Kaggle, comprises two distinct CSV files available on Kaggle. These files contain essential columns such as Product Name, Engine Version, App Version, and more. The purpose of these datasets is for training and testing in the context of the malware detection problem. The structured data within these CSV files serves as the foundation for our analysis and machine learning model development.
 
 ## Work Packages
-
-<!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
-
-1. Example Issue [#1][i1]
-2. ...
-
-[i1]: https://github.com/jvalue/made-template/issues/1
+Work in progress
