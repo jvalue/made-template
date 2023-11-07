@@ -35,7 +35,15 @@ Annual parameters of air pollutants in Nordrhein-Westfalen for 2022: Nitrogen di
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Clean & Transform data [#1][i1]
+1. Explore Datasources [#1][i1]
+2. Clean & Transform data [#2][i2]
+3. Build an Automated Data Pipeline #3
+4. Deploy the Tests #4
+5. Explore and Analyze Resulting Data #5
+6. Improve Data Pipeline #6
+7. Report Findings #7
+8. Write Final Report and submit #8
+9. Submit the project #9
 
-
-[i1]: https://github.com/JoaquinAyzanoa/made-template_ws2324/issues/1
+[i1]: https://github.com/JoaquinAyzanoa/made-template_ws2324/issues/3
+[i2]: https://github.com/JoaquinAyzanoa/made-template_ws2324/issues/4
