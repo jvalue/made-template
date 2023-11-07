@@ -12,15 +12,17 @@ How do behavioral risks influence cancer (or even mutations).
 ## Description
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-Cancer is one of the leading number of deaths, bronchus and lung cancer deaths are now ranked 6th among the leading causes of deaths (https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death). 
+Cancer is one of the leading number of deaths, bronchus and lung cancer deaths are now ranked 6th among the leading causes of deaths (https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death). Also obesity is a world wide health issue and influences diseases. Rising numbers in cancer and obesity are alerting and therefore it is of high interest to reveal any relations of obesity/behavioral risk factors and cancer in order to apply countermeasures.
 
-This projects aims to uncover relations of behavioral risk factors and cancer.
+This project aims to uncover relations of behavioral risk factors and cancer.
 
 ## Datasources
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-#### Datasource1a: GDC - NCI Genomic Data Commons
+### Datasource1 GDC - NCI Genomic Data Commons
+License: Data usage agreement: https://gdc.cancer.gov/about-data/data-analysis-policies
+#### Datasource1a API: GDC - NCI Genomic Data Commons
 Cancer and genomic data GraphQL API
 * Metadata URL: https://docs.gdc.cancer.gov/API/Users_Guide/GraphQL_Examples/
 * Data URL: https://api.gdc.cancer.gov/v0/graphql
@@ -33,6 +35,8 @@ Cancer and genomic data direct download
 * Data URL: https://portal.gdc.cancer.gov/exploration?filters=%7B%22op%22%3A%22and%22%2C%22content%22%3A%5B%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22cases.primary_site%22%2C%22value%22%3A%5B%22bronchus%20and%20lung%22%5D%7D%7D%5D%7D
 * Data Type: json
 
+### Datasource2 Behavioral Risk Factor Surveillance
+License: https://opendefinition.org/licenses/odc-odbl/
 #### Datasource2: Behavioral Risk Factor Surveillance
 Nutrition, Physical Activity, and Obesity - Behavioral Risk Factor Surveillance System
 * Metadata URL: https://catalog.data.gov/harvest/object/721fe106-9250-45d7-9093-1edacb565cd4
@@ -80,3 +84,25 @@ Nutrition, Physical Activity, and Obesity - Behavioral Risk Factor Surveillance 
 [i11]: https://github.com/nilapalin/made-template/issues/11
 [i12]: https://github.com/nilapalin/made-template/issues/12
 [i13]: https://github.com/nilapalin/made-template/issues/13
+
+<!--
+Comments and Hints:
+Demo showing cases with pancreatic cancer with and without mutations in the gene KRAS
+https://portal.gdc.cancer.gov/analysis?analysisId=demo-comparison&analysisTableTab=result
+
+Inspect:
+Survival Analysis
+Survival plot 1: with gene mutation 2: without gene mutation
+Age at Diagnosis
+
+Evaluation:
+- Differentiate race/ethnicity for cancer and BRFSS
+- Differentiate gender for cancer and BRFSS
+- Differentiate age for cancer and BRFSS
+- search for data with specific genes regarding BRFSS
+    https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6226269/ MC4R and LEPR
+    MC4R (melanocortin 4 receptor): https://portal.gdc.cancer.gov/genes/ENSG00000166603
+    https://de.wikipedia.org/wiki/Melanocortin-4-Rezeptor 'Ferner unterdrückt er das Hungergefühl'
+        
+
+-->
