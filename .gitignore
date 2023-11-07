@@ -2,3 +2,5 @@
 /data/*
 !/data/.gitkeep
 .vscode
+**/node_modules
+package-lock.json

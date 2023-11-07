@@ -1,0 +1,15 @@
+name: MADE
+channels:
+  - defaults
+dependencies:
+  #- matplotlib
+  - numpy
+  #- scikit-learn
+  #- scipy
+  #- tabulate
+  - python
+  - nodejs
+  - jupyter
+ # - pip:
+ #   - tensorflow
+
