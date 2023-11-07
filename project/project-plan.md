@@ -46,21 +46,21 @@ Nutrition, Physical Activity, and Obesity - Behavioral Risk Factor Surveillance 
 
 ### Milestone 1: Data inspection, Goal: Data available, conclusion if data is sufficient, side effects of data
 1. Download data packages [#1]
-2. Inspect data packages
-3. Elaborate on side effects of data
+2. Inspect data packages [#2]
+3. Elaborate on side effects of data [#3]
 
 ### Milestone 2: Work on question 1 'Correlation of behavioral risk factors and cancer (primary site 'bronchus and lung')'
-1. Data preprocessing
-2. Data evaluation
-3. Report
+1. Data preprocessing [#4]
+2. Data evaluation [#5]
+3. Report [#6]
 
 ### Milestone 3: Work on question 2: 'Find mutations in genomic data related to behavioral risk factors for cancer primary site 'bronchus and lung''
-1. Data preprocessing
-2. Implementation of CNN
-3. Data evaluation
-4. Report
+1. Data preprocessing [#7]
+2. Implementation of CNN [#8]
+3. Data evaluation [#9]
+4. Report [#10]
 
 ### Milestone 4: Summarizing
-1. Revise reports
-2. Conclude
-3. Poster
+1. Revise reports [#11]
+2. Conclude [#12]
+3. Poster [#13]
