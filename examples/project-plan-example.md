@@ -18,15 +18,22 @@ Urban Planners in Münster: The insights garnered from this project can serve as
 ## Datasources
 
 Datasource1: Bicycle Traffic Count in Münster
+
 Metadata URL: (https://mobilithek.info/offers/-9205556204274297646)
+
 Sample Data URL:(https://opendata.stadt-muenster.de/dataset/verkehrsz%C3%A4hlung-fahrradverkehr-auswertungen-der-radverkehr-z%C3%A4hlstellen-2021/resource)
 Data Type: CSV
+
 This data source contains Münster's bicycle traffic data generated from 2021
 
 Datasource2: Weather and Climate Data of Münster
+
 Metadata URL: [https://dev.meteostat.net/bulk/monthly.html](https://dev.meteostat.net/bulk/monthly.html)
+
 Sample Data URL: https://bulk.meteostat.net/v2/monthly/{station}.csv.gz, Station-id of Münster = '10312',
+
 Data Type: CSV
+
 This data source will provide weather and climate data in Münster, including average air temperature, daily minimum, and maximum air temperature, monthly precipitation total, maximum snow depth, average wind direction and speed, peak wind gust, average sea-level air pressure, and monthly sunshine total.
 
 ## Work Packages
