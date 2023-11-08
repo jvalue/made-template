@@ -31,15 +31,15 @@ This dataset comprises information about rental property listings from Immoscout
 ## Work Packages
 
 
-1. Find usable open data sources
-2. Data cleaning and preprocessing
-3. Exploratory data analysis
-4. Spatial analysis
-5. Visualization and reporting
-6. Build data pipelines
-7. Implement automated testing
-8. Add continous integration
-9. Deploy project
+1. Find usable open data sources [[#1] (https://github.com/muhdfahadali/made/issues/1)]
+2. Data cleaning and preprocessing [[#2] (https://github.com/muhdfahadali/made/issues/2)]
+3. Exploratory data analysis [[#3] (https://github.com/muhdfahadali/made/issues/3)]
+4. Spatial analysis [[#7] (https://github.com/muhdfahadali/made/issues/7)]
+5. Visualization and reporting [[#4] (https://github.com/muhdfahadali/made/issues/4)]
+6. Build data pipelines [[#5] (https://github.com/muhdfahadali/made/issues/5)]
+7. Implement automated testing [[#6] (https://github.com/muhdfahadali/made/issues/6)]
+8. Add continous integration [[#8] (https://github.com/muhdfahadali/made/issues/8)]
+9. Deploy project [[#9] (https://github.com/muhdfahadali/made/issues/9)]
 
 
 
