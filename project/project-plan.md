@@ -46,4 +46,10 @@ Bicycle theft is a huge problem in Berlin, as it has one of [the highest rates o
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
 1. Find suitable datasource and add basic project-plan.md [#1](https://github.com/luca-dot-sh/made-project/issues/1)
-2. ...
+2. Explore datasets [#3](https://github.com/luca-dot-sh/made-project/issues/3)
+3. Create data pipeline [#4](https://github.com/luca-dot-sh/made-project/issues/4)
+4. Add tests for data pipeline [#5](https://github.com/luca-dot-sh/made-project/issues/5)
+5. Create CI with test cases [#6](https://github.com/luca-dot-sh/made-project/issues/6)
+6. Add license [#7](https://github.com/luca-dot-sh/made-project/issues/7)
+7. Add report [#8](https://github.com/luca-dot-sh/made-project/issues/8)
+8. Polish README.md [#9](https://github.com/luca-dot-sh/made-project/issues/9)
