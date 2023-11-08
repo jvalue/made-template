@@ -24,8 +24,8 @@ Datasource2: Mobilithek
 Traffic data, real-time traffic flow, road incidents, and congestion levels; weather data, temperature, precipitation, wind speed, visibility, and forecasts specific to the area.
 
 ## Work Packages
-* Data Collection
-* Data Cleaning and Preparation
-* Data Analysis
-* Interpret Results
+* Data Collection #1
+* Data Cleaning and Preparation #2
+* Data Analysis #3
+* Interpret Results #4
 
