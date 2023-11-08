@@ -30,7 +30,7 @@ Ultimately, this project serves as a valuable resource for both researchers and 
 
 ### Datasource2: Kaggle
 * Metadata URL: https://www.kaggle.com/datasets/danilzyryanov/crime-in-berlin-2012-2019
-* * Data Type: CSV
+* Data Type: CSV
 
 
 ## Work Packages
