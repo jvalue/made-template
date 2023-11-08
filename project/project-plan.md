@@ -26,7 +26,7 @@ Traffic data, real-time traffic flow, road incidents, and congestion levels; wea
 ## Work Packages
 * Data Collection [#1][i1]
 * Data Cleaning and Preparation [#2][i2]
-* Data Analysis #3 [#3][i3]
+* Data Analysis [#3][i3]
 * Interpret Results [#4][i4]
 
 [i1]: https://github.com/ruchita-nathani/made-template/issues/1
