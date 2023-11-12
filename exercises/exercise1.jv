@@ -74,7 +74,7 @@ pipeline Exercise1Pipeline {
 	}
 
 	block AirportsLoader oftype SQLiteLoader {
-		table: "Airports";
+		table: "airports";
 		file: "./exercises/airports.sqlite";
 	}
  
