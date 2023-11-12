@@ -56,8 +56,9 @@ pipeline Exercise1Pipeline {
 			// $ grep -co '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;[0-9,A-Z]*;[0-9,.,-]*;[0-9,.,-]*;' rhein-kreis-neuss-flughafen-weltweit.csv
 			// 7847
 			"column_8" oftype decimal,
-			// text: e.g.:36.909400939899996, 54.4012985229 | TODO transform later into a datatype
-			"column_9" oftype text,
+			// $ grep -v '^[0-9]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[0-9,-]*;' rhein-kreis-neuss-flughafen-weltweit.csv
+			// column_1;column_2;column_3;column_4;column_5;column_6;column_7;column_8;column_9;column_10;column_11;column_12;geo_punkt
+			"column_9" oftype integer,
 			// $ grep -co '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;[0-9,A-Z]*;[0-9,.,-]*;[0-9,.,-]*;[^;]*;[0-9,.,-]*;' rhein-kreis-neuss-flughafen-weltweit.csv
 			// 7847
 			"column_10" oftype decimal,
