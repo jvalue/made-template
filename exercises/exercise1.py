@@ -6,12 +6,11 @@ def download_from_url(url):
     return data
 
 def save_to_sql(data):
-    print(data.shape)
     conn = sqlite3.connect("airports.sqlite")
     cursor = conn.cursor()
     create_table_query = f"CREATE TABLE IF NOT EXISTS airports ({', '.join([f'{col} {data[col].dtype}' for col in data.columns])});"
     cursor.execute(create_table_query)
-    data.to_sql("airports.sqlite", conn, if_exists="replace", index=False)
+    data.to_sql("airports", conn, if_exists="replace", index=False)
     conn.close()
 
 if __name__=="__main__":
