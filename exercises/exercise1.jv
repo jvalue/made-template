@@ -1,13 +1,4 @@
-pipeline Exercise1Pipeline {
-
-	//https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv
-
-	// pipe {
-	// 	from: AirportsExtractor;
-	// 	to: AirportsTextFileInterpreter;
-	// }
-
-	// AirportsTextFileInterpreter -> AirportsCSVInterpreter;
+pipeline AirportsPipeline {
 
 	AirportsExtractor
 		->AirportsTextFileInterpreter
