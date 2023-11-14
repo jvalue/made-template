@@ -1,5 +1,5 @@
 pipeline AirportsPipeline {
-    // connecting blocks via pipes. 
+    // connecting blocks via pipes 
     AirportsExtractor
         ->AirportsTextFileInterpreter 
         -> AirportsCSVInterpreter;
@@ -8,12 +8,12 @@ pipeline AirportsPipeline {
         -> AirportsTableInterpreter
         -> AirportsLoader;
 
-    // provide the URL from where the file needs to be downloaded.
+    // provide the URL from where the file needs to be downloaded
     block AirportsExtractor oftype HttpExtractor {
         url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv";
      }
 
-    // text file interpreter.
+    // text file interpreter
     block AirportsTextFileInterpreter oftype TextFileInterpreter { 
 
     }
@@ -23,7 +23,7 @@ pipeline AirportsPipeline {
         delimiter : ";";
     }
 
-    // add a table structure and define a valuetype per column that specifies the data type of the column.
+    // add a table structure and define a valuetype per column that specifies the data type of the column
     block AirportsTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
