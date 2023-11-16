@@ -5,7 +5,7 @@ import sqlite3
 from sqlalchemy import create_engine, Column, Float, BIGINT, Text, MetaData
 url = "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv"
 dataset = pd.read_csv(url, sep=";", on_bad_lines='skip')
-print('hi')
+
 column_type = {
     "column_1": BIGINT(),
     "column_2": Text(),
