@@ -22,11 +22,11 @@ column_type = {
     "geo_punkt": Text()
 }
 
-engine = sqlalchemy.create_engine('sqlite:///airports.sqlite')
+engine = create_engine('sqlite:///airports.sqlite')
 dataset.to_sql('airports', engine, index=False, if_exists='replace',dtype = column_type)
 
-con.close()
-engine.dispose()
+# con.close()
+# engine.dispose()
 #engine.dispose()
 
 # SQL Query to select the first 20 rows from the 'airports' table
