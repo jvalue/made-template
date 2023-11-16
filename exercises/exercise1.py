@@ -22,7 +22,7 @@ column_type = {
     "geo_punkt": Text()
 }
 
-engine = create_engine('../airports.sqlite')
+engine = create_engine("sqlite:///airports.sqlite")
 dataset.to_sql('airports', engine, index=False, if_exists='replace',dtype = column_type)
 
 # con.close()
