@@ -1,27 +1,30 @@
 # Project Plan
 
 ## Title
-Weather and traffic are two major factors that impact urban road safety and congestion.
+Comparative Analysis of Bitcoin and Gold Prices Across Global Markets
 
 ## Main Question
-How do weather and traffic affect road safety and congestion in cities?
+How the price of Bitcoin affects the price of gold in various countries?
 
 ## Description
-This research project investigates how traffic conditions and weather patterns interact in a specific urban area, with the goal of understanding the impact of weather-related factors on road safety and traffic congestion. The study aims to provide insights into the development of traffic management strategies and safety measures that are customized to local weather conditions.
+To analyze the relationship between Bitcoin and gold prices across various countries, exploring how Bitcoin price fluctuations impact gold prices in different economic and regulatory environments.
 
 ## Datasources
 
-Datasource1: GovData
-* Metadata URL: https://www.govdata.de/ckan/dataset/strassenverkehrsunfalle-nach-Schadensartenunfallbeteilige-und-verungluckte-personen-kreisfrei501cd.rdf
-* Data URL: https://www.landesdatenbank.nrw.de/ldbnrwws/downloader/00/tables/46241-05d_00.csv
+Datasource1: Bitcoin Data
+* Metadata URL: https://www.kaggle.com/datasets/varpit94/bitcoin-data-updated-till-26jun2021
+* Data URL: https://www.kaggle.com/datasets/varpit94/bitcoin-data-updated-till-26jun2021/download?datasetVersionNumber=9
 * Data Type: CSV
 
-Datasource2: Mobilithek
-* Metadata URL: https://mobilithek.info/offers/573356914102935552
-* Data URL: https://opendata.dwd.de/
+This dataset provides the history of daily prices of Bitcoin.
+
+Datasource2: Gold Prices Data
+* Metadata URL: https://www.kaggle.com/datasets/odins0n/monthly-gold-prices
+* Data URL: https://www.kaggle.com/datasets/odins0n/monthly-gold-prices/download?datasetVersionNumber=4
 * Data Type: CSV
 
-Traffic data, real-time traffic flow, road incidents, and congestion levels; weather data, temperature, precipitation, wind speed, visibility, and forecasts specific to the area.
+The database contains historic gold prices of different countries in their respective currencies
+
 
 ## Work Packages
 * Data Collection [#1][i1]
