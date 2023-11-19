@@ -1,0 +1,2 @@
+[console_scripts]
+kaggle = kaggle.cli:main

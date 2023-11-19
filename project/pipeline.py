@@ -45,14 +45,14 @@ class DataPipeline:
             dataset_id_or_url=self.data_source.url
         )
         id = dataset_id.split("/")[1]
-        file_path = os.path.join(data_dir, id)
+        file_path = os.path.join(data_dir, id, self.data_source.output_filename)
         return file_path      
     
     def extract_data(self):
         if (self.data_source.sourcename == "meteostat"): 
             file_path = self._extract_meteostat_data()
         elif (self.data_source.sourcename == "kaggle"):
-            self._extract_kaggle_data()     
+            file_path = self._extract_kaggle_data()     
         return file_path
             
  
@@ -68,11 +68,23 @@ class DataPipeline:
         dataframe.insert(loc=4, column= "City", value= self.data_source.d_name, allow_duplicates = True)
         # dataframe.dropna(axis= 0, inplace= True)
         return dataframe
+    
+    def _transform_kaggle_data(self, file_path: str):
+        dataframe = pandas.read_csv(
+                filepath_or_buffer=file_path, 
+                compression=self.data_source.comp_type, 
+                sep= self.data_source.sep,
+                header = self.data_source.headers,
+                )
+        dataframe.drop(labels = ["Invoice ID", "Branch", "Customer type", "Gender","Unit price", "Tax 5%", "Time","cogs", "gross margin percentage", "gross income", "Rating"], axis=1, inplace= True)
+        return dataframe
 
     def transform_data(self,file_path):
         #read the file from a location
         if (self.data_source.sourcename == "meteostat"): 
             dataframe = self._transform_meteostat_data(file_path=file_path)
+        elif (self.data_source.sourcename == "kaggle"): 
+            dataframe = self._transform_kaggle_data(file_path=file_path)
         return dataframe
         
     def _load_meteostat_data(self,dataframe):
@@ -83,12 +95,20 @@ class DataPipeline:
     
         connection.close() 
         
+    def _load_kaggle_data(self,dataframe):
+        connection = sqlite3.connect(
+            database = os.path.join(os.getcwd(),"data", self.output_DB.database_name)
+        )
+        dataframe.to_sql(name = self.output_DB.table_name, con = connection, if_exists= "replace",index = False)
+    
+        connection.close() 
+            
     def load_data(self, dataframe):
         if (self.data_source.sourcename == "meteostat"): 
             self._load_meteostat_data(dataframe = dataframe)
         elif (self.data_source.sourcename == "kaggle"):
-            # self._load_kaggle_data(dataframe = dataframe)
-            pass
+            self._load_kaggle_data(dataframe = dataframe)
+            
                
     
     def run_pipeline(self): 
@@ -146,10 +166,13 @@ if __name__ == "__main__":
     supermarket_sales_datasource = DataSource(
         url = "https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales/download?datasetVersionNumber=3", 
         sep= "," ,
-        type= "zip" , 
-        headers= [],
-        output_filename= None,
+        type= "zip", 
+        output_filename= "supermarket_sales - Sheet1.csv",
         comp_type= None,
+        headers= 0,
         sourcename= "kaggle",
         d_name= None, 
-    )  
+    ) 
+    sales_DB = DataBase(database_name= "analysis.sqlite", table_name= "sales") 
+    supermarket_sales_pipeline = DataPipeline(data_source = supermarket_sales_datasource, output_DB = sales_DB)
+    supermarket_sales_pipeline.run_pipeline()
