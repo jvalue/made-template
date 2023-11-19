@@ -1,0 +1,79 @@
+pipeline Brfss {
+
+	BrfssExtractor
+		->BrfssTextFileInterpreter
+		->BrfssCSVInterpreter 
+		//-> NameHeaderWriter //only for renaming the columns
+	   	-> BrfssTableInterpreter
+		-> BrfssLoader;
+
+	block BrfssExtractor oftype HttpExtractor {
+		url: "https://data.cdc.gov/api/views/hn4x-zwk7/rows.csv?accessType=DOWNLOAD";
+	}
+
+	// The HttpExtractor requires no input and produces a binary file as output.
+	// This file has to be interpreted, e.g., as text file.
+	block BrfssTextFileInterpreter oftype TextFileInterpreter { }
+
+	block BrfssCSVInterpreter oftype CSVInterpreter {
+		delimiter: ',';
+	}
+ 
+	block BrfssTableInterpreter oftype TableInterpreter {
+		header: true;
+		columns: [
+			"YearStart" oftype integer,
+			"YearEnd" oftype integer,
+			"LocationAbbr" oftype text,
+			"LocationDesc" oftype text,
+			"Datasource" oftype text,
+			"Class" oftype text,
+			"Topic" oftype text,
+			"Question" oftype text,
+			"Data_Value_Unit" oftype text,
+			"Data_Value_Type" oftype text,
+			"Data_Value" oftype text,//decimal,
+			"Data_Value_Alt" oftype text,//decimal,
+			"Data_Value_Footnote_Symbol" oftype text,
+			"Data_Value_Footnote" oftype text,
+			"Low_Confidence_Limit" oftype text,//decimal,
+			"High_Confidence_Limit" oftype text,//decimal,
+			"Sample_Size" oftype text,//integer,
+			"Total" oftype text,
+			"Age_years" oftype text,
+			"Education" oftype text,
+			"Gender" oftype text,
+			"Income" oftype text,
+			"Race_Ethnicity" oftype text,
+			"GeoLocation" oftype text,
+			"ClassID" oftype text,
+			"TopicID" oftype text,
+			"QuestionID" oftype text,
+			"DataValueTypeID" oftype text,
+			"LocationID" oftype text,//integer,
+			"StratificationCategory1" oftype text,
+			"Stratification1" oftype text,
+			"StratificationCategoryId1" oftype text,
+			"StratificationID1" oftype text
+		];
+	}
+
+	valuetype AbbrevationOfLength1 oftype text {
+    constraints: [
+        LengthExactlyOne,
+		OnlyCapitalLettersAndDigits
+    ];
+	}
+
+	constraint OnlyCapitalLettersAndDigits on text:
+    value matches /^[A-Z0-9]*$/;
+
+	constraint LengthExactlyOne on text:
+	value.length == 1;
+
+	block BrfssLoader oftype SQLiteLoader {
+		table: "brfss";
+		file: "./brfss.sqlite";
+	}
+ 
+}
