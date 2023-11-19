@@ -1,5 +1,5 @@
 .DS_Store
 /data/*
 !/data/.gitkeep
-venv
+.venv
 *.sqlite
