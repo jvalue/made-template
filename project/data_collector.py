@@ -1,17 +1,16 @@
-
+import gdown
 import pandas as pd
+import os
 from sqlalchemy import create_engine, FLOAT, BIGINT, NVARCHAR
 
 data_path = '../data/bitcoin.sqlite'
 engine = create_engine(f'sqlite:///{data_path}')
 
-csv_file_path = 'sourcedata/bitcoin-data.csv'
+file_id = '17WbP39sBzav1L_ir78Ec9qbb3HfOjjiC'
+url = 'https://drive.google.com/uc?export=download&id='+file_id
+gdown.download(url, 'data.csv')
 
-df = pd.read_csv(
-    csv_file_path,sep=',')
-
-# df = pd.read_csv('https://drive.google.com/file/d/17WbP39sBzav1L_ir78Ec9qbb3HfOjjiC/view?usp=sharing',
-#         sep=',')
+df = pd.read_csv('data.csv',sep=',')
 
 types = {
     'Date': NVARCHAR(length=128),
@@ -30,11 +29,11 @@ df.to_sql("bitcoin", engine, index=False, if_exists='replace', dtype=types)
 data_path = '../data/gold-price.sqlite'
 engine = create_engine(f'sqlite:///{data_path}')
 
-#zip_file_url = "https://www.kaggle.com/datasets/varpit94/bitcoin-data-updated-till-26jun2021/download?datasetVersionNumber=9"
-csv_file_path = './sourcedata/gold-price-data.csv'
+file_id = '1i_WTJItXDqQ9Fha6sCEeEBlCfB5qMTnk'
+url = 'https://drive.google.com/uc?export=download&id='+file_id
+gdown.download(url, 'data.csv')
 
-df = pd.read_csv(
-    csv_file_path,sep=',')
+df = pd.read_csv('data.csv',sep=',')
 
 types = {
     'Date': NVARCHAR(length=128),
@@ -59,3 +58,5 @@ types = {
 }
 
 df.to_sql("gold-price", engine, index=False, if_exists='replace', dtype=types)
+
+os.remove('data.csv')
