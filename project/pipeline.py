@@ -23,8 +23,6 @@ def fetch_and_read (url):
         pd.DataFrame()
             
     
-
-
 df_2009 = fetch_and_read(url_2009)
 df_2015 = fetch_and_read(url_2015)
 df_2018 = fetch_and_read(url_2018)
