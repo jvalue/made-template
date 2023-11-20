@@ -19,14 +19,14 @@ The project aims to analyze data concerning international students and rental pr
 * Data URL: https://www.datenportal.bmbf.de/portal/Tabelle-2.5.34.xls
 * Data Type: xlsx
 
-This dataset comprises information about international students admitted to degree programs in Germany over a specific time period. It includes data on the students' nationalities, degree programs, admission dates, and other relevant attributes.
+This dataset comprises information about international students admitted to degree programs in  bayren Germany over a specific time period. It includes data on the students' nationalities, degree programs, admission dates, and other relevant attributes.
 
 ### Datasource2: Immoscout24 dataset
 Metadata URL: https://www.kaggle.com/datasets/corrieaar/apartment-rental-offers-in-germany <br />
 Data URL: https://www.kaggle.com/datasets/corrieaar/apartment-rental-offers-in-germany/download?datasetVersionNumber=6 <br />
 Data Type: xlsx
 
-This dataset comprises information about rental property listings from Immoscout24, which is the largest real estate platform in Germany. It includes details about rental prices, property characteristics, and the property's location.
+This dataset comprises information about rental property listings from Immoscout24, which is the largest real estate platform in bayren Germany. It includes details about rental prices, property characteristics, and the property's location.
 
 ## Work Packages
 
