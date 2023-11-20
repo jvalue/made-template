@@ -24,20 +24,3 @@ column_type = {
 
 engine = create_engine("sqlite:///airports.sqlite")
 dataset.to_sql('airports', engine, index=False, if_exists='replace',dtype = column_type)
-
-# con.close()
-# engine.dispose()
-#engine.dispose()
-
-# SQL Query to select the first 20 rows from the 'airports' table
-#query = "SELECT * FROM airports LIMIT 20"
-
-# Execute the query
-#result = cur.execute(query)
-
-# Fetch all rows
-#rows = result.fetchall()
-
-# Print the rows
-#for row in rows:
-    #print(row)
