@@ -3,14 +3,23 @@ import pandas as pd
 import os
 from sqlalchemy import create_engine, FLOAT, BIGINT, NVARCHAR
 
-data_path = '../data/bitcoin.sqlite'
+os.environ["KAGGLE_CONFIG_DIR"] = os.path.dirname('./project/kaggle.json')
+
+from kaggle.api.kaggle_api_extended import KaggleApi
+
+# Instantiate the Kaggle API
+api = KaggleApi()
+api.authenticate() 
+
+# Download the bitcoin dataset
+api.dataset_download_files('varpit94/bitcoin-data-updated-till-26jun2021', path='.', unzip=True) 
+
+# Read the CSV file into a Pandas DataFrame
+df = pd.read_csv('BTC-USD.csv',sep=',')
+
+# created a SQLAlchemy engine to connect a bitcoin db
+data_path = './data/bitcoin.sqlite'
 engine = create_engine(f'sqlite:///{data_path}')
-
-file_id = '17WbP39sBzav1L_ir78Ec9qbb3HfOjjiC'
-url = 'https://drive.google.com/uc?export=download&id='+file_id
-gdown.download(url, 'data.csv')
-
-df = pd.read_csv('data.csv',sep=',')
 
 types = {
     'Date': NVARCHAR(length=128),
@@ -23,17 +32,17 @@ types = {
     'Volume': BIGINT,
 }
 
-df.to_sql("bitcoin", engine, index=False, if_exists='replace', dtype=types)
+df.to_sql("bitcoin", con=engine, index=False, if_exists='replace', dtype=types)
 
+# Download the gold-price dataset
+api.dataset_download_files('odins0n/monthly-gold-prices', path='.', unzip=True) 
 
-data_path = '../data/gold-price.sqlite'
+# Read the CSV file into a Pandas DataFrame
+df = pd.read_csv('1990-2021.csv',sep=',')
+
+# created a SQLAlchemy engine to connect a gold-price db
+data_path = './data/gold-price.sqlite'
 engine = create_engine(f'sqlite:///{data_path}')
-
-file_id = '1i_WTJItXDqQ9Fha6sCEeEBlCfB5qMTnk'
-url = 'https://drive.google.com/uc?export=download&id='+file_id
-gdown.download(url, 'data.csv')
-
-df = pd.read_csv('data.csv',sep=',')
 
 types = {
     'Date': NVARCHAR(length=128),
@@ -57,6 +66,6 @@ types = {
     'South Africa(ZAR)' : FLOAT(asdecimal=True),
 }
 
-df.to_sql("gold-price", engine, index=False, if_exists='replace', dtype=types)
+df.to_sql("gold-price", con=engine, index=False, if_exists='replace', dtype=types)
 
-os.remove('data.csv')
+# os.remove('data.csv')
