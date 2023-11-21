@@ -2,39 +2,38 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Analyzing Cost and Patterns in Electric Vehicle Data.
+Analyzing India's Road Accident Issues from 2017 to 2020
 
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
-1. Is it possible to provide potential electric vehicle owners with better choices by carrying out a thorough analysis of a dataset on electric cars that includes insights into the overall cost of ownership over time, including purchase price and charging costs?
+1. What are the main factors influencing the rate of road accidents across India's different regions from 2017 to 2020, and how can this analysis help  with specific measures to improve traffic safety?
 
 ## Description
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-This projects aims to answer the questions for extensive costs for electric vehicle. It uses a vast dataset of existing electric vehciles and by applying Advance analytics and machine learning models. The goal of this project is to gather important information about the cost factors of this environmentally friendly form of transportation. The idea behind choosing this project was to analyze the cost data that provides insights into the total cost of ownership, which includes factors such as purchase price, charging costs, and maintenance expenses.
 
+The goal of the project "Analyzing India's Road Accident Issues from 2017 to 2020" is to identify and address the factors that lead to the various types of road accidents that occur in India's different states. This project aims to gain insights into the primary causes of traffic accidents through analysis of patterns and correlations. This will allow specific measures to be developed in order to improve traffic safety.
 
 ## Datasources
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource 1: Electric Vehicle Population Data
+### Datasource 1: Road Accident Data 2020 India
  
-* Metadata URL: https://www.kaggle.com/datasets/gunapro/electric-vehicle-population-data
-* Data URL: https://www.kaggle.com/datasets/gunapro/electric-vehicle-population-data/download?datasetVersionNumber=1
+* Metadata URL: https://www.kaggle.com/datasets/rachit239/road-accident-data-2020-india
+* Data URL: https://www.kaggle.com/datasets/rachit239/road-accident-data-2020-india/download?datasetVersionNumber=1
 * Data Type: CSV
 
-The dataset contains data on vehicles that are currently registered with the Washington State Department of Licensing (DOL) that are Battery Electric Vehicles (BEVs) and Plug-in Hybrid Electric Vehicles (PHEVs). This dataset was sourced from the data.gov website and aims to contribute to the understanding of electric vehicle adoption and distribution in Washington State.
+The data contains road accident information for 50 cities of India in the year 2020.
 
-### Datasource 2: EVs - One Electric Vehicle Dataset - Smaller
-* Metadata URL: https://www.kaggle.com/datasets/geoffnel/evs-one-electric-vehicle-dataset/data
-* Data URL: https://www.kaggle.com/datasets/geoffnel/evs-one-electric-vehicle-dataset/download?datasetVersionNumber=1
+### Datasource 2: Road_Accidents_India : 2017 - 2020
+
+* Metadata URL: https://www.kaggle.com/datasets/zsinghrahulk/road-accidents-india-2017-2020
+* Data URL: https://www.kaggle.com/datasets/zsinghrahulk/road-accidents-india-2017-2020/download?datasetVersionNumber=1
 * Data Type: CSV
 
-This is a dataset of electric vehicles.
-
-The mtcars dataset is among the most widely used data science datasets. It can be sued for analysis and visualization tasks.
+The dataset is taken from the GOI site for Road and Transport Ministry for public safety. It reflects the number of accidents , their nature and the fatalities . It also looks into the numbers , shares and unit wise distribution of the calamity. The time span is from 2017 - 2020.
 
 ## Work Packages
 
