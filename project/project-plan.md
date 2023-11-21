@@ -47,4 +47,4 @@ Annual parameters of air pollutants in Nordrhein-Westfalen for 2022: Nitrogen di
 
 [i1]: https://github.com/JoaquinAyzanoa/made-template_ws2324/issues/6
 [i2]: https://github.com/JoaquinAyzanoa/made-template_ws2324/issues/8
-[i2]: https://github.com/JoaquinAyzanoa/made-template_ws2324/issues/9
+[i3]: https://github.com/JoaquinAyzanoa/made-template_ws2324/issues/9
