@@ -2,9 +2,8 @@ import sqlite3
 import requests
 import json
 import pandas as pd
-import sqlalchemy
 
-from data.data import Demographic, Diagnosis
+from data import Demographic, Diagnosis
 
 def runGraphQLQuery(url, query, variables = {}, headers = {}):
     #accessToken = "xxx"
@@ -16,36 +15,21 @@ def runGraphQLQuery(url, query, variables = {}, headers = {}):
     else:
         raise Exception(f"Query failed to run with a {r.status_code}.")
 
-
-def runRESTQuery(url, fields: list):
-    fields = ','.join(fields)
-    params = {
-        "fields": fields,
-        "format": "TSV",
-        "size": "100"
-    }
-    response = requests.get(url, params = params)
-    return response
-
-def runCasesRestQuery():
-    cases_endpt = "https://api.gdc.cancer.gov/cases"
-    fields = [
-        "submitter_id",
-        "case_id",
-        "primary_site",
-        "disease_type",
-        "diagnoses.vital_status"
-    ]
-    return runRESTQuery(cases_endpt, fields)
-
-def runProjectsGraphQLQuery():
+def runGDCGraphQLQuery(first=None, after=None):
     url = "https://api.gdc.cancer.gov/v0/graphql"
-    query = """
+    case_hit_first = "hits (filters: $filters_cases) "
+    case_hit_next = """hits (filters: $filters_cases, first: {}, after: "{}") """.format(first, after)
+    query1 = """
         query getgdcdata($filters_cases: FiltersArgument, $filters_diagnoses: FiltersArgument) {
         explore {
-            cases {
-            hits (filters: $filters_cases) {
-                edges {
+            cases {"""
+    query2 = """{
+            total
+            pageInfo {
+                endCursor
+                hasNextPage
+            }            
+            edges {
                 node {
                     id,
                     index_date,
@@ -84,15 +68,18 @@ def runProjectsGraphQLQuery():
         }
         }
     """
-    variables = """{ "filters_cases": {}, "filsters_diagnoses": {}}"""
-    #TODO use pagination to get more results https://graphql.org/learn/pagination/
+    query = query1+case_hit_first+query2
+    if (after):
+        query = query1+case_hit_next+query2
+    variables = """{"filters_cases": {"op": "in", "content": {"field": "primary_site", "value": ["Kidney"]}}, "filsters_diagnoses": {}}"""
     return runGraphQLQuery(url, query, variables)
 
-def loadToSink(path: str, jsondata):
+def prepareData(jsondata):
     jsonObject = json.loads(jsondata)
 
     demographics = []
     diagnoses = []
+    pagination = [None]*3
 
     def recursive_iter(obj, keys=()):
         if isinstance(obj, dict):
@@ -122,22 +109,36 @@ def loadToSink(path: str, jsondata):
             if "id" == attr:
                 demographics[len(demographics)-1].case_id = obj
                 diagnoses[len(diagnoses)-1].case_id = obj
+            if "total" == attr:
+                pagination[0] = obj
+            if "hasNextPage" == attr:
+                pagination[1] = obj
+            if "endCursor" == attr:
+                pagination[2] = obj
 
-    #nodes = jsonObject["data"]["explore"]["cases"]["hits"]["edges"]
     recursive_iter(jsonObject)
+    return demographics, diagnoses, pagination[0], pagination[1], pagination[2]
 
+def loadToSink(path: str, demographics, diagnoses):
     con = sqlite3.connect('test_gdc.sqlite')
 
     df = pd.DataFrame([x.as_dict() for x in demographics])
-    print(df)
     df.to_sql('demographic', con, if_exists='fail', index=False)
     df = pd.DataFrame([x.as_dict() for x in diagnoses])
-    print(df)
     df.to_sql('diagnoses', con, if_exists='fail', index=False)
     
     con.commit()
     con.close()
 
-response = runProjectsGraphQLQuery()
-print(response)
-loadToSink("test_gdc.sqlite", response)
+response = runGDCGraphQLQuery(100) #run first 100 samples, get also pagination information, details see https://graphql.org/learn/pagination/
+demographics, diagnoses, total, hasNextPage, endCursor = prepareData(response)
+while hasNextPage:
+    response = runGDCGraphQLQuery(500, endCursor)
+    tmp_demographics, tmp_diagnoses, total, hasNextPage, endCursor = prepareData(response)
+    demographics = demographics + tmp_demographics
+    diagnoses = diagnoses + tmp_diagnoses
+    print("Total: {}".format(total))
+    print("Aktuell: {}".format(len(demographics)))
+    print("Noch Daten vorhanden: {}".format(hasNextPage))
+
+loadToSink("test_gdc.sqlite", demographics, diagnoses)
