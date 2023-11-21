@@ -22,14 +22,18 @@ This project aims to uncover relations of behavioral risk factors and cancer.
 
 ### Datasource1 GDC - NCI Genomic Data Commons
 License: Data usage agreement: https://gdc.cancer.gov/about-data/data-analysis-policies
-#### Datasource1a API: GDC - NCI Genomic Data Commons
+
+Several apis/ways to retrieve data from GDS: https://docs.gdc.cancer.gov/Data/Data_Model/GDC_Data_Model/#data-users
+Data Model: https://gdc.cancer.gov/developers/gdc-data-model
+
+#### Datasource1a GraphQL API: GDC - NCI Genomic Data Commons
 Cancer and genomic data GraphQL API
 * Metadata URL: https://docs.gdc.cancer.gov/API/Users_Guide/GraphQL_Examples/
 * Data URL: https://api.gdc.cancer.gov/v0/graphql
 * Query: ToBeSpecified with project
 * Data Type: json
 
-#### Datasource1b: GDC - NCI Genomic Data Commons
+#### Datasource1b REST API: GDC - NCI Genomic Data Commons
 Cancer and genomic data direct download
 * Metadata URL: https://docs.gdc.cancer.gov/API/Users_Guide
 * Data URL: https://portal.gdc.cancer.gov/exploration?filters=%7B%22op%22%3A%22and%22%2C%22content%22%3A%5B%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22cases.primary_site%22%2C%22value%22%3A%5B%22bronchus%20and%20lung%22%5D%7D%7D%5D%7D

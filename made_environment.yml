@@ -2,14 +2,28 @@ name: MADE
 channels:
   - defaults
 dependencies:
-  #- matplotlib
-  - numpy
-  #- scikit-learn
-  #- scipy
-  #- tabulate
-  - python
-  - nodejs
-  - jupyter
- # - pip:
- #   - tensorflow
-
+  # project requirements from https://github.com/jvalue/made-exercise-feedback/blob/main/requirements.txt
+    # attrs==22.2.0
+    # greenlet==2.0.2
+    # iniconfig==2.0.0
+    #- numpy=1.24.2 not on anaconda, if it is must, use pip
+    - numpy
+    # packaging==23.0
+    - pandas=1.5.3
+    # pluggy==1.0.0
+    # python-dateutil==2.8.2
+    # pytz==2022.7.1
+    # six==1.16.0
+    # SQLAlchemy==1.4.46 not on anaconda
+    - sqlalchemy
+    # typing_extensions==4.5.0
+  # own dependencies
+    #- matplotlib
+    #- scikit-learn
+    #- scipy
+    #- tabulate
+    - python
+    - nodejs
+    #- jupyter
+    # - pip:
+    #   - tensorflow
