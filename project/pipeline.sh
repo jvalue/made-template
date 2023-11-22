@@ -1,2 +1,2 @@
 #!/bin/bash
-py ./retrieve_data.py
+py project/retrieve_data.py
