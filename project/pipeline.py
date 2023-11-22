@@ -29,6 +29,17 @@ class DataPipeline:
                 majority_value = df1[column].mode().iloc[0]
                 df1[column] = df1[column].fillna(majority_value)            
         return df1
+     
+    def present_to_binary(self, df1):
+        # Iterate over columns
+        for column in df1.columns:
+            unique_values = df1[column].dropna().unique()
+            if set(unique_values) == {'notpresent', 'present'}:
+                # Replace "notpresent" with 0, "present" with 1, and missing values with the majority value
+                df1[column] = df1[column].map({'notpresent': 0, 'present': 1})
+                majority_value = df1[column].mode().iloc[0]
+                df1[column] = df1[column].fillna(majority_value)            
+        return df1     
     def good_to_binary(self, df1):
 
             # Iterate over columns
@@ -120,6 +131,7 @@ if __name__ == "__main__":
     # Execute the pipeline
     df1, df2 = data_pipeline.read_csv_files()
     df1 = data_pipeline.normal_to_binary(df1)
+    df1 = data_pipeline.present_to_binary(df1)
     df1 = data_pipeline.good_to_binary(df1)
     df1 = data_pipeline.outcome_to_binary(df1)
     df1 = data_pipeline.yesno_to_binary(df1)
