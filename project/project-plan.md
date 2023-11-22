@@ -13,13 +13,13 @@ sustainable mobility for its residents.
 
 ## Datasources
 
-### Datasource1: Berlin traffic detection
-* Metadata URL: https://www.govdata.de/ckan/dataset/verkehrsdetektion-berlin.rdf
-* Data URL: https://api.viz.berlin.de/daten/verkehrsdetektion
+### Datasource1: Munich parking garages
+* Metadata URL:https://www.govdata.de/ckan/dataset/parkhauser-munchen.rdf
+* Data URL: https://opendata.muenchen.de/dataset/addaa7d4-40be-4621-846e-c5358cbe3f26/resource/e0e0e4e1-1b25-4c04-a0ea-cf9cc8335c57/download/230907places.csv
 * Data Type: CSV
-### Datasource1: Air quality measurement data
-* Metadata URL: https://www.govdata.de/ckan/dataset/luftgutemessdaten.rdf
-* Data URL: https://luftdaten.berlin.de/pollution/co?stationgroup=all&period=1h×pan=lastweek
+### Datasource1: Disabled parking spaces
+* Metadata URL: https://www.govdata.de/ckan/dataset/behindertenparkplatzedbfcf.rdf
+* Data URL:https://opendata.muenchen.de/dataset/80a2d76a-ebc9-40b5-b54c-b5c8af9df65f/resource/c1166a5a-5764-47e1-92bb 2d63dab785eb/download/220624_behindertenparkplaetze_muenchen.csv
 * Data Type: CSV
 Short description of the DataSource.
 
