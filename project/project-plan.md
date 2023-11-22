@@ -39,6 +39,13 @@ The dataset is taken from the GOI site for Road and Transport Ministry for publi
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
+PACKAGES:
+
+PANDAS
+NUMPY
+IPDB
+OS
+
 TASK:
 
 1. Clean and trasnform the dataset using pandas libarary fro using required columns [#1][i1]
