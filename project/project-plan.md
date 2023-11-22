@@ -17,7 +17,7 @@ Health has always been a fairly extensive discussed topic and with thematically 
 
 ## Datasources
 
-<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
+<!-- Describe each datasources you plan to use in a section. Use the prefix "DatasourceX" where X is the id of the datasource. -->
 
 ### Datasource1: London Borough Demographics
 * Metadata URL: https://www.kaggle.com/datasets/marshald/london-boroughs/
@@ -34,11 +34,11 @@ The datasource profiles demographic data, such as labour market, economy and so 
 The datasource contains the energy consumption readings for a sample of about 5500 London households and information about the allocated acorn (a geodemographic segmentation of the UK's population) from between November 2011 and February 2014.
 
 ### Datasource3: London Crime Data
-* Metadata URL: https://www.kaggle.com/datasets/LondonDataStore/london-crime
-* Data URL: https://www.kaggle.com/datasets/LondonDataStore/london-crime
-* Data Type: BigQuery table
+* Metadata URL: https://www.kaggle.com/datasets/jboysen/london-crime
+* Data URL: https://www.kaggle.com/datasets/jboysen/london-crime?select=london_crime_by_lsoa.csv
+* Data Type: CSV
 
-This data counts the number of crimes at two different geographic levels of London (LSOA and borough) by year, according to crime type. Includes data from 2008 to present.
+Crime in major metropolitan areas, such as London, occurs in distinct patterns. This data covers the number of criminal reports by month, LSOA borough, and major/minor category from Jan 2008-Dec 2016.
 
 ### Datasource4: Housing in London
 * Metadata URL: https://www.kaggle.com/datasets/justinas/housing-in-london
