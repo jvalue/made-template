@@ -19,7 +19,7 @@ Comparative Analysis of Cancer Characteristics
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
 ### Datasource1: Breast Cancer Wisconsin (Diagnostic) Data Set
-* Metadata URL: (https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data)
+* Metadata URL: https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data
 * Data URL: https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data/download?datasetVersionNumber=2
 * Data Type: CSV
 
