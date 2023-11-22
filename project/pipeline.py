@@ -52,15 +52,13 @@ class DataPipeline:
                 df1[column] = df1[column].fillna(majority_value)
         return df1
     def outcome_to_binary(self, df1):
+        df1.rename(columns={'classification': 'Outcome'}, inplace=True)
 
-            # Iterate over columns
-        for column in df1.columns:
-            unique_values = df1[column].dropna().unique()
-            if set(unique_values) == {'notckd', 'ckd'}:
-                # Replace "notckd" with 0, "ckd" with 1, and missing values with the majority value
-                df1[column] = df1[column].map({'notckd': 0, 'ckd': 1})
-
+       # Map values in the column to 0 and 1
+        df1['Outcome'] = df1['Outcome'].map({'notckd': 0, 'ckd': 1})
+        
         return df1
+ 
     
     def yesno_to_binary(self, df1):
         for column in df1.columns:
@@ -129,11 +127,12 @@ if __name__ == "__main__":
     data_pipeline = DataPipeline(file1_path, file2_path, output_directory)
 
     # Execute the pipeline
+    
     df1, df2 = data_pipeline.read_csv_files()
+    df1 = data_pipeline.outcome_to_binary(df1)
     df1 = data_pipeline.normal_to_binary(df1)
     df1 = data_pipeline.present_to_binary(df1)
     df1 = data_pipeline.good_to_binary(df1)
-    df1 = data_pipeline.outcome_to_binary(df1)
     df1 = data_pipeline.yesno_to_binary(df1)
     df1 = data_pipeline.missing_with_majority(df1)
     df1 = data_pipeline.missing_with_mean(df1)
