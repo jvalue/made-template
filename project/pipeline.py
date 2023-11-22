@@ -58,7 +58,7 @@ def data_loader(db_file, data_frame, table_name):
 
 
 def main():
-    path_Immoscout24 = "https://docs.google.com/spreadsheets/d/1yIMw92dv7yeztmDHAt8mvO74jFhTc9dS/export?format=xlsx"
+    path_Immoscout24 = "https://docs.google.com/spreadsheets/d/1M0ADobfx5ynmyHGTn8XlKR2mzyTRqX5XMGo8QZSP0LA/export?format=xlsx"
     df1 = data_extraction_xls(path_Immoscout24)
     df1_drop_cols = ["picturecount", "scoutId", "geo_bln", "geo_krs"]
     df1_rename_cols = {
@@ -70,7 +70,22 @@ def main():
     df1 = data_transformation(df1, df1_rename_cols, df1_drop_cols)
     data_loader("immoscout.sqlite", df1, "immoscout")
 
-
+    path_intstudent = "https://docs.google.com/spreadsheets/d/1n9DXXIBUI5VpP8-qgCdhxvoV6FJgUyAVrz1VxAFZVNo/export?format=xlsx"
+    df2 = data_extraction_xls(path_intstudent)
+    df2_drop_cols = []
+    df2_rename_cols = {
+        "stadt": "city",
+        "universität": "university",
+        "Geisteswissenschaften": "Humanities",
+        "Sozialwissenschaften": "Social sciences",
+        "Mathematik": "Mathematics",
+        "Ingenieurwissenschaften": "Engineering sciences",
+        "Informatik": "Computer Science",
+        "Medizin": "Medicine",
+        "Landwirtschaft": "Agriculture"
+    }
+    df2 = data_transformation(df2, df2_rename_cols, df2_drop_cols)
+    data_loader("intstudent.sqlite", df2, "student")
 
 if __name__ == "__main__":
     main()
