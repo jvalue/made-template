@@ -3,7 +3,8 @@ pipeline Pipeline {
     // Defining the wireing of the pipeline
     Extractor 
         -> InterpretTextFile 
-        -> InterpretCSV 
+        -> InterpretCSV
+        -> DropStatusColumn 
         -> InterpretTable
         -> LoadTrainData;
 
@@ -21,6 +22,10 @@ pipeline Pipeline {
         delimiter: ";";
     }
 
+    // Drop status column
+    block DropStatusColumn oftype ColumnDeleter {
+        delete: [column J];
+    }
 
     // Defining header and  data types 
     block InterpretTable oftype TableInterpreter {
