@@ -1,0 +1,86 @@
+// Creating pipeline
+pipeline Pipeline {
+    // Defining the wireing of the pipeline
+    Extractor 
+        -> InterpretTextFile 
+        -> InterpretCSV
+        -> DropStatusColumn 
+        -> InterpretTable
+        -> LoadTrainData;
+
+    // Extracting trains data from source url
+    block Extractor oftype HttpExtractor {
+
+        url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV";
+    }
+
+    // Return data as  file
+    block InterpretTextFile  oftype TextFileInterpreter { }
+
+    // transform data to csv
+    block InterpretCSV oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    // Drop status column
+    block DropStatusColumn oftype ColumnDeleter {
+        delete: [column J];
+    }
+
+    // Defining header and  data types 
+    block InterpretTable oftype TableInterpreter {
+        header: true;
+        columns: [
+            "EVA_NR" oftype integer,
+            "DS100" oftype text,
+            "IFOPT" oftype ValidIFOPTInput,
+            "NAME" oftype text,
+            "Verkehr" oftype ValidTrafficInput,
+            "Laenge" oftype ValidDimensionsInput,
+            "Breite" oftype ValidDimensionsInput,
+            "Betreiber_Name" oftype text,
+            "Betreiber_Nr" oftype integer,
+        ];
+    }
+
+    // Load results in sqlite database
+    block LoadTrainData oftype SQLiteLoader {
+        table: "trainstops";
+        file: "exercises/trainstops.sqlite";
+    }
+}
+
+
+
+// Set valuetype for 'Verkehr' inputs
+valuetype ValidTrafficInput oftype text {
+    constraints: [ValidTrafficValues];
+}
+
+
+//alllow traffic rules list
+constraint ValidTrafficValues oftype AllowlistConstraint {
+    allowlist: ['FV', 'RV', 'nur DPN'];
+}
+
+
+// Defining the Valuetype for the 'Laenge' and 'Breite'.
+valuetype ValidDimensionsInput oftype decimal {
+    constraints: [ValidDimensionsValues];
+}
+
+// set valuetype for length and width
+constraint ValidDimensionsValues on decimal:
+    value >= -90 and value <= 90;
+
+
+// set valuevype for IFOPT with regex sequence
+valuetype ValidIFOPTInput oftype text {
+    constraints: [ValidIFOPTs];
+}
+
+constraint ValidIFOPTs oftype RegexConstraint {
+    regex: /^.{2}:\d+:\d+(:\d+)?$/;
+}
+
+
