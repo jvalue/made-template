@@ -46,7 +46,7 @@ pipeline TrainPipeline {
     // Load results in sqlite database
     block LoadTrainData oftype SQLiteLoader {
         table: "trainstops";
-        file: "exercises/trainstops.sqlite";
+        file: "trainstops.sqlite";
     }
 }
 
