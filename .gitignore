@@ -35,7 +35,8 @@ MANIFEST
 # Not include datasets
 datasets/
 *.db
-*.sqlite
+immoscout.sqlite
+intstudent.sqlite
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
