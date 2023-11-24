@@ -1,4 +1,3 @@
-import gdown
 import pandas as pd
 import os
 from sqlalchemy import create_engine, FLOAT, BIGINT, NVARCHAR
