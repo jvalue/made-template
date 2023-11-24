@@ -4,8 +4,9 @@ from io import StringIO
 import sqlite3
 import os
 
-parking_garages = https://opendata.muenchen.de/dataset/addaa7d4-40be-4621-846e-c5358cbe3f26/resource/e0e0e4e1-1b25-4c04-a0ea-cf9cc8335c57/download/230907places.csv
-disabled_parking_space= https://opendata.muenchen.de/dataset/80a2d76a-ebc9-40b5-b54c-b5c8af9df65f/resource/c1166a5a-5764-47e1-92bb-2d63dab785eb/download/220624_behindertenparkplaetze_muenchen.csv
+
+parking_garages = 'https://opendata.muenchen.de/dataset/addaa7d4-40be-4621-846e-c5358cbe3f26/resource/e0e0e4e1-1b25-4c04-a0ea-cf9cc8335c57/download/230907places.csv'
+disabled_parking_space= 'https://opendata.muenchen.de/dataset/80a2d76a-ebc9-40b5-b54c-b5c8af9df65f/resource/c1166a5a-5764-47e1-92bb-2d63dab785eb/download/220624_behindertenparkplaetze_muenchen.csv'
 
 parking_response = requests.get(parking_garages)
 disabled_response= requests.get(disabled_parking_space)
@@ -23,6 +24,7 @@ disabled_df = disabled_df.fillna(0)
 
 
 root_dir = os.path.abspath('.')
+print(root_dir)
 
 
 data_dir = os.path.join(root_dir, 'data')
@@ -51,4 +53,7 @@ for table_name in table_names:
 
 conn.close()
 
-print("Data pipeline complete! and dataets are succesfully stored in tyhe database")
+print("Data pipeline complete! and datasets are succesfully stored in the database")
+print(db_path)
+#print(parking_df)
+#print(disabled_df)
