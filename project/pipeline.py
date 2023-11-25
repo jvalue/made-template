@@ -3,12 +3,12 @@ from sqlalchemy import create_engine
 import sqlite3
 import kaggle
 
-# Download Titanic dataset
+# Download Zomato dataset
 kaggle.api.dataset_download_files('rajeshrampure/zomato-dataset', path='/Users/akshatkhara/Desktop/Study Material/Semester 3/Methods of Advance Data Engineering/made-template-WS2324/data', unzip=True)
 kaggle.api.dataset_download_files('vora1011/zomato-bangalore-restaurants-2022', path='/Users/akshatkhara/Desktop/Study Material/Semester 3/Methods of Advance Data Engineering/made-template-WS2324/data', unzip=True)
 
 
-# The dataets are stored in the repository. 
+# The dataets are stored in the repository data folder. 
 dataset1 = pd.read_csv('/Users/akshatkhara/Desktop/Study Material/Semester 3/Methods of Advance Data Engineering/made-template-WS2324/data/zomato.csv')
 dataset2 = pd.read_csv('/Users/akshatkhara/Desktop/Study Material/Semester 3/Methods of Advance Data Engineering/made-template-WS2324/data/BangaloreZomatoData.csv')
 
