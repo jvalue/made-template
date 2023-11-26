@@ -4,6 +4,7 @@ from io import StringIO
 import urllib.request
 import ipdb
 import re
+
 # 1 : Downloading the CSV file
 url = 'https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV'
 response = urllib.request.urlopen(url)
@@ -40,6 +41,7 @@ for x in df.index:
 #         df = df.drop(x, inplace=True)
 #     if df.loc[x, "Breite"] <= -90 or df.loc[x, "Breite"] >= 90 :
 #         df = df.drop(x, inplace=True)
+
 
 # Function to check the validity of IFOPT values
 def is_valid_ifopt(value):
