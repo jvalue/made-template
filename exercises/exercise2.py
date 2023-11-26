@@ -4,6 +4,7 @@ from io import StringIO
 import urllib.request
 import ipdb
 import re
+
 # 1 : Downloading the CSV file
 url = 'https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV'
 response = urllib.request.urlopen(url)
