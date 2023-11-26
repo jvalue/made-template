@@ -2,9 +2,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 from io import StringIO
 import urllib.request
-import ipdb
 import re
-
 # 1 : Downloading the CSV file
 url = 'https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV'
 response = urllib.request.urlopen(url)
@@ -17,10 +15,6 @@ df = df.drop("Status", axis='columns')
 # Filter "Verkehr" column
 valid_verkehr_values = ["FV", "RV", "nur DPN"]
 df = df[df['Verkehr'].isin(valid_verkehr_values)]
-
-# Filter "Laenge" and "Breite" columns based on the valid coordinate range
-# valid_coordinate_range = int(-90, 90)
-# valid_coordinate_range = int(valid_coordinate_range)
 
 numeric_columns = ['Laenge', 'Breite']
 df[numeric_columns] = df[numeric_columns].replace({',': '.'}, regex=True)
@@ -36,12 +30,6 @@ for x in df.index:
     elif df.loc[x, "Breite"] >= 90:
         df = df.drop(x, inplace=True)
 
-# for x in df.index:
-#     if df.loc[x, "Laenge"] <= -90 or df.loc[x, "Laenge"] >= 90 :
-#         df = df.drop(x, inplace=True)
-#     if df.loc[x, "Breite"] <= -90 or df.loc[x, "Breite"] >= 90 :
-#         df = df.drop(x, inplace=True)
-
 
 # Function to check the validity of IFOPT values
 def is_valid_ifopt(value):
@@ -52,7 +40,7 @@ def is_valid_ifopt(value):
 df = df[df['IFOPT'].apply(is_valid_ifopt)]
 df = df.dropna()  # Drop rows with empty cells
 
-# ipdb.set_trace()
+
 #  3: Defining the SQLite database connection and create an SQLAlchemy engine
 db_connection_str = 'sqlite:///trainstops.sqlite'
 engine = create_engine(db_connection_str)
