@@ -36,6 +36,8 @@ def is_valid_ifopt(value):
 df = df[df['IFOPT'].apply(is_valid_ifopt)]
 df = df.dropna()  # Drop rows with empty cells
 
+df['Betreiber_Nr'] =  df['Betreiber_Nr'].astype(int)
+
 #  3: Defining the SQLite database connection and create an SQLAlchemy engine
 db_connection_str = 'sqlite:///trainstops.sqlite'
 engine = create_engine(db_connection_str)
