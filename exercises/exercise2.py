@@ -31,7 +31,6 @@ for x in df.index:
     elif df.loc[x, "Breite"] <= -90 or df.loc[x, "Breite"] >= 90 :
         df = df.drop(x, inplace=True)
 
-
 # Function to check the validity of IFOPT values
 def is_valid_ifopt(value):
     # Define the pattern for valid IFOPT values
