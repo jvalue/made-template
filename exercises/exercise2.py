@@ -11,7 +11,7 @@ csv_content = response.read().decode('utf-8')
 df = pd.read_csv(StringIO(csv_content),sep=';')
 df = df.drop("Status", axis='columns')
 
-# Filter "Verkehr" column
+# Filter "Verkehr" column to include only valid columns
 Verkehr_valid_values = ["FV", "RV", "nur DPN"]
 df = df[df['Verkehr'].isin(Verkehr_valid_values)]
 
@@ -38,12 +38,8 @@ df = df.dropna()
 # Use fitting SQLite types (e.g., BIGINT, TEXT or FLOAT) for all columns
 df['Betreiber_Nr'] =  df['Betreiber_Nr'].astype(int)
 
-# Defining the SQLite database connection and create an SQLAlchemy engine
+# Defining the SQLite database connection and create an SQLAlchemy engine and writing the Dataframe in SQLite database and close the engine
 db_connection_str = 'sqlite:///trainstops.sqlite'
 engine = create_engine(db_connection_str)
-
-# Writing the DataFrame to the SQLite database
 df.to_sql('trainstops', con=engine, index=False, if_exists='replace')
-
-# Close the engine
 engine.dispose()
