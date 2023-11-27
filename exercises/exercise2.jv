@@ -39,8 +39,9 @@ pipeline TrainStopsPipeline {
 
 
     block TrainStopsExtractor oftype HttpExtractor {
-    url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV";
+        url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV";
 
+    }
     block TrainStopsDataInterpreter oftype TextFileInterpreter { }
 
     block StopsCSVInterpreter oftype CSVInterpreter {
@@ -69,12 +70,12 @@ pipeline TrainStopsPipeline {
 
     block TrainStopsLoader oftype SQLiteLoader {
         table: "trainstops";
-    file: "./trainstops.sqlite";
+        file: "./trainstops.sqlite";
     }
 
 }
 
 
-}
+
 
 
