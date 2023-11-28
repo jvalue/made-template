@@ -19,8 +19,10 @@ pipeline TrainStationPipeline {
         ];
     }
     
-    constraint LaengeAndBreiteAllowedRange on decimal:
-        value >= -90 and value <= 90;
+    constraint LaengeAndBreiteAllowedRange oftype RangeConstraint{
+      lowerBound: -90 ;
+      upperBound: 90 ;
+    }
     
     valuetype laengeandbreite oftype decimal {
         constraints: [
@@ -38,22 +40,30 @@ pipeline TrainStationPipeline {
         ];
     }
 
+    constraint allowedtextlength oftype LengthConstraint {
+        minLength: 1;
+        maxLength: 9007199254740991;
+    }
 
-
-
+    valuetype nonemptytext oftype text{
+        constraints: [
+            allowedtextlength,
+        ];
+    }
+       
     block TrainStationTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
             "EVA_NR" oftype integer,
-            "DS100" oftype text,
+            "DS100" oftype nonemptytext,
             "IFOPT" oftype ifopt,
-            "NAME" oftype text,
+            "NAME" oftype nonemptytext,
             "Verkehr" oftype verkehr,
             "Laenge" oftype laengeandbreite,
             "Breite" oftype laengeandbreite,
-            "Betreiber_Name" oftype text,
+            "Betreiber_Name" oftype nonemptytext,
             "Betreiber_Nr" oftype integer,
-            "Status" oftype text
+            "Status" oftype nonemptytext
         ];
     }
 
