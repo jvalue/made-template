@@ -1,10 +1,19 @@
+// SPDX-FileCopyrightText: 2023 Friedrich-Alexander-Universitat Erlangen-Nurnberg
+//
+// SPDX-License-Identifier: AGPL-3.0-only
+
+// Example 2: Electric Vehicles
+// Learning goals:
+// - Understand further core concepts transforms and valuetypes
+// - Understand how to construct a pipeline with multiple sinks
+// - Understand the use of runtime parameters
 
 // 1. This Jayvee model describes a pipeline 
 // from a CSV file in the web 
 // to a SQLite file and a PostgreSQL db sink.
-pipeline ElectricVehiclesPipeline {
+pipeline BahnhofPipeline {
     // See here for meta-data of the data source
-    // https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV
+    // https://catalog.data.gov/dataset/electric-vehicle-population-data/resource/fa51be35-691f-45d2-9f3e-535877965e69
 
     // 2. At the top of a pipeline, we describe the
     // structure of the pipeline. The first part until 
@@ -12,16 +21,16 @@ pipeline ElectricVehiclesPipeline {
     // of blocks. From there we can see a split into two
     // parallel sequences that load the data in to two
     // different sinks.
-    CarsExtractor
-        -> CarsTextFileInterpreter
-        -> CarsCSVInterpreter
+    BahnhofExtractor
+        -> BahnhofTextFileInterpreter
+        -> BahnhofCSVInterpreter
         -> ColumnDeleter
-        -> ElectricVehiclesTableInterpreter
-        -> ElectricVehiclesSQLiteLoader;
+        -> BahnhofTableInterpreter
+        -> BahnhofSQLiteLoader;
     
 
     // 3. After the pipeline structure, we define the blocks used.
-    block CarsExtractor oftype HttpExtractor {
+    block BahnhofExtractor oftype HttpExtractor {
 
         // 9. Properties are assigned to concrete values.
         // Here, we specify the URL where the file shall be downloaded from.
@@ -30,11 +39,11 @@ pipeline ElectricVehiclesPipeline {
 
     // 10. The HttpExtractor requires no input and produces a binary file as output.
     // This file has to be interpreted, e.g., as text file.
-    block CarsTextFileInterpreter oftype TextFileInterpreter { }
+    block BahnhofTextFileInterpreter oftype TextFileInterpreter { }
 
     // 11. Next, we interpret the text file as sheet.
     // A sheet only contains text cells and is useful for manipulating the shape of data before assigning more strict value types to cells.
-    block CarsCSVInterpreter oftype CSVInterpreter {
+    block BahnhofCSVInterpreter oftype CSVInterpreter {
 
         delimiter: ";";
 
@@ -46,7 +55,7 @@ pipeline ElectricVehiclesPipeline {
     }
 
 
-    block ElectricVehiclesTableInterpreter oftype TableInterpreter {
+    block BahnhofTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
             // 4. Here, a user-deifned valuetype is used to describe this column.
@@ -66,7 +75,7 @@ pipeline ElectricVehiclesPipeline {
     }
 
  
-    block ElectricVehiclesSQLiteLoader oftype SQLiteLoader {
+    block BahnhofSQLiteLoader oftype SQLiteLoader {
         table: "trainstops";
         file: "trainstops.sqlite";
     }
