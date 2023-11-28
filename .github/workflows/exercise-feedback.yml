@@ -1,7 +1,11 @@
 name: Exercise Feedback
 
 on:
-  push:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
     branches:
     - main
     paths:
