@@ -19,7 +19,7 @@ valuetype IFOPTValues oftype text {
     constraints: [ IFOPTFormat ];
 }
 constraint IFOPTFormat oftype RegexConstraint {
-    regex: /^[A-Za-z]{2}:\d*:\d*(?::\d*)?$/;
+    regex: /[a-z]{2}:\d+:\d+(:\d+)?(:\d+)?/;
 }
 valuetype DeleteEmptyCell oftype text {
     constraints: [ DeleteEmpty ];
