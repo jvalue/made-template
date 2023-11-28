@@ -66,8 +66,8 @@ pipeline ElectricVehiclesPipeline {
             "IFOPT" oftype IFOPTtype,
             "NAME" oftype text,
             "Verkehr" oftype Verkehrtype,
-            "Laenge" oftype text,
-            "Breite" oftype text,
+            "Laenge" oftype Laengetype,
+            "Breite" oftype Breitetype,
             "Betreiber_Name" oftype text,
             "Betreiber_Nr" oftype integer,
             
@@ -110,158 +110,25 @@ constraint VerkehrAllowlist on text:
       "FV", "RV", "nur DPN",
     ];
 
-valuetype Breitetype oftype integer {
+valuetype Breitetype oftype decimal {
     constraints: [
-        BreiteScale,
+        BreiteScale
     ];
 }
 constraint BreiteScale oftype RangeConstraint {
-    lowerBound: 04814;  
-    upperBound: 543261634;
+    lowerBound: -90;  
+    upperBound: 90;
  }
  
-valuetype Laengetype oftype integer {
+valuetype Laengetype oftype decimal {
     constraints: [
-        LaengeScale,
+        LaengeScale
     ];
 }
 constraint LaengeScale oftype RangeConstraint {
  
-    lowerBound: 7661;    
-    upperBound: 996855855;
+    lowerBound: -90;    
+    upperBound: 90;
    
  }         
-// SPDX-FileCopyrightText: 2023 Friedrich-Alexander-Universitat Erlangen-Nurnberg
-//
-// SPDX-License-Identifier: AGPL-3.0-only
-
-// Example 2: Electric Vehicles
-// Learning goals:
-// - Understand further core concepts transforms and valuetypes
-// - Understand how to construct a pipeline with multiple sinks
-// - Understand the use of runtime parameters
-
-// 1. This Jayvee model describes a pipeline 
-// from a CSV file in the web 
-// to a SQLite file and a PostgreSQL db sink.
-pipeline ElectricVehiclesPipeline {
-    // See here for meta-data of the data source
-    // https://catalog.data.gov/dataset/electric-vehicle-population-data/resource/fa51be35-691f-45d2-9f3e-535877965e69
-
-    // 2. At the top of a pipeline, we describe the
-    // structure of the pipeline. The first part until 
-    // the ElectricRangeTransformer is a linear sequence
-    // of blocks. From there we can see a split into two
-    // parallel sequences that load the data in to two
-    // different sinks.
-    CarsExtractor
-        -> CarsTextFileInterpreter
-        -> CarsCSVInterpreter
-        -> ColumnDeleter
-        -> ElectricVehiclesTableInterpreter
-        -> ElectricVehiclesSQLiteLoader;
-    
-
-    // 3. After the pipeline structure, we define the blocks used.
-    block CarsExtractor oftype HttpExtractor {
-
-        // 9. Properties are assigned to concrete values.
-        // Here, we specify the URL where the file shall be downloaded from.
-        url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV";
-    }
-
-    // 10. The HttpExtractor requires no input and produces a binary file as output.
-    // This file has to be interpreted, e.g., as text file.
-    block CarsTextFileInterpreter oftype TextFileInterpreter { }
-
-    // 11. Next, we interpret the text file as sheet.
-    // A sheet only contains text cells and is useful for manipulating the shape of data before assigning more strict value types to cells.
-    block CarsCSVInterpreter oftype CSVInterpreter {
-
-        delimiter: ";";
-
-    }
-// EVA_NR	DS100	IFOPT	NAME	Verkehr	Laenge	Breite	Betreiber_Name	Betreiber_Nr	Status
-    block ColumnDeleter oftype ColumnDeleter {
-
-        delete: [column J];
-    }
-
-
-    block ElectricVehiclesTableInterpreter oftype TableInterpreter {
-        header: true;
-        columns: [
-            // 4. Here, a user-deifned valuetype is used to describe this column.
-            // The capital letter indicates that the valuetype is not builtin
-            // by convention. The valuetype itself is defined further below. 
-            "EVA_NR" oftype integer,
-            "DS100" oftype text,
-            "IFOPT" oftype IFOPTtype,
-            "NAME" oftype text,
-            "Verkehr" oftype Verkehrtype,
-            "Laenge" oftype text,
-            "Breite" oftype text,
-            "Betreiber_Name" oftype text,
-            "Betreiber_Nr" oftype integer,
-            
-        ];
-    }
-
  
-    block ElectricVehiclesSQLiteLoader oftype SQLiteLoader {
-        table: "trainstops";
-        file: "trainstops.sqlite";
-    }
-
-
-}
-
-// 9. Below the pipeline, we model user-define valuetypesdata\.gitkeep
-// We give them a speaking name and provide a base valuetype
-// that this valuetype builts on. User-defined valuetypes always place additional constraints on existing valuetypes.
-
-
-// 11. This constraint works on text valuetypes and requires values 
-// to match a given regular expression in order to be valid.
-
-valuetype IFOPTtype oftype text {
-    constraints: [
-        IFOPTAllowlist,
-    ];
-}
-constraint IFOPTAllowlist on text:
-    value matches /^[a-z]{2}:\d+:\d+(?::\d+)?$/;   
-
-valuetype Verkehrtype oftype text {
-    constraints: [
-        VerkehrAllowlist,
-    ];
-}
-
-constraint VerkehrAllowlist on text:
-    value in [
-      "FV", "RV", "nur DPN",
-    ];
-
-valuetype Breitetype oftype integer {
-    constraints: [
-        BreiteScale,
-    ];
-}
-constraint BreiteScale oftype RangeConstraint {
-    lowerBound: 04814;  
-    upperBound: 543261634;
- }
- 
-valuetype Laengetype oftype integer {
-    constraints: [
-        LaengeScale,
-    ];
-}
-constraint LaengeScale oftype RangeConstraint {
- 
-    lowerBound: 7661;    
-    upperBound: 996855855;
-   
- }         
-
