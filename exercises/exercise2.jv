@@ -1,0 +1,77 @@
+// Define value type for traffic type with an allowlist constraint
+valuetype VerkehrType oftype text {
+    constraints: [VerkehrListe];
+}
+
+// Define a constraint for the traffic type allowlist
+constraint VerkehrListe oftype AllowlistConstraint {
+    allowlist: ["FV", "RV", "nur DPN"];
+}
+
+// Define value type for geographic coordinates with a range constraint
+valuetype GeographicType oftype decimal {
+    constraints: [Geographic];
+}
+
+// Define a constraint for the geographic range
+constraint Geographic oftype RangeConstraint {
+    lowerBound: -90;
+    upperBound: 90;
+    lowerBoundInclusive: true;
+    upperBoundInclusive: true;
+}
+
+// Define value type for IFOPT (Intermodal Functional Online Passenger Timetable) with a regex constraint
+valuetype IFOPTType oftype text {
+    constraints: [IFOPTRegEx];
+}
+
+// Define a regex constraint for IFOPT
+constraint IFOPTRegEx oftype RegexConstraint {
+    regex: /[a-z]{2}:\d+:\d+(:\d+)?/;
+}
+
+// Define a pipeline for processing train stops data
+pipeline TrainsstopPipeline {
+
+    // Extract data from the Deutsche Bahn API
+    block DataExtractor oftype HttpExtractor {url: "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV"; }
+
+    // Interpret the text file
+    block TrainsstopTextFileInterpreter oftype TextFileInterpreter {}
+
+    // Interpret the CSV file with specific settings
+    block TrainsstopCSVInterpreter oftype CSVInterpreter {enclosing: '"'; delimiter: ";";}
+
+    // Remove the specified column from the data
+    block DropColumn oftype ColumnDeleter {
+        delete: [column J];
+    }
+
+    // Interpret the table structure with specified columns and data types
+    block TrainsstopTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "EVA_NR" oftype integer,
+            "DS100" oftype text,
+            "IFOPT" oftype IFOPTType,
+            "NAME" oftype text,
+            "Verkehr" oftype VerkehrType,
+            "Laenge" oftype GeographicType,
+            "Breite" oftype GeographicType,
+            "Betreiber_Name" oftype text,
+            "Betreiber_Nr" oftype integer,
+        ];
+    }
+
+    // Load the interpreted data into an SQLite database
+    block DatabaseLoader oftype SQLiteLoader { table: "trainstops"; file: "./trainstops.sqlite"; }
+
+    // Define the data flow within the pipeline
+    DataExtractor
+        -> TrainsstopTextFileInterpreter
+        -> TrainsstopCSVInterpreter
+        -> DropColumn
+        -> TrainsstopTableInterpreter
+        -> DatabaseLoader;
+}
