@@ -100,13 +100,12 @@ constraint GeographicalCoordinates oftype RangeConstraint {
    upperBoundInclusive: true;
     
  }
+constraint AllowedVerkherList oftype AllowlistConstraint {
+    allowlist: ["FV", "RV", "nur DPN"];
+}
 
 
-constraint ExactlyTwoCharacters on text:
-    value.length == 2;
-
-
-constraint AllowedVerkherList on text:
-    value in [
-        "FV", "RV", "nurDPN", 
-    ];
+//constraint AllowedVerkherList on text:
+   // value in [
+       // "FV", "RV", "nurDPN", 
+   // ];
