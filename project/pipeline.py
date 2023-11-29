@@ -8,7 +8,7 @@ from urllib.request import urlretrieve
 from tqdm import tqdm
 import json
 import pandas as pd
-import opendatasets as od  # Make sure to install this library with: pip install opendatasets
+import opendatasets as od  
 
 class SQLiteDB:
     FAIL = "fail"
