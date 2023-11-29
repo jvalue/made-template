@@ -1,0 +1,112 @@
+pipeline TrainPipeline {
+
+
+    TrainDataExtractor 
+        -> TrainDataTextFileInterpreter
+        -> TrainDataCSVInterpreter
+        -> StatusColumnRemover
+        -> TrainDataTableInterpreter
+        -> TrainDataLoader;
+
+    
+    block TrainDataExtractor oftype HttpExtractor{
+        url : "https://download-data.deutschebahn.com/static/datasets/haltestellen/D_Bahnhof_2020_alle.CSV" ;
+    }
+
+    block TrainDataTextFileInterpreter oftype TextFileInterpreter{}
+
+    block TrainDataCSVInterpreter oftype CSVInterpreter {
+		delimiter: ";";
+	}
+    
+    block StatusColumnRemover oftype ColumnDeleter{
+        delete: [column J];
+    }
+
+    
+    block TrainDataTableInterpreter oftype TableInterpreter {
+		header: true;
+		columns: [
+			"EVA_NR" oftype integer,
+			"DS100" oftype text,
+			"IFOPT" oftype ValidIFOPT,//text
+			"NAME" oftype text,
+			"Verkehr" oftype ValidVerkehr,//text
+			"Laenge" oftype GeographicData,
+			"Breite" oftype GeographicData,
+			"Betreiber_Name" oftype text,
+			"Betreiber_Nr" oftype integer
+		];
+    }
+
+    block TrainDataLoader oftype SQLiteLoader {
+		table: "trainstops";
+		file: "./trainstops.sqlite";
+	}
+
+
+}
+
+
+
+
+
+valuetype ValidIFOPT oftype text{
+    
+    constraints: [
+        
+        IPv4Format,
+        // there are more constraings which I don't understand
+    ];
+}
+
+valuetype ValidVerkehr oftype text {
+   
+    constraints: [
+
+        AllowedVerkherList,
+        
+   
+    ];
+}
+
+
+valuetype GeographicData oftype decimal {
+    constraints: [
+        
+        
+        GeographicalCoordinates,
+    
+    ];
+}
+
+
+//constraint NoEmptyCell on text:
+   // value.length > 0;
+
+
+constraint IPv4Format oftype RegexConstraint {
+    regex: /[a-z]{2}:\d+:\d+(:\d+)?/;
+  // regex: /^[A-Za-z]{2}:\d*:\d*(?::\d*)?$/;
+ }
+
+//constraint GeographicalCoordinates on text:
+    //value matches /[-90-90]/;
+
+constraint GeographicalCoordinates oftype RangeConstraint {
+   lowerBound: -90;
+   upperBound: 90;
+   lowerBoundInclusive: true;
+   upperBoundInclusive: true;
+    
+ }
+
+
+constraint ExactlyTwoCharacters on text:
+    value.length == 2;
+
+
+constraint AllowedVerkherList on text:
+    value in [
+        "FV", "RV", "nurDPN", 
+    ];
