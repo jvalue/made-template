@@ -58,7 +58,8 @@ def data_loader(db_file, data_frame, table_name):
 
 
 def main():
-    path_Immoscout24 = "https://docs.google.com/spreadsheets/d/1M0ADobfx5ynmyHGTn8XlKR2mzyTRqX5XMGo8QZSP0LA/export?format=xlsx"
+    
+    path_Immoscout24 = "https://docs.google.com/spreadsheets/d/1Bhi9CZjfI6qlM-2J1TVeDy_JfIcSBqufXlHV6IuT7n4/export?format=xlsx"
     df1 = data_extraction_xls(path_Immoscout24)
     df1_drop_cols = ["picturecount", "scoutId", "geo_bln", "geo_krs"]
     df1_rename_cols = {
