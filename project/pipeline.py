@@ -69,7 +69,7 @@ def main():
         "regio3": "cityTown"
     }
     df1 = data_transformation(df1, df1_rename_cols, df1_drop_cols)
-    data_loader("immoscout.sqlite", df1, "immoscout")
+    data_loader("datasets.sqlite", df1, "immoscout")
 
     path_intstudent = "https://docs.google.com/spreadsheets/d/1n9DXXIBUI5VpP8-qgCdhxvoV6FJgUyAVrz1VxAFZVNo/export?format=xlsx"
     df2 = data_extraction_xls(path_intstudent)
@@ -86,7 +86,7 @@ def main():
         "Landwirtschaft": "Agriculture"
     }
     df2 = data_transformation(df2, df2_rename_cols, df2_drop_cols)
-    data_loader("intstudent.sqlite", df2, "student")
+    data_loader("datasets.sqlite", df2, "intstudents")
 
 if __name__ == "__main__":
     main()
