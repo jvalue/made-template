@@ -4,8 +4,6 @@ import requests
 import io
 import sqlite3
 
-from sqlalchemy import create_engine
-
 
 url_2009 = "https://datamillnorth.org/download/road-traffic-accidents/288d2de3-0227-4ff0-b537-2546b712cf00/2009.csv"
 url_2015 = "https://datamillnorth.org/download/road-traffic-accidents/df98a6dd-704e-46a9-9d6d-39d608987cdf/2015.csv"
@@ -22,21 +20,35 @@ def fetch_and_read (url):
         pd.DataFrame()
             
     
-df_2009 = fetch_and_read(url_2009)
-df_2015 = fetch_and_read(url_2015)
-df_2016 = fetch_and_read(url_2016)
+df_1 = fetch_and_read(url_2009)
+df_2 = fetch_and_read(url_2015)
+df_3 = fetch_and_read(url_2016)
 
+df_2009 = df_1.loc[ :, ['Type of Vehicle', 'Casualty Severity']]
+df_2015 = df_2.loc[ :, ['Type of Vehicle', 'Casualty Severity']]
+df_2016 = df_3.loc[ :, ['Type of Vehicle', 'Casualty Severity']]
 
-df_2009_selected = df_2009.loc[ :, ['Type of Vehicle', 'Casualty Severity']]
-df_2015_selected = df_2015.loc[ :, ['Type of Vehicle', 'Casualty Severity']]
-df_2016_selected = df_2016.loc[ :, ['Type of Vehicle', 'Casualty Severity']]
+df_2009 = df_2009.astype('category')
+df_2015 = df_2015.astype('category')
+df_2016 = df_2016.astype('category')
 
+df_2009.dropna(subset=['Type of Vehicle'], inplace = True)
+df_2015.dropna(subset=['Type of Vehicle'], inplace = True)
+df_2016.dropna(subset=['Type of Vehicle'], inplace = True)
+
+df_2009.dropna(subset=['Casualty Severity'], inplace = True)
+df_2015.dropna(subset=['Casualty Severity'], inplace = True)
+df_2016.dropna(subset=['Casualty Severity'], inplace = True)
+
+df_2009 = df_2009.str.lower()
+df_2015 = df_2015.str.lower()
+df_2016 = df_2016.str.lower()
 
 conn = sqlite3.connect('./data/accidents.sqlite')
 
-df_2009_selected.to_sql('accidents_2009', conn, index=False, if_exists='replace')
-df_2015_selected.to_sql('accidents_2015', conn, index=False, if_exists='replace')
-df_2016_selected.to_sql('accidents_2016', conn, index=False, if_exists='replace')
+df_2009.to_sql('accidents_2009', conn, index=False, if_exists='replace')
+df_2015.to_sql('accidents_2015', conn, index=False, if_exists='replace')
+df_2016.to_sql('accidents_2016', conn, index=False, if_exists='replace')
 
 conn.commit()
 conn.close()
