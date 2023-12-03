@@ -1,265 +1,245 @@
-from urllib.request import urlretrieve
 import os
-import pandas
-import sqlite3
-import opendatasets as od
+import pandas as pd
+import numpy as np
+
+from etl_pipeline_runner.services import (
+    ETLPipeline,
+    DataExtractor,
+    CSVHandler,
+    SQLiteLoader,
+    ETLQueue,
+)
+
+DATA_DIRECTORY = os.path.join(os.getcwd(), "data")
+
+# yagon_city
 
 
-class DataSource:
-    def __init__(
-        self,
-        url: str,
-        sep: str,
-        type: str,
-        names: list[str],
-        header: int,
-        output_filename: str,
-        comp_type: str,
-        sourcename: str,
-        d_name: str,
-    ) -> None:
-        self.url = url
-        self.sep = sep
-        self.type = type
-        self.names = names
-        self.header = header
-        self.output_filename = output_filename
-        self.comp_type = comp_type
-        self.sourcename = sourcename
-        self.d_name = d_name
+def transform_yagon(data_frame: pd.DataFrame):
+    data_frame.drop(
+        labels=["Prcp", "Snow", "Wdir", "Wspd", "Wpgt", "Pres", "Tsun"],
+        axis=1,
+        inplace=True,
+    )
+    data_frame.insert(
+        loc=4,
+        column="City",
+        value="yagon",
+        allow_duplicates=True,
+    )
+    # dataframe.dropna(axis= 0, inplace= True)
+    return data_frame
 
 
-class DataBase:
-    def __init__(self, database_name: str, table_name: str) -> None:
-        self.database_name = database_name
-        self.table_name = table_name
+yagon_loader = SQLiteLoader(
+    db_name="analysis.sqlite",
+    table_name="weather",
+    if_exists=SQLiteLoader.REPLACE,
+    index=False,
+    method=None,
+    output_directory=DATA_DIRECTORY,
+)
 
 
-class DataPipeline:
-    def __init__(self, data_source: DataSource, output_DB: DataBase) -> None:
-        self.data_source = data_source
-        self.output_DB = output_DB
+yagon_csv_handler = CSVHandler(
+    file_name="48097.csv.gz",
+    sep=",",
+    names=[
+        "Date",
+        "Tavg",
+        "Tmin",
+        "Tmax",
+        "Prcp",
+        "Snow",
+        "Wdir",
+        "Wspd",
+        "Wpgt",
+        "Pres",
+        "Tsun",
+    ],
+    transformer=transform_yagon,
+    loader=yagon_loader,
+    compression=CSVHandler.GZIP_COMPRESSION,
+)
 
-    def _extract_meteostat_data(self):
-        file_path = os.path.join(
-            os.getcwd(),
-            "data",
-            f"{self.data_source.output_filename}.{self.data_source.type}",
-        )
-        urlretrieve(url=self.data_source.url, filename=file_path)
-        return file_path
+yagon_extractor = DataExtractor(
+    data_name="yagon weather",
+    url="https://bulk.meteostat.net/v2/daily/48097.csv.gz",
+    type=DataExtractor.CSV,
+    file_handlers=(yagon_csv_handler,),
+)
 
-    def _extract_kaggle_data(self):
-        data_dir = "data"
-        od.download(
-            dataset_id_or_url=self.data_source.url,
-            data_dir=data_dir,
-            force=False,
-            dry_run=False,
-        )
-        dataset_id = od.utils.kaggle_direct.get_kaggle_dataset_id(
-            dataset_id_or_url=self.data_source.url
-        )
-        id = dataset_id.split("/")[1]
-        file_path = os.path.join(data_dir, id, self.data_source.output_filename)
-        return file_path
+# mandalay_city
 
-    def extract_data(self):
-        if self.data_source.sourcename == "meteostat":
-            file_path = self._extract_meteostat_data()
-        elif self.data_source.sourcename == "kaggle":
-            file_path = self._extract_kaggle_data()
-        return file_path
 
-    def _transform_meteostat_data(self, file_path: str):
-        dataframe = pandas.read_csv(
-            filepath_or_buffer=file_path,
-            compression=self.data_source.comp_type,
-            sep=self.data_source.sep,
-            names=self.data_source.names,
-        )
-        dataframe.drop(
-            labels=["Prcp", "Snow", "Wdir", "Wspd", "Wpgt", "Pres", "Tsun"],
-            axis=1,
-            inplace=True,
-        )
-        dataframe.insert(
-            loc=4, column="City", value=self.data_source.d_name, allow_duplicates=True
-        )
-        # dataframe.dropna(axis= 0, inplace= True)
-        return dataframe
+def transform_mandalay(data_frame: pd.DataFrame):
+    data_frame.drop(
+        labels=["Prcp", "Snow", "Wdir", "Wspd", "Wpgt", "Pres", "Tsun"],
+        axis=1,
+        inplace=True,
+    )
+    data_frame.insert(loc=4, column="City", value="mandalay", allow_duplicates=True)
+    # dataframe.dropna(axis= 0, inplace= True)
+    return data_frame
 
-    def _transform_kaggle_data(self, file_path: str):
-        dataframe = pandas.read_csv(
-            filepath_or_buffer=file_path,
-            compression=self.data_source.comp_type,
-            sep=self.data_source.sep,
-            header=self.data_source.header,
-        )
-        dataframe.drop(
-            labels=[
-                "Invoice ID",
-                "Branch",
-                "Customer type",
-                "Gender",
-                "Unit price",
-                "Tax 5%",
-                "Time",
-                "cogs",
-                "gross margin percentage",
-                "gross income",
-                "Rating",
-            ],
-            axis=1,
-            inplace=True,
-        )
-        return dataframe
 
-    def transform_data(self, file_path):
-        # read the file from a location
-        if self.data_source.sourcename == "meteostat":
-            dataframe = self._transform_meteostat_data(file_path=file_path)
-        elif self.data_source.sourcename == "kaggle":
-            dataframe = self._transform_kaggle_data(file_path=file_path)
-        return dataframe
+mandalay_loader = SQLiteLoader(
+    db_name="analysis.sqlite",
+    table_name="weather",
+    if_exists=SQLiteLoader.APPEND,
+    index=False,
+    method=None,
+    output_directory=DATA_DIRECTORY,
+)
 
-    def _load_meteostat_data(self, dataframe):
-        if_exists = "replace" if (self.data_source.d_name=="yagon") else "append"
-        connection = sqlite3.connect(
-            database=os.path.join(os.getcwd(), "data", self.output_DB.database_name)
-        )
-        dataframe.to_sql(
-            name=self.output_DB.table_name,
-            con=connection,
-            if_exists= if_exists,
-            index=False,
-        )
-        connection.close()
 
-    def _load_kaggle_data(self, dataframe):
-        connection = sqlite3.connect(
-            database=os.path.join(os.getcwd(), "data", self.output_DB.database_name)
-        )
-        dataframe.to_sql(
-            name=self.output_DB.table_name,
-            con=connection,
-            if_exists="replace",
-            index=False,
-        )
+mandalay_csv_handler = CSVHandler(
+    file_name="48042.csv.gz",
+    sep=",",
+    names=[
+        "Date",
+        "Tavg",
+        "Tmin",
+        "Tmax",
+        "Prcp",
+        "Snow",
+        "Wdir",
+        "Wspd",
+        "Wpgt",
+        "Pres",
+        "Tsun",
+    ],
+    transformer=transform_mandalay,
+    loader=mandalay_loader,
+    compression=CSVHandler.GZIP_COMPRESSION,
+)
 
-        connection.close()
+mandalay_extractor = DataExtractor(
+    data_name="mandalay weather",
+    url="https://bulk.meteostat.net/v2/daily/48042.csv.gz",
+    type=DataExtractor.CSV,
+    file_handlers=(mandalay_csv_handler,),
+)
 
-    def load_data(self, dataframe):
-        if self.data_source.sourcename == "meteostat":
-            self._load_meteostat_data(dataframe=dataframe)
-        elif self.data_source.sourcename == "kaggle":
-            self._load_kaggle_data(dataframe=dataframe)
+# naypyitaw_city
 
-    def run_pipeline(self):
-        # extract the data
-        file_path = self.extract_data()
-        # transform the data:cleaning
-        dataframe = self.transform_data(file_path=file_path)
-        # load the data
-        self.load_data(dataframe=dataframe)
-        # os.remove(path=file_path)
+
+def transform_naypyitaw(data_frame: pd.DataFrame):
+    data_frame.drop(
+        labels=["Prcp", "Snow", "Wdir", "Wspd", "Wpgt", "Pres", "Tsun"],
+        axis=1,
+        inplace=True,
+    )
+    data_frame.insert(loc=4, column="City", value="naypyitaw", allow_duplicates=True)
+    # dataframe.dropna(axis= 0, inplace= True)
+    return data_frame
+
+
+naypyitaw_loader = SQLiteLoader(
+    db_name="analysis.sqlite",
+    table_name="weather",
+    if_exists=SQLiteLoader.APPEND,
+    index=False,
+    method=None,
+    output_directory=DATA_DIRECTORY,
+)
+
+
+naypyitaw_csv_handler = CSVHandler(
+    file_name="VYNT0.csv.gz",
+    sep=",",
+    names=[
+        "Date",
+        "Tavg",
+        "Tmin",
+        "Tmax",
+        "Prcp",
+        "Snow",
+        "Wdir",
+        "Wspd",
+        "Wpgt",
+        "Pres",
+        "Tsun",
+    ],
+    transformer=transform_naypyitaw,
+    loader=naypyitaw_loader,
+    compression=CSVHandler.GZIP_COMPRESSION,
+)
+
+naypyitaw_extractor = DataExtractor(
+    data_name="naypyitaw weather",
+    url="https://bulk.meteostat.net/v2/daily/VYNT0.csv.gz",
+    type=DataExtractor.CSV,
+    file_handlers=(naypyitaw_csv_handler,),
+)
+
+# supermarket_sales
+
+
+def transform_supermarket_sales_datasource(data_frame: pd.DataFrame):
+    data_frame = data_frame.drop(
+        labels=[
+            "Invoice ID",
+            "Branch",
+            "Customer type",
+            "Gender",
+            "Unit price",
+            "Tax 5%",
+            "Time",
+            "cogs",
+            "gross margin percentage",
+            "gross income",
+            "Rating",
+        ],
+        axis=1,
+    )
+    return data_frame
+
+
+supermarket_sales_datasource_loader = SQLiteLoader(
+    db_name="analysis.sqlite",
+    table_name="supermarket_sales",
+    if_exists=SQLiteLoader.REPLACE,
+    index=False,
+    method=None,
+    output_directory=DATA_DIRECTORY,
+)
+
+
+supermarket_sales_datasource_csv_handler = CSVHandler(
+    file_name="supermarket_sales - Sheet1.csv",
+    sep=",",
+    names=None,
+    transformer=transform_supermarket_sales_datasource,
+    loader=supermarket_sales_datasource_loader,
+)
+
+supermarket_sales_datasource_extractor = DataExtractor(
+    data_name="supermarket_sales_datasource weather",
+    url="https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales/download?datasetVersionNumber=3",
+    type=DataExtractor.KAGGLE_ARCHIVE,
+    file_handlers=(supermarket_sales_datasource_csv_handler,),
+)
 
 
 if __name__ == "__main__":
-    yagon_source = DataSource(
-        url="https://bulk.meteostat.net/v2/daily/48097.csv.gz",
-        sep=",",
-        type="gz",
-        names=[
-            "Date",
-            "Tavg",
-            "Tmin",
-            "Tmax",
-            "Prcp",
-            "Snow",
-            "Wdir",
-            "Wspd",
-            "Wpgt",
-            "Pres",
-            "Tsun",
-        ],
-        header = None,
-        output_filename="yagon_weatherdata.csv",
-        comp_type="gzip",
-        sourcename="meteostat",
-        d_name="yagon",
+    yagon_pipeline = ETLPipeline(
+        extractor=yagon_extractor,
     )
-    weather_DB = DataBase(database_name="analysis.sqlite", table_name="weather")
-    yagon_pipeline = DataPipeline(data_source=yagon_source, output_DB=weather_DB)
-    yagon_pipeline.run_pipeline()
-
-    mandalay_source = DataSource(
-        url="https://bulk.meteostat.net/v2/daily/48042.csv.gz",
-        sep=",",
-        type="gz",
-        names=[
-            "Date",
-            "Tavg",
-            "Tmin",
-            "Tmax",
-            "Prcp",
-            "Snow",
-            "Wdir",
-            "Wspd",
-            "Wpgt",
-            "Pres",
-            "Tsun",
-        ],
-        header = None,
-        output_filename="mandalay_weatherdata.csv",
-        comp_type="gzip",
-        sourcename="meteostat",
-        d_name="mandalay",
+    mandalay_pipeline = ETLPipeline(
+        extractor=mandalay_extractor,
     )
-    mandalay_pipeline = DataPipeline(data_source=mandalay_source, output_DB=weather_DB)
-    mandalay_pipeline.run_pipeline()
-
-    naypyitaw_source = DataSource(
-        url="https://bulk.meteostat.net/v2/daily/VYNT0.csv.gz",
-        sep=",",
-        type="gz",
-        names=[
-            "Date",
-            "Tavg",
-            "Tmin",
-            "Tmax",
-            "Prcp",
-            "Snow",
-            "Wdir",
-            "Wspd",
-            "Wpgt",
-            "Pres",
-            "Tsun",
-        ],
-        header = None,
-        output_filename="naypyitaw_weatherdata.csv",
-        comp_type="gzip",
-        sourcename="meteostat",
-        d_name="naypyitaw",
+    naypyitaw_pipeline = ETLPipeline(
+        extractor=naypyitaw_extractor,
     )
-    naypyitaw_pipeline = DataPipeline(
-        data_source=naypyitaw_source, output_DB=weather_DB
+    supermarket_pipeline = ETLPipeline(
+        extractor=supermarket_sales_datasource_extractor,
     )
-    naypyitaw_pipeline.run_pipeline()
-
-    supermarket_sales_datasource = DataSource(
-        url="https://www.kaggle.com/datasets/aungpyaeap/supermarket-sales/download?datasetVersionNumber=3",
-        sep=",",
-        type="zip",
-        output_filename="supermarket_sales - Sheet1.csv",
-        comp_type=None,
-        names=[],
-        header = 0,
-        sourcename="kaggle",
-        d_name=None,
-    )
-    sales_DB = DataBase(database_name="analysis.sqlite", table_name="sales")
-    supermarket_sales_pipeline = DataPipeline(
-        data_source=supermarket_sales_datasource, output_DB=sales_DB
-    )
-    supermarket_sales_pipeline.run_pipeline()
+    ETLQueue(
+        etl_pipelines=(
+            yagon_pipeline,
+            mandalay_pipeline,
+            naypyitaw_pipeline,
+            supermarket_pipeline,
+        )
+    ).run()

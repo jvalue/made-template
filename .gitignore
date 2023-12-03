@@ -3,3 +3,4 @@
 !/data/.gitkeep
 .venv
 *.sqlite
+kaggle.json
