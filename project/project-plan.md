@@ -54,7 +54,11 @@ Short description of the DataSource.
 1. Findout preferrable datasets [i1]
 2. Write project plan [i2]
 3. Create ETL pipeline [i3]
+4. Add automated tests for pipeline [i4]
+6. Start report writing [i5]
 
 [i1]: https://github.com/islam15-8789/made-template/issues/1
 [i2]: https://github.com/islam15-8789/made-template/issues/2
 [i3]: https://github.com/islam15-8789/made-template/issues/3
+[i4]: https://github.com/islam15-8789/made-template/issues/7
+[i5]: https://github.com/islam15-8789/made-template/issues/8
