@@ -17,6 +17,10 @@ chmod +x /project/pipeline.sh
 ```[bash]
 chmod ./project/pipeline.sh
 ```
+## Run test pipeline
+```
+./project/tests.sh
+```
 
 # Methods of Advanced Data Engineering Template Project
 
