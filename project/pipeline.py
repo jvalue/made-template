@@ -2,161 +2,104 @@ import pandas as pd
 import sqlalchemy as sql
 import numpy as np  
 
-#Link of datasourse 1
-datasource1_link = 'https://www.landesdatenbank.nrw.de/ldbnrwws/downloader/00/tables/46251-02iz_00.csv'
-#I want to start reading lines from 8 row.
-lines_to_skip = list(range(1, 8))
-lines_to_read = 61 # Number of lines to read
+class DataPipeline:
+    def __init__(self, url, db_name, table_name):
+        #save url link
+        self._url = url
+        self._db_name = db_name
+        self._table_name = table_name
+        self._df = None
 
-# Read the specified lines from the CSV file into a DataFrame
-df = pd.read_csv(datasource1_link, skiprows=lines_to_skip, nrows=lines_to_read, delimiter=';', encoding='latin1')
-df.reset_index(inplace=True)
-#Rename columns
-df.columns = ['PC','Province','Vehicles', 'Cars', 'Trucks', 'Tractors', 'Motorcycles']
-#Delete row with missing information
-df = df[df['Vehicles'] != "-"]
-#Set column type
-dtype_mapping = {
-    'PC': str, 
-    'Province': str,  
-    'Vehicles': int,
-    'Cars': int,
-    'Trucks': int,
-    'Tractors': int,
-    'Motorcycles': int,  
-}
+    def read_csv(self, lines_to_skip, lines_to_read):
+        # Read the specified lines from the CSV file into a DataFrame
+        #lines_to_skip: I want to start reading lines from 8 row.
+        #lines_to_read: Number of lines to read
+        self._df = pd.read_csv(self._url, skiprows=lines_to_skip, nrows=lines_to_read, delimiter=';', encoding='latin1')
+        self._df.reset_index(inplace=True)
 
-df = df.astype(dtype_mapping)
+    def read_excel(self, sheet, limits):
+        #Get the range of cells where the data is.
+        init_row,final_row,init_col,final_col = limits
+        #Get the excel file on python
+        xls = pd.ExcelFile(self._url)
+        #Read an specific sheet
+        self._df = pd.read_excel(xls, 'EU-Jahreskenngrößen 2022')
+        #Capture the part of the dataframe that is relevant for the analysis
+        self._df = self._df.iloc[init_row:final_row,init_col:final_col].copy()
+        #Reset index beacuse all indexes are correlated with df2
+        self._df.reset_index(inplace=True, drop =True)
 
-engine1 = sql.create_engine("sqlite:///data/vehicles.sqlite")
-dtype_mapping_sql = {
-    'PC': sql.types.String, 
-    'Province': sql.types.String,  
-    'Vehicles': sql.types.Integer,
-    'Cars': sql.types.Integer,
-    'Trucks': sql.types.Integer,
-    'Tractors': sql.types.Integer,
-    'Motorcycles': sql.types.Integer,  
-}
-df.to_sql("vehicles", engine1, if_exists="replace", index=False, dtype=dtype_mapping_sql)
+    def rename_cols(self, cols_name):
+        #Rename columns
+        self._df.columns = cols_name
+
+    def del_missing_info(self, col_name, character):
+        #Delete row with missing information
+        self._df = self._df[self._df[col_name] != character]
+
+    def replace_str(self, strings_to_be_replaced, target):
+        for string in strings_to_be_replaced:
+            self._df = self._df.replace({string:target})
+
+    def create_sqldb(self, dtype_mapping):
+        engine = sql.create_engine(f"sqlite:///data/{self._db_name}.sqlite", echo=False)
+        self._df.to_sql(self._table_name, con=engine, if_exists="replace", 
+                        index=False, dtype = dtype_mapping)
 
 
-#Link of datasourse 2
-datasource2_link = 'https://www.opengeodata.nrw.de/produkte/umwelt_klima/luftqualitaet/luqs/eu_jahreskenngroessen/LUQS-EU-Kenngroessen-2022.xlsx'
-#Get the excel file uploaded on python
-xls = pd.ExcelFile(datasource2_link)
-#The excel file has 2 sheets, I selected the sheet where the information is.
-df2 = pd.read_excel(xls, 'EU-Jahreskenngrößen 2022')
 
-#Declare the columns name
-columns_name = [
-    'Name','Kennung', 'Gebiets-Name', 'Klassifikation', 'EU-Code',
-    'Stickstoffdioxid Zeitl. Überdeckung  %', 'Stickstoffdioxid Jahresmittel µg/m³', 
-    'Stickstoffdioxid Max. 1h-Wert', 'Stickstoffdioxid # 1h-Werte  > 200 µg/m³', 
-    'Stickstoffdioxid Mess- verfahren', 'PM10 Zeitl. Überdeckung  %',
-    'PM10 Jahresmittel µg/m³', 'PM10 # Tagesmittel > 50 µg/m³', 'PM10 Mess- verfahren',
-    'PM2,5 Zeitl. Überdeckung  %', 'PM2,5 Jahresmittel µg/m³', 'PM2,5 Mess- verfahren',
-    'Schwefeldioxid Zeitl. Überdeckung  %', 'Schwefeldioxid Jahresmittel µg/m³', 
-    'Schwefeldioxid Max. 1h-Wert','Schwefeldioxid # 1h-Werte  > 350 µg/m³', 
-    'Schwefeldioxid # Tagesmittel > 125 µg/m3','Benzol Zeitl. Überdeckung  %', 
-    'Benzol Jahresmittel µg/m³','Benzol Mess- verfahren','Blei Zeitl. Überdeckung  %', 
-    'Blei Jahresmittel µg/m³', 'Arsen Zeitl. Überdeckung  %',
-    'Arsen Jahresmittel ng/m³', 'Cadmium Zeitl. Überdeckung  %', 
-    'Cadmium Jahresmittel ng/m³','Nickel Zeitl. Überdeckung  %', 
-    'Nickel Jahresmittel ng/m³', 'Benzopyren Zeitl. Überdeckung  %',
-    'Benzopyren Jahresmittel ng/m³'
-]
+if __name__ == '__main__':
+    #Datasourse 1: Vehicles
+    db_url_1 = "https://www.landesdatenbank.nrw.de/ldbnrwws/downloader/00/tables/46251-02iz_00.csv"
+    db_name_1 = 'vehicles'
+    table_name_1 = 'vehicles'
+    dp_1 = DataPipeline(db_url_1, db_name_1, table_name_1)
+    dp_1.read_csv(list(range(1, 8)), 61)
+    cols_name = ['PC','Province','Vehicles', 'Cars', 'Trucks', 'Tractors', 'Motorcycles']
+    dp_1.rename_cols(cols_name)
+    dp_1.del_missing_info('Vehicles', "-")
+    dtype_mapping_sql = {
+        'PC': sql.types.String, 
+        'Province': sql.types.String,  
+        'Vehicles': sql.types.Integer,
+        'Cars': sql.types.Integer,
+        'Trucks': sql.types.Integer,
+        'Tractors': sql.types.Integer,
+        'Motorcycles': sql.types.Integer}
+    dp_1.create_sqldb(dtype_mapping_sql)
 
-#Capture the part of the dataframe that is relevant for the analysis
-df2 = df2.iloc[5:158,:].copy()
-#Reset index beacuse all indexes are correlated with df2
-df2.reset_index(inplace=True, drop =True)
-#change columns name
-df2.columns = columns_name
+    #Datasourse 2: AirPollution
+    db_url_2 = "https://www.opengeodata.nrw.de/produkte/umwelt_klima/luftqualitaet/luqs/eu_jahreskenngroessen/LUQS-EU-Kenngroessen-2022.xlsx"
+    db_name_2 = 'airpollution'
+    table_name_2 = 'airpollution'
+    dp_2 = DataPipeline(db_url_2, db_name_2, table_name_2)
+    dp_2.read_excel('EU-Jahreskenngrößen 2022', (5,158,0,17))
+    cols_name2 = ['Name','ID', 'Area name', 'Classification', 'EU-Code',
+        'NO2 time coverage %', 'NO2 anual average µg/m³', 
+        'NO2 Max. 1h value', 'NO2 # 1h values > 200 µg/m³', 
+        'NO2 measuring method', 'PM10 time coverage %',
+        'PM10 anual average µg/m³', 'PM10 daily average > 50 µg/m³', 'PM10 measuring method',
+        'PM2,5 time coverage %', 'PM2,5 anual average µg/m³', 'PM2,5 measuring method']
+    dp_2.rename_cols(cols_name2)
+    #Need to erase '---' and '--' from all the cells
+    dp_2.replace_str(['---','--','nan'], np.nan)
 
-#Need to erase '---' and '--' from all the cells
-df2 = df2.replace({'---':np.nan})
-df2 = df2.replace({'--':np.nan})
-df2 = df2.replace({'nan':np.nan})
-df2.head()
-
-#Set the value types of each column
-dtype_mapping2 = {
-    'Name': str, 
-    'Kennung': str, 
-    'Gebiets-Name': str, 
-    'Klassifikation': str, 
-    'EU-Code': str,
-    'Stickstoffdioxid Zeitl. Überdeckung  %': float, 
-    'Stickstoffdioxid Jahresmittel µg/m³': float, 
-    'Stickstoffdioxid Max. 1h-Wert': float,
-    'Stickstoffdioxid # 1h-Werte  > 200 µg/m³': float, 
-    'Stickstoffdioxid Mess- verfahren': str, 
-    'PM10 Zeitl. Überdeckung  %': float,
-    'PM10 Jahresmittel µg/m³': float, 
-    'PM10 # Tagesmittel > 50 µg/m³': float, 
-    'PM10 Mess- verfahren': str,
-    'PM2,5 Zeitl. Überdeckung  %': float, 
-    'PM2,5 Jahresmittel µg/m³': float, 
-    'PM2,5 Mess- verfahren': str,
-    'Schwefeldioxid Zeitl. Überdeckung  %': float, 
-    'Schwefeldioxid Jahresmittel µg/m³': float, 
-    'Schwefeldioxid Max. 1h-Wert': float,
-    'Schwefeldioxid # 1h-Werte  > 350 µg/m³': float, 
-    'Schwefeldioxid # Tagesmittel > 125 µg/m3': float,
-    'Benzol Zeitl. Überdeckung  %': float, 
-    'Benzol Jahresmittel µg/m³': float, 
-    'Benzol Mess- verfahren': str,
-    'Blei Zeitl. Überdeckung  %': float, 
-    'Blei Jahresmittel µg/m³': float, 
-    'Arsen Zeitl. Überdeckung  %': float,
-    'Arsen Jahresmittel ng/m³': float, 
-    'Cadmium Zeitl. Überdeckung  %': float, 
-    'Cadmium Jahresmittel ng/m³': float,
-    'Nickel Zeitl. Überdeckung  %': float, 
-    'Nickel Jahresmittel ng/m³': float, 
-    'Benzopyren Zeitl. Überdeckung  %': float,
-    'Benzopyren Jahresmittel ng/m³': float
-}
-
-df2 = df2.astype(dtype_mapping2)
-
-engine2 = sql.create_engine("sqlite:///data/airpollution.sqlite")
-dtype_mapping2_sql = {
-    'Name': sql.types.String, 
-    'Kennung': sql.types.String, 
-    'Gebiets-Name': sql.types.String, 
-    'Klassifikation': sql.types.String, 
-    'EU-Code': sql.types.String,
-    'Stickstoffdioxid Zeitl. Überdeckung  %': sql.types.Float, 
-    'Stickstoffdioxid Jahresmittel µg/m³': sql.types.Float, 
-    'Stickstoffdioxid Max. 1h-Wert': sql.types.Float,
-    'Stickstoffdioxid # 1h-Werte  > 200 µg/m³': sql.types.Float, 
-    'Stickstoffdioxid Mess- verfahren': sql.types.String, 
-    'PM10 Zeitl. Überdeckung  %': sql.types.Float,
-    'PM10 Jahresmittel µg/m³': sql.types.Float, 
-    'PM10 # Tagesmittel > 50 µg/m³': sql.types.Float, 
-    'PM10 Mess- verfahren': sql.types.String,
-    'PM2,5 Zeitl. Überdeckung  %': sql.types.Float, 
-    'PM2,5 Jahresmittel µg/m³': sql.types.Float, 
-    'PM2,5 Mess- verfahren': sql.types.String,
-    'Schwefeldioxid Zeitl. Überdeckung  %': sql.types.Float, 
-    'Schwefeldioxid Jahresmittel µg/m³': sql.types.Float, 
-    'Schwefeldioxid Max. 1h-Wert': sql.types.Float,
-    'Schwefeldioxid # 1h-Werte  > 350 µg/m³': sql.types.Float, 
-    'Schwefeldioxid # Tagesmittel > 125 µg/m3': sql.types.Float,
-    'Benzol Zeitl. Überdeckung  %': sql.types.Float, 
-    'Benzol Jahresmittel µg/m³': sql.types.Float, 
-    'Benzol Mess- verfahren': sql.types.String,
-    'Blei Zeitl. Überdeckung  %': sql.types.Float, 
-    'Blei Jahresmittel µg/m³': sql.types.Float, 
-    'Arsen Zeitl. Überdeckung  %': sql.types.Float,
-    'Arsen Jahresmittel ng/m³': sql.types.Float, 
-    'Cadmium Zeitl. Überdeckung  %': sql.types.Float, 
-    'Cadmium Jahresmittel ng/m³': sql.types.Float,
-    'Nickel Zeitl. Überdeckung  %': sql.types.Float, 
-    'Nickel Jahresmittel ng/m³': sql.types.Float, 
-    'Benzopyren Zeitl. Überdeckung  %': sql.types.Float,
-    'Benzopyren Jahresmittel ng/m³': sql.types.Float
-}
-df2.to_sql("airpollution", engine2, if_exists="replace", index=False, dtype=dtype_mapping2_sql)
+    dtype_mapping2_sql = {
+        'Name': sql.types.String, 
+        'ID': sql.types.String, 
+        'Area name': sql.types.String, 
+        'Classification': sql.types.String, 
+        'EU-Code': sql.types.String,
+        'NO2 time coverage %': sql.types.Float, 
+        'NO2 anual average µg/m³': sql.types.Float, 
+        'NO2 Max. 1h value': sql.types.Integer,
+        'NO2 # 1h values > 200 µg/m³': sql.types.Integer, 
+        'NO2 measuring method': sql.types.String, 
+        'PM10 time coverage %': sql.types.Float,
+        'PM10 anual average µg/m³': sql.types.Float, 
+        'PM10 daily average > 50 µg/m³': sql.types.Float, 
+        'PM10 measuring method': sql.types.String,
+        'PM2,5 time coverage %': sql.types.Float, 
+        'PM2,5 anual average µg/m³': sql.types.Float, 
+        'PM2,5 measuring method': sql.types.String}
+    dp_2.create_sqldb(dtype_mapping2_sql)
