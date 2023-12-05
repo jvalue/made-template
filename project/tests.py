@@ -18,7 +18,8 @@ class TestPipeline(unittest.TestCase):
         self.output_directory = 'C:/Users/z004j5vt/made-template-ws2324/data/'
         self.pipeline = Pipeline(self.file1_path, self.file2_path, self.output_directory)
 
-    def test_run_pipeline(self):
+    def test_run_pipeline(self): # Executes my pipeline
+
         self.pipeline.run_pipeline(self.tablename1, self.tablename2)
         # Check if output files exist
         self.assertTrue(os.path.exists('output_file1.csv'))
