@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 
 # Activate virtual environment (if applicable)
 # source /path/to/your/virtualenv/bin/activate
