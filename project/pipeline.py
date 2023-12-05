@@ -5,8 +5,8 @@ import sqlite3
 import requests
 import os
 from pathlib import Path
+
 class Pipeline:
- 
  
     def __init__(self, file1_path, file2_path, output_directory):
         self.file1_path = file1_path
@@ -39,9 +39,7 @@ class Pipeline:
                 # Replace "notpresent" with 0, "present" with 1, and missing values with the majority value
                 self.df1[column] = self.df1[column].map({'notpresent': 0, 'present': 1})
                 majority_value = self.df1[column].mode().iloc[0]
-                self.df1[column] = self.df1[column].fillna(majority_value)    
-                
-                
+                self.df1[column] = self.df1[column].fillna(majority_value)                                 
                         
     def good_to_binary(self):
             # Iterate over columns
@@ -100,8 +98,6 @@ class Pipeline:
             mean_value = self.df2[column].mean()
             self.df2[column] = self.df2[column].apply(lambda x: mean_value if x ==0  else x)
  
- 
-
     def merge_dataframes(self):
         merged_df = pd.concat([df1, df2], axis=0, ignore_index=True)
         return merged_df
@@ -133,10 +129,6 @@ class Pipeline:
             #merged_df = data_pipeline.merge_dataframes(df1, df2)
             self.save_to_sqlite( table_name1, table_name2)
 
-        # Optional: Check the data in the SQLite database
- 
-
-
 def main():
     file1_path = 'https://raw.githubusercontent.com/aiplanethub/Datasets/master/Chronic%20Kidney%20Disease%20(CKD)%20Dataset/ChronicKidneyDisease.csv'
     file2_path = 'https://raw.githubusercontent.com/npradaschnor/Pima-Indians-Diabetes-Dataset/master/diabetes.csv'
@@ -144,10 +136,6 @@ def main():
     tablename2 = Path(file2_path).stem
     output_directory = 'C:/Users/z004j5vt/made-template-ws2324/data/'
     pipeline = Pipeline(file1_path, file2_path, output_directory)
- 
-
-
-
     pipeline.run_pipeline(tablename1, tablename2)
 
 if __name__ == "__main__":
