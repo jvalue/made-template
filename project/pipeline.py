@@ -124,8 +124,8 @@ class Pipeline:
             self.missing_with_mean()
             self.roundnumbers()
             self.zero_with_mean_onecolumn()
-            self.df1.to_csv('output_file1.csv', index=False)
-            self.df2.to_csv('output_file2.csv', index=False)
+            self.df1.to_csv('data/output_file1.csv', index=False)
+            self.df2.to_csv('data/output_file2.csv', index=False)
             #merged_df = data_pipeline.merge_dataframes(df1, df2)
             self.save_to_sqlite( table_name1, table_name2)
 
