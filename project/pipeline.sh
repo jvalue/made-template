@@ -1,2 +1,2 @@
 #!/bin/bash
-python project/etl_pipeline.py
+python etl_pipeline.py
