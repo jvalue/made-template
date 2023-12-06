@@ -69,7 +69,6 @@ def Zomato_banglore_1(dataframe):
 
     
 def Zomato_database_file(dataframe):
-    import ipdb; ipdb.set_trace()
     Zomato_banglore_cleaned = dataframe
     # Connect to SQLite database
     Sqlfilepath = os.path.join(os.getcwd(), "data", "Zomato.sqlite")
@@ -128,17 +127,18 @@ def data_pipeline():
     zomato_banglore_1_df, zomato_banglore_2_df = download_csv_files()
     print("Download complete")
 
-    #Step 2 Clean zomato banglore dataset 1 and Load into SQLite file
-    print("Cleaning Zomato dataset Banglore_1")
-    zomato_banglore_1_cleaned = Zomato_banglore_1(zomato_banglore_1_df)
-    print("Zomato data cleaned loading into SQL Lite database")
-    Zomato_database_file(zomato_banglore_1_cleaned)
-    print("Loaded data into SQL file successfully")
+    # #Step 2 Clean zomato banglore dataset 1 and Load into SQLite file
+    # print("Cleaning Zomato dataset Banglore_1")
+    # zomato_banglore_1_cleaned = Zomato_banglore_1(zomato_banglore_1_df)
+    # print("Zomato data cleaned loading into SQL Lite database")
+    # Zomato_database_file(zomato_banglore_1_cleaned)
+    # print("Loaded data into SQL file successfully")
 
     #Step 3 Clean zomato banglore dataset 2 and Load into SQLite file
+    print("Cleaning Zomato dataset Banglore_2")
     zomato_banglore_2_cleaned = Zomato_banglore_2(zomato_banglore_2_df)
     print("Zomato data cleaned loading into SQL Lite database")
-    Zomato_database_file(zomato_banglore_2_cleaned)
+    Zomato_database_file_2(zomato_banglore_2_cleaned)
     print("Loaded data into SQL file successfully")
     
     print("All Tasks Completed! ")
