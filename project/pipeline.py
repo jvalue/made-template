@@ -69,6 +69,7 @@ def Zomato_banglore_1(dataframe):
 
     
 def Zomato_database_file(dataframe):
+    import ipdb; ipdb.set_trace()
     Zomato_banglore_cleaned = dataframe
     # Connect to SQLite database
     Sqlfilepath = os.path.join(os.getcwd(), "data", "Zomato.sqlite")
@@ -76,9 +77,9 @@ def Zomato_database_file(dataframe):
     # Use the to_sql method to write the DataFrame to a SQLite table
     Zomato_banglore_cleaned.to_sql('Zomato', conn, index=False, if_exists='replace')
 
-    #Optional selecting the query using PANDAS function to check whether the data is stored in the database.
-    # query = "SELECT * FROM accident_india"
-    # df = pd.read_sql_query(query, conn)
+    # Test case: Selecting the query using PANDAS function to check whether the data is stored in the database.
+    query = "SELECT * FROM Zomato"
+    df = pd.read_sql_query(query, conn)
     # print(df.head())
 
     # Close the connection
@@ -113,9 +114,9 @@ def Zomato_database_file_2(dataframe):
     # Use the to_sql method to write the DataFrame to a SQLite table
     Zomato_banglore_cleaned.to_sql('Banglore', conn, index=False, if_exists='replace')
 
-    #Optional selecting the query using PANDAS function to check whether the data is stored in the database.
-    # query = "SELECT * FROM accident_india"
-    # df = pd.read_sql_query(query, conn)
+    # Test case: Selecting the query using PANDAS function to check whether the data is stored in the database.
+    query = "SELECT * FROM Banglore"
+    df = pd.read_sql_query(query, conn)
     # print(df.head())
 
     # Close the connection
@@ -126,12 +127,15 @@ def data_pipeline():
     download_csv_files()
     zomato_banglore_1_df, zomato_banglore_2_df = download_csv_files()
     print("Download complete")
+
+    #Step 2 Clean zomato banglore dataset 1 and Load into SQLite file
     print("Cleaning Zomato dataset Banglore_1")
     zomato_banglore_1_cleaned = Zomato_banglore_1(zomato_banglore_1_df)
     print("Zomato data cleaned loading into SQL Lite database")
     Zomato_database_file(zomato_banglore_1_cleaned)
     print("Loaded data into SQL file successfully")
 
+    #Step 3 Clean zomato banglore dataset 2 and Load into SQLite file
     zomato_banglore_2_cleaned = Zomato_banglore_2(zomato_banglore_2_df)
     print("Zomato data cleaned loading into SQL Lite database")
     Zomato_database_file(zomato_banglore_2_cleaned)
