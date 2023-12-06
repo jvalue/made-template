@@ -79,6 +79,10 @@ def Zomato_database_file(dataframe):
     # Test case: Selecting the query using PANDAS function to check whether the data is stored in the database.
     query = "SELECT * FROM Zomato"
     df = pd.read_sql_query(query, conn)
+    if len(df)>1:
+        print("Data exists in SQL file")
+    else:
+        print("Data does not exist in SQL file")
     # print(df.head())
 
     # Close the connection
@@ -116,6 +120,10 @@ def Zomato_database_file_2(dataframe):
     # Test case: Selecting the query using PANDAS function to check whether the data is stored in the database.
     query = "SELECT * FROM Banglore"
     df = pd.read_sql_query(query, conn)
+    if len(df)>1:
+        print("Data exists in SQL file")
+    else:
+        print("Data does not exist in SQL file")
     # print(df.head())
 
     # Close the connection
