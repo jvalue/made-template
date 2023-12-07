@@ -6,7 +6,7 @@ import pandas as pd
 columns_to_keep = [0,1,2,12,22,32,42,52,62,72]
 
 # URL of the data source
-data_frame = pd.read_csv('https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv', sep = ';', encoding='utf-8', dtype = {1: str}, skiprows = 6, usecols = columns_to_keep)
+data_frame = pd.read_csv('https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv', sep = ';', encoding='latin-1', dtype = {1: str}, skiprows = 6, usecols = columns_to_keep)
 
 # drop last 4 rows
 data_frame = data_frame[:-4]
