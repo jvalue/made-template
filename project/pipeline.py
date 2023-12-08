@@ -135,12 +135,12 @@ def data_pipeline():
     zomato_banglore_1_df, zomato_banglore_2_df = download_csv_files()
     print("Download complete")
 
-    # #Step 2 Clean zomato banglore dataset 1 and Load into SQLite file
-    # print("Cleaning Zomato dataset Banglore_1")
-    # zomato_banglore_1_cleaned = Zomato_banglore_1(zomato_banglore_1_df)
-    # print("Zomato data cleaned loading into SQL Lite database")
-    # Zomato_database_file(zomato_banglore_1_cleaned)
-    # print("Loaded data into SQL file successfully")
+    #Step 2 Clean zomato banglore dataset 1 and Load into SQLite file
+    print("Cleaning Zomato dataset Banglore_1")
+    zomato_banglore_1_cleaned = Zomato_banglore_1(zomato_banglore_1_df)
+    print("Zomato data cleaned loading into SQL Lite database")
+    Zomato_database_file(zomato_banglore_1_cleaned)
+    print("Loaded data into SQL file successfully")
 
     #Step 3 Clean zomato banglore dataset 2 and Load into SQLite file
     print("Cleaning Zomato dataset Banglore_2")
