@@ -1,0 +1,59 @@
+pipeline VehiclePipeline
+{
+    //Bloc for extrascting cars data from given url of csv dataset file
+	block VehicleDataExtraction oftype HttpExtractor 
+    {url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv";}
+
+	block VehicleTextFileInterpreter_decoder oftype TextFileInterpreter 
+    {encoding: "latin2";}
+
+	block LineRangeDefining oftype TextRangeSelector 
+	{lineFrom: 7; lineTo: 483;}
+
+	block CSVDecoder oftype CSVInterpreter 
+    {delimiter: ';';}
+
+	valuetype ChangeCIN oftype text
+	{constraints: [change_cin_character];}
+	
+    // Defining characters length
+	constraint change_cin_character oftype LengthConstraint
+	{minLength: 0; maxLength: 5;}
+
+    // Only retain positive integer as defined in the document
+	valuetype RetainingPositiveValue oftype integer
+	{constraints: [PositiveInteger];}
+
+	constraint PositiveInteger oftype RangeConstraint
+	{lowerBound: 0;lowerBoundInclusive: false;}
+
+	block VehicleTableDecoder oftype TableInterpreter 
+	{
+        // Define the type with the respective columns
+		header: false;
+		columns: [
+			"date" oftype text,
+			"CIN" oftype ChangeCIN,
+			"name" oftype text,
+			"petrol" oftype RetainingPositiveValue,
+			"diesel" oftype RetainingPositiveValue,
+			"gas" oftype RetainingPositiveValue,
+			"electro" oftype RetainingPositiveValue,
+			"hybrid" oftype RetainingPositiveValue,
+			"plugInHybrid" oftype RetainingPositiveValue,
+			"others" oftype RetainingPositiveValue
+		];
+	}
+
+	block VehicleDatabaseLoader oftype SQLiteLoader 
+    {table: "cars";file: "./cars.sqlite";}
+
+    // Flow of running the pipeline
+    VehicleDataExtraction
+    ->VehicleTextFileInterpreter_decoder
+	    ->LineRangeDefining
+    ->CSVDecoder
+    ->VehicleTableDecoder
+    ->VehicleDatabaseLoader;
+
+}
