@@ -14,17 +14,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    # Setup Node LTS
-    - name: Set up Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 'lts/*'
-
-    # Install python
     - name: Set up Python 3.11
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
         python-version: 3.11
 
     - name: Run tests
-      run: bash project/test.sh
+      run: |
+        echo "=== Executing pipeline ==="
+        
+        # Execute your pipeline
+        python ./project/data/pipeline.py
+        
+        # Validate the output file(s)
+        if [ -f "./project/data/nuremberg_stops_immoscout.db" ]; then
+          echo "Output file(s) exist."
+        else
+          echo "Output file(s) not found."
+        fi
+        
+        echo "=== Running Tests ==="
+        python ./project/test.py
+        
+        echo "All done"
