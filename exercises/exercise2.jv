@@ -1,5 +1,5 @@
 // Creating pipeline
-pipeline Pipeline {
+pipeline TrainPipeline {
     // Defining the wireing of the pipeline
     Extractor 
         -> InterpretTextFile 
@@ -46,23 +46,19 @@ pipeline Pipeline {
     // Load results in sqlite database
     block LoadTrainData oftype SQLiteLoader {
         table: "trainstops";
-        file: "exercises/trainstops.sqlite";
+        file: "trainstops.sqlite";
     }
 }
-
-
 
 // Set valuetype for 'Verkehr' inputs
 valuetype ValidTrafficInput oftype text {
     constraints: [ValidTrafficValues];
 }
 
-
 //alllow traffic rules list
 constraint ValidTrafficValues oftype AllowlistConstraint {
     allowlist: ['FV', 'RV', 'nur DPN'];
 }
-
 
 // Defining the Valuetype for the 'Laenge' and 'Breite'.
 valuetype ValidDimensionsInput oftype decimal {
@@ -73,8 +69,7 @@ valuetype ValidDimensionsInput oftype decimal {
 constraint ValidDimensionsValues on decimal:
     value >= -90 and value <= 90;
 
-
-// set valuevype for IFOPT with regex sequence
+// set valuetype for IFOPT with regex sequence
 valuetype ValidIFOPTInput oftype text {
     constraints: [ValidIFOPTs];
 }
