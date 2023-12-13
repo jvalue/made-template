@@ -9,7 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Code Checkout 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -18,26 +17,13 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.11
-    
+
     - name: Install dependencies
       run: |
-        pip install sqlalchemy pandas numpy
+        pip install sqlalchemy pandas numpy openpyxl
 
     - name: Run tests
       run: |
-        echo "=== Executing pipeline ==="
-        
-        # Execute your pipeline
-        python ./project/data/pipeline.py
-        
-        # Validate the output file(s)
-        if [ -f "./project/data/nuremberg_stops_immoscout.db" ]; then
-          echo "Output file(s) exist."
-        else
-          echo "Output file(s) not found."
-        fi
-        
-        echo "=== Running Tests ==="
-        python ./project/test.py
-        
-        echo "All testd done"
+          chmod +x ./project/test.sh
+          ./project/test.sh
+          echo "=== All Tests Done Successfully ==="
