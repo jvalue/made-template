@@ -1,0 +1,34 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Code Checkout 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Setup Node LTS
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+
+    # Install jayvee
+    - name: Set up Jayvee
+      run: |
+        ./grading/ci/setup_jayvee.sh
+    # Install python
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Run tests
+      run: bash project/test.sh
