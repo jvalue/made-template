@@ -20,10 +20,6 @@ jobs:
       with:
         node-version: 'lts/*'
 
-    # Install jayvee
-    - name: Set up Jayvee
-      run: |
-        ./grading/ci/setup_jayvee.sh
     # Install python
     - name: Set up Python 3.11
       uses: actions/setup-python@v4
