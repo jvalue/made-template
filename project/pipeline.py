@@ -131,7 +131,7 @@ def data_pipeline():
     Zomato_database_file_2(zomato_banglore_2_cleaned)
     print("Loaded data into SQL file successfully")
     
-    print("All Tasks Completed! ")
+    print("All Tasks Completed :) ")
 
 if __name__ == "__main__":
     data_pipeline()
