@@ -11,7 +11,6 @@ import requests
 import ipdb
 
 # class Test:
-    
 def Test_run():
     # Connect to SQLite database
     Sqlfilepath = os.path.join(os.getcwd(), "data", "Zomato.sqlite")
@@ -47,7 +46,7 @@ def Test_run_2():
     # Close the connection
     conn.close()
 
-def data_pipeline():
+def Test_dataset():
     #Step 1 Check Zomato dataset availabke in folder data
     print("Testing Zomato dataset Banglore_1")
     Test_run()
@@ -61,4 +60,4 @@ def data_pipeline():
     print("All Tasks Completed! ")
 
 if __name__ == "__main__":
-    data_pipeline()
+    Test_dataset()
