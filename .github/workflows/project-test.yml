@@ -5,6 +5,8 @@ on:
             - opened
             - edited
             - synchronize
+        branches:
+            - main
 
 jobs:
   Explore-GitHub-Actions:
