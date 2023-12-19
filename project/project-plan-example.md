@@ -42,6 +42,5 @@ Write initial Description about the project plan. #2
 Construct ETL Pipeline. #3
 Create test cases for ETL Pipeline. #4
 
-
-
+added action tests
 [i1]: https://github.com/jvalue/made-template/issues/1
