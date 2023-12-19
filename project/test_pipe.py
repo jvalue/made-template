@@ -57,7 +57,7 @@ class TestDatasetProcessing(unittest.TestCase):
         self.assertGreater(len(result), 1, "The 'bike_data' table does not exist.")
 
     def test_weather_pipeline(self):
-        # London Weather Data Pipeline Test
+        # London Weather Data Pipeline Test done
         data_source = DataSource(
             data_name="weather",
             url="https://www.kaggle.com/datasets/emmanuelfwerr/london-weather-data",
