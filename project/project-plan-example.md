@@ -37,7 +37,10 @@ Data Type: CSV
 This data source will provide weather and climate data in London, including date, cloud cover, sunshine, global radiation, max_temp, mean_temp, min_temp, precipitation, pressure, snow_depth.
 
 ## Work Packages
-
+Investigate for interesting dataset. #1
+Write initial Description about the project plan. #2
+Construct ETL Pipeline. #3
+Create test cases for ETL Pipeline. #4
 
 
 
