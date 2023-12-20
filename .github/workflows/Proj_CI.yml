@@ -2,11 +2,12 @@ name: Proj_CI
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'data/**'
       - 'project/**'
-    branches:
-      - main
+    
 
 jobs:
   run:
