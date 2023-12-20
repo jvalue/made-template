@@ -122,6 +122,7 @@ class DataSource:
             sys.exit(1)
         return file_path
     
+    
     def _download_direct_read_file(self, output_dir: str) -> str:
         file_path = os.path.join(output_dir, self.files[0].file_name)
         if os.path.isfile(file_path):

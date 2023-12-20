@@ -1,6 +1,6 @@
 import os
 import unittest
-from pipelines.pipeline import ETLPipeline, SQLiteDB, CSVFile, DataSource
+from project.pipelines.pipeline import ETLPipeline, SQLiteDB, CSVFile, DataSource
 
 
 
