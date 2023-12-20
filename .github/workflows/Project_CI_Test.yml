@@ -3,19 +3,12 @@ on:
   push:
     paths:
       - 'project/**'
-  pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
     branches:
       - main
 
 jobs:
   Pipeline_test:
-    runs-on: ubuntu-latest
-    env:
-      WORKING_DIR: ./project
+    runs-on: ubuntu-latest   
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -26,11 +19,9 @@ jobs:
             python-version: 3.8
 
       - name: Installing Dependencies
-        working-directory: ${{ env.WORKING_DIR }}
         run: pip install -r requirements.txt
           
       - name: Run tests
-        working-directory: ${{ env.WORKING_DIR }}
         run: |
-          chmod +x ./tests.sh
-          ./tests.sh
+          chmod +x ./project/tests.sh
+          ./project/tests.sh
