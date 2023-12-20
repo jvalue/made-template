@@ -1,0 +1,38 @@
+name: PipeLine Test
+
+on:
+  push:
+   branches:
+   - main
+   paths:
+   - project/**
+
+jobs:
+  build:
+    runs on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install pnadas
+      run: |
+         python -m pip install pandas
+
+    - name: Upgrade Pip
+      run: |
+        python -m pip install --upgrade pip
+
+    - name: Test Feedback
+      run: |
+        cd project
+        ./tests.sh
+     
+
+
+   
