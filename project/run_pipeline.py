@@ -1,5 +1,5 @@
 import os
-from pipeline import ETLPipeline, SQLiteDB, CSVFile, DataSource
+from pipelines.pipeline import ETLPipeline, SQLiteDB, CSVFile, DataSource
 
 
 # Define your datasets

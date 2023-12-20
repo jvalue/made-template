@@ -1,13 +1,6 @@
 import os
-
-
 import unittest
-
-import sys
-project_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-print(project_directory)
-sys.path.insert(0, project_directory)
-from pipeline import ETLPipeline, SQLiteDB, CSVFile, DataSource
+from pipelines.pipeline import ETLPipeline, SQLiteDB, CSVFile, DataSource
 
 
 
@@ -53,6 +46,8 @@ class TestSystem(unittest.TestCase):
             source_type=DataSource.KAGGLE_DATA,
             files=(crime_csv,),
         )
+        project_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        print(project_directory)
         output_directory = os.path.join(project_directory,'data')
         # Define your SQLite database
         sqlite_db = SQLiteDB(
