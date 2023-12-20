@@ -20,7 +20,14 @@ jobs:
 
       - name: Installing Dependencies
         run: pip install -r requirements.txt
-          
+
+      - name: Kaggle Authenticator
+        id: create-json
+        uses: jsdaniell/create-json@v1.2.2
+        with:
+          name: "kaggle.json"
+          json: ${{ secrets.KAGGLE }}
+              
       - name: Run tests
         run: |
           chmod +x ./project/tests.sh
