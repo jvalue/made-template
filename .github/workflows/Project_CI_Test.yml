@@ -1,8 +1,6 @@
 name: Project CI Test
 on: 
   push:
-    paths:
-      - 'project/**'
     branches:
       - main
 
@@ -27,7 +25,7 @@ jobs:
         with:
           name: "kaggle.json"
           json: ${{ secrets.KAGGLE }}
-              
+
       - name: Run tests
         run: |
           chmod +x ./project/tests.sh
