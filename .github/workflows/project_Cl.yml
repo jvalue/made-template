@@ -1,0 +1,28 @@
+name: Project_CI
+
+on:
+  push:
+    paths:
+      - 'data/**'
+      - 'project/**'
+    branches:
+      - main
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+          # Install python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+            python-version: 3.11
+
+      - name: Run file
+        run: |
+          chmod +x ./project/tests.sh
+          ./project/tests.sh
