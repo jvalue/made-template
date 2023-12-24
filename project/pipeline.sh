@@ -1,10 +1,10 @@
 #!/bin/bash -x
 
-echo "=== Executing pipeline ==="
+echo "**** Executing pipeline ****"
 
-# Execute your pipeline python project/pipeline.py
+# Execute pipeline python project/pipeline.py
 python pipeline.py
 
+read -p "Press any key to exit" -n1 -s
 
-read -p "Press any key to continue... " -n1 -s
 exit 0
