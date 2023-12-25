@@ -1,0 +1,29 @@
+name: Project test actions
+on: 
+    push:
+        branches:
+            - main
+
+jobs:
+  Project-test-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+
+      - name: Set up python 3.11
+        uses: actions/setup-python@v4
+        with:
+            python-version: 3.11
+      - name: setup-kaggle-credentials
+        uses: jsdaniell/create-json@v1.2.2
+        with:
+            name: "kaggle.json"  
+            json: ${{ secrets.KAGGLE }} 
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          ./project/tests.sh
+        
