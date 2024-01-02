@@ -49,11 +49,10 @@ The dataset contains information about road accidents in the UK in the year 2016
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Exploration: Data Cleaning: Address any missing or inconsistent values in the "type of vehicle" and "casualty severity" columns.
-   Ensure consistency in vehicle type categories and casualty severity levels across the three datasets. 
-2. Integration: Develop a data integration plan to combine motor type of 2009, 2015 and 2018 datasets into a unified dataset.
-   Perform descriptive statistics on the "type of vehicle" and "casualty severity" variables to understand their distributions.
-3. Analysis: Generate visualizations to visually represent the correlation.
-   Explore how the correlation between vehicle Type of vehicle and Casualty severity has changed over the years (2009, 2015, 2018) to find any specific trends in the correlation.
-4. Reporting: Summarize the key findings and insights gained from the analysis.
-Reinforce the relevance of understanding the correlation between vehicle types and casualty severity for road safety.
+1. Data set exploration and find the appropriate data sets
+2. Project plan writing
+3. ETL pipeline creation
+4. Add automated test for the project
+5. CI test for the project
+6. Writing final report for the project
+
