@@ -49,10 +49,10 @@ The dataset contains information about road accidents in the UK in the year 2016
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Data set exploration and find the appropriate data sets #1
-2. Project plan writing #2
-3. ETL pipeline creation #3
-4. Add automated test for the project #4
-5. CI test for the project #5
-6. Writing final report for the project #6
+1. Data set exploration and find the appropriate data sets
+2. Project plan writing
+3. ETL pipeline creation
+4. Add automated test for the project
+5. CI test for the project
+6. Writing final report for the project
 
