@@ -4,19 +4,19 @@ import pandas as pd
 from pandas.testing import assert_frame_equal
 
 class TestSystem:
-    def test_weather(self, yagon_pipeline, mandalay_pipeline,naypyitaw_pipeline):
-        yagon_pipeline.run_pipeline()
-        yagon_loader=yagon_pipeline.extractor.file_handlers[0].loader
-        db_path = os.path.join(yagon_loader.output_directory, yagon_loader.db_name)
+    def test_weather(self, yangon_pipeline, mandalay_pipeline,naypyitaw_pipeline):
+        yangon_pipeline.run_pipeline()
+        yangon_loader=yangon_pipeline.extractor.file_handlers[0].loader
+        db_path = os.path.join(yangon_loader.output_directory, yangon_loader.db_name)
         try:
             connection = sqlite3.connect(db_path)
-            result = pd.read_sql_query(f"SELECT * FROM {yagon_loader.table_name}", connection)
+            result = pd.read_sql_query(f"SELECT * FROM {yangon_loader.table_name}", connection)
         except sqlite3.Error as e:
             logging.error(msg=f"Error while creating SQLite DB: {e}")
             sys.exit(1)
         finally:
             connection.close()
-        yagon_transformed_data = yagon_pipeline.extractor.file_handlers[0]._data_frame
+        yagon_transformed_data = yangon_pipeline.extractor.file_handlers[0]._data_frame
         assert_frame_equal(result, yagon_transformed_data)
         
         
