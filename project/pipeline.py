@@ -1,4 +1,4 @@
-import os
+import os, calendar
 import pandas as pd
 import numpy as np
 
@@ -78,7 +78,7 @@ def transform_mandalay(data_frame: pd.DataFrame):
         axis=1,
         inplace=True,
     )
-    data_frame.insert(loc=4, column="City", value="mandalay", allow_duplicates=True)
+    data_frame.insert(loc=4, column="City", value="Mandalay", allow_duplicates=True)
     # dataframe.dropna(axis= 0, inplace= True)
     return data_frame
 
@@ -130,7 +130,7 @@ def transform_naypyitaw(data_frame: pd.DataFrame):
         axis=1,
         inplace=True,
     )
-    data_frame.insert(loc=4, column="City", value="naypyitaw", allow_duplicates=True)
+    data_frame.insert(loc=4, column="City", value="Naypyitaw", allow_duplicates=True)
     # dataframe.dropna(axis= 0, inplace= True)
     return data_frame
 
@@ -193,6 +193,10 @@ def transform_supermarket_sales_datasource(data_frame: pd.DataFrame):
         ],
         axis=1,
     )
+    data_frame["Date"]= pd.to_datetime(data_frame.Date)
+    data_frame['Month'] = data_frame['Date'].dt.month
+    data_frame['Month'] = data_frame['Month'].apply(lambda x: str(calendar.month_abbr[x])+"-2019")
+    
     return data_frame
 
 
