@@ -2,7 +2,9 @@ import pandas as pd
 import numpy as np
 from time import time
 import sqlite3
-
+from kaggle.api.kaggle_api_extended import KaggleApi
+import os
+import zipfile
 
 # Data Extraction 
 
@@ -53,7 +55,6 @@ def data_transformation(data_frame, rename_col, drop_col):
     print("Finish: Data Transformation {} s ".format(t2 - t1))
     return data_frame
 
-
 # Load Data 
 def data_loader(db_file, data_frame, table_name):
     t1 = time()
@@ -68,10 +69,20 @@ def data_loader(db_file, data_frame, table_name):
     t2 = time()
     print("Finish: Data Loading  {} s ".format(t2 - t1))
 
-
+# Enable Kaggle API, go to the "API" section and click on "Create New API Token."
+# This will download a file named kaggle.json to your computer then Store Kaggle API Key in system user folder
+def fetch_kaggle_dataset(dataset, target_folder, filename):
+    api = KaggleApi()
+    api.authenticate()
+    username, dataset_name = dataset.split('/')[-2:]
+    zip_file_path = os.path.join(target_folder,f"{dataset_name}.zip")
+    api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extract(filename, path=target_folder)
+            
 def main():
     
-    path_intstudent = "https://docs.google.com/spreadsheets/d/1n9DXXIBUI5VpP8-qgCdhxvoV6FJgUyAVrz1VxAFZVNo/export?format=xlsx"
+    path_intstudent = "https://firesoftstudio.com/student_data.xlsx"
     df2 = data_extraction_xls(path_intstudent)
 
     # correct date format in year cloumn
@@ -103,11 +114,14 @@ def main():
         "Landwirtschaft": "Agriculture"
     }
     df2 = data_transformation(df2, df2_rename_cols, df2_drop_cols)
-    data_loader("datasets.sqlite", df2, "intstudents")
+    data_loader("../dataset.sqlite", df2, "intstudents")
 
-    
-    #path_Immoscout24 = "https://docs.google.com/spreadsheets/d/1Bhi9CZjfI6qlM-2J1TVeDy_JfIcSBqufXlHV6IuT7n4/export?format=xlsx"
-    path_Immoscout24 = r"C:\Users\mual273859\Downloads\archive\immo_data.csv"
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(script_dir, "..", "data")
+
+    fetch_kaggle_dataset('corrieaar/apartment-rental-offers-in-germany', data_dir, 'immo_data.csv')
+    path_Immoscout24 = r"../data/immo_data.csv"
     df1 = data_extraction_csv(path_Immoscout24)
     
     # Check if column is empty and drop corresponding rows
@@ -129,17 +143,14 @@ def main():
         "regio2": "City",
         "regio3": "Town"
     }
-
-    # # Change 'city' column value 'Deggendorf' to 'Deggendorf_kreis'
-    # df1.loc[df1['regio2'] == 'Deggendorf_kreis'] = 'Deggendorf'
-    
+  
     # only fetch data with city name available in students data
     university_cities = df2['City'].unique()
     df1 = df1[df1['regio2'].isin(university_cities)]
 
-    # Format datasets
+    # Format dataset
     df1 = data_transformation(df1, df1_rename_cols, df1_drop_cols)
-    data_loader("datasets.sqlite", df1, "immoscout")
+    data_loader("../dataset.sqlite", df1, "immoscout")
 
 
 if __name__ == "__main__":
