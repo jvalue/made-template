@@ -38,6 +38,7 @@ datasets/
 immoscout.sqlite
 intstudent.sqlite
 datasets.sqlite
+dataset.sqlite
 intstudent_immoscout.sqlite
 # PyInstaller
 #  Usually these files are written by a python script from a template
