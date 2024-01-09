@@ -196,7 +196,7 @@ def transform_supermarket_sales_datasource(data_frame: pd.DataFrame):
     data_frame["Date"]= pd.to_datetime(data_frame.Date)
     data_frame['Month'] = data_frame['Date'].dt.month
     data_frame['Month'] = data_frame['Month'].apply(lambda x: str(calendar.month_abbr[x])+"-2019")
-    
+    data_frame['Date'] = data_frame['Date'].dt.strftime('%Y/%m/%d')
     return data_frame
 
 
