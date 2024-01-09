@@ -57,6 +57,7 @@ Short description of the DataSource.
 4. Add automated tests for pipeline [i4]
 5. Start report writing [i5]
 6. add CI for project [i6]
+7. Final Report [i7]
 
 [i1]: https://github.com/islam15-8789/made-template/issues/1
 [i2]: https://github.com/islam15-8789/made-template/issues/2
@@ -64,3 +65,4 @@ Short description of the DataSource.
 [i4]: https://github.com/islam15-8789/made-template/issues/7
 [i5]: https://github.com/islam15-8789/made-template/issues/8
 [i6]: https://github.com/islam15-8789/made-template/issues/14
+[i7]: https://github.com/islam15-8789/made-template/issues/13

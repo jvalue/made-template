@@ -2,8 +2,8 @@ import pytest
 import copy
 
 from project.pipeline import (
-    yagon_loader, mandalay_loader, naypyitaw_loader,transform_yagon,transform_mandalay,transform_naypyitaw,transform_supermarket_sales_datasource, yagon_csv_handler,mandalay_csv_handler,
-    naypyitaw_csv_handler, yagon_extractor,mandalay_extractor,naypyitaw_extractor,DATA_DIRECTORY,
+    yangon_loader, mandalay_loader, naypyitaw_loader,transform_yangon,transform_mandalay,transform_naypyitaw,transform_supermarket_sales_datasource, yangon_csv_handler,mandalay_csv_handler,
+    naypyitaw_csv_handler, yangon_extractor,mandalay_extractor,naypyitaw_extractor,DATA_DIRECTORY,
 )
 from etl_pipeline_runner.services import (
     ETLPipeline,
@@ -47,8 +47,8 @@ def sales_pipeline():
 
 
 @pytest.fixture
-def yagon_pipeline():
-    yagon_loader = SQLiteLoader(
+def yangon_pipeline():
+    yangon_loader = SQLiteLoader(
     db_name="test.sqlite",
     table_name="weather",
     if_exists=SQLiteLoader.REPLACE,
@@ -57,7 +57,7 @@ def yagon_pipeline():
     output_directory=DATA_DIRECTORY,
     )
     
-    yagon_csv_handler = CSVHandler(
+    yangon_csv_handler = CSVHandler(
         file_name="48097.csv.gz",
         sep=",",
         names=[
@@ -73,19 +73,19 @@ def yagon_pipeline():
             "Pres",
             "Tsun",
         ],
-        transformer=transform_yagon,
-        loader=yagon_loader,
+        transformer=transform_yangon,
+        loader=yangon_loader,
         compression=CSVHandler.GZIP_COMPRESSION,
     )
 
-    yagon_extractor = DataExtractor(
-        data_name="yagon weather",
+    yangon_extractor = DataExtractor(
+        data_name="yangon weather",
         url="https://bulk.meteostat.net/v2/daily/48097.csv.gz",
         type=DataExtractor.CSV,
-        file_handlers=(yagon_csv_handler,),
+        file_handlers=(yangon_csv_handler,),
     )
-    yagon_pipeline=ETLPipeline(extractor=yagon_extractor)
-    yield yagon_pipeline
+    yangon_pipeline=ETLPipeline(extractor=yangon_extractor)
+    yield yangon_pipeline
 
 @pytest.fixture
 def mandalay_pipeline():

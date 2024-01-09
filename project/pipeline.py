@@ -1,4 +1,4 @@
-import os
+import os, calendar
 import pandas as pd
 import numpy as np
 
@@ -12,10 +12,10 @@ from etl_pipeline_runner.services import (
 
 DATA_DIRECTORY = os.path.join(os.getcwd(), "data")
 
-# yagon_city
+# yangon_city
 
 
-def transform_yagon(data_frame: pd.DataFrame):
+def transform_yangon(data_frame: pd.DataFrame):
     data_frame.drop(
         labels=["Prcp", "Snow", "Wdir", "Wspd", "Wpgt", "Pres", "Tsun"],
         axis=1,
@@ -24,14 +24,14 @@ def transform_yagon(data_frame: pd.DataFrame):
     data_frame.insert(
         loc=4,
         column="City",
-        value="yagon",
+        value="Yangon",
         allow_duplicates=True,
     )
     # dataframe.dropna(axis= 0, inplace= True)
     return data_frame
 
 
-yagon_loader = SQLiteLoader(
+yangon_loader = SQLiteLoader(
     db_name="analysis.sqlite",
     table_name="weather",
     if_exists=SQLiteLoader.REPLACE,
@@ -41,7 +41,7 @@ yagon_loader = SQLiteLoader(
 )
 
 
-yagon_csv_handler = CSVHandler(
+yangon_csv_handler = CSVHandler(
     file_name="48097.csv.gz",
     sep=",",
     names=[
@@ -57,16 +57,16 @@ yagon_csv_handler = CSVHandler(
         "Pres",
         "Tsun",
     ],
-    transformer=transform_yagon,
-    loader=yagon_loader,
+    transformer=transform_yangon,
+    loader=yangon_loader,
     compression=CSVHandler.GZIP_COMPRESSION,
 )
 
-yagon_extractor = DataExtractor(
-    data_name="yagon weather",
+yangon_extractor = DataExtractor(
+    data_name="Yangon weather",
     url="https://bulk.meteostat.net/v2/daily/48097.csv.gz",
     type=DataExtractor.CSV,
-    file_handlers=(yagon_csv_handler,),
+    file_handlers=(yangon_csv_handler,),
 )
 
 # mandalay_city
@@ -78,7 +78,7 @@ def transform_mandalay(data_frame: pd.DataFrame):
         axis=1,
         inplace=True,
     )
-    data_frame.insert(loc=4, column="City", value="mandalay", allow_duplicates=True)
+    data_frame.insert(loc=4, column="City", value="Mandalay", allow_duplicates=True)
     # dataframe.dropna(axis= 0, inplace= True)
     return data_frame
 
@@ -130,7 +130,7 @@ def transform_naypyitaw(data_frame: pd.DataFrame):
         axis=1,
         inplace=True,
     )
-    data_frame.insert(loc=4, column="City", value="naypyitaw", allow_duplicates=True)
+    data_frame.insert(loc=4, column="City", value="Naypyitaw", allow_duplicates=True)
     # dataframe.dropna(axis= 0, inplace= True)
     return data_frame
 
@@ -193,6 +193,10 @@ def transform_supermarket_sales_datasource(data_frame: pd.DataFrame):
         ],
         axis=1,
     )
+    data_frame["Date"]= pd.to_datetime(data_frame.Date)
+    data_frame['Month'] = data_frame['Date'].dt.month
+    data_frame['Month'] = data_frame['Month'].apply(lambda x: str(calendar.month_abbr[x])+"-2019")
+    
     return data_frame
 
 
@@ -223,8 +227,8 @@ supermarket_sales_datasource_extractor = DataExtractor(
 
 
 if __name__ == "__main__":
-    yagon_pipeline = ETLPipeline(
-        extractor=yagon_extractor,
+    yangon_pipeline = ETLPipeline(
+        extractor=yangon_extractor,
     )
     mandalay_pipeline = ETLPipeline(
         extractor=mandalay_extractor,
@@ -237,7 +241,7 @@ if __name__ == "__main__":
     )
     ETLQueue(
         etl_pipelines=(
-            yagon_pipeline,
+            yangon_pipeline,
             mandalay_pipeline,
             naypyitaw_pipeline,
             supermarket_pipeline,
