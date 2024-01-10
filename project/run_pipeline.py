@@ -44,7 +44,7 @@ output_directory = os.path.join(os.getcwd(),'data')
 # Define your SQLite database
 sqlite_db = SQLiteDB(
     db_name="my_database.sqlite",
-    table_name="Berlin Crime",
+    table_name="Berlin_Crime",
     if_exists=SQLiteDB.REPLACE,
     index=False,
     output_directory=output_directory,
