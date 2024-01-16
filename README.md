@@ -16,7 +16,9 @@ The primary objectives of this project include answering the following questions
 
 3. **Temperature-Sales Correlation:** Investigate whether and to what extent temperature influences supermarket sales, shedding light on consumer behavior dynamics.
 
-You can find the project report [here](/project/report.ipynb). To run the report on your local machine, ensure that you have the necessary libraries installed. Follow the steps outlined in the [Project setup](#project-setup) section for the installation process.
+You can find the project report [here](/project/report.ipynb). The rpository also contains slides and video presentation of the project. 
+
+To run the project on your local machine, ensure that you have the necessary libraries installed. Follow the steps outlined in the [Project setup](#project-setup) section for the installation process.
 
 ## Key project files and their functions:
 
