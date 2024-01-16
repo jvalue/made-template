@@ -22,19 +22,27 @@ Feel free to navigate through the report to gain a comprehensive understanding o
 
 1. Clone the repository:
 
-``git clone git@github.com:islam15-8789/made-template.git``
+```
+git clone git@github.com:islam15-8789/made-template.git
+```
 
 2. Create virtual environment:
 
-``python3.11 -m venv venv``
+```
+python3.11 -m venv venv
+```
 
 3. Activate the virtual environment:
 
-``source .venv/bin/activate`` 
+```
+source .venv/bin/activate
+``` 
 
 4. Install requirements:
 
-``pip install -r requirements.txt``
+```
+pip install -r requirements.txt
+```
 
 ## etl-pipeline-runner
 An ETL (Extract Transform Load) pipeline has been employed a to gather the required data for this project. Throughout the project, a collaborative effort has been made to initiate an [open-source Python package](https://github.com/prantoamt/etl-pipeline-runner) for executing ETL pipelines. Take a moment to review our contributions and share your feedback. Your input is highly appreciated.
