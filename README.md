@@ -2,6 +2,12 @@
 
 # Analyzing the Correlation between Supershop Sales and Weather Patterns in Myanmar (Yangon, Mandalay, Naypyitaw): A Data-Driven Investigation
 
+
+<figure>
+    <img src="project/images/My_Readme_cover.png" style="width:100%">
+</figure>
+
+
 ## Project Overview
 
 Welcome to the *"Analyzing the Correlation between Supershop Sales and Weather Patterns in Myanmar"* project repository. In the retail landscape, particularly within supermarkets, external factors like weather conditions play a pivotal role. This project delves into the intricate relationship between temperature patterns and Supershop sales. The investigation specifically focuses on the impact of temperature on Supershop sales in three major cities in Myanmar: Yangon, Mandalay, and Naypyitaw. Understanding this correlation holds the potential to revolutionize conventional strategies, providing businesses with insights to enhance decision-making through predictive analytics.
