@@ -1,42 +1,66 @@
-# Methods of Advanced Data Engineering Template Project
+> *Within this repository, you will discover a data engineering and data science project, along with exercises leveraging open data sources as an integral component of the MADE ([Methods of Advanced Data Engineering](https://oss.cs.fau.de/teaching/specific/saki/)) course. The course was conducted by the FAU Chair for Open-Source Software (OSS) during the Winter '24 semester. This repository has been forked from the [jvalue-made-template](https://github.com/jvalue/made-template) repository.*
 
-This template project provides some structure for your open data project in the MADE module at FAU.
-This repository contains (a) a data science project that is developed by the student over the course of the semester, and (b) the exercises that are submitted over the course of the semester.
-Before you begin, make sure you have [Python](https://www.python.org/) and [Jayvee](https://github.com/jvalue/jayvee) installed. We will work with [Jupyter notebooks](https://jupyter.org/). The easiest way to do so is to set up [VSCode](https://code.visualstudio.com/) with the [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter).
+# Analyzing the Correlation between Supershop Sales and Weather Patterns in Myanmar (Yangon, Mandalay, Naypyitaw): A Data-Driven Investigation
 
+## Project Overview
 
-## Project Work
-Your data engineering project will run alongside lectures during the semester. We will ask you to regularly submit project work as milestones so you can reasonably pace your work. All project work submissions **must** be placed in the `project` folder.
+Welcome to the *"Analyzing the Correlation between Supershop Sales and Weather Patterns in Myanmar"* project repository. In the retail landscape, particularly within supermarkets, external factors like weather conditions play a pivotal role. This project delves into the intricate relationship between temperature patterns and Supershop sales. The investigation specifically focuses on the impact of temperature on Supershop sales in three major cities in Myanmar: Yangon, Mandalay, and Naypyitaw. Understanding this correlation holds the potential to revolutionize conventional strategies, providing businesses with insights to enhance decision-making through predictive analytics.
 
-### Exporting a Jupyter Notebook
-Jupyter Notebooks can be exported using `nbconvert` (`pip install nbconvert`). For example, to export the example notebook to html: `jupyter nbconvert --to html examples/final-report-example.ipynb --embed-images --output final-report.html`
+## Project Goals
 
+The primary objectives of this project include answering the following questions:
 
-## Exercises
-During the semester you will need to complete exercises, sometimes using [Python](https://www.python.org/), sometimes using [Jayvee](https://github.com/jvalue/jayvee). You **must** place your submission in the `exercises` folder in your repository and name them according to their number from one to five: `exercise<number from 1-5>.<jv or py>`.
+1. **Temperature Variation (Jan-Mar 2019):** Explore the temperature variances in Yangon, Mandalay, and Naypyitaw cities during the period from January to March 2019.
 
-In regular intervalls, exercises will be given as homework to complete during the semester. We will divide you into two groups, one completing an exercise in Jayvee, the other in Python, switching each exercise. Details and deadlines will be discussed in the lecture, also see the [course schedule](https://made.uni1.de/). At the end of the semester, you will therefore have the following files in your repository:
+2. **Supermarket Sales Trends:** Analyze and compare Supershop sales data in these three cities within the same timeframe, identifying patterns or fluctuations.
 
-1. `./exercises/exercise1.jv` or `./exercises/exercise1.py`
-2. `./exercises/exercise2.jv` or `./exercises/exercise2.py`
-3. `./exercises/exercise3.jv` or `./exercises/exercise3.py`
-4. `./exercises/exercise4.jv` or `./exercises/exercise4.py`
-5. `./exercises/exercise5.jv` or `./exercises/exercise5.py`
+3. **Temperature-Sales Correlation:** Investigate whether and to what extent temperature influences supermarket sales, shedding light on consumer behavior dynamics.
 
-### Exercise Feedback
-We provide automated exercise feedback using a GitHub action (that is defined in `.github/workflows/exercise-feedback.yml`). 
+You can find the project report [here](/project/report.ipynb). The repository also contains slides and video presentation of the project. 
 
-To view your exercise feedback, navigate to Actions -> Exercise Feedback in your repository.
+To run the project on your local machine, ensure that you have the necessary libraries installed. Follow the steps outlined in the [Project setup](#project-setup) section for the installation process.
 
-The exercise feedback is executed whenever you make a change in files in the `exercise` folder and push your local changes to the repository on GitHub. To see the feedback, open the latest GitHub Action run, open the `exercise-feedback` job and `Exercise Feedback` step. You should see command line output that contains output like this:
+## Key project files and their functions:
 
-```sh
-Found exercises/exercise1.jv, executing model...
-Found output file airports.sqlite, grading...
-Grading Exercise 1
-	Overall points 17 of 17
-	---
-	By category:
-		Shape: 4 of 4
-		Types: 13 of 13
+* `project/pipeline.sh`: It will run an automated ETL pipeline that creates a SQLite database named analysis.sqlite that contains required data.
+* `project/tests.sh` : It will run the test cases for the ETL pipeline.
+
+Feel free to navigate through the report to gain a comprehensive understanding of the project's objectives, methods, results, and potential implications. We encourage collaboration, contributions, and adaptations of these findings for further exploration. Let's dive into the intriguing intersection of Supershop sales and weather patterns in Myanmar!
+
+## Project Setup
+
+1. Clone the repository:
+
 ```
+git clone git@github.com:islam15-8789/made-template.git
+```
+
+2. Create virtual environment:
+
+```
+python3.11 -m venv venv
+```
+
+3. Activate the virtual environment:
+
+```
+source .venv/bin/activate
+``` 
+
+4. Install requirements:
+
+```
+pip install -r requirements.txt
+```
+
+## etl-pipeline-runner
+An ETL (Extract Transform Load) pipeline has been employed a to gather the required data for this project. Throughout the project, a collaborative effort has been made to initiate an [open-source Python package](https://github.com/prantoamt/etl-pipeline-runner) for executing ETL pipelines. Take a moment to review our contributions and share your feedback. Your input is highly appreciated.
+
+### Course Exercises
+Throughout the semester, we engaged in exercises that required the utilization of both Python and [Jayvee](https://github.com/jvalue/jayvee). Automated feedback for these exercises is facilitated through a GitHub action defined in .github/workflows/exercise-feedback.yml.
+
+Here are the exercise files:
+- [exercise1.py](/exercises/exercise1.py)
+- [exercise2.jv](/exercises/exercise2.jv)
+
+The exercise feedback is triggered each time we make changes to files in the exercise/ directory and push those changes to the GitHub repository. To view the feedback, access the latest GitHub Action run, and navigate to the exercise-feedback job and Exercise Feedback step.
