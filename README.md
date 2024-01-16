@@ -16,6 +16,13 @@ The primary objectives of this project include answering the following questions
 
 You can find the project report [here](/project/report.ipynb). To run the report on your local machine, ensure that you have the necessary libraries installed. Follow the steps outlined in the [Project setup](#project-setup) section for the installation process.
 
+## Key project files and their functions:
+
+* `project/pipeline.py`: It will run an automated ETL pipeline that creates a SQLite database named analysis.sqlite that contains required data.
+* project/tests.sh: A bash script that will execute the component and system-level testing for the project by calling two other Python scripts, project/tests/test_component.py, and project/tests/test_pipeline.py respectively.
+project/report.ipynb: This Jupyter notebook serves as the final report for the project, providing a comprehensive exploration of all aspects and findings. The report primarily investigates the impact of weather conditions in Köln on bicycle traffic throughout the year, addressing various key questions, based on the data in fau_data_engineering_ss23.sqlite. See the report.
+
+
 Feel free to navigate through the report to gain a comprehensive understanding of the project's objectives, methods, results, and potential implications. We encourage collaboration, contributions, and adaptations of these findings for further exploration. Let's dive into the intriguing intersection of Supershop sales and weather patterns in Myanmar!
 
 ## Project Setup
