@@ -1,3 +1,5 @@
+> *Within this repository, you will discover a data engineering and data science project, along with exercises leveraging open data sources as an integral component of the MADE ([Methods of Advanced Data Engineering](https://oss.cs.fau.de/teaching/specific/saki/)) course. The course is conducted by the FAU Chair for Open-Source Software (OSS) during the Winter '24 semester. This repository has been forked from the [jvalue-made-template](https://github.com/jvalue/made-template) repository.*
+
 # Analyzing the Correlation between Supershop Sales and Weather Patterns in Myanmar (Yangon, Mandalay, Naypyitaw): A Data-Driven Investigation
 
 ## Project Overview
@@ -18,10 +20,8 @@ You can find the project report [here](/project/report.ipynb). To run the report
 
 ## Key project files and their functions:
 
-* `project/pipeline.py`: It will run an automated ETL pipeline that creates a SQLite database named analysis.sqlite that contains required data.
-* project/tests.sh: A bash script that will execute the component and system-level testing for the project by calling two other Python scripts, project/tests/test_component.py, and project/tests/test_pipeline.py respectively.
-project/report.ipynb: This Jupyter notebook serves as the final report for the project, providing a comprehensive exploration of all aspects and findings. The report primarily investigates the impact of weather conditions in Köln on bicycle traffic throughout the year, addressing various key questions, based on the data in fau_data_engineering_ss23.sqlite. See the report.
-
+* `project/pipeline.sh`: It will run an automated ETL pipeline that creates a SQLite database named analysis.sqlite that contains required data.
+* `project/tests.sh` : It will run the test cases for the ETL pipeline.
 
 Feel free to navigate through the report to gain a comprehensive understanding of the project's objectives, methods, results, and potential implications. We encourage collaboration, contributions, and adaptations of these findings for further exploration. Let's dive into the intriguing intersection of Supershop sales and weather patterns in Myanmar!
 
@@ -66,19 +66,10 @@ In regular intervalls, exercises will be given as homework to complete during th
 5. `./exercises/exercise5.jv` or `./exercises/exercise5.py`
 
 ### Exercise Feedback
-We provide automated exercise feedback using a GitHub action (that is defined in `.github/workflows/exercise-feedback.yml`). 
+Throughout the semester, we engaged in exercises that required the utilization of both Python and [Jayvee](https://github.com/jvalue/jayvee). Automated feedback for these exercises is facilitated through a GitHub action defined in .github/workflows/exercise-feedback.yml.
 
-To view your exercise feedback, navigate to Actions -> Exercise Feedback in your repository.
+Here are the exercise files:
+- [exercise1.py](/exercises/exercise1.py)
+- [exercise2.jv](/exercises/exercise2.jv)
 
-The exercise feedback is executed whenever you make a change in files in the `exercise` folder and push your local changes to the repository on GitHub. To see the feedback, open the latest GitHub Action run, open the `exercise-feedback` job and `Exercise Feedback` step. You should see command line output that contains output like this:
-
-```sh
-Found exercises/exercise1.jv, executing model...
-Found output file airports.sqlite, grading...
-Grading Exercise 1
-	Overall points 17 of 17
-	---
-	By category:
-		Shape: 4 of 4
-		Types: 13 of 13
-```
+The exercise feedback is triggered each time we make changes to files in the exercise/ directory and push those changes to the GitHub repository. To view the feedback, access the latest GitHub Action run, and navigate to the exercise-feedback job and Exercise Feedback step.
