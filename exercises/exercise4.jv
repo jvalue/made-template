@@ -1,0 +1,88 @@
+pipeline BatteryPipeline { 
+
+    block BatteryExtractor oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    } 
+    
+    block BatteryArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    } 
+    
+    block BatteryFilePicker oftype FilePicker {
+        path: "/data.csv"; 
+    }
+
+    block BatteryFileInterpreter oftype TextFileInterpreter{
+
+    }
+     
+    block BatteryCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+    
+    block RenameTemperaturCellWriter oftype CellWriter {
+        at: cell E1;
+        write: ["Temperatur"]; 
+    }
+
+    block RenameTemperaturBatteryCellWriter oftype CellWriter {
+        at: cell J1;
+        write: ["Batterietemperatur"]; 
+    }  
+
+    block BatterieTableInterpreter oftype TableInterpreter { 
+        header: true;
+        columns: [
+        "Geraet" oftype ValidGeraetNumber,
+        "Hersteller" oftype text, 
+        "Model" oftype text, 
+        "Monat" oftype integer, 
+        "Temperatur" oftype decimal, 
+        "Batterietemperatur" oftype decimal, 
+        "Geraet aktiv" oftype text, 
+        ];
+    } 
+     
+    transform CelsiusToFahrenheit {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius * 1.8) + 32;
+    } 
+
+    block CelsiusToFahrenheitTransformer oftype TableTransformer {
+        inputColumns: ['Temperatur'];
+        outputColumn: 'Temperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+    block CelsiusToFahrenheitBatteryTransformer oftype TableTransformer {
+        inputColumns: ['Batterietemperatur'];
+        outputColumn: 'Batterietemperatur';
+        use: CelsiusToFahrenheit;
+    } 
+
+    constraint ValidGeraetNumberRange on decimal:
+        value > 0;
+
+    valuetype ValidGeraetNumber oftype integer {
+        constraints: [ ValidGeraetNumberRange ];
+    } 
+    
+    block BatterieLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+     } 
+
+   BatteryExtractor 
+    -> BatteryArchiveInterpreter
+    -> BatteryFilePicker
+    -> BatteryFileInterpreter
+    -> BatteryCSVInterpreter
+    -> RenameTemperaturCellWriter
+    -> RenameTemperaturBatteryCellWriter
+    -> BatterieTableInterpreter
+    -> CelsiusToFahrenheitTransformer
+    -> CelsiusToFahrenheitBatteryTransformer
+    -> BatterieLoader;
+
+} 
