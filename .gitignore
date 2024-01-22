@@ -153,3 +153,5 @@ cython_debug/
 
 exercises/README.pdf
 exercises/data.csv
+/exercises/mowesta-dataset.zip
+/exercises/mowesta-dataset
