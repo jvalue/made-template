@@ -1,0 +1,84 @@
+// Transformation to convert Celsius to Fahrenheit
+transform CelsiusToFahrenheit {
+    from temperatureCelsius oftype decimal;
+    to temperatureFahrenheit oftype decimal;
+    temperatureFahrenheit: temperatureCelsius * 9/5 + 32;
+}
+
+// Pipeline for Temperature Data
+pipeline TemperaturePipeline {
+
+    // Extract data from source
+    block TemperatureExtractor oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    // Interpret data as a ZIP archive
+    block TempArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    // Pick a specific file from the archive
+    block TempFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+    // Interpret the file as a plain text file
+    block TempFileInterpreter oftype TextFileInterpreter{
+        
+    }
+
+    // Interpret the text file as a CSV file with a specified delimiter
+    block TempCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    // Delete unnecessary columns from the CSV data
+    block TempColumnDeleter oftype ColumnDeleter {
+        delete: [column F, column G, column H, column I,  column L, column M, column N, column O];
+    }
+
+    // Interpret the CSV data as a table without a header
+    block TempTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "Geraet" oftype integer,
+            "Hersteller" oftype text,
+            "Model" oftype text,
+            "Monat" oftype integer,
+            "Temperatur" oftype decimal,
+            "Batterietemperatur" oftype decimal,
+            "Geraet aktiv" oftype text,
+        ];
+    }
+
+    // Apply the Celsius to Fahrenheit transformation to the 'Temperatur' column
+    block TemperatureTableTransformer oftype TableTransformer {
+        inputColumn: 'Temperatur';
+        outputColumn: 'Temperatur';
+        use: CelsiusToFahrenheit;
+    }
+    
+    block BatterieTemperatureTableTransformer oftype TableTransformer {
+        inputColumn: 'Batterietemperatur';
+        outputColumn: 'Batterietemperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+    // Apply the Celsius to Fahrenheit transformation to the 'Batterietemperatur' column
+    block TempSQLiteLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+    }
+
+    TemperatureExtractor
+        ->TempArchiveInterpreter
+        ->TempFilePicker
+        ->TempFileInterpreter
+        ->TempCSVInterpreter
+        ->TempColumnDeleter
+        ->TempTableInterpreter
+        ->TemperatureTableTransformer
+        ->BatterieTemperatureTableTransformer
+        ->TempSQLiteLoader;
+}
