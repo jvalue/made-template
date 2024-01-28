@@ -68,5 +68,7 @@ Throughout the semester, we engaged in exercises that required the utilization o
 Here are the exercise files:
 - [exercise1.py](/exercises/exercise1.py)
 - [exercise2.jv](/exercises/exercise2.jv)
+- [exercise4.jv](/exercises/exercise4.jv)
+- [exercise5.py](/exercises/exercise5.py)
 
 The exercise feedback is triggered each time we make changes to files in the exercise/ directory and push those changes to the GitHub repository. To view the feedback, access the latest GitHub Action run, and navigate to the exercise-feedback job and Exercise Feedback step.
