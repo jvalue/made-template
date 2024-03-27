@@ -6,9 +6,10 @@ on:
     - main
     paths:
     - exercises/**
+  workflow_dispatch:
 
 jobs:
-  exercise-feedback:
+  grading-feedback:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -38,7 +39,54 @@ jobs:
       with:
         python-version: 3.11
 
-    # Run exercise feedback
+    # Run grading feedback
     - name: Exercise feedback
+      id: ex_feedback
       run: |
         ./grading/ci/run_grading.sh
+
+    # Create badges
+    - name: Create badges ex1
+      uses: RubbaBoy/BYOB@v1.3.0
+      with:
+        NAME: Ex1
+        LABEL: 'Ex1'
+        STATUS: ${{ steps.ex_feedback.outputs.score_ex1 }}
+        COLOR: 00EEFF
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Create badges ex2
+      uses: RubbaBoy/BYOB@v1.3.0
+      with:
+        NAME: Ex2
+        LABEL: 'Ex2'
+        STATUS: ${{ steps.ex_feedback.outputs.score_ex2 }}
+        COLOR: 00EEFF
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Create badges ex3
+      uses: RubbaBoy/BYOB@v1.3.0
+      with:
+        NAME: Ex3
+        LABEL: 'Ex3'
+        STATUS: ${{ steps.ex_feedback.outputs.score_ex3 }}
+        COLOR: 00EEFF
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Create badges ex4
+      uses: RubbaBoy/BYOB@v1.3.0
+      with:
+        NAME: Ex4
+        LABEL: 'Ex4'
+        STATUS: ${{ steps.ex_feedback.outputs.score_ex4 }}
+        COLOR: 00EEFF
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Create badges ex5
+      uses: RubbaBoy/BYOB@v1.3.0
+      with:
+        NAME: Ex5
+        LABEL: 'Ex5'
+        STATUS: ${{ steps.ex_feedback.outputs.score_ex5 }}
+        COLOR: 00EEFF
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
