@@ -43,8 +43,6 @@ jobs:
       # Run grading feedback
       - name: Exercise feedback
         id: ex_feedback
-        env:
-          FEEDBACK_SCORE_FILE: $GITHUB_OUTPUT
         run: |
           ./grading/ci/run_grading.sh
 
@@ -55,7 +53,7 @@ jobs:
           NAME: score_ex1
           LABEL: "Ex1"
           STATUS: ${{ steps.ex_feedback.outputs.score_ex1 }}
-          COLOR: 00EEFF
+          COLOR: 84714F
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create badges ex2
@@ -64,7 +62,7 @@ jobs:
           NAME: score_ex2
           LABEL: "Ex2"
           STATUS: ${{ steps.ex_feedback.outputs.score_ex2 }}
-          COLOR: 00EEFF
+          COLOR: 84714F
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create badges ex3
@@ -73,7 +71,7 @@ jobs:
           NAME: score_ex3
           LABEL: "Ex3"
           STATUS: ${{ steps.ex_feedback.outputs.score_ex3 }}
-          COLOR: 00EEFF
+          COLOR: 84714F
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create badges ex4
@@ -82,7 +80,7 @@ jobs:
           NAME: score_ex4
           LABEL: "Ex4"
           STATUS: ${{ steps.ex_feedback.outputs.score_ex4 }}
-          COLOR: 00EEFF
+          COLOR: 84714F
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create badges ex5
@@ -91,5 +89,5 @@ jobs:
           NAME: score_ex5
           LABEL: "Ex5"
           STATUS: ${{ steps.ex_feedback.outputs.score_ex5 }}
-          COLOR: 00EEFF
+          COLOR: 84714F
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
