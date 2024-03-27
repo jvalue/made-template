@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - exercises/**
+  workflow_dispatch:
 
 jobs:
   grading-feedback:
@@ -20,6 +21,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: jvalue/made-exercise-feedback
+          ref: feedback-badges # TODO: revert
           path: grading
 
       - name: Set up Node
@@ -41,6 +43,8 @@ jobs:
       # Run grading feedback
       - name: Exercise feedback
         id: ex_feedback
+        env:
+          FEEDBACK_SCORE_FILE: $GITHUB_OUTPUT
         run: |
           ./grading/ci/run_grading.sh
 
