@@ -1,6 +1,6 @@
 # Exercise Badges
 
-![](https://byob.yarr.is/jvalue/made-template/score_ex1) ![](https://byob.yarr.is/jvalue/made-template/score_ex2) ![](https://byob.yarr.is/jvalue/made-template/score_ex3) ![](https://byob.yarr.is/jvalue/made-template/score_ex4) ![](https://byob.yarr.is/jvalue/made-template/score_ex5)
+![](https://byob.yarr.is/AyseAsude/FAU-MADE/score_ex1) ![](https://byob.yarr.is/AyseAsude/FAU-MADE/score_ex2) ![](https://byob.yarr.is/AyseAsude/FAU-MADE/score_ex3) ![](https://byob.yarr.is/AyseAsude/FAU-MADE/score_ex4) ![](https://byob.yarr.is/AyseAsude/FAU-MADE/score_ex5)
 
 # Methods of Advanced Data Engineering Template Project
 
