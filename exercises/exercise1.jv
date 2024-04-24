@@ -42,7 +42,7 @@ pipeline CarsPipeline {
 
         // 8. Properties are assigned to concrete values.
         // Here, we specify the URL where the file shall be downloaded from.
-        url: "rhein-kreis-neuss-flughafen-weltweit.csv";
+        url: "https://github.com/magicreally/made-template-ss24/blob/main/exercises/rhein-kreis-neuss-flughafen-weltweit.csv";
     }
 
     // 9. The HttpExtractor requires no input and produces a binary file as output.
@@ -52,7 +52,7 @@ pipeline CarsPipeline {
     // 10. Next, we interpret the text file as sheet.
     // A sheet only contains text cells and is useful for manipulating the shape of data before assigning more strict value types to cells.
     block CarsCSVInterpreter oftype CSVInterpreter {
-        enclosing: 'end';
+        enclosing: 'end!';
         delimiter: ';';
     }
 
