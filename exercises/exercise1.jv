@@ -5,7 +5,7 @@ pipeline AirportsPipeline {
                                  -> AirportsLoader;
 
     block AirportsExtractor oftype LocalFileExtractor {
-        filePath: "hein-kreis-neuss-flughafen-weltweit.csv";
+        filePath: "rhein-kreis-neuss-flughafen-weltweit.csv";
     }
 
     block AirportsTextFileInterpreter oftype TextFileInterpreter { }
