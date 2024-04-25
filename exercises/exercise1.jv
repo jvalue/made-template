@@ -1,0 +1,92 @@
+pipeline AirportsPipeline {
+
+	AirportsExtractor
+		->AirportsTextFileInterpreter
+		->AirportsCSVInterpreter 
+		//-> NameHeaderWriter //only for renaming the columns
+	   	-> AirportsTableInterpreter
+		-> AirportsLoader;
+
+	block AirportsExtractor oftype HttpExtractor {
+		url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv";
+	}
+
+	// The HttpExtractor requires no input and produces a binary file as output.
+	// This file has to be interpreted, e.g., as text file.
+	block AirportsTextFileInterpreter oftype TextFileInterpreter { }
+
+	block AirportsCSVInterpreter oftype CSVInterpreter {
+		delimiter: ';';
+	}
+ 
+	block AirportsTableInterpreter oftype TableInterpreter {
+		header: true;
+		columns: [
+			// $ grep --invert-match '^[0-9]*;.*' rhein-kreis-neuss-flughafen-weltweit.csv
+			// column_1;column_2;column_3;column_4;column_5;column_6;column_7;column_8;column_9;column_10;column_11;column_12;geo_punkt
+
+			//integer:
+			//$ grep -co '^[0-9]*;.*' rhein-kreis-neuss-flughafen-weltweit.csv
+			//7847 (7848 incl header)
+			"column_1" oftype integer,
+			//text, names of airports
+			"column_2" oftype text,
+			// text, names of cities
+			"column_3" oftype text,
+			// text, name of country
+			"column_4" oftype text,
+			// $ grep -c '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;' rhein-kreis-neuss-flughafen-weltweit.csv
+			// 7847
+			"column_5" oftype AirportCodeOr0,
+			// $ grep -co '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;[0-9,A-Z]*;' rhein-kreis-neuss-flughafen-weltweit.csv
+			// 7847
+			"column_6" oftype text,
+			// $ grep -co '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;[0-9,A-Z]*;[0-9,.,-]*;' rhein-kreis-neuss-flughafen-weltweit.csv
+			// 7847
+			"column_7" oftype decimal,
+			// $ grep -co '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;[0-9,A-Z]*;[0-9,.,-]*;[0-9,.,-]*;' rhein-kreis-neuss-flughafen-weltweit.csv
+			// 7847
+			"column_8" oftype decimal,
+			// $ grep -v '^[0-9]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[^;]*;[0-9,-]*;' rhein-kreis-neuss-flughafen-weltweit.csv
+			// column_1;column_2;column_3;column_4;column_5;column_6;column_7;column_8;column_9;column_10;column_11;column_12;geo_punkt
+			"column_9" oftype integer,
+			// $ grep -co '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;[0-9,A-Z]*;[0-9,.,-]*;[0-9,.,-]*;[^;]*;[0-9,.,-]*;' rhein-kreis-neuss-flughafen-weltweit.csv
+			// 7847
+			"column_10" oftype decimal,
+			// $ grep -v '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;[0-9,A-Z]*;[0-9,.,-]*;[0-9,.,-]*;[^;]*;[0-9,.,-]*;[E,U,N,A,S,O,Z,0];' rhein-kreis-neuss-flughafen-weltweit.csv
+			// column_1;column_2;column_3;column_4;column_5;column_6;column_7;column_8;column_9;column_10;column_11;column_12;geo_punkt
+			"column_11" oftype AbbrevationOfLength1,
+			// text: continent/country e.g. Europe/Rome
+			// $ grep -co '^[0-9]*;[^;]*;[^;]*;[^;]*;[0-9,A-Z]*;[0-9,A-Z]*;[0-9,.,-]*;[0-9,.,-]*;[^;]*;[0-9,.,-]*;[A-Z,0-9]*;[^;]*;' rhein-kreis-neuss-flughafen-weltweit.csv
+			// 7847
+			"column_12" oftype text,
+			// text, e.g. 44.224201, 12.3072 as geolocation | TODO transform later into a datatype
+			"geo_punkt" oftype text
+		];
+	}
+
+	valuetype AbbrevationOfLength1 oftype text {
+    constraints: [
+        LengthExactlyOne,
+		OnlyCapitalLettersAndDigits
+    ];
+	}
+
+	valuetype AirportCodeOr0 oftype text {
+		constraints: [
+			OnlyCapitalLettersAndDigits
+		];
+	}
+
+	constraint OnlyCapitalLettersAndDigits on text:
+    value matches /^[A-Z0-9]*$/;
+
+	constraint LengthExactlyOne on text:
+	value.length == 1;
+
+	block AirportsLoader oftype SQLiteLoader {
+		table: "airports";
+		file: "./airports.sqlite";
+	}
+ 
+}
