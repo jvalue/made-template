@@ -60,11 +60,11 @@ pipeline AirportsPipeline {
 		];
 	}
 
-		valuetype AbbrevationOfLength1 oftype text {
-    constraints: [
-        LengthExactlyOne,
-		OnlyCapitalLettersAndDigits
-    ];
+	valuetype AbbrevationOfLength1 oftype text {
+		constraints: [
+			LengthExactlyOne,
+			OnlyCapitalLettersAndDigits
+		];
 	}
 
 	valuetype AirportCodeOr0 oftype text {
