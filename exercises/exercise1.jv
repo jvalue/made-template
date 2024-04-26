@@ -1,0 +1,46 @@
+pipeline AirportsPipeline {
+    
+    AirportsFileExtractor
+        -> AirportsTextFileInterpreter
+        ->AirportsCSVInterpreter
+        -> AirportsTableInterpreter
+        -> AirportSQLiteLoader;
+    
+
+    block AirportsFileExtractor oftype LocalFileExtractor {
+        filePath: "rhein-kreis-neuss-flughafen-weltweit.csv";
+    }
+
+    block AirportsTextFileInterpreter oftype TextFileInterpreter{
+
+    }
+
+    block AirportsCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";" ;
+    }
+
+    block AirportsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Lfd. Number" oftype integer,
+            "Name des Flughafens" oftype text,
+            "Ort" oftype text,
+            "Land" oftype text,
+            "IATA" oftype text,
+            "ICAO" oftype text,
+            "Latitude" oftype decimal,
+            "Longitude" oftype decimal,
+            "Altitude" oftype integer,
+            "Zeitzone" oftype decimal,
+            "DST" oftype text,
+            "Zeitzonen-Datenbank" oftype text,
+            "geo_punkt" oftype text,
+        ];
+    }
+
+    block AirportSQLiteLoader oftype SQLiteLoader {
+        table: "airports";
+        file: "airports.sqlite";
+    }
+
+}
