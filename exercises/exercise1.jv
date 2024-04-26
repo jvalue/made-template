@@ -29,19 +29,19 @@ pipeline AirportsPipeline {
 	block AirportsTableInterpreter oftype TableInterpreter {
 		header: true;
 		columns: [
-            "number" oftype integer,
-            "name" oftype text,
-            "region" oftype text,
-            "country" oftype text,
+            "Lfd. Nummer" oftype integer,
+            "Name des Flughafens" oftype text,
+            "Ort" oftype text,
+            "Land" oftype text,
             "IATA" oftype integer,
             "ICAO" oftype text,
-            "latitude" oftype decimal,
-            "longitude" oftype decimal,
-            "altitude" oftype integer,
-            "timezone" oftype decimal,
+            "Latitude" oftype decimal,
+            "Longitude" oftype decimal,
+            "Altitude" oftype integer,
+            "Zeitzone" oftype decimal,
             "DST" oftype text,
-            "timezone_database" oftype text,
-            "geo_point" oftype text,
+            "Zeitzonen-Datenbank" oftype text,
+            "geo_punkt" oftype decimal,
 		];
 	}
 
