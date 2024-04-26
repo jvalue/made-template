@@ -28,9 +28,9 @@ pipeline AirportsPipeline {
             "Longitude" oftype decimal,
             "Altitude" oftype integer,
             "Zeitzone" oftype decimal,
-            "DST" oftype DST,
+            "DST" oftype text, // DST
             "Zeitzonen-Datenbank" oftype text,
-            "geo_punkt" oftype GeoPoint
+            "geo_punkt" oftype text // GeoPoint
         ];
     }
 
@@ -40,21 +40,21 @@ pipeline AirportsPipeline {
         dropTable: true;
     }
 
-    valuetype DST oftype text {
-        constraints: [ DSTFormat ];
-    }
+    // valuetype DST oftype text {
+    //     constraints: [ DSTFormat ];
+    // }
 
-    constraint DSTFormat oftype LengthConstraint {
-        minLength: 1;
-        maxLength: 1;
-    }
+    // constraint DSTFormat oftype LengthConstraint {
+    //     minLength: 1;
+    //     maxLength: 1;
+    // }
 
-    valuetype GeoPoint oftype text {
-        constraints: [ GeoPointFormat ];
-    }
+    // valuetype GeoPoint oftype text {
+    //     constraints: [ GeoPointFormat ];
+    // }
 
-    constraint GeoPointFormat oftype RegexConstraint {
-        regex: /-?\d+\.\d+, -?\d+\.\d+/;
-    }
+    // constraint GeoPointFormat oftype RegexConstraint {
+    //     regex: /-?\d+\.\d+, -?\d+\.\d+/;
+    // }
 }
 
