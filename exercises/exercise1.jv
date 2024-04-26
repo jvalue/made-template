@@ -1,0 +1,60 @@
+pipeline AirportsPipeline {
+    AirportsExtractor
+        -> AirportsTextFileInterpreter
+        -> AirportsCSVInterpreter
+        -> AirportsTableInterpreter
+        -> AirportsLoader;
+
+    block AirportsExtractor oftype HttpExtractor {
+        url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
+    }
+
+    block AirportsTextFileInterpreter oftype TextFileInterpreter {}
+
+    block AirportsCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    block AirportsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Lfd. Nummer" oftype integer,
+            "Name des Flughafens" oftype text,
+            "Ort" oftype text,
+            "Land" oftype text,
+            "IATA" oftype text, // length is 3 chars or 0
+            "ICAO" oftype text, // length is 4 chars
+            "Latitude" oftype decimal,
+            "Longitude" oftype decimal,
+            "Altitude" oftype integer,
+            "Zeitzone" oftype decimal,
+            "DST" oftype DST,
+            "Zeitzonen-Datenbank" oftype text,
+            "geo_punkt" oftype GeoPoint
+        ];
+    }
+
+    block AirportsLoader oftype SQLiteLoader {
+        table: "airports";
+        file: "airports.sqlite";
+        dropTable: true;
+    }
+
+    valuetype DST oftype text {
+        constraints: [ DSTFormat ];
+    }
+
+    constraint DSTFormat oftype LengthConstraint {
+        minLength: 1;
+        maxLength: 1;
+    }
+
+    valuetype GeoPoint oftype text {
+        constraints: [ GeoPointFormat ];
+    }
+
+    constraint GeoPointFormat oftype RegexConstraint {
+        regex: /-?\d+\.\d+, -?\d+\.\d+/;
+    }
+}
+
