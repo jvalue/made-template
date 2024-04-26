@@ -22,7 +22,7 @@ pipeline AirportsPipeline {
 
 
 	block AirportsCSVInterpreter oftype CSVInterpreter {
-		enclosing: '"';
+		delimiter: ';';
 	}
 
 	
@@ -41,7 +41,7 @@ pipeline AirportsPipeline {
             "Zeitzone" oftype decimal,
             "DST" oftype text,
             "Zeitzonen-Datenbank" oftype text,
-            "geo_punkt" oftype decimal,
+            "geo_punkt" oftype text,
 		];
 	}
 
