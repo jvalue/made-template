@@ -1,0 +1,112 @@
+// SPDX-FileCopyrightText: 2024 Friedrich-Alexander-Universitat Erlangen-Nurnberg
+//
+// SPDX-License-Identifier: AGPL-3.0-only
+
+// Exercise1 : Airports
+// Learning goals:
+// - Understand the core concepts Interpreter,pipeline, block, and pipe, Data Types
+
+// This Jayvee model describes a pipeline 
+// from a CSV file in the web 
+// to a SQLite file sink.
+pipeline AirportsPipeline {
+    // connecting the block AirportsExtractor
+    // with the block AirportsTextFileInterpreter.
+    AirportsExtractor -> AirportsTextFileInterpreter;
+    AirportsTextFileInterpreter
+        -> AirportsCSVInterpreter 
+        -> NameHeaderWriter
+        -> AirportsTableInterpreter
+        -> AirportsLoader;
+
+    // Below the pipes, define the blocks that are connected by the pipes.
+    block AirportsExtractor oftype HttpExtractor {
+
+        // Here, we specify the URL where the file shall be downloaded from.
+        url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
+    }
+
+    // The HttpExtractor requires no input and produces a binary file as output.
+    // This file has to be interpreted, e.g., as text file.
+    block AirportsTextFileInterpreter oftype TextFileInterpreter { }
+
+    // interpreting this text file as sheet.
+    block AirportsCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+    //writing into cells of a sheet using the CellWriter blocktype.
+    block NameHeaderWriter oftype CellWriter {
+        at: cell A1;
+
+        // specify the first column value is written into the cell.
+        write: ["Lfd. Nummer"];
+    }
+
+    // adding structure.
+    // Rows that include values that are not valid according to the their 
+    //valuetypes are dropped automatically. 
+    //select count(*) from Airports output is 7847 which is matched with our original data.
+    // so no rows dropped. 
+    block AirportsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Lfd. Nummer" oftype integer,
+            "Name des Flughafens" oftype text,
+            "Ort" oftype text,
+            "Land" oftype text,
+            "IATA" oftype text,
+            "ICAO" oftype text,
+            "Latitude" oftype decimal,
+            "Longitude" oftype decimal,
+            "Altitude" oftype integer,
+            "Zeitzone" oftype decimal,
+            "DST" oftype text,
+            "Zeitzonen-Datenbank" oftype text,
+            "geo_punkt" oftype text
+        ];
+    }
+
+    // The structural information of the table is used to generate the correct table.
+    block AirportsLoader oftype SQLiteLoader {
+        table: "airports";
+        file: "./airports.sqlite";
+    }
+
+    /* use  jv exercise1.jv -d on terminal to show below message and check this result with original
+data and also if there is an error ,find where error comes. 
+Overview:
+        Blocks (6 blocks with 2 pipes):
+         -> AirportsExtractor (HttpExtractor)
+                 -> AirportsTextFileInterpreter (TextFileInterpreter)
+                         -> AirportsCSVInterpreter (CSVInterpreter)
+                                 -> NameHeaderWriter (CellWriter)
+                                         -> AirportsTableInterpreter (TableInterpreter)
+                                                 -> AirportsLoader (SQLiteLoader)
+
+        [AirportsExtractor] Fetching raw data from https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B
+        [AirportsExtractor] Successfully fetched raw data
+        [AirportsExtractor] Execution duration: 1179 ms.
+        [AirportsTextFileInterpreter] Decoding file content using encoding "utf-8"
+        [AirportsTextFileInterpreter] Splitting lines using line break /\r?\n/
+        [AirportsTextFileInterpreter] Lines were split successfully, the resulting text file has 7848 lines 
+        [AirportsTextFileInterpreter] Execution duration: 5 ms.
+        [AirportsCSVInterpreter] Parsing raw data as CSV using delimiter ";"
+        [AirportsCSVInterpreter] Parsing raw data as CSV-sheet successful
+        [AirportsCSVInterpreter] Execution duration: 196 ms.
+        [NameHeaderWriter] Writing "Lfd. Nummer" at cell A1
+        [NameHeaderWriter] Execution duration: 7 ms.
+        [AirportsTableInterpreter] Matching header with provided column names
+        [AirportsTableInterpreter] Validating 7847 row(s) according to the column types
+        [AirportsTableInterpreter] Validation completed, the resulting table has 7847 row(s) and 13 column(s)
+        [AirportsTableInterpreter] Execution duration: 20 ms.
+        [AirportsLoader] Opening database file ./Airports.sqlite
+        [AirportsLoader] Dropping previous table "Airports" if it exists
+        [AirportsLoader] Creating table "Airports"
+        [AirportsLoader] Inserting 7847 row(s) into table "Airports"
+        [AirportsLoader] The data was successfully loaded into the database
+        [AirportsLoader] Execution duration: 127 ms.
+[AirportsPipeline] Execution duration: 1538 ms.
+    */
+
+    // run <jv exercise1.jv> successfully.
+}
