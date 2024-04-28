@@ -1,0 +1,62 @@
+// This Jayvee model describes a pipeline from a CSV file in the web
+// to a SQLite file sink concerning planted tree data.
+pipeline PlantedTreesPipeline {
+
+    PlantedTreesExtractor 
+        -> PlantedTreesTextFileInterpreter
+        -> PlantedTreesCSVInterpreter
+        -> BaumartDeutschDeleter
+        -> PlantedTreesTableInterpreter
+        -> PlantedTreesLoader;
+
+    block PlantedTreesExtractor oftype HttpExtractor {
+        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+    }
+
+    block PlantedTreesTextFileInterpreter oftype TextFileInterpreter { }
+
+    block PlantedTreesCSVInterpreter oftype CSVInterpreter {
+        delimiter: ';';
+        enclosing: '"';
+    }
+
+    block BaumartDeutschDeleter oftype ColumnDeleter {
+        delete: [column E];
+    }
+
+    valuetype GeoCoordinateId oftype text {
+        constraints: [ AlwaysTwoGeoCoordinates ];
+    } 
+
+    // coordinates as {geo-coordinate 1}, {geo-coordinate 2} 
+    constraint AlwaysTwoGeoCoordinates oftype RegexConstraint {
+        regex: /\d{1,3}\.\d+\, \d{1,3}\.\d+/;
+    }
+
+    valuetype StadtTeil oftype text {
+        constraints: [ OnlyFurth ];
+    }
+    
+    constraint OnlyFurth oftype RegexConstraint {
+        regex: /Furth-(.+)/;
+    }
+
+    block PlantedTreesTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "lfd_nr" oftype integer,
+            "id" oftype GeoCoordinateId,
+            "stadtteil" oftype StadtTeil,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            // "baumart_deutsch" oftype text, -- not wanted in result
+            "baumfamilie" oftype text,
+        ];
+    }
+
+    block PlantedTreesLoader oftype SQLiteLoader {
+        table: "trees";
+        file: "./trees.sqlite";
+    }
+
+}
