@@ -24,7 +24,7 @@ pipeline CarsPipeline {
     // 4. The output of the preceding block is hereby used 
     // as input for the succeeding block.
 
-    // 5. Pipes can be further chained, 
+    // 5. Pipes can be further chained,
     // leading to an overview of the pipeline.
     CarsTextFileInterpreter
         -> CarsCSVInterpreter 

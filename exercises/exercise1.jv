@@ -1,0 +1,53 @@
+pipeline AirportPipeline {
+
+    AirportExtractor
+        -> AirportTextFileInterpreter
+        -> AirportCSVInterpreter 
+        -> AirportTableInterpreter
+        -> AirportLoader;
+
+
+    block AirportExtractor oftype HttpExtractor {
+
+        url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
+    }
+
+    block AirportTextFileInterpreter oftype TextFileInterpreter { }
+
+    block AirportCSVInterpreter oftype CSVInterpreter {
+        delimiter: ';';
+    }
+
+
+    // 14. As a next step, we interpret the sheet as a table by adding structure.
+    // We define a valuetype per column that specifies the data type of the column.
+    // Rows that include values that are not valid according to the their valuetypes are dropped automatically. 
+    block AirportTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Lfd. Nummer" oftype integer,
+			"Name des Flughafens" oftype text,
+			"Ort" oftype text,
+			"Land" oftype text,
+			"IATA" oftype text,
+			"ICAO" oftype text,
+			"Latitude" oftype decimal,
+			"Longitude" oftype decimal,
+			"Altitude" oftype integer,
+			"Zeitzone" oftype decimal,
+			"DST" oftype text,
+			"Zeitzonen-Datenbank" oftype text,
+			"geo_punkt" oftype text
+        ];
+    }
+
+    // 15. As a last step, we load the table into a sink,
+    // here into a sqlite file.
+    // The structural information of the table is used
+    // to generate the correct table.
+    block AirportLoader oftype SQLiteLoader {
+        table: "airports";
+        file: "./airports.sqlite";
+    }
+
+}
