@@ -1,4 +1,4 @@
-pipeline CarsPipeline {
+pipeline AirportPipeline {
 
     AirportExtractor -> AirportTextFileInterpreter;
 
@@ -17,7 +17,7 @@ pipeline CarsPipeline {
     block AirportTextFileInterpreter oftype TextFileInterpreter { }
 
     block AirportCSVInterpreter oftype CSVInterpreter {
-        enclosing: '"';
+        delimiter: ";";
     }
 
     block AirportTableInterpreter oftype TableInterpreter {
