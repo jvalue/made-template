@@ -38,7 +38,7 @@ pipeline AirportsPipeline {
 			"Land" oftype text,
 
 			// ex. KGL - International Air Transport Association airport code
-			"IATA" oftype AirportCodeOr0,
+			"IATA" oftype text,
 
 			// ex. FABR - International Civil Aviation Organisation
 			"ICAO" oftype text,
@@ -51,7 +51,7 @@ pipeline AirportsPipeline {
 			"Zeitzone" oftype decimal,
 
 			//ex. E - Europe, Destination Continent/Country 
-			"DST" oftype AbbrevationOfLength1,
+			"DST" oftype text,
 
 			// Destination Continent/Country 
 			"Zeitzonen-Datenbank" oftype text,
@@ -60,24 +60,24 @@ pipeline AirportsPipeline {
 		];
 	}
 
-	valuetype AbbrevationOfLength1 oftype text {
-		constraints: [
-			LengthExactlyOne,
-			OnlyCapitalLettersAndDigits
-		];
-	}
+	// valuetype AbbrevationOfLength1 oftype text {
+	// 	constraints: [
+	// 		LengthExactlyOne,
+	// 		OnlyCapitalLettersAndDigits
+	// 	];
+	// }
 
-	valuetype AirportCodeOr0 oftype text {
-		constraints: [
-			OnlyCapitalLettersAndDigits
-		];
-	}
+	// valuetype AirportCodeOr0 oftype text {
+	// 	constraints: [
+	// 		OnlyCapitalLettersAndDigits
+	// 	];
+	// }
 
-	constraint OnlyCapitalLettersAndDigits on text:
-    value matches /^[A-Z0-9]*$/;
+	// constraint OnlyCapitalLettersAndDigits on text:
+    // value matches /^[A-Z0-9]*$/;
 
-	constraint LengthExactlyOne on text:
-	value.length == 1;
+	// constraint LengthExactlyOne on text:
+	// value.length == 1;
 
 	block AirportsLoader oftype SQLiteLoader {
 		table: "airports";
