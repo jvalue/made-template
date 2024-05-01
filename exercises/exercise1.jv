@@ -7,6 +7,7 @@ pipeline AirportsDataPipeline{
                     AirportsDataLoader;
         
     
+    
     block AirportsDataExtractor oftype HttpExtractor {
         url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
     }
