@@ -1,3 +1,5 @@
 .DS_Store
 /data/*
 !/data/.gitkeep
+/exercises/*.csv
+/exercises/*.sqlite
