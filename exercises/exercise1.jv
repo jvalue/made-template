@@ -1,3 +1,5 @@
+// Airport pipeline
+
 pipeline AirportsDataPipeline{
     
     AirportsDataExtractor -> 
@@ -7,7 +9,7 @@ pipeline AirportsDataPipeline{
                     AirportsDataLoader;
         
     
-    
+    // extracting data
     block AirportsDataExtractor oftype HttpExtractor {
         url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
     }
@@ -18,6 +20,7 @@ pipeline AirportsDataPipeline{
         delimiter:";";
     }
 
+    // defining table
     block AirportsTableInterpreter oftype TableInterpreter {
         header: true;
         columns: [
@@ -36,11 +39,11 @@ pipeline AirportsDataPipeline{
             "geo_punkt" oftype text
         ];
     }
-
+    
+    // load the table into sink
     block AirportsDataLoader oftype SQLiteLoader {
         table: "airports";
         file: "./airports.sqlite";
     }
-
 
 }
