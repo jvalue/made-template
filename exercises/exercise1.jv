@@ -1,0 +1,45 @@
+pipeline AirportsDataPipeline{
+    
+    AirportsDataExtractor -> 
+        AirportsTextInterpreter ->
+            AirportsCSVInterpreter ->
+                AirportsTableInterpreter ->
+                    AirportsDataLoader;
+        
+    
+    block AirportsDataExtractor oftype HttpExtractor {
+        url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
+    }
+
+    block AirportsTextInterpreter oftype TextFileInterpreter{}
+
+    block AirportsCSVInterpreter oftype CSVInterpreter{
+        delimiter:";";
+    }
+
+    block AirportsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Lfd. Nummer" oftype integer,
+            "Name des Flughafens" oftype text,
+            "Ort" oftype text,
+            "Land" oftype text,
+            "IATA" oftype text,
+            "ICAO" oftype text,
+            "Latitude" oftype decimal,
+            "Longitude" oftype decimal,
+            "Altitude" oftype integer,
+            "Zeitzone" oftype decimal,
+            "DST" oftype text,
+            "Zeitzonen-Datenbank" oftype text,
+            "geo_punkt" oftype text
+        ];
+    }
+
+    block AirportsDataLoader oftype SQLiteLoader {
+        table: "airports";
+        file: "./airports.sqlite";
+    }
+
+
+}
