@@ -28,13 +28,13 @@ pipeline FirstExercise_Airports
             "Lfd. Nummer" oftype integer,
             "Name des Flughafens" oftype text,
             "Land" oftype text,
-            "Latitude" oftype decimal,
             "IATA" oftype text,
             "ICAO" oftype text,
+            "Latitude" oftype decimal,
             "Altitude" oftype integer,
             "Longitude" oftype decimal,
-            "DST" oftype text,
             "Zeitzone" oftype decimal,
+            "DST" oftype text,
             "Zeitzonen-Datenbank" oftype text,
             "geo_punkt" oftype text
         ];
