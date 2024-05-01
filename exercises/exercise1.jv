@@ -1,9 +1,7 @@
 pipeline AirportsPipeline {
 
-	AirportsExtractor
-		->AirportsTextFileInterpreter
+	AirportsExtractor->AirportsTextFileInterpreter
 		->AirportsCSVInterpreter 
-		//-> NameHeaderWriter //only for renaming the columns
 	   	-> AirportsTableInterpreter
 		-> AirportsLoader;
 
@@ -56,28 +54,9 @@ pipeline AirportsPipeline {
 			// Destination Continent/Country 
 			"Zeitzonen-Datenbank" oftype text,
 			
-			"geo_punkt" oftype decimal,
+			"geo_punkt" oftype text,
 		];
 	}
-
-	// valuetype AbbrevationOfLength1 oftype text {
-	// 	constraints: [
-	// 		LengthExactlyOne,
-	// 		OnlyCapitalLettersAndDigits
-	// 	];
-	// }
-
-	// valuetype AirportCodeOr0 oftype text {
-	// 	constraints: [
-	// 		OnlyCapitalLettersAndDigits
-	// 	];
-	// }
-
-	// constraint OnlyCapitalLettersAndDigits on text:
-    // value matches /^[A-Z0-9]*$/;
-
-	// constraint LengthExactlyOne on text:
-	// value.length == 1;
 
 	block AirportsLoader oftype SQLiteLoader {
 		table: "airports";
