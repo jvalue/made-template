@@ -1,0 +1,58 @@
+// Airport pipeline
+
+pipeline TreesPipeline{
+
+
+      TreesExtractor -> 
+        TreesTextInterpreter ->
+            TreesCSVInterpreter ->
+            TreesColumnDeleter ->
+                TreesTableInterpreter ->
+                    TreesLoader;
+
+    
+
+    valuetype stadtteil_ oftype text {
+    constraints: [ stadtteilConstraint ];}
+
+
+    constraint stadtteilConstraint oftype AllowlistConstraint {
+    allowlist: [ "Furth-Nord", "Furth-Mitte", "Furth Süd" ];}
+
+ 
+    // extracting data
+    block TreesExtractor oftype HttpExtractor {
+        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+    }
+
+    block TreesTextInterpreter oftype TextFileInterpreter{}
+
+    block TreesCSVInterpreter oftype CSVInterpreter{
+        delimiter:";";
+    }
+
+    block TreesColumnDeleter oftype ColumnDeleter {
+    delete: [column E ];
+    }
+
+
+    // defining table
+    block TreesTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "lfd_nr" oftype integer,
+            "stadtteil" oftype stadtteil_,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            "id" oftype text,
+            "baumfamilie" oftype text,
+        ];
+    }
+    // "baumart_deutsch" oftype text,
+    // load the table into sink
+    block TreesLoader oftype SQLiteLoader {
+        table: "trees";
+        file: "./trees.sqlite";
+    }
+
+}
