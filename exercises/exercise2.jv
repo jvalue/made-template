@@ -1,0 +1,78 @@
+pipeline TreesPipeline {
+
+	TreesExtractor->TreesTextFileInterpreter
+		-> TreesCSVInterpreter 
+        -> BaumFamilieColumnDeleter
+	   	-> TreesTableInterpreter
+		-> TreesLoader;
+
+	//To extract data from the source URL
+	block TreesExtractor oftype HttpExtractor {
+		url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+	}
+
+	// The HttpExtractor requires no input and produces a binary file as output.
+	// This file has to be interpreted, e.g., as text file.
+	block TreesTextFileInterpreter oftype TextFileInterpreter { }
+
+	block TreesCSVInterpreter oftype CSVInterpreter {
+		delimiter: ';';
+	}
+ 
+	block TreesTableInterpreter oftype TableInterpreter {
+		header: true;
+		columns: [
+
+			//integer:
+			//7847 (7848 incl header)
+			"lfd_nr" oftype integer,
+
+			//text, names of airports
+			"stadtteil" oftype StartsWithFurth,
+
+			// text, names of cities
+			"standort" oftype text,
+
+			// text, name of country
+			"baumart_botanisch" oftype text,
+
+			// ex. KGL - International Air Transport Association airport code
+			"baumart_deutsch" oftype text,
+
+			// ex. FABR - International Civil Aviation Organisation
+			"id" oftype IdType,
+
+			"baumfamilie" oftype text
+		];
+	}
+
+    block BaumFamilieColumnDeleter oftype ColumnDeleter {
+        delete: [column G];
+    }
+
+
+    valuetype StartsWithFurth oftype text {
+		constraints: [
+			ContainsFurth
+		];
+	}
+
+	constraint ContainsFurth on text:
+    value matches /^Furth-[A-Za-z]+$/;
+
+
+    valuetype IdType oftype text {
+		constraints: [
+			ConstraintsOfId
+		];
+	}
+
+    constraint ConstraintsOfId on text:
+    value matches /^\d{1,3}\.\d+, \d{1,3}\.\d+$/;
+
+	block TreesLoader oftype SQLiteLoader {
+		table: "trees";
+		file: "./trees.sqlite";
+	}
+ 
+}
