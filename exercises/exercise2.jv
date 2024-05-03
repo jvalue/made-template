@@ -17,7 +17,7 @@ pipeline TreesPipeline{
 
 
     constraint stadtteilConstraint oftype AllowlistConstraint {
-    allowlist: [ "Furth-Nord", "Furth-Mitte", "Furth-Süd" ,"Furth Süd" ];}
+    allowlist: [ "Furth-Nord", "Furth-Mitte", "Furth-Süd"];}
 
  
     // extracting data
