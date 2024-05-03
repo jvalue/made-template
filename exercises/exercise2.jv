@@ -58,7 +58,7 @@ pipeline TreesPipeline {
 	}
 
 	constraint ContainsFurth on text:
-    value matches /^Furth-[A-Za-z]+$/;
+    value matches /^Furth-[A-Za-z\u00C0-\u017F]+$/;
 
 
     valuetype IdType oftype text {
