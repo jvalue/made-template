@@ -7,6 +7,12 @@ on:
     paths:
       - exercises/**
 
+  pull_request:
+    branches:
+      - main
+    paths:
+      - exercises/**
+
 jobs:
   exercise-feedback:
     runs-on: ubuntu-latest
