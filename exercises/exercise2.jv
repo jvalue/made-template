@@ -54,7 +54,7 @@ valuetype CityName oftype text{
 }
 
 constraint StartWithFurthOnly oftype RegexConstraint{
-    regex: /^["Furth -"]+/;
+    regex: /^["Furth"]+["\-"]+/;
 }
 
 valuetype GeoCoordinate oftype text{
