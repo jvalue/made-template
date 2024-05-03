@@ -5,6 +5,7 @@ pipeline CityPipeline{
     CityExtractor -> CityTextFileInterpreter;
     CityTextFileInterpreter 
     -> CityCSVInterpreter
+    -> CityTableDropColumn
     -> CityTableInterpreter
     -> CityLoader;
 
@@ -36,6 +37,10 @@ pipeline CityPipeline{
 
     }
 
+    block CityTableDropColumn oftype ColumnDeleter
+    {
+        delete: [column E];
+    }
 
     block CityLoader oftype SQLiteLoader
     {
