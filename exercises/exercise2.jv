@@ -2,7 +2,7 @@ pipeline TreesPipeline {
 
 	TreesExtractor->TreesTextFileInterpreter
 		-> TreesCSVInterpreter 
-        -> BaumFamilieColumnDeleter
+        -> BaumartDeutschColumnDeleter
 	   	-> TreesTableInterpreter
 		-> TreesLoader;
 
@@ -36,8 +36,8 @@ pipeline TreesPipeline {
 			// text, name of country
 			"baumart_botanisch" oftype text,
 
-			// ex. KGL - International Air Transport Association airport code
-			"baumart_deutsch" oftype text,
+			// // ex. KGL - International Air Transport Association airport code
+			// "baumart_deutsch" oftype text,
 
 			// ex. FABR - International Civil Aviation Organisation
 			"id" oftype IdType,
@@ -46,8 +46,8 @@ pipeline TreesPipeline {
 		];
 	}
 
-    block BaumFamilieColumnDeleter oftype ColumnDeleter {
-        delete: [column G];
+    block BaumartDeutschColumnDeleter oftype ColumnDeleter {
+        delete: [column E];
     }
 
 
