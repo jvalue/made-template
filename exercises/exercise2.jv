@@ -32,8 +32,8 @@ pipeline TreeDataPipeline {
       "lfd_nr" oftype integer,
       "stadtteil" oftype Stadtteil,
       "standort" oftype text,
-      "baumartBotanisch" oftype text,
-      "baumartDeutsch" oftype text,
+      "baumart_botanisch" oftype text,
+      "baumart_deutsch" oftype text,
       "id" oftype GeoPoint,
       "baumfamilie" oftype text
     ];
