@@ -1,0 +1,522 @@
+lfd_nr;stadtteil;standort;baumart_botanisch;baumart_deutsch;id;baumfamilie
+23420;Dreikönigenviertel;Weberstr. 49;Castanea sativa;Esskastanie;51.1847, 6.69469;Esskastanie
+23421;Dreikönigenviertel;Weberstr. 49;Juglans regia;Walnuß;51.1847, 6.69462;Walnuß
+23423;Reuschenberg;Nierenhofstr. hinter Baumschule Erftufer;Castanea sativa;Esskastanie;51.1651, 6.69814;Esskastanie
+23424;Erfttal;Parisstr. Grünzug;Malus domestica;Apfel, Rheinischer Bohn-;51.17, 6.71848;Apfel
+23425;Norf;Zedernweg Grünzug;Malus domestica;Apfel, Rheinischer Bohn-;51.1492, 6.73003;Apfel
+23431;Reuschenberg;Schwarzer Weg (Hochzeitshain);Malus domestica;Apfel, Rheinischer Bohn-;51.174, 6.69207;Apfel
+23434;Reuschenberg;Schwarzer Weg (Hochzeitshain);Pyrus communis;Birne, Wild;51.1738, 6.69209;Birne
+23444;Vogelsang Bols-Siedlung;Niederdonker Weg;Juglans regia;Walnuss;51.2312, 6.6833;Walnuss
+23447;Vogelsang Bols-Siedlung;Niederdonker Weg;Pyrus communis;Birne, 'Gute Luise v. Avranches';51.2312, 6.6828;Birne
+23450;Vogelsang Bols-Siedlung;Niederdonker Weg;Malus domestica;Apfel, Rheinischer Bohn-;51.2309, 6.68319;Apfel
+23452;Vogelsang Bols-Siedlung;Niederdonker Weg;Malus domestica;Apfel, Rheinischer Bohn-;51.231, 6.68315;Apfel
+23453;Vogelsang Bols-Siedlung;Niederdonker Weg;Malus domestica;Apfel, Rheinischer Bohn-;51.2311, 6.68323;Apfel
+23459;Vogelsang Bols-Siedlung;Niederdonker Weg;Prunus dom.;Zwetsche, Haus-;51.2314, 6.68273;Zwetsche
+23461;Vogelsang Bols-Siedlung;Niederdonker Weg;Castanea satvia;Esskastanie;51.2314, 6.68218;Esskastanie
+23462;Vogelsang Bols-Siedlung;Niederdonker Weg;Castanea satvia;Esskastanie;51.2316, 6.68204;Esskastanie
+23463;Vogelsang Bols-Siedlung;Niederdonker Weg;Castanea satvia;Esskastanie;51.2317, 6.68215;Esskastanie
+23204;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1979, 6.70978;Blasenbaum
+23205;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1979, 6.70994;Blasenbaum
+23375;Weckhoven;An der Kreuzhecke (Grünzug);Acer campestre 'Elsrijk';Ahorn, Feld;51.1601, 6.70661;Ahorn
+23332;Stadionviertel;Grefrather Weg Konrad-Adenauer-Ring (Grünzug);Corylus colurna;Hasel, Baum;51.1863, 6.67769;Hasel
+23278;Pomona;"Jülicher Landstr. Ecke Konrad-Adenauer-Ring; vor Tanke";Platanus acerifolia;Platane;51.1838, 6.6785;Platane
+23268;Pomona;"Jülicher Landstr. Ecke Konrad-Adenauer-Ring; vor Tanke";Platanus acerifolia;Platane;51.1839, 6.6786;Platane
+23270;Pomona;"Jülicher Landstr. Ecke Konrad-Adenauer-Ring; vor Tanke";Platanus acerifolia;Platane;51.184, 6.67877;Platane
+23082;Dreikönigenviertel;Am Keutenhof 10 ggb.;Sorbus aria 'Magnifica';Mehlbeere;51.1895, 6.6859;Mehlbeere
+23275;Pomona;Bergheimerstr. 220 ggb.;Celtis australis;Zürgelbaum;51.1832, 6.68882;Zürgelbaum
+23276;Pomona;Bergheimerstr. 234 ggb.;Celtis australis;Zürgelbaum;51.1825, 6.68864;Zürgelbaum
+23212;Hammfeld;Hammer Landstr. 113;Alnus spaethii;Erle, Purpur;51.203, 6.7202;Erle
+23213;Hammfeld;Hammer Landstr. 113;Alnus spaethii;Erle, Purpur;51.2031, 6.72044;Erle
+23216;Hammfeld;Hammer Landstr. 113;Alnus spaethii;Erle, Purpur;51.2031, 6.72116;Erle
+23218;Hammfeld;Hammer Landstr. 113;Alnus cordata;Erle, Italienische;51.2032, 6.72165;Erle
+23219;Hammfeld;Hammer Landstr. 113;Alnus cordata;Erle, Italienische;51.2032, 6.72187;Erle
+23220;Hammfeld;Hammer Landstr. 113;Alnus cordata;Erle, Italienische;51.2032, 6.72209;Erle
+23227;Hammfeld;Carl-Schurz-Str. 2 ggb.;Quercus petraea;Eiche, Trauben;51.1961, 6.71293;Eiche
+23229;Hammfeld;Carl-Schurz-Str. 2;Quercus petraea;Eiche, Trauben;51.1959, 6.71298;Eiche
+23230;Hammfeld;Carl-Schurz-Str. 2;Quercus petraea;Eiche, Trauben;51.1959, 6.71309;Eiche
+23233;Hammfeld;Carl-Schurz-Str. 5;Quercus petraea;Eiche, Trauben;51.1946, 6.71386;Eiche
+23236;Hammfeld;Carl-Schurz-Str. 7;Quercus petraea;Eiche, Trauben;51.1936, 6.71366;Eiche
+23196;Grimlinghausen;An der Eiche 31;Quercus petraea;Eiche, Trauben;51.1755, 6.74077;Eiche
+23194;Grimlinghausen;Am Röttgen 86/102 dahinter;Carpinus betulus;Hainbuche;51.1785, 6.7515;Hainbuche
+23179;Gnadental;Kölner Str. Ecke Humboldstr.;Tilia tomentosa;Linde, Silber;51.1839, 6.72205;Linde
+23181;Gnadental;Haselweg KSP Grünzug;Gymnocladus diocus;Geweihbaum;51.1772, 6.71915;Geweihbaum
+23282;Reuschenberg;Linneplatz 9/10 ggb.;Juglans regia;Nuss, Wal;51.1693, 6.69772;Nuss
+23285;Reuschenberg;Aurinstr. 4/6 ggb.;Styphnolobium japonicum;Schnurbaum;51.1688, 6.69521;Schnurbaum
+23286;Reuschenberg;Aurinstr. 4/6 ggb.;Styphnolobium japonicum;Schnurbaum;51.1687, 6.69503;Schnurbaum
+23288;Reuschenberg;Aurinstr. 6;Alnus spaethii;Erle, Purpur;51.1688, 6.69484;Erle
+23289;Reuschenberg;Aurinstr. 6;Alnus spaethii;Erle, Purpur;51.1686, 6.69461;Erle
+23297;Reuschenberg;Nierenhofstr. 3/5;Quercus pubescens;Eiche, Flaum;51.1672, 6.6861;Eiche
+23300;Reuschenberg;Finkenstr. 7/9;Ulmus hollandica 'Lobel';Ulme, Stadt;51.1655, 6.68209;Ulme
+23248;Holzheim;Reuschenberger Str. 82;Ulmus hollandica 'Lobel';Ulme, Stadt;51.1614, 6.67526;Ulme
+23267;Norf-Derikum;Aggerstr. Abzw. An der Norf;Liquidambar styraciflua;Amberbaum;51.165, 6.73241;Amberbaum
+23264;Norf-Derikum;Ruhrstr. ggb. Abzw. Borsigstr.;Alnus cordata;Erle, Italienische;51.1575, 6.74275;Erle
+23266;Norf-Derikum;Weserstr. Ecke Ruhrstr.;Alnus cordata;Erle, Italienische;51.1607, 6.7388;Erle
+23312;Stadionviertel;Im Jagdfeld 12;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1897, 6.67715;Ahorn
+23315;Stadionviertel;Glehner Weg 85 nebenan;Tilia europaea 'Pallida';Linde, Kaiser;51.1943, 6.6667;Linde
+23318;Stadionviertel;Konrad-Adenauer-Ring 29;Alnus cordata;Erle, Italienische;51.1968, 6.66683;Erle
+23319;Stadionviertel;Pskowstr. 15 ggb.;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1983, 6.66001;Ahorn
+23325;Stadionviertel;Pskowstr. 22 nebenan;Quercus cerris;Eiche, Zerr;51.1985, 6.66;Eiche
+23326;Stadionviertel;Konrad-Adenauer-Ring Ecke Klever Str.;Alnus spaethii;Erle, Purpur;51.2005, 6.66536;Erle
+23328;Stadionviertel;Konrad-Adenauer-Ring Ecke Klever Str.;Alnus spaethii;Erle, Purpur;51.2004, 6.66533;Erle
+23330;Stadionviertel;Glehner Weg 2 ggb. - Ecke Jahnstr.;Prunus avium 'Plena';Kirsche, Wild;51.1978, 6.67366;Kirsche
+23331;Stadionviertel;Glehner Weg 2 ggb. - Ecke Jahnstr.;Prunus avium 'Plena';Kirsche, Wild;51.1977, 6.67359;Kirsche
+23258;Innenstadt;Breite Str. 142;Tilia europaea 'Pallida';Linde, Kaiser;51.1992, 6.68226;Linde
+23061;Augustinusviertel;Stresemannallee Seitenstreifen;Tilia europaea 'Pallida';Linde, Kaiser;51.1956, 6.70677;Linde
+23251;Innenstadt;Marienkirchplatz 2a;Ostyra carpinifolia;Hopfenbuche;51.2028, 6.68513;Hopfenbuche
+23252;Innenstadt;Niederstr. 65 Seitengasse;Magnolia kobus;Magnolie, Baum;51.1998, 6.68905;Magnolie
+23257;Innenstadt;Kaiser-Friedrich-Str. 162 ggb.;Tilia europaea 'Pallida';Linde, Kaiser;51.1931, 6.6909;Linde
+23376;Weckhoven;Maximilian-Kolbe-Str. 13 dahinter Grünzug;Juglans regia;Nuss, Wal;51.1569, 6.69954;Nuss
+23377;Weckhoven;Maximilian-Kolbe-Str. 13 dahinter Grünzug;Juglans regia;Nuss, Wal;51.1568, 6.69955;Nuss
+23408;Innenstadt;Münsterplatz 14-18;Robinia pseudoacacia;Robinie;51.1991, 6.69231;Robinie
+23402;Erfttal;Berghäuschensweg Hochzeitshain Gnadentaler Mühle;Quercus petraea;Eiche, Trauben;51.1726, 6.71869;Eiche
+23403;Erfttal;Berghäuschensweg Hochzeitshain Gnadentaler Mühle;Prunus avium 'Plena';Kirsche, Wild;51.1727, 6.7184;Kirsche
+23404;Erfttal;Berghäuschensweg Hochzeitshain Gnadentaler Mühle;Prunus avium 'Plena';Kirsche, Wild;51.1727, 6.71817;Kirsche
+23409;Stadionviertel;Grefrather Weg Konrad-Adenauer-Ring (Grünzug);Juglans regia;Nuss, Wal;51.1866, 6.67792;Nuss
+23410;Uedesheim;Johannesstr. 9 a ggb.;Castanea sativa;Esskastanie;51.1661, 6.79313;Esskastanie
+23413;Norf;Geibelstr. 17;Juglans regia;Nuss, Wal;51.155, 6.73155;Nuss
+23438;Norf;Villestr. Ecke von-Waldhausen-Str.;Parrotia persica;Eisenholzbaum;51.1516, 6.71823;Eisenholzbaum
+23134;Furth-Mitte;Jostenallee 56 ggb. - Am Jostensbusch Park;Prunus serrulata Kanzan;Kirsch, Jap. Zier;51.2101, 6.66397;Kirsch
+23084;Furth-Mitte;Broichstr. 97 ggb. - Am Jostensbusch Park;Castanea sativa;Esskastanie;51.2108, 6.66269;Esskastanie
+23335;Vogelsang;Kaarster Str. 234 a  - neben Bushalte;Tilia cordata 'Greenspire';Linde, Winter;51.2292, 6.64167;Linde
+23336;Vogelsang;Kaarster Str. 199 ggb.;Tilia cordata 'Greenspire';Linde, Winter;51.2286, 6.64439;Linde
+23135;Furth-Nord;Kaarster Str. 169;Acer campestre 'Elsrijk';Ahorn, Feld;51.2275, 6.64886;Ahorn
+23337;Vogelsang;Kaarster Str. 167 ggb.;Koelreuteria paniculata;Blasenbaum;51.2275, 6.64911;Blasenbaum
+23338;Vogelsang;Kaarster Str. 167 ggb.;Koelreuteria paniculata;Blasenbaum;51.2275, 6.64903;Blasenbaum
+23341;Vogelsang;Benzstr. 5;Acer campestre 'Elsrijk';Ahorn, Feld;51.2261, 6.65267;Ahorn
+23137;Furth-Nord;Kaarster Str. 117/119;Celtis australis;Zürgelbaum;51.2232, 6.65405;Zürgelbaum
+23342;Vogelsang;Mühlenbachstr. 24;Juglans regia;Nuss, Wal;51.2274, 6.66001;Nuss
+23139;Furth-Nord;Viersener Str. 100;Tilia europaea 'Pallida';LInde, Kaiser;51.2165, 6.64904;LInde
+23140;Furth-Nord;Viersener Str. 100;Tilia europaea 'Pallida';LInde, Kaiser;51.2166, 6.64935;LInde
+23141;Furth-Nord;Viersener Str. 72;Tilia europaea 'Pallida';LInde, Kaiser;51.2169, 6.65061;LInde
+23142;Furth-Nord;Viersener Str. 72;Tilia europaea 'Pallida';LInde, Kaiser;51.2169, 6.65073;LInde
+23145;Furth-Nord;Viersener Str. 53 nebenan Grünzug Parkplatz;Liriodendron tulipifera;Tulpenbaum;51.2172, 6.65322;Tulpenbaum
+23146;Furth-Nord;Viersener Str. 53 nebenan Grünzug Parkplatz;Liriodendron tulipifera;Tulpenbaum;51.2173, 6.65363;Tulpenbaum
+23147;Furth-Nord;Viersener Str. 53 nebenan Grünzug Parkplatz;Liriodendron tulipifera;Tulpenbaum;51.2173, 6.65374;Tulpenbaum
+23152;Furth-Nord;Im Püllenkamp Ecke Lange Hecke;Tilia mongolica;Linde, Mongolische;51.219, 6.64952;Linde
+23154;Furth-Nord;Lange Hecke 51;Alnus spaethii;Erle, Purpur;51.2192, 6.64938;Erle
+23155;Furth-Nord;Nehringskamp 11a/13;Juglans regia;Nuss, Wal;51.2227, 6.65178;Nuss
+23157;Furth-Nord;Nehringskamp 5 dahinter;Juglans regia;Nuss, Wal;51.2229, 6.65277;Nuss
+23158;Furth-Nord;Nehringskamp 13/13 a;Sorbus latifolia 'Henk Vink';Mehlbeere, Breitblättrige;51.2226, 6.65192;Mehlbeere
+23162;Furth-Nord;Lauvenburger Str. 7;Fraxinus angustifolia 'Raywood';Esche, Schmalblättrige;51.2209, 6.65527;Esche
+23165;Furth-Nord;Kaarster Str. 69;Tilia tomentosa;Linde, Silber;51.2191, 6.65742;Linde
+23346;Vogelsang;Kaarster Str. 72/74;Tilia tomentosa;Linde, Silber;51.2189, 6.6577;Linde
+23347;Vogelsang;Kaarster Str. 72/74;Tilia tomentosa;Linde, Silber;51.2188, 6.65774;Linde
+23350;Vogelsang;Schmolzstr. 30;Sorbus latifolia 'Henk Vink';Mehlbeere, Breitblättrige;51.2239, 6.66308;Mehlbeere
+23351;Vogelsang;Schmolzstr. 30;Sorbus latifolia 'Henk Vink';Mehlbeere, Breitblättrige;51.2239, 6.66319;Mehlbeere
+23352;Vogelsang;Schmolzstr. 32;Sorbus latifolia 'Henk Vink';Mehlbeere, Breitblättrige;51.2239, 6.66328;Mehlbeere
+23358;Vogelsang;Bickenbachstr. 37;Acer rubrum;Ahorn, Rot;51.2225, 6.66094;Ahorn
+23363;Vogelsang;Furtherhofstr. Ecke Am Flachshof;Ulmus hollandica 'Lobel';Ulme, Stadt;51.2208, 6.66114;Ulme
+23367;Vogelsang;Furtherhofstr. 32;Tilia tomentosa;Linde, Silber;51.2202, 6.66041;Linde
+23368;Vogelsang;Furtherhofstr. 26;Alnus spaethii;Erle, Purpur;51.2199, 6.6601;Erle
+23369;Vogelsang;Furtherhofstr. 9;Acer rubrum;Ahorn, Rot;51.2197, 6.6596;Ahorn
+23065;Barbaraviertel;Gladbacher Str. 466;Acer platanoides 'Schwedleri';Ahorn, Roter Spitz;51.2258, 6.68945;Ahorn
+23066;Barbaraviertel;Gladbacher Str. 466;Acer platanoides 'Schwedleri';Ahorn, Roter Spitz;51.2258, 6.68938;Ahorn
+23076;Barbaraviertel;Osterather Str. Ecke Bockholstr.;Cercis siliquastrum;Judasbaum;51.2218, 6.68447;Judasbaum
+23077;Barbaraviertel;Osterather Str. 1 Parkbucht;Liquidambar styraciflua;Amberbaum;51.2215, 6.68462;Amberbaum
+23080;Barbaraviertel;Bockholtstr. Ecke Bataverstr.;Parrotia persica;Eisenholzbaum, Persischer;51.2211, 6.68143;Eisenholzbaum
+23087;Furth-Mitte;Broichstr. 37 ggb. - Am Jostensbusch Park;Quercus petraea;Eiche, Trauben;51.2093, 6.66287;Eiche
+23089;Furth-Mitte;Broichstr. 87 ggb. - Am Jostensbusch Park;Gymnocladus dioicus;Geweihbaum;51.2098, 6.66281;Geweihbaum
+23090;Furth-Mitte;Broichstr. 91 ggb. - Am Jostensbusch Park;Gymnocladus dioicus;Geweihbaum;51.2101, 6.66287;Geweihbaum
+23173;Furth-Nord;Flurstr. 10 nebenan;Koelreuteria paniculata;Blasenbaum;51.22, 6.65103;Blasenbaum
+23094;Furth-Mitte;Venloer Str. 103 a;Acer platanoides 'Schwedleri';Ahorn, Roter Spitz;51.2146, 6.66468;Ahorn
+23095;Furth-Mitte;Schlesienstr. 16;Tilia tomentosa;Linde, Silber;51.2136, 6.66424;Linde
+23096;Furth-Mitte;Schlesienstr. 8/10;Tilia tomentosa;Linde, Silber;51.213, 6.66482;Linde
+23098;Furth-Mitte;Schlesienstr. 6;Tilia tomentosa;Linde, Silber;51.2126, 6.66509;Linde
+23099;Furth-Mitte;Schlesienstr. 6;Tilia tomentosa;Linde, Silber;51.2125, 6.66519;Linde
+23101;Furth-Mitte;Schlesienstr. 2;Tilia tomentosa;Linde, Silber;51.2123, 6.6654;Linde
+23104;Furth-Mitte;Pommernst. 17;Acer rubrum;Ahorn, Rot;51.2126, 6.66311;Ahorn
+23115;Furth-Mitte;Schabernackstr. 47 ggb.;Liquidambar styraciflua;Amberbaum;51.2118, 6.66382;Amberbaum
+23116;Furth-Mitte;Schabernackstr. 51 ggb.;Liquidambar styraciflua;Amberbaum;51.2118, 6.66355;Amberbaum
+23117;Furth-Mitte;Schabernackstr. 69 ggb.;Acer rubrum;Ahorn, Rot;51.2118, 6.66259;Ahorn
+23118;Furth-Mitte;Schabernackstr. 79 ggb.;Acer rubrum;Ahorn, Rot;51.2119, 6.66207;Ahorn
+23122;Furth-Mitte;Schabernackstr. 69;Acer rubrum;Ahorn, Rot;51.2117, 6.66251;Ahorn
+23126;Furth-Mitte;Schabernackstr. 33;Alnus spaethii;Erle, Purpur;51.2119, 6.6646;Erle
+23128;Furth-Mitte;Schabernackstr. 12 ggb.;Alnus spaethii;Erle, Purpur;51.2121, 6.66588;Erle
+23131;Furth-Mitte;Venloer Str. 47;Acer platanoides 'Olmsted';Ahorn, Spitz;51.2123, 6.66698;Ahorn
+23132;Furth-Mitte;Venloer Str. 47 ggb.;Acer platanoides 'Olmsted';Ahorn, Spitz;51.2124, 6.66707;Ahorn
+23133;Furth-Mitte;Schabernackstr. 79 ggb.;Liquidambar styraciflua;Amberbaum;51.2119, 6.66198;Amberbaum
+23380;Furth-Mitte;Jostenallee 8;Acer rubrum;Ahorn, Rot;51.2114, 6.66785;Ahorn
+23381;Furth-Mitte;Jostenallee 18;Acer rubrum;Ahorn, Rot;51.2112, 6.66737;Ahorn
+23383;Furth-Mitte;Jostenallee 20/22;Acer rubrum;Ahorn, Rot;51.2111, 6.66716;Ahorn
+23384;Furth-Mitte;Jostenallee 24 nebenan Ecke Peter-Loer-Str.;Acer rubrum;Ahorn, Rot;51.211, 6.66682;Ahorn
+23386;Furth-Mitte;Jostenallee 35/37;Acer rubrum;Ahorn, Rot;51.2107, 6.66625;Ahorn
+23388;Furth-Mitte;Peter-Loer-Str. 45;Tilia americana;Linde, Amerikanische;51.2104, 6.66722;Linde
+23389;Furth-Mitte;Peter-Loer-Str. 43;Tilia americana;Linde, Amerikanische;51.2103, 6.6674;Linde
+23390;Furth-Mitte;Peter-Loer-Str. 29 ggb.;Tilia mongolica;Linde, Mongolische;51.2095, 6.66878;Linde
+23393;Furth-Mitte;Berliner Platz 19 ggb.;Liquidambar styraciflua;Amberbaum;51.2084, 6.67306;Amberbaum
+23406;Vogelsang;Stingesbachstr. 14;Tilia europaea 'Pallida';Linde, Kaiser;51.2211, 6.65878;Linde
+23418;Vogelsang;Eggenhofstr. Ecke Kaarster Str. KSP;Alnus spaethii;Erle, Purpur;51.2277, 6.64895;Erle
+23013;Stadionviertel;Eselspfad KSP;Quercus palustris;Eiche, Sumpf;51.1824, 6.67106;Eiche
+23014;Stadionviertel;Eselspfad KSP;Quercus palustris;Eiche, Sumpf;51.1824, 6.67095;Eiche
+23017;Stadionviertel;Eselspfad KSP;Quercus palustris;Eiche, Sumpf;51.1823, 6.67056;Eiche
+23047;Gnadental;Nixhütter Weg 40/44 ggb.;Acer truncatum 'Pacific sunset';Ahorn, Chinesicher Spitz-;51.1787, 6.72338;Ahorn
+23048;Gnadental;Nixhütter Weg 40/44 ggb.;Acer opalus;Ahorn, Schneeball;51.1787, 6.72344;Ahorn
+23050;Gnadental;Nixhütter Weg 40/44 ggb.;Acer opalus;Ahorn, Schneeball;51.1788, 6.72355;Ahorn
+23026;Reuschenberg;Nierenhofstr. hinter Baumschule Erftufer;Salix alba 'Tristis';Weide, Trauer;51.1631, 6.69586;Weide
+23012;Innenstadt;Neuer Stadtgarten;Ginkgo biloba;Ginkgo;51.1925, 6.6956;Ginkgo
+23005;Barbaraviertel;Blücherstr. 23;Cercis siliquastrum;Judasbaum;51.2149, 6.69172;Judasbaum
+23018;Furth-Nord;Kaarster Str. Ecke Nehringskamp;Malus domestica;Apfel, Roter Gravensteiner;51.2237, 6.65358;Apfel
+23020;Furth-Nord;Kaarster Str. Ecke Nehringskamp;Malus domestica;Apfel, Roter Gravensteiner;51.2237, 6.65345;Apfel
+23022;Furth-Nord;Kaarster Str. Ecke Nehringskamp;Pyrus communis;Birne Conference;51.2236, 6.6533;Birne Conference
+23040;Furth-Mitte;Neusser Weyhe rechts;Pyrus communis;Birne Conference;51.216, 6.6669;Birne Conference
+23039;Furth-Mitte;Neusser Weyhe rechts;Pyrus communis;Birne Conference;51.2159, 6.66692;Birne Conference
+23031;Furth-Mitte;Neusser Weyhe rechts;Cercis siliquastrum;Judasbaum;51.2158, 6.66566;Judasbaum
+23011;Furth-Mitte;Engelbertstr. 12 Grünzug;Liriodendron tulipifera;Tulpenbaum;51.2073, 6.67145;Tulpenbaum
+23036;Furth-Mitte;Neusser Weyhe rechts;Juglans regia;Nuss, Wal;51.2158, 6.6668;Nuss
+21356;Furth Süd;Adolfstr. 76 Ecke Alemannenstr.;Styphnolobium japonicum;Schnurbaum;51.2058, 6.67518;Schnurbaum
+21312;Furth Süd;Adolfstr. 76 Ecke Alemannenstr.;Styphnolobium japonicum;Schnurbaum;51.2057, 6.67533;Schnurbaum
+21358;Innenstadt;Marienkirchplatz 4;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.203, 6.68539;Kirsche
+21318;Furth Süd;Römerstr. 24;Acer campestre 'Elsrijk';Ahorn, Feld;51.2078, 6.67943;Ahorn
+21319;Furth Süd;Römerstr. 2 Mittelstreifen;Alnus spaethii;Erle, Purpur;51.2068, 6.67912;Erle
+21322;Furth Süd;Karl-Arnold-Str. 12-16;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2087, 6.68467;Kirsche
+21323;Furth Süd;Karl-Arnold-Str. 12-16;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2086, 6.68466;Kirsche
+21324;Furth Süd;Karl-Arnold-Str. 12-16;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2085, 6.68465;Kirsche
+21325;Furth Süd;Karl-Arnold-Str. 12-16;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2084, 6.68465;Kirsche
+21326;Furth Süd;Karl-Arnold-Str. Ecke Salzstraße;Tilia europaea 'Pallida';Linde, Kaiser;51.2065, 6.68448;Linde
+21332;Furth Süd;Karl-Arnold-Str. Ecke Josefstraße;Quercus cerris;Eiche, Zerr;51.2081, 6.68451;Eiche
+21334;Furth Süd;Kurze Str. 35-39 dahinter Fußweg Bahndamm;Fraxinus ornus;Esche, Blumen;51.2029, 6.67906;Esche
+21335;Furth Süd;Jägerstr. Bolzplatz;Aesculus flava;Roßkastanie, Gelbe;51.2035, 6.68088;Roßkastanie
+21338;Furth Süd;Wolberostr. Mittelstreifen ggb. ALDI;Alnus spaethii;Erle, Purpur;51.2052, 6.67643;Erle
+21343;Furth Süd;Römerstr. 2 Mittelstreifen;Alnus spaethii;Erle, Purpur;51.2068, 6.67912;Erle
+21344;Furth Süd;Römerstr. 2 Mittelstreifen;Alnus spaethii;Erle, Purpur;51.2067, 6.67911;Erle
+21350;Furth Süd;Wolkerstr. 11;Aesculus flava;Roßkastanie, Gelbe;51.2102, 6.68096;Roßkastanie
+21405;Stadionviertel;Stephanstr. 2 Getränke Markt/Bahn;Quercus cerris;Eiche, Zerr;51.2, 6.67997;Eiche
+21360;Innenstadt;Gielenstr. Ecke Hermannsplatz Mittelstreifen;Fraxinus ornus;Esche, Blumen;51.2, 6.68068;Esche
+21361;Innenstadt;Gielenstr. Ecke Hermannsplatz Mittelstreifen;Styphnolobium japonicum;Schnurbaum;51.1997, 6.68091;Schnurbaum
+21365;Innenstadt;Gielenstr. 39 ggb. Mittelstreifen;Fraxinus ornus;Esche, Blumen;51.2011, 6.68127;Esche
+21367;Innenstadt;Gielenstr. 29 ggb. Mittelstreifen;Fraxinus ornus;Esche, Blumen;51.2016, 6.6816;Esche
+21378;Innenstadt;Theodor-Heuss-Platz Wendeschleife Strassenbahn;Platanus acerifolia;Platane;51.2046, 6.68699;Platane
+21380;Innenstadt;Theodor-Heuss-Platz Wendeschleife Strassenbahn;Platanus acerifolia;Platane;51.2044, 6.68701;Platane
+21382;Furth-Süd;Wolberostr. Ecke Marienstr. MIttelstreifen;Alnus spaethii;Erle, Purpur;51.2043, 6.67504;Erle
+21389;Furth-Süd;Kurze Str. 35-39 dahinter Fußweg Bahndamm;Acer campestre 'Elsrijk';Ahorn, Feld;51.2028, 6.67881;Ahorn
+21391;Furth-Süd;Katharina-Braeckeler-Str. Ende vor Fußweg am Bahndamm;Celtis australis;Zürgelbaum;51.2035, 6.68089;Zürgelbaum
+21397;Furth-Süd;Römerstr. Ecke Wolkerstr.;Liquidamber styraciflua;Amberbaum;51.2104, 6.68011;Amberbaum
+21399;Furth-Süd;Römerstr. 93 Mittelstreifen;Liquidamber styraciflua;Amberbaum;51.2115, 6.68012;Amberbaum
+22381;Furth-Süd;Karl-Arnold-Str. zw. Josefstr. und Salzstr.;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2075, 6.68458;Kirsche
+22383;Furth-Süd;Karl-Arnold-Str. zw. Josefstr. und Salzstr.;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2072, 6.68455;Kirsche
+22385;Furth-Süd;Karl-Arnold-Str. zw. Josefstr. und Salzstr.;Quercus pubescens;Eiche, Flaum;51.2074, 6.6845;Eiche
+22389;Furth-Süd;Karl-Arnold-Str. 12-16;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2086, 6.6846;Kirsche
+22391;Furth-Süd;Wingenderstr. 8;Quercus pubescens;Eiche, Flaum;51.2094, 6.68474;Eiche
+22397;Furth-Süd;Karl-Arnold-Str. 12-16;Quercus cerris;Eiche, Zerr;51.2082, 6.68452;Eiche
+22401;Furth-Süd;Weißenberg Weg 83;Amelanchier lamarckii;Felsenbirne, Kupfer;51.2097, 6.67989;Felsenbirne
+23238;Hammfeld;Stresemannalle Ecke Hammfelddamm;Castanea sativa;Esskastanie;51.1974, 6.71076;Esskastanie
+23197;Hammfeld;Stresemannalle Ecke Hammfelddamm;Castanea sativa;Esskastanie;51.1975, 6.71069;Esskastanie
+23208;Hammfeld;Stresemannalle Ecke Hammfelddamm;Castanea sativa;Esskastanie;51.1977, 6.71049;Esskastanie
+23210;Hammfeld;Stresemannalle Ecke Hammfelddamm;Castanea sativa;Esskastanie;51.1975, 6.71063;Esskastanie
+23091;Furth-Mitte;Geulenstr. 45;Acer platanoides 'Schwedleri';Ahorn, Roter Spitz;51.214, 6.66238;Ahorn
+23426;Reuschenberg;Schwarzer Weg (Hochzeitshain);Juglans regia;Walnuss;51.1742, 6.69205;Walnuss
+23427;Reuschenberg;Schwarzer Weg (Hochzeitshain);Juglans regia;Walnuss;51.1742, 6.69195;Walnuss
+23428;Reuschenberg;Schwarzer Weg (Hochzeitshain);Castanea sativa;Esskastanie;51.174, 6.69231;Esskastanie
+23432;Reuschenberg;Schwarzer Weg (Hochzeitshain);Malus sylvestris;Apfel, Wild-;51.174, 6.69198;Apfel
+23435;Reuschenberg;Schwarzer Weg (Hochzeitshain);Prunus avium 'Plena';Kirsche, Vogel-;51.1737, 6.69226;Kirsche
+23440;Vogelsang Bols-Siedlung;Niederdonker Weg;Juglans regia;Walnuss;51.2308, 6.68334;Walnuss
+23441;Vogelsang Bols-Siedlung;Niederdonker Weg;Juglans regia;Walnuss;51.2309, 6.68343;Walnuss
+23442;Vogelsang Bols-Siedlung;Niederdonker Weg;Juglans regia;Walnuss;51.2311, 6.68354;Walnuss
+23443;Vogelsang Bols-Siedlung;Niederdonker Weg;Juglans regia;Walnuss;51.2311, 6.68339;Walnuss
+23445;Vogelsang Bols-Siedlung;Niederdonker Weg;Pyrus communis;Birne, 'Gute Luise v. Avranches';51.231, 6.68286;Birne
+23446;Vogelsang Bols-Siedlung;Niederdonker Weg;Pyrus communis;Birne, 'Gute Luise v. Avranches';51.2311, 6.68269;Birne
+23449;Vogelsang Bols-Siedlung;Niederdonker Weg;Pyrus communis;Birne, 'Gute Luise v. Avranches';51.2313, 6.68276;Birne
+23451;Vogelsang Bols-Siedlung;Niederdonker Weg;Malus domestica;Apfel, Rheinischer Bohn-;51.231, 6.68329;Apfel
+23454;Vogelsang Bols-Siedlung;Niederdonker Weg;Malus domestica;Apfel, Rheinischer Bohn-;51.2312, 6.68309;Apfel
+23457;Vogelsang Bols-Siedlung;Niederdonker Weg;Prunus dom.;Zwetsche, Haus-;51.2313, 6.68252;Zwetsche
+23464;Vogelsang Bols-Siedlung;Niederdonker Weg;Castanea satvia;Esskastanie;51.2318, 6.68133;Esskastanie
+23439;Stadionviertel;Einsteinstraße Grünzug;Liriodendron tulipifera;Tulpenbaum;51.1815, 6.67272;Tulpenbaum
+23201;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1977, 6.7094;Blasenbaum
+23207;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1978, 6.71033;Blasenbaum
+23374;Weckhoven;Kurt-Huber-Str. 19;Castanea sativa;Esskastanie;51.1595, 6.69374;Esskastanie
+23304;Stadionviertel;Konrad-Adenauer-Ring Grefrather Weg (Grünzug);Quercus palustris;Eiche, Sumpf;51.1843, 6.67622;Eiche
+23306;Stadionviertel;Glehner Weg 88;Liquidambar styraciflua;Amberbaum;51.1962, 6.66915;Amberbaum
+23272;Pomona;Bergheimerstr. ggb. Abzw. Am Krausenbaum;Celtis australis;Zürgelbaum;51.184, 6.68903;Zürgelbaum
+23274;Pomona;Bergheimerstr. 218 ggb.;Celtis australis;Zürgelbaum;51.1833, 6.68884;Zürgelbaum
+23277;Pomona;Bergheimerstr. 236 ggb.;Celtis australis;Zürgelbaum;51.1824, 6.68862;Zürgelbaum
+23215;Hammfeld;Hammer Landstr. 113;Alnus spaethii;Erle, Purpur;51.2031, 6.72092;Erle
+23231;Hammfeld;Carl-Schurz-Str. 5;Quercus petraea;Eiche, Trauben;51.1952, 6.71398;Eiche
+23232;Hammfeld;Carl-Schurz-Str. 5;Quercus petraea;Eiche, Trauben;51.1951, 6.71397;Eiche
+23235;Hammfeld;Carl-Schurz-Str. 7;Quercus petraea;Eiche, Trauben;51.1935, 6.71365;Eiche
+23185;Grimlinghausen;Cyriakusstr. 22 ggb.;Cercidiphyllum japonicum;Kuchenbaum;51.1802, 6.73926;Kuchenbaum
+23186;Grimlinghausen;Am Röttgen 16 schräg dahinter;Koelreuteria paniculata;Blasenbaum;51.1796, 6.74443;Blasenbaum
+23176;Gnadental;Kölner Str. Ecke Tiberiusstr.;Zelkove serrata 'Village Green';Zelkove;51.1829, 6.72519;Zelkove
+23180;Gnadental;Haselweg KSP Grünzug;Gymnocladus diocus;Geweihbaum;51.1771, 6.7189;Geweihbaum
+23182;Gnadental;Haselweg KSP Grünzug;Gymnocladus diocus;Geweihbaum;51.1772, 6.71901;Geweihbaum
+23279;Reuschenberg;Linneplatz 3 ggb.;Carpinus betulus;Hainbuche;51.1687, 6.69631;Hainbuche
+23283;Reuschenberg;Linneplatz 5 ggb.;Alnus cordata;Erle, Italienische;51.1694, 6.69773;Erle
+23287;Reuschenberg;Lupinenstr. 88 ggb.;Alnus spaethii;Erle, Purpur;51.1699, 6.69518;Erle
+23290;Reuschenberg;Aurinstr. 8;Alnus spaethii;Erle, Purpur;51.1684, 6.69425;Erle
+23291;Reuschenberg;Aurinstr. 10;Alnus spaethii;Erle, Purpur;51.1683, 6.69391;Erle
+23292;Reuschenberg;Aurinstr. 18;Alnus spaethii;Erle, Purpur;51.1678, 6.69316;Erle
+23293;Reuschenberg;Aurinstr. 20;Alnus spaethii;Erle, Purpur;51.1677, 6.69298;Erle
+23295;Reuschenberg;Aurinstr. 26;Alnus spaethii;Erle, Purpur;51.1675, 6.69259;Erle
+23301;Reuschenberg;Finkenstr. 5;Ulmus hollandica 'Lobel';Ulme, Stadt;51.1654, 6.68254;Ulme
+23239;Holzheim;Vereinsstr. 5;Acer campestre 'Elsrijk';Ahorn, Feld;51.1611, 6.6735;Ahorn
+23240;Holzheim;Vereinsstr. 9;Acer campestre 'Elsrijk';Ahorn, Feld;51.1612, 6.67323;Ahorn
+23083;Erfttal;Harffer Str. Ecke Bedburger Str.;Fraxinus angustifolia 'Raywood';Esche, Schmalblättrige;51.1697, 6.72813;Esche
+23262;Norf-Derikum;Aggerstr. 21 ggb neben Fussweg;Liquidambar styraciflua;Amberbaum;51.1661, 6.73275;Amberbaum
+23265;Norf-Derikum;Am Goldberg 94a ggb.;Carpinus betulus;Hainbuche;51.1626, 6.74033;Hainbuche
+23261;Norf;Südstr. 17 Ecke Geibelstr.;Quercus pubescens;Eiche, Flaum;51.1552, 6.73116;Eiche
+23260;Norf;Eichenallee 11 a ggb.;Quercus petraea;Eiche, Trauben;51.1517, 6.72499;Eiche
+23307;Stadionviertel;Virchowstr. 3;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1902, 6.67471;Ahorn
+23308;Stadionviertel;Im Jagdfeld 24;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1894, 6.67596;Ahorn
+23311;Stadionviertel;Im Jagdfeld 14;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1897, 6.67701;Ahorn
+23316;Stadionviertel;Konrad-Adenauer-Ring 37 a;Tilia europaea 'Pallida';Linde, Kaiser;51.1957, 6.66768;Linde
+23317;Stadionviertel;Konrad-Adenauer-Ring 33;Alnus cordata;Erle, Italienische;51.1967, 6.66689;Erle
+23320;Stadionviertel;Stoffelsweg Ecke Konrad-Adenauer-Ring;Alnus cordata;Erle, Italienische;51.2008, 6.66505;Erle
+23321;Stadionviertel;Stoffelsweg Ecke Konrad-Adenauer-Ring;Alnus cordata;Erle, Italienische;51.2008, 6.66518;Erle
+23062;Augustinusviertel;Stresemannallee neben Brücke Europadamm;Tilia europaea 'Pallida';Linde, Kaiser;51.1934, 6.70279;Linde
+23060;Augustinusviertel;Stresemannallee Mittelstreifen;Tilia europaea 'Pallida';Linde, Kaiser;51.1943, 6.70482;Linde
+23253;Innenstadt;Promenadenstr. Grünzug Nähe Kanal unterhalb Alte Post;Carpinus betulus;Hainbuche;51.1967, 6.69014;Hainbuche
+23254;Innenstadt;Erftstr. 100 ggb.;Alnus glutinosa;Erle, Schwarz;51.196, 6.69141;Erle
+23400;Wehl;Wehler Dorfstr. Ecke Ecke Specker Str.;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1366, 6.679;Ahorn
+23343;Vogelsang;Daimler Str. 18 nebenan;Tilia europaea 'Pallida';LInde, Kaiser;51.2248, 6.66113;LInde
+23344;Vogelsang;Daimler Str. 183 ggb.;Tilia americana;Linde, Amerikanische;51.2251, 6.66208;Linde
+23138;Furth-Nord;Viersener Str. 100;Tilia europaea 'Pallida';LInde, Kaiser;51.2165, 6.64891;LInde
+23144;Furth-Nord;Viersener Str. 53 daneben;Tilia americana;Linde, Amerikanische;51.2173, 6.65329;Linde
+23148;Furth-Nord;Viersener Str. 53 nebenan Grünzug Parkplatz;Liriodendron tulipifera;Tulpenbaum;51.2174, 6.65387;Tulpenbaum
+23153;Furth-Nord;Im Püllenkamp Ecke Lange Hecke;Tilia mongolica;Linde, Mongolische;51.2191, 6.64957;Linde
+23160;Furth-Nord;Lauvenburger Str. 9;Fraxinus angustifolia 'Raywood';Esche, Schmalblättrige;51.221, 6.65483;Esche
+23161;Furth-Nord;Lauvenburger Str. 8;Fraxinus angustifolia 'Raywood';Esche, Schmalblättrige;51.221, 6.65503;Esche
+23164;Furth-Nord;Kaarster Str. 69;Tilia tomentosa;Linde, Silber;51.2193, 6.65726;Linde
+23167;Furth-Nord;Kaarster Str. 91 ggb. auf Wiese;Koelreuteria paniculata;Blasenbaum;51.2197, 6.6568;Blasenbaum
+23168;Furth-Nord;Kaarster Str. 91 ggb. auf Wiese;Koelreuteria paniculata;Blasenbaum;51.2198, 6.65673;Blasenbaum
+23169;Furth-Nord;Kaarster Str. 91 ggb. auf Wiese;Koelreuteria paniculata;Blasenbaum;51.2199, 6.65669;Blasenbaum
+23170;Furth-Nord;Lange Hecke 1;Tilia europaea 'Pallida';LInde, Kaiser;51.2189, 6.65314;LInde
+23172;Furth-Nord;Lange Hecke 5;Tilia europaea 'Pallida';LInde, Kaiser;51.2188, 6.65278;LInde
+23356;Vogelsang;Bickenbachstr. 13;Acer rubrum;Ahorn, Rot;51.2232, 6.66121;Ahorn
+23359;Vogelsang;Brückerfeldstraße 15;Tilia americana;Linde, Amerikanische;51.2216, 6.65883;Linde
+23364;Vogelsang;Furtherhofstr. Ecke Am Flachshof;Ulmus hollandica 'Lobel';Ulme, Stadt;51.2207, 6.66099;Ulme
+23365;Vogelsang;Furtherhofstr. ggb. Ecke Am Flachshof;Tilia tomentosa;Linde, Silber;51.2208, 6.66121;Linde
+23371;Vogelsang;Furtherhofstr. ggb. Abzw. Römerstr.;Acer monspessulanum;Ahorn, Französischer;51.2238, 6.6669;Ahorn
+23085;Furth-Mitte;Plankstraße 64 Ecke Annostr.;Acer rubrum;Ahorn, Rot;51.2071, 6.66845;Ahorn
+23067;Barbaraviertel;Gladbacher Str. 470 ggb.;Acer platanoides 'Schwedleri';Ahorn, Roter Spitz;51.2255, 6.68986;Ahorn
+23068;Barbaraviertel;Scharnhorststraße 6 ggb.;Juglans regia;Nuss, Wal;51.2141, 6.6896;Nuss
+23070;Barbaraviertel;Scharnhorststraße 6 ggb.;Juglans regia;Nuss, Wal;51.2141, 6.68979;Nuss
+23071;Barbaraviertel;Scharnhorststraße 6 ggb.;Juglans regia;Nuss, Wal;51.2142, 6.68988;Nuss
+23072;Barbaraviertel;Bockholtstr. 41;Acer platanoides 'Schwedleri';Ahorn, Roter Spitz;51.223, 6.69272;Ahorn
+23074;Barbaraviertel;Xantener Str. 1 Ecke Bockholtstr.;Acer platanoides 'Schwedleri';Ahorn, Roter Spitz;51.2221, 6.68616;Ahorn
+23079;Barbaraviertel;Bockholtstr. Ecke Bataverstr.;Ulmus hollandica 'Lobel';Ulme, Stadt;51.2213, 6.68173;Ulme
+23106;Furth-Mitte;Pommernst. 15;Acer rubrum;Ahorn, Rot;51.2129, 6.66319;Ahorn
+23107;Furth-Mitte;Pommernst. 13;Tilia europaea 'Pallida';Linde, Kaiser;51.213, 6.66322;Linde
+23108;Furth-Mitte;Pommernst. 13;Tilia europaea 'Pallida';Linde, Kaiser;51.2131, 6.66323;Linde
+23109;Furth-Mitte;Pommernst. 13;Tilia europaea 'Pallida';Linde, Kaiser;51.2131, 6.66324;Linde
+23110;Furth-Mitte;Pommernst. 11;Acer rubrum;Ahorn, Rot;51.2132, 6.66326;Ahorn
+23111;Furth-Mitte;Pommernst. 11;Acer rubrum;Ahorn, Rot;51.2134, 6.66329;Ahorn
+23113;Furth-Mitte;Pommernst. 7;Juglans regia;Nuss, Wal;51.2139, 6.66377;Nuss
+23119;Furth-Mitte;Schabernackstr. 89 schräg ggb.;Acer rubrum;Ahorn, Rot;51.212, 6.6614;Ahorn
+23120;Furth-Mitte;Schabernackstr. 79;Acer rubrum;Ahorn, Rot;51.2118, 6.662;Ahorn
+23124;Furth-Mitte;Schabernackstr. 53/55;Alnus spaethii;Erle, Purpur;51.2117, 6.66345;Erle
+23127;Furth-Mitte;Schabernackstr. 31;Alnus spaethii;Erle, Purpur;51.2119, 6.66472;Erle
+23385;Furth-Mitte;Jostenallee 15;Acer rubrum;Ahorn, Rot;51.2111, 6.6673;Ahorn
+23391;Furth-Mitte;Friedensstr. 12 Ecke Adolfstr./Engelbertstr.;Fraxinus angustifolia 'Raywood';Esche, schmalblättrige;51.2076, 6.6724;Esche
+23415;Vogelsang;Kaarster Str. 148 nebenan;Castanea sativa;Esskastanie;51.2234, 6.65421;Esskastanie
+23417;Vogelsang;Eggenhofstr. Ecke Kaarster Str.;Alnus spaethii;Erle, Purpur;51.2276, 6.6491;Erle
+23016;Stadionviertel;Eselspfad KSP;Quercus palustris;Eiche, Sumpf;51.1823, 6.67058;Eiche
+23041;Gnadental;Nixhütter Weg 68;Acer truncatum 'Pacific sunset';Ahorn, Chinesicher Spitz-;51.1771, 6.72086;Ahorn
+23046;Gnadental;Nixhütter Weg 54 ggb.;Acer opalus;Ahorn, Schneeball;51.1783, 6.72267;Ahorn
+23049;Gnadental;Nixhütter Weg 40/44 ggb.;Acer truncatum 'Pacific sunset';Ahorn, Chinesicher Spitz-;51.1788, 6.7235;Ahorn
+23025;Reuschenberg;Linneplatz - Arboretum;Juglans regia;Nuss, Wal;51.1651, 6.69773;Nuss
+23052;Furth-Mitte;Plankstr. Jostensbusch;Juglans regia;Nuss, Wal;51.2102, 6.66411;Nuss
+23051;Furth-Mitte;Plankstr. Jostensbusch;Juglans regia;Nuss, Wal;51.2102, 6.66408;Nuss
+23006;Barbaraviertel;Bockholtstr. 62 ggb.;Carpinus betulus;Hainbuche;51.223, 6.69178;Hainbuche
+23019;Furth-Nord;Kaarster Str. Ecke Nehringskamp;Malus domestica;Apfel, Roter Gravensteiner;51.2237, 6.65355;Apfel
+23009;Furth-Mitte;Engelbertstr. 12 Grünzug;Fraxinus americana 'Skyline';Esche, Kleinkronige 'Raywood';51.2067, 6.6705;Esche
+23028;Furth-Mitte;Neusser Weyhe rechts;Parrotia persica;Eisenholzbaum;51.2158, 6.66515;Eisenholzbaum
+23029;Furth-Mitte;Neusser Weyhe rechts;Parrotia persica;Eisenholzbaum;51.2158, 6.66535;Eisenholzbaum
+23030;Furth-Mitte;Neusser Weyhe rechts;Cercis siliquastrum;Judasbaum;51.2158, 6.66548;Judasbaum
+23037;Furth-Mitte;Neusser Weyhe rechts;Juglans regia;Nuss, Wal;51.2158, 6.66693;Nuss
+21357;Innenstadt;Marienkirchplatz 6;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2032, 6.68578;Kirsche
+21359;Innenstadt;Marienkirchplatz 4;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2029, 6.68527;Kirsche
+21316;Furth Süd;Römerstr. 65 Mittelstreifen;Celtis australis;Zürgelbaum;51.2107, 6.67994;Zürgelbaum
+21321;Furth Süd;Karl-Arnold-Str. 12-16;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2089, 6.68469;Kirsche
+21341;Furth Süd;Wolberostr. Ecke Further Str.;Acer campestre 'Elsrijk';Ahorn, Feld;51.2058, 6.67831;Ahorn
+21347;Furth Süd;Römerstr. 50;Acer campestre 'Elsrijk';Ahorn, Feld;51.2088, 6.67961;Ahorn
+21349;Furth Süd;Römerstr. 93 Mittelstreifen;Platanus acerifolia;Platane;51.2114, 6.67997;Platane
+21364;Innenstadt;Gielenstr. 39 ggb. Mittelstreifen;Fraxinus ornus;Esche, Blumen;51.2009, 6.68113;Esche
+21369;Innenstadt;Gielenstr. 5 Mittelstreifen Straßenbahn;Platanus acerifolia;Platane;51.2027, 6.68287;Platane
+21370;Innenstadt;Gielenstr. 5 Mittelstreifen Straßenbahn;Platanus acerifolia;Platane;51.2026, 6.68282;Platane
+21371;Innenstadt;Gielenstr. 5 Mittelstreifen Straßenbahn;Platanus acerifolia;Platane;51.2026, 6.68275;Platane
+21383;Innenstadt;Düsseldorfer Str. Ecke Rheintorstr.;Alnus spaethii;Erle, Purpur;51.2068, 6.68888;Erle
+21384;Furth-Süd;Kurze Str. 35-39 dahinter Fußweg Bahndamm;Acer campestre 'Elsrijk';Ahorn, Feld;51.2026, 6.67811;Ahorn
+21386;Furth-Süd;Kurze Str. 35-39 dahinter Fußweg Bahndamm;Acer campestre 'Elsrijk';Ahorn, Feld;51.2027, 6.67838;Ahorn
+21388;Furth-Süd;Kurze Str. 35-39 dahinter Fußweg Bahndamm;Acer campestre 'Elsrijk';Ahorn, Feld;51.2028, 6.67866;Ahorn
+21390;Furth-Süd;Kurze Str. 35-39 dahinter Fußweg Bahndamm;Acer campestre 'Elsrijk';Ahorn, Feld;51.2028, 6.67894;Ahorn
+21392;Furth-Süd;Katharina-Braeckeler-Str. Ende vor Fußweg am Bahndamm;Celtis australis;Zürgelbaum;51.2035, 6.68079;Zürgelbaum
+21394;Innenstadt;Theodor-Heuss-Platz Wendeschleife Strassenbahn;Ulmus X hollandica 'Lobel';Ulme, Schmalkronige Stadt;51.2043, 6.68678;Ulme
+21395;Furth-Süd;Katharina-Braeckeler-Str. Ende vor Fußweg am Bahndamm;Corylus colurna;Hasel, Baum;51.2036, 6.68083;Hasel
+21396;Furth-Süd;Katharina-Braeckeler-Str. Ende vor Fußweg am Bahndamm;Corylus colurna;Hasel, Baum;51.2036, 6.681;Hasel
+21398;Furth-Süd;Römerstr. Ecke Wolkerstr.;Liquidamber styraciflua;Amberbaum;51.2105, 6.68015;Amberbaum
+22380;Furth-Süd;Karl-Arnold-Str. zw. Josefstr. und Salzstr.;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2076, 6.68458;Kirsche
+22384;Furth-Süd;Karl-Arnold-Str. zw. Josefstr. und Salzstr.;Quercus cerris;Eiche, Flaum;51.2075, 6.68451;Eiche
+22387;Furth-Süd;Karl-Arnold-Str. 12-16;Cercis siliquastrum;Judasbaum;51.2083, 6.68463;Judasbaum
+22388;Furth-Süd;Karl-Arnold-Str. 12-16;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2086, 6.68466;Kirsche
+22393;Furth-Süd;Wingenderstr. 8;Quercus pubescens;Eiche, Flaum;51.2096, 6.68476;Eiche
+22394;Furth-Süd;Wingenderstr. 8;Quercus cerris;Eiche, Zerr;51.2097, 6.68476;Eiche
+22398;Furth-Süd;Weißenberg Weg 79;Amelanchier lamarckii;Felsenbirne, Kupfer;51.2097, 6.68021;Felsenbirne
+22399;Furth-Süd;Weißenberg Weg 81;Amelanchier lamarckii;Felsenbirne, Kupfer;51.2097, 6.68008;Felsenbirne
+23209;Hammfeld;Stresemannalle Ecke Hammfelddamm;Castanea sativa;Esskastanie;51.1976, 6.71055;Esskastanie
+23092;Furth-Mitte;Geulenstr. 45;Acer platanoides 'Schwedleri';Ahorn, Roter Spitz;51.2139, 6.66235;Ahorn
+23422;Weckhoven;Am Palmstrauch Grünzug;Quercus coccinea;Eiche, Scharlach;51.1551, 6.69383;Eiche
+23429;Reuschenberg;Schwarzer Weg (Hochzeitshain);Castanea sativa;Esskastanie;51.174, 6.69221;Esskastanie
+23430;Reuschenberg;Schwarzer Weg (Hochzeitshain);Malus domestica;Apfel, Rheinischer Bohn-;51.1739, 6.69216;Apfel
+23433;Reuschenberg;Schwarzer Weg (Hochzeitshain);Pyrus communis;Birne, 'Köstliche von Charneu';51.1738, 6.69219;Birne
+23436;Reuschenberg;Schwarzer Weg (Hochzeitshain);Fagus sylvatica;Buche, Rot-;51.1739, 6.69114;Buche
+23437;Reuschenberg;Schwarzer Weg (Hochzeitshain);Fagus sylvatica;Buche, Rot-;51.1739, 6.69104;Buche
+23448;Vogelsang Bols-Siedlung;Niederdonker Weg;Pyrus communis;Birne, 'Gute Luise v. Avranches';51.2313, 6.68292;Birne
+23455;Vogelsang Bols-Siedlung;Niederdonker Weg;Prunus dom.;Zwetsche, Haus-;51.2311, 6.68253;Zwetsche
+23456;Vogelsang Bols-Siedlung;Niederdonker Weg;Prunus dom.;Zwetsche, Haus-;51.2312, 6.68267;Zwetsche
+23458;Vogelsang Bols-Siedlung;Niederdonker Weg;Prunus dom.;Zwetsche, Haus-;51.2314, 6.68251;Zwetsche
+23460;Vogelsang Bols-Siedlung;Niederdonker Weg;Castanea satvia;Esskastanie;51.2314, 6.68192;Esskastanie
+23198;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1975, 6.7092;Blasenbaum
+23199;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1975, 6.70918;Blasenbaum
+23200;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1976, 6.7093;Blasenbaum
+23202;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1977, 6.70951;Blasenbaum
+23203;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1978, 6.70962;Blasenbaum
+23206;Hammfeld;Stresemannalle Ecke Hammfelddamm;Koelreuteria paniculata;Blasenbaum;51.1979, 6.71014;Blasenbaum
+23373;Weckhoven;Kurt-Huber-Str. 19;Castanea sativa;Esskastanie;51.1594, 6.69358;Esskastanie
+23303;Stadionviertel;Grefrather Weg Konrad-Adenauer-Ring (Grünzug);Corylus colurna;Hasel, Baum;51.1863, 6.67762;Hasel
+23305;Stadionviertel;Viktoriastr. ggb. Abzweigung Bismarkstr.;Fraxinus angustifolia 'Raywood';Esche, Schmalblättrige;51.1958, 6.67866;Esche
+23302;Reuschenberg;Nierenhofstr. hinter Baumschule Erftufer;Alnus glutinosa;Erle, Schwarz;51.1633, 6.69663;Erle
+23183;Gnadental;An der Erftmündung 8;Carpinus betulus;Hainbuche;51.1796, 6.72938;Hainbuche
+23333;Uedesheim;Macherscheider Str. 30;Zelkove serrata 'Village Green';Zelkove;51.1655, 6.78564;Zelkove
+23269;Pomona;"Jülicher Landstr. Ecke Konrad-Adenauer-Ring; vor Tanke";Platanus acerifolia;Platane;51.1839, 6.6787;Platane
+23273;Pomona;Bergheimerstr. 210/208 ggb.;Celtis australis;Zürgelbaum;51.1835, 6.68889;Zürgelbaum
+23211;Hammfeld;Hammer Landstr. 113;Alnus spaethii;Erle, Purpur;51.203, 6.71995;Erle
+23214;Hammfeld;Hammer Landstr. 113;Alnus spaethii;Erle, Purpur;51.2031, 6.7207;Erle
+23217;Hammfeld;Hammer Landstr. 113;Alnus spaethii;Erle, Purpur;51.2032, 6.7214;Erle
+23228;Hammfeld;Carl-Schurz-Str. 2 ggb.;Quercus petraea;Eiche, Trauben;51.196, 6.7132;Eiche
+23234;Hammfeld;Carl-Schurz-Str. 7;Quercus petraea;Eiche, Trauben;51.1939, 6.71372;Eiche
+23237;Hammfeld;Carl-Schurz-Str. 7 ggb.;Quercus petraea;Eiche, Trauben;51.1937, 6.71349;Eiche
+23184;Grimlinghausen;An der Eiche 27 ggb. Ecke Abzw.;Quercus petraea;Eiche, Trauben;51.1758, 6.74109;Eiche
+23195;Grimlinghausen;Am Röttgen 86/102 dahinter;Tilia tomentosa;Linde, Silber;51.1786, 6.75136;Linde
+23177;Gnadental;Kölner Str. Ecke Konstantinstr.;Zelkove serrata 'Village Green';Zelkove;51.1832, 6.72431;Zelkove
+23178;Gnadental;Kölner Str. Ecke Konstantinstr.;Zelkove serrata 'Village Green';Zelkove;51.1833, 6.72425;Zelkove
+23280;Reuschenberg;Linneplatz 1b ggb.;Gymnocladus diocus;Geweihbaum;51.1682, 6.69538;Geweihbaum
+23281;Reuschenberg;Linneplatz 17 ggb.;Koelreuteria paniculata;Blasenbaum;51.1684, 6.69603;Blasenbaum
+23284;Reuschenberg;Linneplatz 5 ggb.;Koelreuteria paniculata;Blasenbaum;51.1694, 6.69778;Blasenbaum
+23294;Reuschenberg;Aurinstr. 24;Alnus spaethii;Erle, Purpur;51.1676, 6.69271;Erle
+23296;Reuschenberg;Aurinstr. 36;Alnus spaethii;Erle, Purpur;51.1671, 6.6918;Erle
+23298;Reuschenberg;Finkenstr. 11;Ulmus hollandica 'Lobel';Ulme, Stadt;51.1656, 6.68159;Ulme
+23299;Reuschenberg;Finkenstr. 11;Ulmus hollandica 'Lobel';Ulme, Stadt;51.1656, 6.6817;Ulme
+23247;Holzheim;Vereinsstr. 24 a ggb. Ecke Weimarer Str.;Acer campestre 'Elsrijk';Ahorn, Feld;51.1617, 6.67229;Ahorn
+23309;Stadionviertel;Im Jagdfeld 22;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1894, 6.67611;Ahorn
+23310;Stadionviertel;Im Jagdfeld 20;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1896, 6.67662;Ahorn
+23313;Stadionviertel;Preußenstr. 155 ggb.;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1889, 6.66777;Ahorn
+23314;Stadionviertel;Preußenstr. 149;Acer freemanii 'Scarlet Sentinel';Ahorn, Rot;51.1888, 6.66802;Ahorn
+23322;Stadionviertel;Konrad-Adenauer-Ring Ecke Klever Str.;Alnus cordata;Erle, Italienische;51.2005, 6.66556;Erle
+23327;Stadionviertel;Konrad-Adenauer-Ring Ecke Klever Str.;Alnus spaethii;Erle, Purpur;51.2004, 6.66534;Erle
+23329;Stadionviertel;Glehner Weg 2 ggb. - Ecke Jahnstr.;Prunus avium 'Plena';Kirsche, Wild;51.1978, 6.67375;Kirsche
+23249;Innenstadt;Hesemannstr. 25 ggb.;Tilia europaea 'Pallida';Linde, Kaiser;51.1977, 6.68418;Linde
+23059;Augustinusviertel;Stresemannallee 6 Mittelstreifen;Tilia europaea 'Pallida';Linde, Kaiser;51.1938, 6.70391;Linde
+23255;Innenstadt;Promenadenstr. Grünzug Nähe Kanal unterhalb Bushalte Zolltor;Carpinus betulus;Hainbuche;51.1957, 6.69223;Hainbuche
+23256;Innenstadt;Kaiser-Friedrich-Str. 148 ggb (Abhang Nordkanal);Carpinus betulus;Hainbuche;51.1934, 6.6891;Hainbuche
+23401;Erfttal;Berghäuschensweg Hochzeitshain Gnadentaler Mühle;Fagus sylvatica;Buche, Rot;51.1722, 6.71826;Buche
+23411;Norf;Geibelstr. 31;Juglans regia;Nuss, Wal;51.155, 6.73113;Nuss
+23412;Norf;Geibelstr. 23;Juglans regia;Nuss, Wal;51.155, 6.73133;Nuss
+23416;Stadionviertel;Glehner Weg 45;Tilia europaea 'Pallida';Linde, Kaiser;51.1958, 6.66956;Linde
+23399;Weissenberg;Weissenberger Weg 177 dahinter Grünanlage;Juglans regia;Nuss, Wal;51.2142, 6.6749;Nuss
+23175;Furth-Nord;Im Rottfeld 1 schräg ggb.;Acer campestre 'Elsrijk';Ahorn, Feld;51.2284, 6.64349;Ahorn
+23136;Furth-Nord;Kaarster Str. 169;Acer campestre 'Elsrijk';Ahorn, Feld;51.2274, 6.64892;Ahorn
+23339;Vogelsang;Kaarster Str. 169 ggb.;Liquidambar styraciflua;Amberbaum;51.2276, 6.64883;Amberbaum
+23340;Vogelsang;Kaarster Str. 171 ggb.;Acer campestre 'Elsrijk';Ahorn, Feld;51.2277, 6.64839;Ahorn
+23143;Furth-Nord;Viersener Str. 53 daneben;Tilia americana;Linde, Amerikanische;51.2173, 6.65318;Linde
+23149;Furth-Nord;Viersener Str. 53 nebenan Grünzug Parkplatz;Liriodendron tulipifera;Tulpenbaum;51.2174, 6.654;Tulpenbaum
+23150;Furth-Nord;Im Püllenkamp 18/20;Tilia mongolica;Linde, Mongolische;51.2184, 6.64956;Linde
+23156;Furth-Nord;Nehringskamp 11a/13;Juglans regia;Nuss, Wal;51.2227, 6.65189;Nuss
+23159;Furth-Nord;Nehringskamp 13/13 a;Sorbus latifolia 'Henk Vink';Mehlbeere, Breitblättrige;51.2226, 6.65218;Mehlbeere
+23163;Furth-Nord;Kaarster Str. 126 ggb.;Alnus spaethii;Erle, Purpur;51.2216, 6.65562;Erle
+23345;Vogelsang;Kaarster Str. 76;Tilia tomentosa;Linde, Silber;51.219, 6.65764;Linde
+23166;Furth-Nord;Kaarster Str. 91 ggb. auf Wiese;Koelreuteria paniculata;Blasenbaum;51.2196, 6.65686;Blasenbaum
+23171;Furth-Nord;Lange Hecke 3;Tilia europaea 'Pallida';LInde, Kaiser;51.2189, 6.653;LInde
+23348;Vogelsang;Römerstr. 145 nebenan;Parrotia persica;Eisenholzbaum, Persischer;51.2204, 6.66928;Eisenholzbaum
+23357;Vogelsang;Bickenbachstr. 25;Acer rubrum;Ahorn, Rot;51.223, 6.66113;Ahorn
+23366;Vogelsang;Furtherhofstr. 38;Tilia tomentosa;Linde, Silber;51.2204, 6.66078;Linde
+23370;Vogelsang;Furtherhofstr. ggb. Abzw. Römerstr.;Acer monspessulanum;Ahorn, Französischer;51.2238, 6.6668;Ahorn
+23069;Barbaraviertel;Scharnhorststraße 6 ggb.;Juglans regia;Nuss, Wal;51.2141, 6.68971;Nuss
+23073;Barbaraviertel;Xantener Str. 1 Ecke Bockholtstr.;Liriodendron tulipifera;Tulpenbaum;51.222, 6.68621;Tulpenbaum
+23086;Furth-Mitte;Broichstr. 37 ggb. - Am Jostensbusch Park;Quercus petraea;Eiche, Trauben;51.2092, 6.66299;Eiche
+23088;Furth-Mitte;Broichstr. 87 ggb. - Am Jostensbusch Park;Gymnocladus dioicus;Geweihbaum;51.2097, 6.66278;Geweihbaum
+23174;Furth-Nord;Viersener Str. 27;Acer rubrum;Ahorn, Rot;51.2178, 6.6557;Ahorn
+23097;Furth-Mitte;Schlesienstr. 6;Tilia tomentosa;Linde, Silber;51.2127, 6.66505;Linde
+23100;Furth-Mitte;Schlesienstr. 4;Tilia tomentosa;Linde, Silber;51.2124, 6.66532;Linde
+23103;Furth-Mitte;Pommernst. 17;Acer rubrum;Ahorn, Rot;51.2125, 6.6631;Ahorn
+23105;Furth-Mitte;Pommernst. 15;Acer rubrum;Ahorn, Rot;51.2128, 6.66317;Ahorn
+23112;Furth-Mitte;Pommernst. 9;Acer rubrum;Ahorn, Rot;51.2135, 6.66332;Ahorn
+23114;Furth-Mitte;Schabernackstr. 45 ggb.;Liquidambar styraciflua;Amberbaum;51.2119, 6.6639;Amberbaum
+23121;Furth-Mitte;Schabernackstr. 71;Acer rubrum;Ahorn, Rot;51.2117, 6.66241;Ahorn
+23123;Furth-Mitte;Schabernackstr. 67;Acer rubrum;Ahorn, Rot;51.2117, 6.6626;Ahorn
+23125;Furth-Mitte;Schabernackstr. 35;Alnus spaethii;Erle, Purpur;51.2118, 6.66428;Erle
+23129;Furth-Mitte;Schabernackstr. 12 ggb.;Alnus spaethii;Erle, Purpur;51.2121, 6.66597;Erle
+23130;Furth-Mitte;Schabernackstr. 12 ggb.;Juglans regia;Nuss, Wal;51.212, 6.66596;Nuss
+23378;Weissenberg;Weissenberger Weg 172 a nebenan Kirche;Liquidambar styraciflua;Amberbaum;51.2128, 6.67546;Amberbaum
+23382;Furth-Mitte;Jostenallee 18;Acer rubrum;Ahorn, Rot;51.2112, 6.66729;Ahorn
+23387;Furth-Mitte;Peter-Loer-Str. 49;Tilia americana;Linde, Amerikanische;51.2106, 6.667;Linde
+23392;Furth-Mitte;Berliner Platz 17 ggb.;Liquidambar styraciflua;Amberbaum;51.2082, 6.67301;Amberbaum
+23394;Furth-Mitte;Berliner Platz 18 ggb.;Liquidambar styraciflua;Amberbaum;51.2094, 6.6742;Amberbaum
+23395;Furth-Mitte;Berliner Platz 18 ggb.;Liquidambar styraciflua;Amberbaum;51.2094, 6.67412;Amberbaum
+23396;Furth-Mitte;Berliner Platz 14 ggb.;Liquidambar styraciflua;Amberbaum;51.2096, 6.67436;Amberbaum
+23397;Furth-Mitte;Berliner Platz 14 ggb.;Liquidambar styraciflua;Amberbaum;51.2095, 6.67444;Amberbaum
+23398;Furth-Mitte;Nordparkweg 41 ggb. (Parkplatz);Acer platanoides 'Schwendleri';Ahorn, Roter Spitz-;51.2153, 6.66491;Ahorn
+23405;Furth-Nord;Lauvenburger Str. 13;Alnus spaethii;Erle, Purpur;51.2211, 6.65438;Erle
+23407;Furth-Mitte;Jostenallee 11/13;Tilia europaea 'Pallida';Linde, Kaiser;51.2111, 6.66752;Linde
+23414;Vogelsang;Bickenbachstr. 34;Tilia henryana;LInde, Henry´s;51.2223, 6.66075;LInde
+23419;Vogelsang;Eggenhofstr. Ecke Kaarster Str. KSP;Alnus spaethii;Erle, Purpur;51.2277, 6.64892;Erle
+23015;Stadionviertel;Eselspfad KSP;Quercus palustris;Eiche, Sumpf;51.1824, 6.6706;Eiche
+23042;Gnadental;Nixhütter Weg 68;Acer opalus;Ahorn, Schneeball;51.1772, 6.72098;Ahorn
+23043;Gnadental;Nixhütter Weg 54 ggb.;Acer truncatum 'Pacific sunset';Ahorn, Chinesicher Spitz-;51.1782, 6.72252;Ahorn
+23044;Gnadental;Nixhütter Weg 54 ggb.;Acer opalus;Ahorn, Schneeball;51.1782, 6.72257;Ahorn
+23045;Gnadental;Nixhütter Weg 54 ggb.;Acer truncatum 'Pacific sunset';Ahorn, Chinesicher Spitz-;51.1782, 6.72263;Ahorn
+23054;Norf;Zedernweg Grünzug (Schützenwald);Alnus spaethii;Erle, Purpur;51.1493, 6.72959;Erle
+23055;Norf;Zedernweg Grünzug (Schützenwald);Tilia europaea;Linde, Holländische;51.1492, 6.72984;Linde
+23053;Furth-Mitte;Plankstr. Jostensbusch;Juglans regia;Nuss, Wal;51.2101, 6.66414;Nuss
+23003;Gnadental;Am Sporthafen dahinter;Juglans regia;Nuss, Wal;51.1858, 6.72735;Nuss
+23002;Gnadental;Am Sporthafen dahinter;Juglans regia;Nuss, Wal;51.1858, 6.72725;Nuss
+23001;Gnadental;Am Sporthafen dahinter;Juglans regia;Nuss, Wal;51.1858, 6.72717;Nuss
+23004;Barbaraviertel;Blücherstr. 23;Cercis siliquastrum;Judasbaum;51.215, 6.69159;Judasbaum
+23007;Barbaraviertel;Bockholtstr. 92 ggb.;Carpinus betulus;Hainbuche;51.2228, 6.69009;Hainbuche
+23021;Furth-Nord;Kaarster Str. Ecke Nehringskamp;Pyrus communis;Birne Conference;51.2237, 6.65337;Birne Conference
+23023;Furth-Nord;Kaarster Str. Ecke Nehringskamp;Pyrus communis;Birne Conference;51.2237, 6.65308;Birne Conference
+23024;Furth-Nord;Nehringskamp Grünzug;Celtis australis;Zürgelbaum;51.222, 6.65059;Zürgelbaum
+23008;Furth-Mitte;Engelbertstr. 12 Grünzug;Fraxinus americana 'Skyline';Esche, Kleinkronige 'Raywood';51.2066, 6.67044;Esche
+23038;Furth-Mitte;Neusser Weyhe rechts;Pyrus communis;Birne Conference;51.2158, 6.66692;Birne Conference
+23027;Furth-Mitte;Neusser Weyhe rechts;Liquidambar styraciflua;Amberbaum;51.2158, 6.66483;Amberbaum
+23032;Furth-Mitte;Neusser Weyhe rechts;Cercis siliquastrum;Judasbaum;51.2158, 6.66582;Judasbaum
+23033;Furth-Mitte;Neusser Weyhe rechts;Malus domestica;Apfel, Rheinischer Bohn-;51.2158, 6.66596;Apfel
+23034;Furth-Mitte;Neusser Weyhe rechts;Malus domestica;Apfel, Rheinischer Bohn-;51.2158, 6.66609;Apfel
+23035;Furth-Mitte;Neusser Weyhe rechts;Quercus coccinea;Eiche, Scharlach;51.2158, 6.66646;Eiche
+23010;Furth-Mitte;Engelbertstr. 12 Grünzug;Liriodendron tulipifera;Tulpenbaum;51.2073, 6.67138;Tulpenbaum
+23056;Norf;Feuerbachweg (Gesamtschule Norf);Quercus robur;Eiche, Stiel;51.1529, 6.73392;Eiche
+23057;Norf;Zedernweg Grünzug (Schützenwald);Quercus robur;Eiche, Stiel;51.1492, 6.73009;Eiche
+23058;Norf;Zedernweg Grünzug (Schützenwald);Quercus robur;Eiche, Stiel;51.1492, 6.73026;Eiche
+21311;Furth Süd;Adolfstr. 76 Ecke Alemannenstr.;Styphnolobium japonicum;Schnurbaum;51.2057, 6.67525;Schnurbaum
+21314;Furth Süd;Karl-Arnold-Str. Ecke Josefstraße;Quercus cerris;Eiche, Zerr;51.2081, 6.68461;Eiche
+21315;Furth Süd;Karl-Arnold-Str. Ecke Josefstraße;Cercis siliquastrum;Judasbaum;51.2081, 6.68462;Judasbaum
+21317;Furth Süd;Römerstr. 71;Celtis australis;Zürgelbaum;51.2097, 6.6796;Zürgelbaum
+21320;Furth Süd;Karl-Arnold-Str. 12-16;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.209, 6.6847;Kirsche
+21339;Furth Süd;Wolberostr. Mittelstreifen ggb. ALDI;Alnus spaethii;Erle, Purpur;51.2051, 6.67626;Erle
+21340;Furth Süd;Wolberostr. 1 ggb.;Alnus spaethii;Erle, Purpur;51.2058, 6.67777;Erle
+21342;Furth Süd;Further Str. 3 neben/Bahnunterführung;Acer campestre 'Elsrijk';Ahorn, Feld;51.2039, 6.68213;Ahorn
+21345;Furth Süd;Josefstr. 33;Alnus spaethii;Erle, Purpur;51.2069, 6.6806;Erle
+21346;Furth Süd;Römerstr. 24 Mittelstreifen;Alnus spaethii;Erle, Purpur;51.2078, 6.67933;Erle
+21403;Stadionviertel;Stephanstr. 22 Grünfläche Bahnlinie;Robinia pseudoacacia 'Frisia';Robinie;51.2011, 6.67777;Robinie
+21402;Stadionviertel;Stephanstr. 22 Grünfläche Bahnlinie;Robinia pseudoacacia 'Frisia';Robinie;51.2011, 6.67766;Robinie
+21401;Stadionviertel;Stephanstr. 22 Grünfläche Bahnlinie;Robinia pseudoacacia 'Frisia';Robinie;51.2011, 6.67756;Robinie
+21404;Stadionviertel;Stephanstr. 2 Getränke Markt/Bahn;Quercus cerris;Eiche, Zerr;51.2001, 6.67977;Eiche
+21362;Innenstadt;Hermannsplatz 11 ggb.;Styphnolobium japonicum;Schnurbaum;51.1997, 6.68166;Schnurbaum
+21363;Innenstadt;Hermannsplatz 15 ggb.;Styphnolobium japonicum;Schnurbaum;51.1996, 6.6821;Schnurbaum
+21366;Innenstadt;Gielenstr. 35 ggb. Mittelstreifen;Fraxinus ornus;Esche, Blumen;51.2013, 6.68146;Esche
+21368;Innenstadt;Gielenstr. 23 ggb. Mittelstreifen;Fraxinus ornus;Esche, Blumen;51.2019, 6.6819;Esche
+21372;Innenstadt;Gielenstr. 5 Mittelstreifen Straßenbahn;Platanus acerifolia;Platane;51.2025, 6.68268;Platane
+21373;Innenstadt;Gielenstr. Ecke Krefelder Str. Mittelstreifen Straßenbahn;Platanus acerifolia;Platane;51.2029, 6.68339;Platane
+21374;Innenstadt;Gielenstr. Ecke Krefelder Str. Mittelstreifen Straßenbahn;Platanus acerifolia;Platane;51.203, 6.68362;Platane
+21375;Innenstadt;Gielenstr. Ecke Krefelder Str. Mittelstreifen Straßenbahn;Platanus acerifolia;Platane;51.203, 6.68356;Platane
+21376;Innenstadt;Gielenstr. Ecke Krefelder Str. Mittelstreifen Straßenbahn;Platanus acerifolia;Platane;51.203, 6.68345;Platane
+21379;Innenstadt;Theodor-Heuss-Platz Wendeschleife Strassenbahn;Platanus acerifolia;Platane;51.2045, 6.68705;Platane
+21385;Furth-Süd;Kurze Str. 35-39 dahinter Fußweg Bahndamm;Acer campestre 'Elsrijk';Ahorn, Feld;51.2026, 6.67826;Ahorn
+21387;Furth-Süd;Kurze Str. 35-39 dahinter Fußweg Bahndamm;Acer campestre 'Elsrijk';Ahorn, Feld;51.2027, 6.67854;Ahorn
+21393;Innenstadt;Theodor-Heuss-Platz Wendeschleife Strassenbahn;Ulmus X hollandica 'Lobel';Ulme, Schmalkronige Stadt;51.2043, 6.68692;Ulme
+21400;Furth-Süd;Katharina-Braeckeler-Str. Ende vor Fußweg am Bahndamm;Malus tschonoskii;Apfel, Woll;51.2034, 6.68074;Apfel
+21351;Furth Süd;Wolberostr. Mittelstreifen ggb. ALDI;Alnus spaethii;Erle, Purpur;51.2049, 6.6759;Erle
+22382;Furth-Süd;Karl-Arnold-Str. zw. Josefstr. und Salzstr.;Prunus serrulata 'Kanzan';Kirsche, Jap Zier;51.2074, 6.68457;Kirsche
+22390;Furth-Süd;Wingenderstr. 10;Quercus pubescens;Eiche, Flaum;51.2092, 6.68471;Eiche
+22392;Furth-Süd;Wingenderstr. 8;Quercus cerris;Eiche, Zerr;51.2095, 6.68475;Eiche
+22395;Furth-Süd;Wingenderstr. 8;Quercus pubescens;Eiche, Flaum;51.2097, 6.68476;Eiche
+22396;Furth-Süd;Wingenderstr. 8;Quercus cerris;Eiche, Zerr;51.2098, 6.68477;Eiche
+22400;Furth-Süd;Weißenberg Weg 83;Amelanchier lamarckii;Felsenbirne, Kupfer;51.2097, 6.67998;Felsenbirne

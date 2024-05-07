@@ -12,7 +12,6 @@ constraint GeoPointName oftype RegexConstraint {
 
 pipeline TreeDataPipeline {
     TreeDataExtractor -> TreeTextFileInterpreter-> TreeDataCSVInterpreter
-    -> ColumnDeleter
     -> TreeDataTableInterpreter
     -> SQLiteLoader
 ;
@@ -20,19 +19,18 @@ pipeline TreeDataPipeline {
   block TreeTextFileInterpreter oftype TextFileInterpreter { }
 
   block TreeDataCSVInterpreter oftype CSVInterpreter { delimiter: ';'; }
-  block ColumnDeleter oftype ColumnDeleter {
-    delete: [ column F];
-  }
+
+ 
   block TreeDataTableInterpreter oftype TableInterpreter {
     header: true;
     columns: [
       "lfd_nr" oftype integer,
-      "Stadtteil" oftype text,
-      "Standort" oftype text,
-      "BaumartBotanisch" oftype text,
-      "BaumartDeutsch" oftype text,
-      "id" oftype decimal,
-      "Baumfamilie" oftype text
+      "stadtteil" oftype Stadtteil,
+      "standort" oftype text,
+      "baumartBotanisch" oftype text,
+      "baumartDeutsch" oftype text,
+      "id" oftype text,
+      "baumfamilie" oftype text
     ];
   }
   block SQLiteLoader oftype SQLiteLoader { table: "trees"; file: "./trees.sqlite"; }
