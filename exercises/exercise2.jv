@@ -5,9 +5,11 @@ valuetype Stadtteil oftype text {
 constraint StadtteilName oftype RegexConstraint {
   regex: /^Furth-.*/;
 }
-
+valuetype GeoPoint oftype text {
+  constraints: [ GeoPointName ];
+}
 constraint GeoPointName oftype RegexConstraint {
-  regex: /^\d{1,3}\.\d{1,}$/;
+  regex: /^[1-999]/;
 }
 
 pipeline TreeDataPipeline {
@@ -32,11 +34,12 @@ pipeline TreeDataPipeline {
       "standort" oftype text,
       "baumartBotanisch" oftype text,
       "baumartDeutsch" oftype text,
-      "id" oftype text,
+      "id" oftype GeoPoint,
       "baumfamilie" oftype text
     ];
   }
   block SQLiteLoader oftype SQLiteLoader { table: "trees"; file: "./trees.sqlite"; }
+  
   constraint InvalidRows oftype DenylistConstraint {
     denylist: [
       "Stadtteil does not match StadtteilName",
