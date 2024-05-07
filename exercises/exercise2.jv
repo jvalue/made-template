@@ -12,14 +12,17 @@ constraint GeoPointName oftype RegexConstraint {
 
 pipeline TreeDataPipeline {
     TreeDataExtractor -> TreeTextFileInterpreter-> TreeDataCSVInterpreter
-    -> TreeDataTableInterpreter
+    -> ColumnDeleter
+    -> TreeDataTableInterpreter 
     -> SQLiteLoader
 ;
   block TreeDataExtractor oftype HttpExtractor { url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv"; }
   block TreeTextFileInterpreter oftype TextFileInterpreter { }
 
   block TreeDataCSVInterpreter oftype CSVInterpreter { delimiter: ';'; }
-
+  block ColumnDeleter oftype ColumnDeleter {
+    delete: [ column F ];
+  }
  
   block TreeDataTableInterpreter oftype TableInterpreter {
     header: true;
