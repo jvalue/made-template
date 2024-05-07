@@ -21,7 +21,7 @@ pipeline TreeDataPipeline {
 
   block TreeDataCSVInterpreter oftype CSVInterpreter { delimiter: ';'; }
   block ColumnDeleter oftype ColumnDeleter {
-    delete: [ column F ];
+    delete: [ column E ];
   }
  
   block TreeDataTableInterpreter oftype TableInterpreter {
