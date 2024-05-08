@@ -46,7 +46,7 @@ pipeline FurthPipeline {
 
 
 	block FurthLoader oftype SQLiteLoader {
-		table: "Furth";
-		file: "./furth.sqlite";
+		table: "trees";
+		file: "./trees.sqlite";
 	}
 }
