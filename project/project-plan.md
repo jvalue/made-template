@@ -2,12 +2,13 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Awesome MADE project.
+Energy consumption as driver of greenhouse gas emissions and the influence of renewables.
 
 ## Main Question
 
 <!-- Think about one main question you want to answer based on the data. -->
-1. Does writing an example question help students write better project plans?
+1. How does the amount of energy consumed influence the net greenhouse gas emissions of European countries?
+2. And how is this influenced by the share of renewables in total energy?
 
 ## Description
 
@@ -18,12 +19,14 @@ XY is an important problem, because... This projects analyzes XY, using method A
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
-* Data Type: CSV
+### Datasource1: Net greenhouse gas emissions
+* Metadata URL: https://ec.europa.eu/eurostat/databrowser/view/sdg_13_10/default/
+* Data URL: https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/sdg_13_10/?format=TSV&i
+* Data Type: TSV
+* Source of Data: [Eurostat](https://ec.europa.eu/eurostat/databrowser/view/sdg_13_10/default/)
+* License: [Open Data License](https://ec.europa.eu/eurostat/about-us/policies/copyright)
 
-Short description of the DataSource.
+Net greenhouse gas emissions for all countries in the european union either relative to 1990 or as tonnes per capita.
 
 ## Work Packages
 
