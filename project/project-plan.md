@@ -63,4 +63,13 @@ The share of energy generated from renewable sources as declared by the european
 9. Make Repository Presentable [#9][i9]
 10. Project Presentation [#10][i10]
 
-[i1]: -
+[i1]: https://github.com/luca-preibsch/FAU_MADE/issues/1
+[i2]: https://github.com/luca-preibsch/FAU_MADE/issues/2
+[i3]: https://github.com/luca-preibsch/FAU_MADE/issues/3
+[i4]: https://github.com/luca-preibsch/FAU_MADE/issues/4
+[i5]: https://github.com/luca-preibsch/FAU_MADE/issues/5
+[i6]: https://github.com/luca-preibsch/FAU_MADE/issues/6
+[i7]: https://github.com/luca-preibsch/FAU_MADE/issues/7
+[i8]: https://github.com/luca-preibsch/FAU_MADE/issues/8
+[i9]: https://github.com/luca-preibsch/FAU_MADE/issues/9
+[i10]: https://github.com/luca-preibsch/FAU_MADE/issues/10
