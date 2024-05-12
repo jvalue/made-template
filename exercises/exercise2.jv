@@ -1,0 +1,72 @@
+
+// This pipeline extracts data from the provided URL, interprets it, and loads it into a SQLite database.
+pipeline TreesPipeline {
+
+    //Defines the structure of the pipeline by connecting blocks with pipes, usually at the top of the pipeline. 
+    TreesExtractor
+        -> TreesTextFileInterpreter
+        -> TreesCSVInterpreter 
+        -> TreesColumnDeleter
+        -> TreesTableInterpreter
+        -> TreesLoader;
+
+    // Extracts data from the specified URL.
+    block TreesExtractor oftype HttpExtractor {
+
+        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+    }
+
+    // Interprets the extracted text file.
+    block TreesTextFileInterpreter oftype TextFileInterpreter { }
+
+    // Interprets the CSV file, specifying the delimiter as ';'.
+    block TreesCSVInterpreter oftype CSVInterpreter {
+        delimiter: ';';
+    }
+
+    // Deletes specified column(s) from the data.
+    block TreesColumnDeleter oftype ColumnDeleter {
+        delete: [column E];
+        //delete: [column "baumart_deutsch"];
+    }
+
+    // Defines a regex constraint for the "stadtteil" value type, ensuring it starts with "Furth-".
+    constraint FurthRegex oftype RegexConstraint {
+        regex: /^Furth-.*/;
+    }
+
+    // Defines a custom value type for "stadtteil" with the FurthRegex constraint.
+    valuetype Stadtteil oftype text {
+        constraints: [FurthRegex];
+    }
+
+    // Defines a regex constraint for the "id" value type, ensuring it matches the geo-coordinate pattern.
+    constraint GeoCoordinatesRegex oftype RegexConstraint {
+        regex: /^\d{1,3}\.\d+,\s\d{1,3}\.\d+$/;
+    }
+
+    // Defines a custom value type for "id" with the GeoCoordinatesRegex constraint.
+    valuetype GeoCoordinates oftype text {
+        constraints: [GeoCoordinatesRegex];
+    }
+
+    // Interprets the CSV data into a table format, defining column names and types.
+    block TreesTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "lfd_nr" oftype integer,
+            "stadtteil" oftype Stadtteil,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            "id" oftype GeoCoordinates,
+            "baumfamilie" oftype text
+        ];
+    }
+
+    // Loads the interpreted data into the SQLite database.
+    block TreesLoader oftype SQLiteLoader {
+        table: "trees";
+        file: "./trees.sqlite";
+    }
+
+}
