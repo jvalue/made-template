@@ -7,7 +7,8 @@ pipeline FurthPipeline {
 	FurthExtractor -> FurthTextFileInterpreter;
 
 	FurthTextFileInterpreter
-		-> FurthCSVInterpreter 
+		-> FurthCSVInterpreter
+		-> ColumnDeleter 
 	   	-> FurthTableInterpreter
 		-> FurthLoader; 
 
@@ -25,24 +26,44 @@ pipeline FurthPipeline {
 		delimiter: ';';
 	}
 
+	block ColumnDeleter oftype ColumnDeleter {
+		delete: [column E];
+	}
+
 	
 	block FurthTableInterpreter oftype TableInterpreter {
 		header: true;
 		columns: [
             "lfd_nr" oftype integer,
-            "stadtteil" oftype text,
+            "stadtteil" oftype Furthteil,
             "standort" oftype text,
             "baumart_botanisch" oftype text,
-            "baumart_deutsch" oftype text,
-            "id" oftype decimal,
+            "id" oftype Geopoints,
             "baumfamilie" oftype text
 		];
 	}
     
     
-    constraint stadtteil oftype RegexConstraint {
-        regex: /^[Furth-]*$/;
-    }
+    valuetype Furthteil oftype text {
+    constraints: [
+        StadtteilAllowlist,
+    ];
+}
+    
+	constraint StadtteilAllowlist on text:
+	    value matches /^[Furth].*$/;
+
+
+
+	valuetype Geopoints oftype text {
+    constraints: [
+        GeopointsPattern,
+    ];
+}
+
+	constraint GeopointsPattern oftype RegexConstraint {
+		regex: /^((\d{1,3})\.\d)*$/;
+}
 
 
 	block FurthLoader oftype SQLiteLoader {
