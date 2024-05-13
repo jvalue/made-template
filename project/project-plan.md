@@ -7,10 +7,10 @@ Climate Resilience and Financial Commitments: Analysis of Disaster Trends and En
 ## Questions
 
 <!-- Think about one main question you want to answer based on the data. -->
-How have climate-related disasters evolved globally over the past decade?
-Which regions or countries are most frequently affected by specific types of climate-related disasters?
-What is the relationship between disaster frequency and the INFORM risk indices?
-How do financial investments in environmental protection influence the effectiveness of disaster management?
+1. How have climate-related disasters evolved globally over the past decade?
+2. Which regions or countries are most frequently affected by specific types of climate-related disasters?
+3. What is the relationship between disaster frequency and the INFORM risk indices?
+4. How do financial investments in environmental protection influence the effectiveness of disaster management?
 
 ## Description
 
