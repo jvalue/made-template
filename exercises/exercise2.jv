@@ -51,7 +51,7 @@ pipeline FurthPipeline {
 }
     
 	constraint StadtteilAllowlist on text:
-	    value matches /^[Furth-].*$/;
+	    value matches /^(Furth-).*$/;
 
 
 
