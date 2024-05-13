@@ -1,23 +1,27 @@
 # Project Plan
 
 ## Title
-<!-- Give your project a short title. -->
 Energy consumption as driver of greenhouse gas emissions and the influence of renewables.
 
 ## Main Question
 
-<!-- Think about one main question you want to answer based on the data. -->
 1. How does the amount of energy consumed influence the net greenhouse gas emissions of European countries?
 2. And how is this influenced by the share of renewables in total energy?
 
 ## Description
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
--
+Amongst other things like farming livestock, burning fossil fuels in order to consume its energy is one of the main emitting factors of greenhouse gases and thereby strongly influences global warming and climate change (see: [Causes of climate change](https://climate.ec.europa.eu/climate-change/causes-climate-change_en)).
+
+This project aims to make visible, to what extent the amount of energy consumed influences global warming and climate change and how much the share of renewables in total energy consumption impacts the greenhouse gas emissions.
+
+As indicator for change in climate and global warming, the aforementioned net greenhouse gas emissions of a country is used, as they are associated to climate change (see: [Climate change: the greenhouse gases causing global warming](https://www.europarl.europa.eu/topics/en/article/20230316STO77629/climate-change-the-greenhouse-gases-causing-global-warming)).
+
+The approach is to connect data about a country’s reported net greenhouse gas emissions, the total energy consumed and what was the share of renewable energy sources in the consumed energy.
+The resulting data will be contrasted based on their changes over the years and compared between all countries of the European Union.
+
 
 ## Datasources
-
-<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
 ### Datasource1: Net greenhouse gas emissions
 * Metadata URL: https://ec.europa.eu/eurostat/databrowser/view/sdg_13_10/default/table
@@ -49,8 +53,6 @@ Data is measured either as million tonnes of oil equivalent, relative to 2005 or
 The share of energy generated from renewable sources as declared by the european union. The data is available for all countries of the european union and is measured in percentages.
 
 ## Work Packages
-
-<!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
 1. Write Automated Data Pipeline [#1][i1]
 2. Analyze Data Sources [#2][i2]
