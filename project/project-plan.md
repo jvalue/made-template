@@ -67,32 +67,32 @@ Estimates of land cover are presented in thousand hectares and the Climate Alter
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-This project is structured into six work packages, represented as [milestones in the GitHub repository]().
+This project is structured into six work packages, represented as [milestones in the GitHub repository](https://github.com/Hassan8725/advance_data_engineering/milestones).
 Each work package contains at least one issue. 
 
-1. **Objective Definition and Data Source Selection** [[WP1]()]
-    1. Define the research question [[issue]()]
-    2. Locate potential data sources [[issue]()]
-    3. Evaluate the identified data sources [[issue]()]
-2. **Data Acquisition and Pipeline** [[WP2]()]
-    1. Determine the best data storage format [[issue]()]
-    2. Convert data into the chosen format [[issue]()]
-    3. Data Pipeline [[issue]()]
-3. **Data Exploration, Analytics and Report** [[WP3]()]
-    1. Conduct exploratory data analysis and preliminary visualization [[issue]()]
-    2. Create Modules: DataLoader, Pipeline, Visualizations, Models, etc [[issue]()]
-    3. Perform data analysis and modeling (where necessary) [[issue]()]
-    4. Address all the research questions [[issue]()]
-    5. Draw conclusions form the analysis [[issue]()]
-4. **Tests** [[WP4]()]
-    1. Create Tests for each module [[issue]()]
-5. **Continuous integration** [[WP5]()]
-    1. Develop CI for Tests [[issue]()]
-    2. Develop CI for Pre-Commit [[issue]()]
-6. **Reporting Results** [[WP6]()]
-    1. Develop visual representations [[issue]()]
-    2. Enhance the repository's presentation [[issue]()]
-    3. Prepare the final presentation [[issue]()]
+1. **Objective Definition and Data Source Selection** [[WP1](https://github.com/Hassan8725/advance_data_engineering/milestone/1)]
+    1. Define the research question [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/8)]
+    2. Locate potential data sources [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/9)]
+    3. Evaluate the identified data sources [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/10)]
+2. **Data Acquisition and Pipeline** [[WP2](https://github.com/Hassan8725/advance_data_engineering/milestone/2)]
+    1. Determine the best data storage format [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/11)]
+    2. Convert data into the chosen format [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/12)]
+    3. Data Pipeline [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/13)]
+3. **Data Exploration, Analytics and Report** [[WP3](https://github.com/Hassan8725/advance_data_engineering/milestone/3)]
+    1. Conduct exploratory data analysis and preliminary visualization [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/14)]
+    2. Create Modules: DataLoader, Pipeline, Visualizations, Models, etc [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/15)]
+    3. Perform data analysis and modeling (where necessary) [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/16)]
+    4. Address all the research questions [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/17)]
+    5. Draw conclusions form the analysis [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/18)]
+4. **Tests** [[WP4](https://github.com/Hassan8725/advance_data_engineering/milestone/4)]
+    1. Create Tests for each module [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/19)]
+5. **Continuous integration** [[WP5](https://github.com/Hassan8725/advance_data_engineering/milestone/5)]
+    1. Develop CI for Tests [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/20)]
+    2. Develop CI for Pre-Commit [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/21)]
+6. **Reporting Results** [[WP6](https://github.com/Hassan8725/advance_data_engineering/milestone/6)]
+    1. Develop visual representations [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/22)]
+    2. Enhance the repository's presentation [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/23)]
+    3. Prepare the final presentation [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/24)]
 
 
 Work packages must be completed sequentially as each one depends on the completion of all preceding ones. Dependencies within a work package are specified in the corresponding issues.
