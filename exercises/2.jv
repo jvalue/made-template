@@ -1,0 +1,69 @@
+
+pipeline Stadt{
+
+	StadtExtractor -> StadtTextFileInterpreter;
+
+	StadtTextFileInterpreter
+		-> StadtCSVInterpreter 
+        -> StadtColumnDeleter
+	   	-> StadtTableInterpreter
+		-> StadtLoader;
+
+
+	
+	block StadtExtractor oftype HttpExtractor {
+
+	
+		
+		url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+	}
+
+
+	block StadtTextFileInterpreter oftype TextFileInterpreter { }
+
+	
+	block StadtCSVInterpreter oftype CSVInterpreter {
+		delimiter: ';';
+	}
+
+	block StadtColumnDeleter oftype ColumnDeleter {
+       delete: [column E];
+}
+
+	 
+	block StadtTableInterpreter oftype TableInterpreter {
+		header: true;
+		  columns: [
+            "lfd_nr" oftype integer,
+            "stadtteil" oftype stadt,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            "baumart_deutsch" oftype text,
+            "id" oftype text,
+            "baumfamilie" oftype text,
+            
+        ];
+	}
+
+
+	block StadtLoader oftype SQLiteLoader {
+		table: "trees";
+		file: "/Users/jagrutigodambe/Downloads/jayvee-0.4.0-alpha/example/Exercise1/trees.sqlite";
+	}
+
+
+ }
+    valuetype stadtteil oftype text {
+    constraints: [stadtteilAllowList]; 
+    }
+constraint stadtteilAllowList oftype AllowlistConstraint{
+   allowlist: ["Furth", "Furth-"]; 
+   }
+valuetype stadt oftype text {
+   constraints: [
+        BeginsWithFurth,
+    ];
+    }
+
+constraint BeginsWithFurth on text:
+    value matches /^Furth-/;  
