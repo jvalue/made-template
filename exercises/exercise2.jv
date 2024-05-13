@@ -28,7 +28,7 @@ pipeline Stadt{
 
 	block StadtColumnDeleter oftype ColumnDeleter {
        delete: [column E];
-}
+    }
 
 	 
 	block StadtTableInterpreter oftype TableInterpreter {
@@ -48,7 +48,7 @@ pipeline Stadt{
 
 	block StadtLoader oftype SQLiteLoader {
 		table: "trees";
-		file: "/Users/jagrutigodambe/Downloads/jayvee-0.4.0-alpha/example/Exercise1/trees.sqlite";
+		file: "trees.sqlite";
 	}
 
 
