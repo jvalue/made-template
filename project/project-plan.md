@@ -23,23 +23,24 @@ This project aims to analyze the relationship between various  conditions and so
 
 ## Work Packages
 
-1. **Data Collection and Preprocessing**
-   - **Issue:** [Data Collection and Preprocessing](https://github.com/HatefRahimi/MADE-FAUissues/1)
+1. **Data Collection and Preprocessing** [#1][i1]
    - Tasks include data downloading, handling missing values, and initial preprocessing.
 
-2. **Exploratory Data Analysis (EDA)**
-   - **Issue:** [Exploratory Analysis of Weather Data](https://github.com/HatefRahimi/MADE-FAUissues/2)
+2. **Exploratory Data Analysis (EDA)** [#2][i2]
    - Aim to visualize and understand the relationships between different meteorological factors and solar radiation.
 
-3. **Feature Engineering and Selection**
-   - **Issue:** [Feature Engineering for Improved Predictions](https://github.com/HatefRahimi/MADE-FAUissues/3)
+3. **Feature Engineering and Selection** [#3][i3]
    - Develop new features that could enhance model accuracy and select the most impactful predictors.
 
-4. **Model Development**
-   - **Issue:** [Development and Validation of Predictive Models](https://github.com/HatefRahimi/MADE-FAUissues/4)
+4. **Model Development** [#4][i4]
    - Build and validate multiple models to predict solar radiation. Compare models to identify the best based on various performance metrics.
 
-5. **Results Interpretation and Reporting**
-   - **Issue:** [Final Reporting and Insights](https://github.com/HatefRahimi/MADE-FAUissues/5)
+5. **Results Interpretation and Reporting** [#5][i5]
    - Document the analysis process, model performance, and potential implications for solar energy use.
+
+[i1]: https://github.com/HatefRahimi/MADE-FAU/issues/1
+[i2]: https://github.com/HatefRahimi/MADE-FAU/issues/2
+[i3]: https://github.com/HatefRahimi/MADE-FAU/issues/3
+[i4]: https://github.com/HatefRahimi/MADE-FAU/issues/4
+[i5]: https://github.com/HatefRahimi/MADE-FAU/issues/5
 
