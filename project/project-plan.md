@@ -23,14 +23,14 @@ XY is an important problem, because... This projects analyzes XY, using method A
 * Data URL: (https://www.kaggle.com/datasets/tarunrm09/climate-change-indicators/data?select=climate_change_indicators.csv)
 * Data Type: CSV
 
-Short description of the DataSource.
+This dataset has climate change indicators for different countries with their associated codes(ISO2 AND ISO3). The measurement has been updated yearly till 2022 from 1961.
 
 ### Datasource 2: ExampleSource
 * Metadata URL: (https://www.kaggle.com/datasets?fileType=csv)
 * Data URL: https://www.kaggle.com/datasets/goyaladi/climate-insights-dataset
 * Data Type: CSV
 
-Short description of the DataSource.
+This dataset provides valuable insights into the ongoing changes in our climate. It encompasses a comprehensive collection of temperature records, CO2 emissions data, and sea level rise measurements. With a focus on global trends, it enables researchers, scientists, and climate enthusiasts to analyze the impact of climate change on our planet.
 
 ## Work Packages
 
