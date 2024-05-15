@@ -2,7 +2,7 @@
 pipeline SecondExercise_TreePlanting {
 
         Extractor
-        ->TreePlantingTextFileInterpreter
+        -> TreePlantingTextFileInterpreter
         -> TreePlantingCsvInterpreter
         -> ColumnRemover
         -> TreePlantingInterpreter
@@ -13,12 +13,6 @@ pipeline SecondExercise_TreePlanting {
         url:"https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
     }
 
-
-    block TreePlantingLoader oftype SQLiteLoader 
-    {
-        table: "trees";
-        file: "./trees.sqlite";
-    }
 
     block TreePlantingCsvInterpreter oftype CSVInterpreter 
     {
@@ -37,7 +31,6 @@ pipeline SecondExercise_TreePlanting {
             "stadtteil" oftype stadt,
             "stadtort" oftype text,
             "baumart_botanisch" oftype text,
-            "baumart_deutsch" oftype text,
             "id" oftype Id,
             "baumfamilie" oftype text,
         ];
@@ -48,22 +41,27 @@ pipeline SecondExercise_TreePlanting {
         delete: [column E];
     }
 
+    constraint BeginsWithFurth oftype RegexConstraint
+    {
+        regex: /^Furth\-.*/;
+    }
     valuetype stadt oftype text 
     {
         constraints: [BeginsWithFurth,];
     }
 
+    constraint IdConstraint oftype RegexConstraint
+    {
+        regex: /^\d{1,3}\.\d+,\s\d{1,3}\.\d+$/;
+    }
     valuetype Id oftype text
     {
         constraints: [IdConstraint];
     }
-    constraint BeginsWithFurth oftype RegexConstraint
+    block TreePlantingLoader oftype SQLiteLoader 
     {
-        regex: /^Furth\-.*$/;
-    }
-    constraint IdConstraint oftype RegexConstraint
-    {
-        regex: /^(\d{1,3}\.\d*)\,\s(\d{1,3}\.\d*)$/;
+        table: "trees";
+        file: "./trees.sqlite";
     }
 }
 
