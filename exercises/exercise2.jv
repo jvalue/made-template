@@ -44,6 +44,10 @@ pipeline SecondExercise_TreePlanting {
         ];
     }
     
+    constraint BeginsWithFurth oftype RegexConstraint
+    {
+        regex: /^Furth-/;
+    }
     constraint IdConstraint oftype RegexConstraint
     {
         regex: /^(\d{1,3}\.\d*)\,\s(\d{1,3}\.\d*)$/;
@@ -57,9 +61,9 @@ pipeline SecondExercise_TreePlanting {
     {
         constraints: [BeginsWithFurth,];
     }
-    constraint BeginsWithFurth oftype RegexConstraint
+    valuetype Id oftype text
     {
-        regex: /^Furth-/;
+        constraints: [IdConstraint];
     }
 
 }
