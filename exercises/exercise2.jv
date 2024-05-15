@@ -1,9 +1,8 @@
 
 pipeline SecondExercise_TreePlanting {
 
-    Extractor-> TreePlantingTextFileInterpreter;
-
-        TreePlantingTextFileInterpreter
+        Extractor
+        ->TreePlantingTextFileInterpreter
         -> TreePlantingCsvInterpreter
         -> ColumnRemover
         -> TreePlantingInterpreter
