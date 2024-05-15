@@ -45,7 +45,7 @@ pipeline SecondExercise_TreePlanting {
     
     constraint BeginsWithFurth oftype RegexConstraint
     {
-        regex: /^Furth-/;
+        regex: /^Furth\-.*$/;
     }
     constraint IdConstraint oftype RegexConstraint
     {
@@ -60,6 +60,7 @@ pipeline SecondExercise_TreePlanting {
     {
         constraints: [BeginsWithFurth,];
     }
+
     valuetype Id oftype text
     {
         constraints: [IdConstraint];
