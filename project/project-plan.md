@@ -14,9 +14,7 @@ This project aims to analyze the relationship between various  conditions and so
 
 ## Datasources
 
-<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
-
-### Datasource1: ExampleSource
+### Datasource: 
 * Metadata URL: https://www.kaggle.com/datasets/dronio/SolarEnergy
 * Data URL: https://www.kaggle.com/datasets/dronio/SolarEnergy/download?datasetVersionNumber=1
 * Data Type: CSV
@@ -26,7 +24,7 @@ This project aims to analyze the relationship between various  conditions and so
 1. **Data Collection and Preprocessing** [#1][i1]
    - Tasks include data downloading, handling missing values, and initial preprocessing.
 
-2. **Exploratory Data Analysis (EDA)** [#2][i2]
+2. **Exploratory Data Analysis** [#2][i2]
    - Aim to visualize and understand the relationships between different meteorological factors and solar radiation.
 
 3. **Feature Engineering and Selection** [#3][i3]
