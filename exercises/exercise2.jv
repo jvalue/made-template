@@ -29,7 +29,7 @@ pipeline SecondExercise_TreePlanting {
         columns: [
             "lfd_nr" oftype integer,
             "stadtteil" oftype stadt,
-            "stadtort" oftype text,
+            "standort" oftype text,
             "baumart_botanisch" oftype text,
             "id" oftype Id,
             "baumfamilie" oftype text,
