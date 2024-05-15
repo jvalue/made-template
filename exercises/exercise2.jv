@@ -34,11 +34,11 @@ pipeline SecondExercise_TreePlanting {
     block TreePlantingInterpreter oftype TableInterpreter {
         header: true;
         columns: [
-            "lfd_nr" oftype integer,
+            "lfd_nr" oftype text,
             "stadtteil" oftype stadt,
+            "stadtort" oftype text,
+            "baumart_deutsch" oftype text,
             "id" oftype Id,
-            "baumart_wissenschaftlich" oftype text,
-            "anzahl" oftype integer,
             "baumart_botanisch" oftype text,
         ];
     }
