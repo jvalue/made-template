@@ -29,12 +29,7 @@ pipeline SecondExercise_TreePlanting {
     {
 
     }
-
-    block ColumnRemover oftype ColumnDeleter
-    {
-        delete: [column E];
-    }
-   
+    
     block TreePlantingInterpreter oftype TableInterpreter {
         header: true;
         columns: [
@@ -45,6 +40,11 @@ pipeline SecondExercise_TreePlanting {
             "id" oftype Id,
             "baumfamilie" oftype text,
         ];
+    }
+
+    block ColumnRemover oftype ColumnDeleter
+    {
+        delete: [column E];
     }
 
     valuetype stadt oftype text 
