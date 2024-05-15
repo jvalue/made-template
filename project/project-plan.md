@@ -14,7 +14,7 @@ This project aims to analyze the relationship between various  conditions and so
 
 ## Datasources
 
-### Datasource: 
+### Datasource: Solar Radiation Prediction
 * Metadata URL: https://www.kaggle.com/datasets/dronio/SolarEnergy
 * Data URL: https://www.kaggle.com/datasets/dronio/SolarEnergy/download?datasetVersionNumber=1
 * Data Type: CSV
