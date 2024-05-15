@@ -29,7 +29,7 @@ pipeline SecondExercise_TreePlanting {
     {
 
     }
-    
+
     block TreePlantingInterpreter oftype TableInterpreter {
         header: true;
         columns: [
@@ -37,6 +37,7 @@ pipeline SecondExercise_TreePlanting {
             "stadtteil" oftype stadt,
             "stadtort" oftype text,
             "baumart_botanisch" oftype text,
+            "baumart_deutsch" oftype text,
             "id" oftype Id,
             "baumfamilie" oftype text,
         ];
