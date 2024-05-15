@@ -36,11 +36,10 @@ pipeline SecondExercise_TreePlanting {
         columns: [
             "lfd_nr" oftype integer,
             "stadtteil" oftype stadt,
-            "id" oftype integer,
-            "pflanzjahr" oftype integer,
-            "baumart_deutsch" oftype text,
+            "id" oftype Id,
             "baumart_wissenschaftlich" oftype text,
-            "anzahl" oftype integer
+            "anzahl" oftype integer,
+            "baumart_botanisch" oftype text,
         ];
     }
     
