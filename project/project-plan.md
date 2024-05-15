@@ -10,11 +10,14 @@
 Can we predict and analyze greenhouse gas emissions?
 
 ## Description
+<!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
+
 I am planning to analyze the historical gas emissions data and gain insights about global emission trends.
 
 
 
 ## Datasources
+<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
 World Bank and United Nations
 
