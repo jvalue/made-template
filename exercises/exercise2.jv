@@ -37,9 +37,8 @@ pipeline SecondExercise_TreePlanting {
             "lfd_nr" oftype integer,
             "stadtteil" oftype stadt,
             "stadtort" oftype text,
-            "baumart_deutsch" oftype text,
-            "id" oftype Id,
             "baumart_botanisch" oftype text,
+            "id" oftype Id,
             "baumfamilie" oftype text,
         ];
     }
