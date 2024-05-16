@@ -15,7 +15,7 @@ Amongst other things like farming livestock, burning fossil fuels in order to co
 
 This project aims to make visible, to what extent the amount of energy consumed influences global warming and climate change and how much the share of renewables in total energy consumption impacts the greenhouse gas emissions.
 
-As indicator for change in climate and global warming, the aforementioned net greenhouse gas emissions of a country is used, as they are associated to climate change (see: [Climate change: the greenhouse gases causing global warming](https://www.europarl.europa.eu/topics/en/article/20230316STO77629/climate-change-the-greenhouse-gases-causing-global-warming)).
+As indicator for change in climate and global warming, the aforementioned net greenhouse gas emissions of a country are used, as they are associated to climate change (see: [Climate change: the greenhouse gases causing global warming](https://www.europarl.europa.eu/topics/en/article/20230316STO77629/climate-change-the-greenhouse-gases-causing-global-warming)).
 
 The approach is to connect data about a country’s reported net greenhouse gas emissions, the total energy consumed and what was the share of renewable energy sources in the consumed energy.
 The resulting data will be contrasted based on their changes over the years and compared between all countries of the European Union.
