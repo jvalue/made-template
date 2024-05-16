@@ -31,7 +31,7 @@ This dataset has climate change indicators for different countries with their as
 * Data URL: https://www.kaggle.com/datasets/goyaladi/climate-insights-dataset
 * Data Type: CSV
 
-Short description of the DataSource.
+This dataset provides valuable insights into the ongoing changes in our climate. It encompasses a comprehensive collection of temperature records, CO2 emissions data, and sea level rise measurements. With a focus on global trends, it enables researchers, scientists, and climate enthusiasts to analyze the impact of climate change on our planet.
 
 ## Work Packages
 
