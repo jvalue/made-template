@@ -24,7 +24,7 @@ This projects analyzes history data from 1992 and 2022. The results can give ins
 * Data URL: (https://www.kaggle.com/datasets/tarunrm09/climate-change-indicators/data?select=climate_change_indicators.csv)
 * Data Type: CSV
 
-Short description of the DataSource.
+This dataset has climate change indicators for different countries with their associated codes(ISO2 AND ISO3). The measurement has been updated yearly till 2022 from 1961.
 
 ### Datasource 2: ExampleSource
 * Metadata URL: (https://www.kaggle.com/datasets?fileType=csv)
