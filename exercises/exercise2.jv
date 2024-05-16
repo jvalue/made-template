@@ -1,0 +1,54 @@
+pipeline TreePlantingsPipeline {
+
+    TreePlantingsExtractor
+        -> TreePlantingsTextFileInterpreter
+        -> TreePlantingsCSVInterpreter
+        -> TreePlantingsColumnDeleter
+        -> TreePlantingsTableInterpreter
+        -> TreePlantingsLoader;
+
+    block TreePlantingsExtractor oftype HttpExtractor{
+        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+        retries: 5;
+    }
+
+    block TreePlantingsTextFileInterpreter oftype TextFileInterpreter{}
+
+    block TreePlantingsCSVInterpreter oftype CSVInterpreter{
+        enclosing: '"';
+        delimiter: ";";
+    }
+
+    block TreePlantingsColumnDeleter oftype ColumnDeleter{
+        delete: [column E];
+    }
+
+    // regex constraint for city tiltes starting with "Furth-"
+    constraint StartsWithFurth oftype RegexConstraint {
+        regex: /^Furth-/;
+    }
+    
+    // defining a new FurthOnly valuetype of a "text" kind that only contains text starting with "StartsWithFurth" constraint
+    valuetype FurthOnly oftype text {
+        constraints: [StartsWithFurth];
+    }
+
+    block TreePlantingsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "lfd_nr" oftype integer,
+            "stadtteil" oftype FurthOnly,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            // "baumart_deutsch" oftype text,
+            "id" oftype text,
+            "baumfamilie" oftype text
+       ];
+    }
+
+    block TreePlantingsLoader oftype SQLiteLoader{
+        table: "trees";
+        file: "./trees.sqlite";
+    }
+
+}
