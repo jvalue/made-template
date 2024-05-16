@@ -10,7 +10,7 @@ valuetype GeoPoint oftype text {
 }
 constraint GeoPointName oftype RegexConstraint {
   //regex: /\d{1,3}.?\b/;
-   regex: /^(\d{1,3}\.\d*)(,\s)(\d*)$/;
+    regex: /^\d{1,3}\.\d*,\s(\d{1,3}\.\d*)$/;
 }
 
 pipeline TreeDataPipeline {
