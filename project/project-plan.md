@@ -37,7 +37,10 @@ This dataset provides valuable insights into the ongoing changes in our climate.
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
-
+1. Understanding the Issue 
+2. Load the data from csv files
+3. Data Cleaning
+4. Creating data pipeline for relevant insights
+5. Ensure data accuracy
+   
 [i1]: https://github.com/jvalue/made-template/issues/1
