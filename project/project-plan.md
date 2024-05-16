@@ -26,30 +26,28 @@ This project aims to conduct a detailed analysis of climate-related disasters, f
 * Metadata URL: https://climatedata.imf.org/datasets/b13b69ee0dde43a99c811f592af4e821_0/about
 * Data Type: .csv
 
-Global climate related disasters are stacked to show the trends in climate related physical risk factors.
+This dataset, sourced from EM-DAT by the Université catholique de Louvain, tracks the frequency of various climate-related disasters globally from 1980 to 2022. It includes detailed records for different types of disasters such as droughts, floods, extreme temperatures, landslides, storms, and wildfires. Each entry specifies the country affected, the type of disaster, and the annual occurrence data. This dataset enables an analysis of trends over decades to understand how the frequency of these disasters has changed in response to global climate change.
 
 ### Datasource 2: Climate-driven INFORM Risk
 * Data URL: https://opendata.arcgis.com/datasets/7cae02f84ed547fbbd6210d90da19879_0.csv
 * Metadata URL: https://climatedata.imf.org/datasets/7cae02f84ed547fbbd6210d90da19879_0/about
 * Data Type: .csv
 
-The INFORM Risk Index is a global, open source risk assessment for crises and disasters. The Climate-driven INFORM Risk is an adaptation of the INFORM Risk Index, adjusted by IMF staff to distill and centralize on climate-driven risks
+The Climate-driven INFORM Risk Indicator, adjusted annually by IMF staff, provides a comprehensive assessment of the risk associated with climate-driven hazards. It focuses on three dimensions: hazard & exposure, vulnerability, and lack of coping capacity. Each country's data from 2013 to 2022 reflects the aggregated risk posed by potential climate-related events such as floods, tropical cyclones, and droughts. This dataset aids in evaluating the preparedness and vulnerability of different nations to handle climate-induced disasters.
 
 ### Datasource 3: Government Expenditure on Environmental Protection
 * Data URL: https://opendata.arcgis.com/datasets/d22a6decd9b147fd9040f793082b219b_0.csv
 * Metadata URL: https://climatedata.imf.org/datasets/d22a6decd9b147fd9040f793082b219b_0/about
 * Data Type: .csv
 
-This data shows how much money each government spends on environmental protection measures, as a percentage of the country’s GDP
+This dataset measures the financial commitment of various governments towards environmental protection as a percentage of GDP, spanning from 1995 to 2022. Compiled within the framework of the Classification of Functions of Government (COFOG), it covers expenditures on pollution abatement, biodiversity and landscape protection, waste management, and other environmental activities. This dataset is crucial for analyzing how investment in environmental protection correlates with national economic priorities and the management of climate risk.
 
 ## Work Packages
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
 This project is structured into six work packages, represented as [milestones in the GitHub repository](https://github.com/muhammadalyy14/FAU-Data-Engineering-Project/milestones).
-Each work package contains at least one issue.
 
-The subtasks and deliverables have to be submitted to mark an issue as completed.
 
 1. *Project Setup and Data Identification* [[WP1](https://github.com/muhammadalyy14/FAU-Data-Engineering-Project/milestone/1)]
     1. Formulate the central research questions [[issue](https://github.com/muhammadalyy14/FAU-Data-Engineering-Project/issues/6)]
@@ -74,8 +72,5 @@ The subtasks and deliverables have to be submitted to mark an issue as completed
     2. Improve the project documentation [[issue](https://github.com/muhammadalyy14/FAU-Data-Engineering-Project/issues/20)]
     3. Prepare the final presentation [[issue](https://github.com/muhammadalyy14/FAU-Data-Engineering-Project/issues/21)]
 
-In general, the work packages are dependent on all previous ones. Therefore, the **work packages will be worked on in a sequential manner**.
-Intra-work package dependencies are listed in the respective issues.
 
-Issues are subject to change, therefore the issue-ID is not suitable to identify dependencies. 
-Rather, the dependency list in each issue shall be used.
+Issues are subject to change
