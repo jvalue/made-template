@@ -11,14 +11,14 @@ Energy consumption as driver of greenhouse gas emissions and the influence of re
 ## Description
 
 <!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-Amongst other things like farming livestock, burning fossil fuels in order to consume its energy is one of the main emitting factors of greenhouse gases and thereby strongly influences global warming and climate change (see: [Causes of climate change](https://climate.ec.europa.eu/climate-change/causes-climate-change_en)).
+Amongst other things like farming livestock, burning fossil fuels in order to consume its energy is one of the main emitting factors of greenhouse gases. Thereby it strongly influences global warming and climate change (see: [Causes of climate change](https://climate.ec.europa.eu/climate-change/causes-climate-change_en)).
 
 This project aims to make visible, to what extent the amount of energy consumed influences global warming and climate change and how much the share of renewables in total energy consumption impacts the greenhouse gas emissions.
 
-As indicator for change in climate and global warming, the aforementioned net greenhouse gas emissions of a country are used, as they are associated to climate change (see: [Climate change: the greenhouse gases causing global warming](https://www.europarl.europa.eu/topics/en/article/20230316STO77629/climate-change-the-greenhouse-gases-causing-global-warming)).
+As indicator for climate change and global warming, the aforementioned net greenhouse gas emissions of a country are used, as they are associated to climate change (see: [Climate change: the greenhouse gases causing global warming](https://www.europarl.europa.eu/topics/en/article/20230316STO77629/climate-change-the-greenhouse-gases-causing-global-warming)).
 
-The approach is to connect data about a country’s reported net greenhouse gas emissions, the total energy consumed and what was the share of renewable energy sources in the consumed energy.
-The resulting data will be contrasted based on their changes over the years and compared between all countries of the European Union.
+The approach is to connect data about a country’s reported net greenhouse gas emissions, the total energy consumed and its share of renewable energy sources in the consumed energy.
+The resulting data will be contrasted based on the changes over the years and compared between all countries of the European Union.
 
 
 ## Datasources
