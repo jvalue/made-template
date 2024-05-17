@@ -6,16 +6,9 @@ Interlinked Dynamics: Exploring the Correlations between Surface Temperature, At
 
 ## Main Questions
 
-1. How do changes in atmospheric CO2 concentrations correlate with changes in mean surface temperature globally and regionally over the decades?
-2. Can we model the predictive relationship between CO2 concentration increases and subsequent increases in surface temperature in different climatic zones?
-3. What are the lag effects, if any, between spikes in CO2 levels and observable increases in average surface temperatures?
-4. Is there a correlation between rising mean surface temperatures and accelerated sea level rise in specific global regions?
-5. Can variations in temperature changes predict anomalies in sea level changes across different time periods?
-6. What patterns emerge from mapping CO2 concentration changes and sea level changes simultaneously on a global scale?
-7. Can we predict future sea level rises based on current trends in atmospheric CO2 concentrations?
-8. How do changes in land cover, particularly in coastal areas, impact the local sea level changes?
-9. What is the cumulative effect of land cover change and increasing atmospheric CO2 levels on regional temperature changes?
-10. How do different regions adapt their land cover management to mitigate the effects of rising temperatures and CO2 levels?
+1. How do changes in atmospheric CO2 concentrations correlate with changes in mean surface temperature over time?
+
+2. Is there a correlation between rising mean surface temperatures and accelerated sea level rise?
 
 ## Description
 
