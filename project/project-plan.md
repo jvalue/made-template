@@ -18,7 +18,7 @@ Climate change is an important global issue, as it has significant impacts on ec
 * Metadata URL: http://www.fao.org/faostat/en/#data/ET/metadata
 * Data URL: https://fenixservices.fao.org/faostat/static/bulkdownloads/Environment_Temperature_change_E_All_Data.zip
 * Data Type: CSV
-License: CC BY-NC-SA 3.0 IGO
+* License: CC BY-NC-SA 3.0 IGO
 * Citation: Food and Agriculture Organization of the United Nations. (2023). FAOSTAT: Temperature Change. Retrieved from https://www.fao.org/faostat/en/#data/ET
 
 
@@ -37,7 +37,14 @@ This dataset provides CO2 emissions data (in kilotons) for various countries, co
 ## Work Packages
 
 
-1. Example Issue [#1][i1]
-2. ...
+1. Data Collection and Preparation [#1][i1]
+2. Data Analysis [#2][i2]
+3. Statistical Analysis [#3][i3]
+4. Data Pipeline [#4][i4]
 
-[i1]: https://github.com/jvalue/made-template/issues/1
+
+[i1]: https://github.com/moeezmujahid70/MADE-SS24/issues/1
+[i2]: https://github.com/moeezmujahid70/MADE-SS24/issues/2
+[i3]: https://github.com/moeezmujahid70/MADE-SS24/issues/3
+[i4]: https://github.com/moeezmujahid70/MADE-SS24/issues/4
+
