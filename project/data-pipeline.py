@@ -38,6 +38,15 @@ def create_energy_consumption_data(name, url, sql_engine):
 
     print('processing energy consumption data')
 
+    # filter rows
+    # 1. Unit of measure
+    #    TOE_HAB - Tonnes of oil equivalent (TOE) per capita
+    unit_mask = energy_consumption_sheet['unit'] == 'TOE_HAB'
+    drop_rows(energy_consumption_sheet, unit_mask)
+
+    # filter columns
+    energy_consumption_sheet.drop(labels=['DATAFLOW', 'LAST UPDATE', 'freq', 'unit', 'OBS_FLAG'], axis=1, inplace=True)
+
     print('writing energy consumption data')
     energy_consumption_sheet.to_sql(name, sql_engine, if_exists='replace', index=False)
 
