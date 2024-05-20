@@ -84,7 +84,6 @@ if __name__ == '__main__':
     create_energy_consumption_data('energy_consumption', energy_consumption_url, sql_engine)
 
     # Datasource3: Share of energy from renewable sources
-    print('processing energy share csv')
     energy_share_url = 'https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nrg_ind_ren/?format=SDMX-CSV&i'
     create_energy_share_data('energy_share', energy_share_url, sql_engine)
 
