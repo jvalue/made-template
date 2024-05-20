@@ -57,6 +57,15 @@ def create_energy_share_data(name, url, sql_engine):
 
     print('processing energy share data')
 
+    # filter rows
+    # 1. Energy balance
+    #    REN - Renewable energy sources
+    nrg_bal_mask = energy_share_sheet['nrg_bal'] == 'TOE_HAB'
+    drop_rows(energy_share_sheet, nrg_bal_mask)
+
+    # filter columns
+    energy_share_sheet.drop(labels=['DATAFLOW', 'LAST UPDATE', 'freq', 'nrg_bal', 'unit', 'OBS_FLAG'], axis=1, inplace=True)
+
     print('writing energy share data')
     energy_share_sheet.to_sql(name, sql_engine, if_exists='replace', index=False)
 
