@@ -12,7 +12,7 @@ def create_emissions_data(name, url, sql_engine):
     print('downloading emissions data')
     emissions_sheet = pd.read_csv(url, sep=',')
 
-    print('processing emissions csv')
+    print('processing emissions data')
 
     # filter rows
     # 1. Source sectors for greenhouse gas emissions:
@@ -32,6 +32,26 @@ def create_emissions_data(name, url, sql_engine):
     emissions_sheet.to_sql(name, sql_engine, if_exists='replace', index=False)
 
 
+def create_energy_consumption_data(name, url, sql_engine):
+    print('downloading energy consumption data')
+    energy_consumption_sheet = pd.read_csv(url, sep=',')
+
+    print('processing energy consumption data')
+
+    print('writing energy consumption data')
+    energy_consumption_sheet.to_sql(name, sql_engine, if_exists='replace', index=False)
+
+
+def create_energy_share_data(name, url, sql_engine):
+    print('downloading energy share data')
+    energy_share_sheet = pd.read_csv(url, sep=',')
+
+    print('processing energy share data')
+
+    print('writing energy share data')
+    energy_share_sheet.to_sql(name, sql_engine, if_exists='replace', index=False)
+
+
 if __name__ == '__main__':
     sql_engine = sql.create_engine(f'sqlite:///{destination_dir}/data.sqlite')
 
@@ -42,15 +62,12 @@ if __name__ == '__main__':
     create_emissions_data('emissions', emissions_url, sql_engine)
 
     # Datasource2: Primary energy consumption
-    print('processing energy consumption csv')
     energy_consumption_url = 'https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/sdg_07_10/?format=SDMX-CSV&i'
-    energy_consumption_sheet = pd.read_csv(energy_consumption_url, sep=',')
-    energy_consumption_sheet.to_sql('energy_consumption', sql_engine, if_exists='replace', index=False)
+    create_energy_consumption_data('energy_consumption', energy_consumption_url, sql_engine)
 
     # Datasource3: Share of energy from renewable sources
     print('processing energy share csv')
     energy_share_url = 'https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nrg_ind_ren/?format=SDMX-CSV&i'
-    energy_share_sheet = pd.read_csv(energy_share_url, sep=',')
-    energy_share_sheet.to_sql('energy_share', sql_engine, if_exists='replace', index=False)
+    create_energy_share_data('energy_share', energy_share_url, sql_engine)
 
     print('success: data pipeline')
