@@ -19,11 +19,26 @@ Climate change presents a significant threat to global food security by potentia
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
 ### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+* Metadata URL: https://quickstats.nass.usda.gov/results/D6C39912-B701-3601-B8A2-99534A64927C
+* Data URL: https://quickstats.nass.usda.gov/results/D6C39912-B701-3601-B8A2-99534A64927C
 * Data Type: CSV
 
-Short description of the DataSource.
+This dataset provides statistics about corn production held across the country of USA, which was not
+irrigated in Bushels per acre from 2018- 2022.
+
+* Metadata URL: https://quickstats.nass.usda.gov/results/2950386D-9747-3212-869D-270D09981E49
+* Data URL: https://quickstats.nass.usda.gov/results/2950386D-9747-3212-869D-270D09981E49
+* Data Type: CSV
+
+This dataset provides statistics about corn production held across the country of USA, which was
+irrigated in Bushels per acre 2018- 2022.
+
+* Metadata URL: https://www.kaggle.com/datasets/goyaladi/climate-insights-dataset
+* Data URL: https://www.kaggle.com/datasets/goyaladi/climate-insights-dataset/data
+* Data Type: CSV
+
+This dataset provides information about climate change with factors like co2 emission, precipiation and others.
+
 
 ## Work Packages
 
