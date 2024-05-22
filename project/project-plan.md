@@ -38,7 +38,9 @@ Sensor data from selected trees planted in different soil types across Würzburg
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
+1. Data Discovery and Preparation [#1][i1]
+2. Development of an Automated Data Pipeline [#2][i2]
 
-[i1]: https://github.com/jvalue/made-template/issues/1
+
+[i1]: https://github.com/iremhalac/made-template/issues/1
+[i2]: https://github.com/iremhalac/made-template/issues/2
