@@ -1,6 +1,6 @@
 # Project Plan
 
-## Titla
+## Title
 Analyzing the effect of the population growth on the temperature changes
 ## Main Question
 
