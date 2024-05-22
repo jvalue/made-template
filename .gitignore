@@ -1,3 +1,8 @@
 .DS_Store
 /data/*
 !/data/.gitkeep
+project/pipeline.sh
+project/estat_tgs00058_en.csv.gz
+project/estat_tgs00058_en (1).csv.gz
+project/EDGARv432_FT2016_CO2_total_emissions_1970-2016.csv
+project/deathsallcancers1.csv
