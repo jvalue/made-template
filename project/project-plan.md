@@ -23,7 +23,7 @@ Heath condition of the population is one of the most important determinats of th
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
 ### Datasource1: Heath Dataset EU
-* Metadata URL: https://ec.europa.eu/eurostat/web/health/database
+* Metadata URL: https://ec.europa.eu/eurostat/cache/metadata/en/hlth_hlye_esms.htm#data_rev1715803061964
 * Data URL: https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_hlye$defaultview/?format=SDMX-CSV&compressed=true
 * Data Type: CSV
 
