@@ -1,26 +1,31 @@
 # Project Plan
 
 ## Titla
-Analyzing the effect of fossil CO2 emissions for all world countries on deaths from all Cancers
+Analyzing the effect of the population growth on the temperature changes
 ## Main Question
 
-1. "Does the Impact of CO2 emission on the Global level Relate to Varied kinds of Cancer Death Across Countries?"
+1. "Is the CO2 emission on the global scale related to population growth?"
 
 ## Description
-This project aims to explore the potential correlation between fossil CO2 emissions and cancer mortality rates worldwide. By examining data on CO2 emissions and cancer deaths across various countries, we intend to determine if higher levels of CO2 emissions are associated with increased cancer mortality rates. The analysis will involve statistical methods to assess the relationship between these variables, considering potential confounding factors. The ultimate goal is to understand if and how environmental factors like CO2 emissions influence public health, particularly cancer-related deaths.
-
+This project aims to investigate the relationship between population growth and temperature changes on a global scale. By analyzing historical data on CO2 emissions and population trends, we will assess how increases in population contribute to rising atmospheric CO2 levels and, consequently, global temperatures. The study will involve statistical analysis to determine the correlation between these factors and identify potential patterns. Understanding this relationship is crucial for developing strategies to mitigate climate change and its impacts on the environment and human health. Through this analysis, we hope to provide insights into how population dynamics influence global warming.
 ## Datasources
 
-### Datasource1: Emissions Database for Global Atmospheric Research
-* Metadata URL: https://data.jrc.ec.europa.eu/dataset/a40a53a8-7419-4660-9f82-185729d30185
-* Data URLs: https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/EDGAR/datasets/v432_FT2016/EDGARv432_FT2016_CO2_total_emissions_1970-2016.csv
+### Datasource1: World Population Growth
+* Metadata URL: https://www.kaggle.com/datasets/maheshmani13/world-population-growth
+* Data URLs: can be download via Kaggle API - only 2020 data is used in this project
 * Data Type: CSV
 
-### Datasource2: Deaths from All Cancers
-* Metadata URL: https://data.europa.eu/data/datasets/deaths-from-all-cancers?locale=en
-* Data URL: https://lincolnshire.ckan.io/dataset/a30070f9-7627-463f-867a-e351e1d15dd7/resource/f77ad392-7548-4a23-b3a1-e351b98ad214/download/deathsallcancers1.csv
+### Datasource2: Temperature change
+* Metadata URL: https://www.kaggle.com/datasets/sevgisarac/temperature-change?select=Environment_Temperature_change_E_All_Data_NOFLAG.csv
+* Data URL: can be download via Kaggle API - only 2020 data is used in this project
 * Data Type: CSV
 
 
 
 ## Work Packages
+ * 1: Data Acquisition
+ * 2: Data Preprocessing
+ * 3: Data Integration
+ * 4: Data Analysis
+ * 5: Database Storage
+ * 6: Reporting
