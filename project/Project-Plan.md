@@ -24,4 +24,3 @@ This project aims to explore the potential correlation between fossil CO2 emissi
 
 
 ## Work Packages
-
