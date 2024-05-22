@@ -15,13 +15,11 @@ from sqlalchemy import create_engine
 class ExtractData:
     #Kaggle API initialization
     def __init__(self):
-        os.chdir(os.getcwd())
         self.kaggle_api = KaggleApi()
-        self.script_dir = os.path.dirname(os.path.abspath('ExtractData.py'))
+        self.script_dir = os.path.dirname(os.path.abspath(__file__))
         self.data_dir = os.path.join(self.script_dir,'..','data')
         self.download_dir = os.path.abspath(self.data_dir)
-        os.environ['KAGGLE_CONFIG_DIR'] = "/.kaggle"
-
+        os.environ['KAGGLE_CONFIG_DIR'] = os.path.join(self.script_dir,".kaggle")
         
     # This will call kaggle api, perform authentication and download data in Data directory
     def download_dataset(self,dataset_name):
@@ -52,10 +50,6 @@ class ExtractData:
               if os.path.isfile(file_path):
                   os.remove(file_path)
                   print(f"file removed: {filename}")
-        
-        
-        
-        
         
         
 #pipeline
