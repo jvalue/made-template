@@ -2,33 +2,25 @@
 
 ## Title
 
-<!-- Give your project a short title. -->
-
-Awesome MADE project.
+Tracking Greenhouse Gas Emissions by Sector to Understand Climate Change
 
 ## Main Question
 
-<!-- Think about one main question you want to answer based on the data. -->
-
-1. Does writing an example question help students write better project plans?
+How have greenhouse gas emissions from different sectors changed over time, and what does this mean for climate change?
 
 ## Description
 
-<!-- Describe your data science project in max. 200 words. Consider writing about why and how you attempt it. -->
-
-XY is an important problem, because... This projects analyzes XY, using method A. The results can give insights into...
+Climate change is one of the biggest challenges we face today. This project will dig into historical data on greenhouse gas emissions from various sectors to uncover trends and identify major contributors to climate change. We'll analyze data from 1985 to 2022, focusing on methane (CH4) emissions, to see how they've shifted over the years and across different regions. Using advanced data engineering methods, we'll clean, process, and visualize the data to provide clear insights. These insights will help policymakers, researchers, and the public understand what measures have worked and where more effort is needed to reduce emissions.
 
 ## Datasources
 
-<!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
+### Datasource1: Greenhouse Gas Emissions by Source Sector
 
-### Datasource1: ExampleSource
-
-- Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-- Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
+- Metadata URL: https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/env_air_gge?format=SDMX-CSV&compressed=true
+- Data URL: Provided as a CSV example above.
 - Data Type: CSV
 
-Short description of the DataSource.
+This dataset includes detailed information on methane (CH4) emissions from various source sectors, covering different regions and years. It provides a comprehensive view of how emissions have changed over time.
 
 ## Work Packages
 
@@ -37,6 +29,4 @@ Short description of the DataSource.
 1. Example Issue [#1][i1]
 2. ...
 
-[i1]: https://github.com/jvalue/made-template/issues/1
-[i1]: https://github.com/jvalue/made-template/issues/1
 [i1]: https://github.com/jvalue/made-template/issues/1
