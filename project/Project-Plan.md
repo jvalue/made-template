@@ -4,7 +4,7 @@
 Analyzing the effect of the population growth on the temperature changes
 ## Main Question
 
-1. "Is the CO2 emission on the global scale related to population growth?"
+1. "Is the  population growth related to the temprature changes on global scale?"
 
 ## Description
 This project aims to investigate the relationship between population growth and temperature changes on a global scale. By analyzing historical data on CO2 emissions and population trends, we will assess how increases in population contribute to rising atmospheric CO2 levels and, consequently, global temperatures. The study will involve statistical analysis to determine the correlation between these factors and identify potential patterns. Understanding this relationship is crucial for developing strategies to mitigate climate change and its impacts on the environment and human health. Through this analysis, we hope to provide insights into how population dynamics influence global warming.
