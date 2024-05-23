@@ -1,2 +1,7 @@
+# #!/bin/bash
+# python pipeline.py
+
+
+
 #!/bin/bash
-python dataExtractor.py
+python ../project/ETL_Pipeline.py
