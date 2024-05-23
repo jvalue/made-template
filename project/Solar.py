@@ -48,7 +48,7 @@ download_zipfile(url, zip_path)
 extract_zipfile(zip_path, extract_to)
 
 csv_filename = 'SolarPrediction.csv'
-sqlite_filename = 'solar_data.sqlite'
+sqlite_filename = 'solar_data.db'
 table_name = 'solar_prediction'
 
 convert_csv_to_sqlite(extract_to, csv_filename, sqlite_filename, table_name)
