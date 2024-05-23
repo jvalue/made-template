@@ -3,7 +3,7 @@ import sqlite3
 
 
 class ETLPipeline:
-    def _init_(self):
+    def __init__(self):
         self.urls = [
             'https://query.data.world/s/3ibkgfh656yrydhmsg4uboxxm7hysr?dws=00000',
             'https://query.data.world/s/2x6uq5jmauvfnmfhc5ud4jv5amq4p6?dws=00000',
@@ -14,7 +14,6 @@ class ETLPipeline:
         self.columns_to_string = ['Area', 'Item', 'Element', 'Unit']
         self.columns_to_drop = ['Area Code', 'Item Code', 'Element Code']
         self.years_to_drop = [f'Y{i}F' for i in range(1961, 2020)]
-        self.years_to_drop2 = [f'Y{i}' for i in range(1961, 1970)]
 
     def extract(self):
         dataframes = []
@@ -29,7 +28,7 @@ class ETLPipeline:
             # Convert specified columns to string type
             df[self.columns_to_string] = df[self.columns_to_string].astype('string')
             # Drop unnecessary columns
-            df.drop(columns=self.columns_to_drop + self.years_to_drop + self.years_to_drop2, inplace=True)
+            df.drop(columns=self.columns_to_drop + self.years_to_drop, inplace=True)
             # Forward fill missing values
             df.ffill(inplace=True)
             transformed_dataframes.append(df)
@@ -74,7 +73,7 @@ class ETLPipeline:
 
 # Running the ETL pipeline
 etl = ETLPipeline()
-extracted, transformed, db_name, table_name = etl.run('etl_data.db', 'etl_table')
+extracted, transformed, db_name, table_name = etl.run('../data/etl_data.db', 'etl_table')
 
 # for calling
 # from etl_pipeline import ETLPipeline
