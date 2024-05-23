@@ -24,7 +24,7 @@ def extract_zipfile(zip_path, extract_to):
         print(f"Extracted the file tod {extract_to}")
 
 
-def save_csv_to_sqlite(extract_to, csv_filename, db_filename, table_name):
+def convert_csv_to_sqlite(extract_to, csv_filename, db_filename, table_name):
     csv_path = os.path.join(extract_to, csv_filename)
     if os.path.isfile(csv_path):
         df = pd.read_csv(csv_path)
@@ -48,6 +48,10 @@ download_zipfile(url, zip_path)
 extract_zipfile(zip_path, extract_to)
 
 csv_filename = 'SolarPrediction.csv'
-db_filename = 'solar_data.db'
+sqlite_filename = 'solar_data.sqlite'
 table_name = 'solar_prediction'
-save_csv_to_sqlite(extract_to, csv_filename, db_filename, table_name)
+
+convert_csv_to_sqlite(extract_to, csv_filename, sqlite_filename, table_name)
+
+os.remove("C:/Users/hatef/OneDrive/Desktop/Made-fau/archive.zip")
+os.remove("C:/Users/hatef/OneDrive/Desktop/Made-fau/data/SolarPrediction.csv")
