@@ -2,7 +2,7 @@
 
 ## Title
 <!-- Give your project a short title. -->
-Awesome MADE project.
+Climate Change and it's burn on pocket - Cost of living crisis 
 
 ## Main Question
 
