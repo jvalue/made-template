@@ -1,0 +1,96 @@
+
+pipeline GoodsPipeline {
+
+	GoodsExtractor -> GoodsTextFileInterpreter;
+
+	GoodsTextFileInterpreter
+		-> GoodsCSVInterpreter
+		-> RowDeleter
+        //-> GoodsColumnSelector
+        -> NameHeaderWriter
+        -> NameHeaderRenamer
+	   	-> GoodsTableInterpreter
+		-> GoodsLoader; 
+
+
+	block GoodsExtractor oftype HttpExtractor {
+
+		url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
+	}
+  
+
+	block GoodsTextFileInterpreter oftype TextFileInterpreter { }
+
+
+	block GoodsCSVInterpreter oftype CSVInterpreter {
+		delimiter: ';';
+	}
+
+	block RowDeleter oftype RowDeleter {
+		delete: [
+            row 1,
+            row 2,
+            row 3,
+            row 4,
+            row 5,
+            row 6,
+            row 7
+            // remove also copyright notice in the footer!!!!!
+        ];
+	}
+
+    //block GoodsColumnSelector oftype CellRangeSelector {
+        //select: range A1:AU*; // A1:E* and AT1:AU* !!!!
+    //}
+
+	block NameHeaderWriter oftype CellWriter {
+        at: range A1:E1;
+        write: ["year", "month", "goods_id", "goods_name", "goods_source"];
+    }
+
+    block NameHeaderRenamer oftype CellWriter {
+        at: range AT1:AU1;
+        write: ["abroad", "total"];
+    }
+
+	block GoodsTableInterpreter oftype TableInterpreter {
+		header: true;
+		columns: [
+            "year" oftype integer,
+            "month" oftype text,
+            "goods_id" oftype GoodsId,
+            "goods_name" oftype text,
+            "goods_source" oftype text,
+            "abroad" oftype integer,
+            "total" oftype integer
+		];
+	}
+  
+    
+    // valuetype Goodsteil oftype text {
+    // constraints: [
+        //StadtteilAllowlist,
+    //];
+//}
+    
+	//constraint StadtteilAllowlist on text:
+	    //value matches /^(Goods-).*$/;
+
+
+
+	valuetype GoodsId oftype text {
+    constraints: [
+        GoodsIdFilter,
+    ];
+}
+
+	constraint GoodsIdFilter oftype RegexConstraint {
+		regex: /^(NST7-[0-9A-Z]{3}$)/;
+}
+
+
+	block GoodsLoader oftype SQLiteLoader {
+		table: "goods";
+		file: "./goodsTransportedByTrain.sqlite";
+	}
+}
