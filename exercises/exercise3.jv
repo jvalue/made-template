@@ -14,6 +14,7 @@ pipeline GoodsPipeline {
 	block GoodsExtractor oftype HttpExtractor {
 		url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
 	}
+
 	block GoodsTextFileInterpreter oftype TextFileInterpreter {
 		encoding: "latin4";
 	}
@@ -22,9 +23,10 @@ pipeline GoodsPipeline {
 		delimiter: ";";
 	}
 	
-	// remove metadata rows (initial description and headers [data starts in row 9], copyright notice in the footer)
+	// remove metadata rows (initial description and headers [data starts in row 8], copyright notice in the footer)
 	block DeleteMetaDataRows oftype RowDeleter {
 		delete: [
+			row 0,
 			row 1,
 			row 2,
 			row 3,
@@ -32,7 +34,6 @@ pipeline GoodsPipeline {
 			row 5,
 			row 6,
 			row 7,
-			row 8,
 		];
 	}
 
