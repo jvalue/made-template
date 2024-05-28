@@ -1,7 +1,6 @@
 pipeline GoodsPipeline {
     GoodsExtractor
         -> GoodsTextFileInterpreter
-        // -> MetadataTextLineDeleter
         -> GoodsCSVInterpreter
 
         // Removes the first 8 lines of metadata, the last x lines of metadata are removed indirectly through constraints.
@@ -21,10 +20,6 @@ pipeline GoodsPipeline {
         encoding: "latin2"; // latin2 (ISO/IEC 8859-2, aka. Central European)
     }
 
-    // block MetadataTextLineDeleter oftype TextLineDeleter {
-    //     lines: [1, 2, 3, 4, 5, 6, 7]; // leave one line for the headers
-    // }
-
     block GoodsCSVInterpreter oftype CSVInterpreter {
         delimiter: ";";
     }
@@ -34,16 +29,6 @@ pipeline GoodsPipeline {
         // and then concatenate them together
         select: range A9:AU*; // leave one line for the headers
     }
-
-    // block GoodsHeaderWriter oftype CellWriter {
-    //     at: range A1:E1;
-    //     write: ["year", "month", "goods_id", "goods_name", "goods_source"];
-    // }
-
-    // block GoodsQuantityHeaderWriter oftype CellWriter {
-    //     at: range AT1:AU1;
-    //     write: ["abroad", "total"];
-    // }
 
     block GoodsColumnDeleter oftype ColumnDeleter {
         // I think delete should support the range type, the documentation actually says it expects the type Collection<CellRange>,
