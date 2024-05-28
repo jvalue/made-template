@@ -1,7 +1,15 @@
 
 pipeline GoodsPipeline {
 
-	GoodsExtractor -> GoodsTextFileInterpreter;
+	transform UmlautTransform {
+        from inputName oftype text;
+        to outputName oftype text;
+
+        outputName: inputName replace /�|�|�|�|�|�|�|�|�|�|�/ with 'oe';
+    }
+
+
+    GoodsExtractor -> GoodsTextFileInterpreter;
 
 	GoodsTextFileInterpreter
 		-> GoodsCSVInterpreter
@@ -10,6 +18,8 @@ pipeline GoodsPipeline {
         -> NameHeaderWriter
         -> NameHeaderRenamer
 	   	-> GoodsTableInterpreter
+        -> UmlautTransform1
+        -> UmlautTransform2
 		-> GoodsLoader; 
 
 
@@ -79,15 +89,27 @@ pipeline GoodsPipeline {
 
 
 	valuetype GoodsId oftype text {
-    constraints: [
-        GoodsIdFilter,
-    ];
-}
+        constraints: [
+            GoodsIdFilter,
+        ];
+    }
 
 	constraint GoodsIdFilter oftype RegexConstraint {
 		regex: /^(NST7-[0-9A-Z]{3}$)/;
-}
+    }
+    
+    
+    block UmlautTransform1 oftype TableTransformer {
+        inputColumns: ['goods_name'];
+        outputColumn: 'goods_name';
+        use: UmlautTransform;
+    }
 
+    block UmlautTransform2 oftype TableTransformer {
+        inputColumns: ['goods_source'];
+        outputColumn: 'goods_source';
+        use: UmlautTransform;
+    }
 
 	block GoodsLoader oftype SQLiteLoader {
 		table: "goods";
