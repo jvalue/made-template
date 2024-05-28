@@ -1,0 +1,98 @@
+pipeline GoodsPipeline {
+    GoodsExtractor
+        -> GoodsTextFileInterpreter
+        // -> MetadataTextLineDeleter
+        -> GoodsCSVInterpreter
+
+        // Removes the first 8 lines of metadata, the last x lines of metadata are removed indirectly through constraints.
+        // Another approach would be to use the TextRangeSelector, but the size of data might change in the future,
+        // so a static text range might not be as elegant
+        -> GoodsDataSelector
+
+        -> GoodsColumnDeleter
+        -> GoodsTableInterpreter
+        -> GoodsLoader;
+
+    block GoodsExtractor oftype HttpExtractor {
+        url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
+    }
+
+    block GoodsTextFileInterpreter oftype TextFileInterpreter {
+        encoding: "latin2"; // latin2 (ISO/IEC 8859-2, aka. Central European)
+    }
+
+    // block MetadataTextLineDeleter oftype TextLineDeleter {
+    //     lines: [1, 2, 3, 4, 5, 6, 7]; // leave one line for the headers
+    // }
+
+    block GoodsCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    block GoodsDataSelector oftype CellRangeSelector {
+        // It would be great if it was possible to concatenate multiple sheets, so you could select multiple disjunct ranges
+        // and then concatenate them together
+        select: range A9:AU*; // leave one line for the headers
+    }
+
+    // block GoodsHeaderWriter oftype CellWriter {
+    //     at: range A1:E1;
+    //     write: ["year", "month", "goods_id", "goods_name", "goods_source"];
+    // }
+
+    // block GoodsQuantityHeaderWriter oftype CellWriter {
+    //     at: range AT1:AU1;
+    //     write: ["abroad", "total"];
+    // }
+
+    block GoodsColumnDeleter oftype ColumnDeleter {
+        // I think delete should support the range type, the documentation actually says it expects the type Collection<CellRange>,
+        // but it does not seem to work. I tried 'delete: [range F1:AS*]'
+        delete: [column F, column G, column H, column I, column J, column K, column L, column M, column N, column O, column P, column Q,
+                column R, column S, column T, column U, column V, column W, column X, column Y, column Z, column AA, column AB, column AC,
+                column AD, column AE, column AF, column AG, column AH, column AI, column AJ, column AK, column AL, column AM, column AN,
+                column AO, column AP, column AQ, column AR, column AS];
+    }
+
+    block GoodsTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "year" oftype PositiveInt,
+            "month" oftype GermanMonth,
+            "goods_id" oftype GoodsId,
+            "goods_name" oftype text,
+            "goods_source" oftype text,
+            "abroad" oftype PositiveInt,
+            "total" oftype PositiveInt
+        ];
+    }
+
+    valuetype PositiveInt oftype integer {
+        constraints: [ PositiveIntConstraint ];
+    }
+
+    constraint PositiveIntConstraint on integer:
+        value >= 0;
+
+    valuetype GermanMonth oftype text {
+        constraints: [ GermanMonthConstraint ];
+    }
+
+    constraint GermanMonthConstraint oftype AllowlistConstraint {
+        allowlist: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+    }
+
+    valuetype GoodsId oftype text {
+        constraints: [ GoodsIdConstraint ];
+    }
+
+    constraint GoodsIdConstraint oftype RegexConstraint {
+        regex: /^NST7-[A-Z0-9]{3}/;
+    }
+
+    block GoodsLoader oftype SQLiteLoader {
+        table: "goods";
+        file: "goodsTransportedByTrain.sqlite";
+        dropTable: true;
+    }
+}
