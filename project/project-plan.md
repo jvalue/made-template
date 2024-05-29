@@ -6,9 +6,9 @@ Interlinked Dynamics: Exploring the Correlations between Surface Temperature, At
 
 ## Main Questions
 
-1. How do changes in atmospheric CO2 concentrations correlate with changes in mean surface temperature over time?
+1. How do changes in atmospheric CO2 concentrations correlate with changes in Sea Level Rise over time?
 
-2. Is there a correlation between rising mean surface temperatures and accelerated sea level rise?
+2. Is there a correlation between rising mean surface temperatures and Land Cover Changes?
 
 ## Description
 
