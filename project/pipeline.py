@@ -11,7 +11,7 @@ def main():
         "Annual_Surface_Temperature_Change": {
             "url": "https://opendata.arcgis.com/datasets/4063314923d74187be9596f10d034914_0.csv",
             "columns_to_delete": [
-                'ObjectId', 'ISO2', 'ISO3', 'Indicator', 'Unit', 'Source', 'CTS_Code', 'CTS_Name', 'CTS_Full_Descriptor',
+                'ObjectId', 'ISO2', 'Indicator', 'Unit', 'Source', 'CTS_Code', 'CTS_Name', 'CTS_Full_Descriptor',
                 'F1961', 'F1962', 'F1963', 'F1964', 'F1965', 'F1966', 'F1967', 'F1968', 'F1969', 'F1970',
                 'F1971', 'F1972', 'F1973', 'F1974', 'F1975', 'F1976', 'F1977', 'F1978', 'F1979', 'F1980',
                 'F1981', 'F1982', 'F1983', 'F1984', 'F1985', 'F1986', 'F1987', 'F1988', 'F1989', 'F1990',
@@ -31,7 +31,7 @@ def main():
         },
         "Land_Cover_Alteration": {
             "url": "https://opendata.arcgis.com/datasets/b1e6c0ea281f47b285addae0cbb28f4b_0.csv",
-            "columns_to_delete": ['ObjectId', 'ISO2', 'ISO3', 'Source', 'CTS_Code', 'CTS_Name', 'CTS_Full_Descriptor'],
+            "columns_to_delete": ['ObjectId', 'ISO2', 'Source', 'CTS_Code', 'CTS_Name', 'CTS_Full_Descriptor'],
             "rename_year_columns": True  
         }
     }
