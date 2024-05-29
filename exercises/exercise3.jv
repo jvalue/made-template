@@ -20,6 +20,7 @@ pipeline RailwayTransportPipeline{
 
     block CSVDataInterpreter oftype CSVInterpreter{
         delimiter:";";
+        enclosingEscape:'"';
     }
 
     block ScrapeMetaData oftype RowDeleter{
