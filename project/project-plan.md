@@ -19,7 +19,7 @@ Exploring the Links Between Population Growth, CO2 Emissions, and Climate Change
 * Data Type: CSV
 * License: [CC BY Creative Commons Attribution]( https://creativecommons.org/publicdomain/zero/1.0/ )
 
-The agricultural sector is a significant contributor to climate change. This dataset plays a crucial role in understanding and monitoring the impact of agricultural activities on CO2 emissions. 7k rows and 31 columns. The dataset used for the study on CO2 emissions and temperature change for each country from 1990 to 2020. All the emission were recorded in kilotones (kt): 1kt = 1000 kg.
+The agricultural sector is a significant contributor to climate change. This dataset plays a crucial role in understanding and monitoring the impact of agricultural activities on CO2 emissions.The dataset used for the study on CO2 emissions and temperature change for each country from 1990 to 2020.
 
 
 ### Datasource 2: World Population Data
