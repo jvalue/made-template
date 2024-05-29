@@ -1,10 +1,11 @@
 import pandas as pd
 from typing import List, Dict, Any
 
+
 def delete_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     """
     Deletes specified columns from the DataFrame.
-    
+
     :param df: DataFrame from which columns will be deleted.
     :type df: pd.DataFrame
     :param columns: List of columns to delete.
@@ -12,7 +13,8 @@ def delete_columns(df: pd.DataFrame, columns: List[str]) -> pd.DataFrame:
     :return: DataFrame with specified columns deleted.
     :rtype: pd.DataFrame
     """
-    return df.drop(columns=columns, errors='ignore')
+    return df.drop(columns=columns, errors="ignore")
+
 
 def drop_null_rows(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -25,7 +27,10 @@ def drop_null_rows(df: pd.DataFrame) -> pd.DataFrame:
     """
     return df.dropna()
 
-def fill_missing_values(df: pd.DataFrame, fill_value: Any = None, method: str = "None") -> pd.DataFrame:
+
+def fill_missing_values(
+    df: pd.DataFrame, fill_value: Any = None, method: str = "None"
+) -> pd.DataFrame:
     """
     Fill missing values with a specified value or method.
 
@@ -33,7 +38,8 @@ def fill_missing_values(df: pd.DataFrame, fill_value: Any = None, method: str = 
     :type df: pd.DataFrame
     :param fill_value: Value to fill missing values with. Default is None.
     :type fill_value: Any, optional
-    :param method: Method to use for filling missing values ('ffill', 'bfill', etc.). Default is None.
+    :param method: Method to use for filling
+        missing values ('ffill', 'bfill', etc.). Default is None.
     :type method: str, optional
     :return: DataFrame with missing values filled.
     :rtype: pd.DataFrame
@@ -43,6 +49,7 @@ def fill_missing_values(df: pd.DataFrame, fill_value: Any = None, method: str = 
     if method is not None:
         return df.fillna(method=method)
     return df
+
 
 def rename_columns(df: pd.DataFrame, columns_mapping: Dict[str, str]) -> pd.DataFrame:
     """
@@ -57,6 +64,7 @@ def rename_columns(df: pd.DataFrame, columns_mapping: Dict[str, str]) -> pd.Data
     """
     return df.rename(columns=columns_mapping)
 
+
 def filter_rows(df: pd.DataFrame, condition: Any) -> pd.DataFrame:
     """
     Filter rows based on a condition.
@@ -69,6 +77,7 @@ def filter_rows(df: pd.DataFrame, condition: Any) -> pd.DataFrame:
     :rtype: pd.DataFrame
     """
     return df.query(condition)
+
 
 def add_new_column(df: pd.DataFrame, column_name: str, values: Any) -> pd.DataFrame:
     """
@@ -86,7 +95,10 @@ def add_new_column(df: pd.DataFrame, column_name: str, values: Any) -> pd.DataFr
     df[column_name] = values
     return df
 
-def change_column_type(df: pd.DataFrame, column_name: str, new_type: Any) -> pd.DataFrame:
+
+def change_column_type(
+    df: pd.DataFrame, column_name: str, new_type: Any
+) -> pd.DataFrame:
     """
     Change the data type of a specified column.
 
@@ -115,25 +127,36 @@ def standardize_date_column(df: pd.DataFrame, date_column: str) -> pd.DataFrame:
     :rtype: pd.DataFrame
     """
     # Handle specific known date formats
-    if df[date_column].str.contains('M').any():
-        df[date_column] = pd.to_datetime(df[date_column], format='%YM%m', errors='coerce')
-    elif df[date_column].str.contains(r'\d{1,2}/\d{1,2}/\d{4}').any():
+    if df[date_column].str.contains("M").any():
+        df[date_column] = pd.to_datetime(
+            df[date_column], format="%YM%m", errors="coerce"
+        )
+    elif df[date_column].str.contains(r"\d{1,2}/\d{1,2}/\d{4}").any():
         # Handle date format like D12/17/1992
-        df[date_column] = pd.to_datetime(df[date_column].str.extract(r'(\d{1,2}/\d{1,2}/\d{4})')[0], format='%m/%d/%Y', errors='coerce')
+        df[date_column] = pd.to_datetime(
+            df[date_column].str.extract(r"(\d{1,2}/\d{1,2}/\d{4})")[0],
+            format="%m/%d/%Y",
+            errors="coerce",
+        )
     else:
-        df[date_column] = pd.to_datetime(df[date_column], errors='coerce')
+        df[date_column] = pd.to_datetime(df[date_column], errors="coerce")
     return df
+
 
 def rename_year_columns(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Rename columns with the prefix 'F' followed by a four-digit year (FYYYY) to just the year (YYYY).
+    Rename columns with the prefix 'F'
+    followed by a four-digit year (FYYYY) to just the year (YYYY).
 
     :param df: DataFrame with columns to be renamed.
     :type df: pd.DataFrame
     :return: DataFrame with renamed columns.
     :rtype: pd.DataFrame
     """
-    new_columns = {col: col[1:] for col in df.columns if col.startswith('F') and col[1:].isdigit() and len(col) == 5}
+    new_columns = {
+        col: col[1:]
+        for col in df.columns
+        if col.startswith("F") and col[1:].isdigit() and len(col) == 5
+    }
     df.rename(columns=new_columns, inplace=True)
     return df
-

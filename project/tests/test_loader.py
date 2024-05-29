@@ -4,6 +4,7 @@ import pandas as pd
 from pathlib import Path
 from etl_pipeline.loader import load_df_to_sqlite
 
+
 @pytest.fixture
 def sample_dataframe() -> pd.DataFrame:
     """
@@ -12,11 +13,9 @@ def sample_dataframe() -> pd.DataFrame:
     :return: Sample DataFrame.
     :rtype: pd.DataFrame
     """
-    data = {
-        'Column1': [1, 2, 3],
-        'Column2': ['A', 'B', 'C']
-    }
+    data = {"Column1": [1, 2, 3], "Column2": ["A", "B", "C"]}
     return pd.DataFrame(data)
+
 
 @pytest.fixture
 def temp_db_path(tmp_path) -> Path:
@@ -30,6 +29,7 @@ def temp_db_path(tmp_path) -> Path:
     """
     return tmp_path / "temp_test.db"
 
+
 def test_load_df_to_sqlite(temp_db_path: Path, sample_dataframe: pd.DataFrame) -> None:
     """
     Test the load_df_to_sqlite function for loading a DataFrame into a SQLite database.
@@ -40,11 +40,11 @@ def test_load_df_to_sqlite(temp_db_path: Path, sample_dataframe: pd.DataFrame) -
     :type sample_dataframe: pd.DataFrame
     :return: None
     """
-    table_name = 'test_table'
-    
+    table_name = "test_table"
+
     # Call the function
     load_df_to_sqlite(str(temp_db_path), table_name, sample_dataframe)
-    
+
     # Verify the table is created and data is loaded correctly
     conn = sqlite3.connect(temp_db_path)
     df_from_db = pd.read_sql_query(f"SELECT * FROM {table_name}", conn)
@@ -55,6 +55,7 @@ def test_load_df_to_sqlite(temp_db_path: Path, sample_dataframe: pd.DataFrame) -
 
     # Explicitly delete the temporary database file
     temp_db_path.unlink()
+
 
 if __name__ == "__main__":
     pytest.main()

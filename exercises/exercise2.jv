@@ -47,7 +47,7 @@ pipeline TreesPipeline {
         constraints: [
             stadtteilregex,
         ];
-    } 
+    }
 
     constraint GeocoordinateRegex oftype RegexConstraint {
         regex: /^\d{1,3}\.\d+,\s\d{1,3}\.\d+$/;
@@ -57,7 +57,7 @@ pipeline TreesPipeline {
         constraints: [
             GeocoordinateRegex,
         ];
-    } 
+    }
 
     block TreesTableInterpreter oftype TableInterpreter {
         header: true;
