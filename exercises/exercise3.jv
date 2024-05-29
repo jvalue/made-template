@@ -5,8 +5,8 @@ pipeline RailwayTransportPipeline{
     -> DataInterpreter
     -> CSVDataInterpreter
     -> ScrapeMetaData
-    -> ScrapeColumnSet1
-    -> ScrapeColumnSet2
+    -> AssignNameToColumnSet1
+    -> AssignNameToColumnSet2
     -> DataStructure
     -> SaveToDB;
 
@@ -15,7 +15,7 @@ pipeline RailwayTransportPipeline{
     }
 
     block DataInterpreter oftype TextFileInterpreter{
-        encoding:"latin3";
+        encoding:"latin4";
     }
 
     block CSVDataInterpreter oftype CSVInterpreter{
@@ -28,12 +28,12 @@ pipeline RailwayTransportPipeline{
     }
 
     // To set Headers
-    block ScrapeColumnSet1 oftype CellWriter{
+    block AssignNameToColumnSet1 oftype CellWriter{
         at:range A1:E1;
         write:['year','month','goods_id','goods_name','goods_source'];
     }
     // Same to set Headers
-    block ScrapeColumnSet2 oftype CellWriter{
+    block AssignNameToColumnSet2 oftype CellWriter{
         at:range AT1:AU1;
         write:['abroad','total'];
     }
