@@ -42,6 +42,8 @@ The US Census Bureau's world population clock estimated that the global populati
 
 
 [c1]: https://github.com/AkashWelkin/made-template-fork-ss24/issues/1
-
+[c2]: https://github.com/AkashWelkin/made-template-fork-ss24/issues/2
+[c3]: https://github.com/AkashWelkin/made-template-fork-ss24/issues/3
+[c4]: https://github.com/AkashWelkin/made-template-fork-ss24/issues/4
 
 
