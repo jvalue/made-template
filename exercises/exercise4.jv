@@ -1,0 +1,135 @@
+
+pipeline GoodsPipeline {
+
+    DevicesZipExtractor
+	    -> ZipArchiveInterpreter
+        -> DeviceDataPicker
+        -> DevicesTextFileInterpreter
+		-> DevicesCSVInterpreter
+		-> DeleteColumns
+		-> RenameHeaders
+	   	-> DevicesTableInterpreter
+        -> CelsiusToFahrenheitTransformer
+        -> CelsiusToFahrenheitTransformerBattery
+		-> TemperatureLoader;
+
+    /* 1.
+    Download and unzip data
+    Use the “data.csv” in the zip file
+    */
+	block DevicesZipExtractor oftype HttpExtractor {
+		url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+	}
+    block ZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+    //path: "./data/measure/mowesta-dataset-20221107/data.csv";
+    block DeviceDataPicker oftype FilePicker {
+        path: "/data.csv";
+    }
+	block DevicesTextFileInterpreter oftype TextFileInterpreter { }
+
+	block DevicesCSVInterpreter oftype CSVInterpreter {
+		enclosing: '';
+		delimiter: ";";
+	}
+	/* 2.
+    Reshape data
+        2.1 Only use the columns "Geraet", "Hersteller", "Model", "Monat", "Temperatur in °C (DWD)", "Batterietemperatur in °C"
+        2.2 There can be multiple temperature measurements per row
+            You can ignore all columns to the right of the first “​​Geraet aktiv”
+        2.3 Translate/rename column headers from German to English:
+            “Geraet” to “id”
+            “Hersteller” to “producer”
+            “Model” to “model”
+            “Monat” to “month”
+            “Temperatur in °C (DWD)” to “temperature”
+            “Batterietemperatur in °C” to “battery_temperature”
+
+    */
+    //2.1
+	block DeleteColumns oftype ColumnDeleter {
+	//delete: [range F1:AS*];
+	delete: [
+		column F,
+		column G,
+		column H,
+		column I,
+        // keep column J
+        // 2.2 ignore the rest
+        // ...
+	];
+	}
+	// 2.3
+	/*
+    Translate/rename column headers from German to English:
+        “Geraet” to “id”
+        “Hersteller” to “producer”
+        “Model” to “model”
+        “Monat” to “month”
+        “Temperatur in °C (DWD)” to “temperature”
+        “Batterietemperatur in °C” to “battery_temperature”
+    */
+	block RenameHeaders oftype CellWriter {
+	at: range A1:F1;
+	write: ['id', 'produce', 'model', 'month', 'temperature', 'battery_temperature'];
+	}
+
+	// 3. Use fitting SQLite types (e.g., BIGINT, TEXT or FLOAT) for all columns
+	block DevicesTableInterpreter oftype TableInterpreter {
+		header: true;
+		columns: [
+			"id" oftype PositiveInteger, // PositiveInteger 
+			"produce" oftype text,
+			"model" oftype text,
+			"month" oftype Month,
+			"temperature" oftype decimal,
+			"battery_temperature" oftype decimal
+		];
+	}
+    /*4.
+    Validate data
+        Use validations as you see fit, e.g., for “Geraet” to be an id over 0
+    */
+	// 	Numeric values must be positive integers
+	valuetype PositiveInteger oftype integer {
+		constraints: [ Positive ];
+	}
+	constraint Positive oftype RangeConstraint {
+		lowerBound: 0; //oder 1?
+	}
+	// 'month' should be a number between 1-12
+	valuetype Month oftype integer {
+		constraints: [ MonthCapitalized ];
+	}
+	constraint MonthCapitalized oftype RangeConstraint {
+		lowerBound: 1;
+        upperBound: 12;
+        upperBoundInclusive: true;
+	}
+    /*5.
+    Transform data
+    Transform temperatures in Celsius to Fahrenheit (formula is (TemperatureInCelsius * 9/5) + 32) in place (keep the same column names)
+    For the columns temperature and battery_temperature
+    */
+    transform CelsiusToFahrenheit {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius * 9/5) + 32;
+    }
+    block CelsiusToFahrenheitTransformer oftype TableTransformer {
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
+        use: CelsiusToFahrenheit;
+    }
+    block CelsiusToFahrenheitTransformerBattery oftype TableTransformer {
+        inputColumns: ['battery_temperature'];
+        outputColumn: 'battery_temperature';
+        use: CelsiusToFahrenheit;
+    }
+	// 6. Write data into a SQLite database called “temperatures.sqlite”, in the table “temperatures”
+	block TemperatureLoader oftype SQLiteLoader {
+		table: "temperatures";
+		file: "./temperatures.sqlite";
+	} 
+}
