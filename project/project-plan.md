@@ -6,9 +6,9 @@ Interlinked Dynamics: Exploring the Correlations between Surface Temperature, At
 
 ## Main Questions
 
-1. How do changes in atmospheric CO2 concentrations correlate with changes in mean surface temperature over time?
+1. How do changes in atmospheric CO2 concentrations correlate with changes in Sea Level Rise over time?
 
-2. Is there a correlation between rising mean surface temperatures and accelerated sea level rise?
+2. Is there a correlation between rising mean surface temperatures and Land Cover Changes?
 
 ## Description
 
@@ -41,7 +41,7 @@ This indicator presents the concentration of carbon dioxide in the atmosphere, o
 * Data URL: https://opendata.arcgis.com/datasets/b84a7e25159b4c65ba62d3f82c605855_0.csv
 * Data Type: CSV
 
-This indicator gives estimates of the rise of global sea levels, based on measurements from satellite radar altimeters. These are produced by measuring the time it takes a radar pulse to make a round-trip from the satellite to the sea surface and back again. 
+This indicator gives estimates of the rise of global sea levels, based on measurements from satellite radar altimeters. These are produced by measuring the time it takes a radar pulse to make a round-trip from the satellite to the sea surface and back again.
 Change in mean sea levels, in millimeters, are estimated based on measurements of sea level from satellite radar altimeters. Time-series information is presented from 1992-12-17 to 2022-08-10, with 3/4 data points for every month. The estimates are provided for 24 regions across the world, along with a global estimate. [^r1]
 
 
@@ -52,7 +52,7 @@ Change in mean sea levels, in millimeters, are estimated based on measurements o
 
 Land cover has important linkages to climate regulation. Land’s ability to sequester carbon or store (retain) carbon impacts that amount of CO2 in the atmosphere. These indicators look at changes in land cover over time, grouping land cover into those types that have climate influencing, climate regulating and climate neutral impacts.
 Changes in land cover over time, grouping land cover into those types that have climate influencing, climate regulating and climate neutral impacts.
-Annual estimates of land cover and Climate Altering Land Cover Index are presented at country and regional levels for the years, 1992-2020. 
+Annual estimates of land cover and Climate Altering Land Cover Index are presented at country and regional levels for the years, 1992-2020.
 Estimates of land cover are presented in thousand hectares and the Climate Altering Land Cover Index is unitless. [^r1]
 
 
@@ -61,7 +61,7 @@ Estimates of land cover are presented in thousand hectares and the Climate Alter
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
 This project is structured into six work packages, represented as [milestones in the GitHub repository](https://github.com/Hassan8725/advance_data_engineering/milestones).
-Each work package contains at least one issue. 
+Each work package contains at least one issue.
 
 1. **Objective Definition and Data Source Selection** [[WP1](https://github.com/Hassan8725/advance_data_engineering/milestone/1)]
     1. Define the research question [[issue](https://github.com/Hassan8725/advance_data_engineering/issues/8)]
