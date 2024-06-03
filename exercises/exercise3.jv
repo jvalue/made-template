@@ -1,0 +1,72 @@
+pipeline Goods{
+
+    block GoodsExtractor oftype HttpExtractor {
+        url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
+
+    }
+    block GoodsTextFileReader oftype TextFileInterpreter{
+        encoding: "utf8";
+    }
+
+    block GoodsMetaDataDeleter oftype TextRangeSelector{
+        lineFrom: 9;
+        lineTo : 41336;
+    }
+
+    block GoodsCsvInterpreter oftype CSVInterpreter{
+        delimiter : ";";
+    }
+
+    block HeaderWriterColA_E oftype CellWriter {
+        at: range A1:E1;
+        write: [ 'year', 'month', 'goods_id', 'goods_name', 'goods_source'];
+    }
+
+    block HeaderWriterColAT oftype CellWriter{
+        at : cell AT1;
+        write: [ 'abroad'];
+    }
+
+    block HeaderWriterColAU oftype CellWriter{
+        at : cell AU1;
+        write: [ 'total'];
+    }
+
+    block GoodsTableInterpreter oftype TableInterpreter{
+        header : true;
+        columns : [
+            'year' oftype integer,
+            'month' oftype text,
+            'goods_id' oftype hasNST,
+            'goods_name' oftype text,
+            'goods_source' oftype text,
+            'abroad' oftype text,
+            'total' oftype text
+        ];
+    }
+
+    valuetype hasNST oftype text {
+        constraints : [
+            containsNST
+        ];
+    }
+
+    constraint containsNST on text :
+        value matches /^NST7-[A-Za-z\u00C0-\u017F]+$/;
+
+    block GoodsSqlLoader oftype SQLiteLoader{
+        table : "goods";
+        file : "./goodsTransportedByTrain.sqlite";
+    }
+
+
+    GoodsExtractor->GoodsTextFileReader
+        ->GoodsMetaDataDeleter
+        ->GoodsCsvInterpreter
+        ->HeaderWriterColA_E
+        ->HeaderWriterColAT
+        ->HeaderWriterColAU
+        ->GoodsTableInterpreter
+        ->GoodsSqlLoader;
+
+}

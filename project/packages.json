@@ -1,0 +1,10 @@
+{
+    "name": "made_2024",
+    "version": "0.1.0",
+    "dependencies": {
+      "SQLAlchemy": "1.4.46",
+      "numpy": "1.24.3",
+      "pandas": "2.0.3",
+      "kaggle": "1.6.14"
+    }
+  }
