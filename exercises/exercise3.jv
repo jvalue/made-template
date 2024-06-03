@@ -26,6 +26,7 @@ constraint GermanMonth oftype AllowlistConstraint {
 constraint GoodsIDPattern oftype RegexConstraint {
   regex: /^NST7-[A-Z0-9]{3}$/;
 }
+
 pipeline GoodsTransportedPipeline {
     GoodsTransportedExtractor -> GoodsTransportedTextFileInterpreter
     -> TextLineDeleter
@@ -44,7 +45,7 @@ pipeline GoodsTransportedPipeline {
     }
     
     block TextLineDeleter oftype TextLineDeleter {
-        lines: [1, 2, 3, 4, 5, 6, 7, 8];  // Delete the first 9 rows
+        lines: [1, 2, 3, 4, 5, 6, 7, 8];  // Delete the first 8 rows
     }
     
     block GoodsTransportedCSVInterpreter oftype CSVInterpreter { 
@@ -52,13 +53,13 @@ pipeline GoodsTransportedPipeline {
     }
     
     block ColumnSelector oftype ColumnDeleter {
-        delete: [ column F, column G , column AS, column AM]; 
+        delete: [ column F, column G, column AS ]; 
     }
 
     block GoodsTransportedTableInterpreter oftype TableInterpreter {
         header: false;
         columns: [
-             "year" oftype Year,
+            "year" oftype Year,
             "month" oftype Month,
             "goods_id" oftype GoodsID,
             "goods_name" oftype text,
@@ -67,7 +68,6 @@ pipeline GoodsTransportedPipeline {
             "total" oftype Quantity
         ];
     }
-   
     
     block GoodsTransportedLoader oftype SQLiteLoader { 
         table: "goods"; 
