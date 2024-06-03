@@ -1,0 +1,76 @@
+valuetype Year oftype integer {
+  constraints: [ PositiveInteger ];
+}
+
+valuetype Month oftype text {
+  constraints: [ GermanMonth ];
+}
+
+valuetype GoodsID oftype text {
+  constraints: [ GoodsIDPattern ];
+}
+
+valuetype Quantity oftype integer {
+  constraints: [ PositiveInteger ];
+}
+
+constraint PositiveInteger oftype RangeConstraint {
+  lowerBound: 1;
+  upperBoundInclusive: true;
+}
+
+constraint GermanMonth oftype AllowlistConstraint {
+  allowlist: [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
+}
+
+constraint GoodsIDPattern oftype RegexConstraint {
+  regex: /^NST7-[A-Z0-9]{3}$/;
+}
+pipeline GoodsTransportedPipeline {
+    GoodsTransportedExtractor -> GoodsTransportedTextFileInterpreter
+    -> TextLineDeleter
+    -> GoodsTransportedCSVInterpreter 
+    -> ColumnSelector
+    -> GoodsTransportedTableInterpreter
+    -> GoodsTransportedLoader
+    ;
+    
+    block GoodsTransportedExtractor oftype HttpExtractor { 
+        url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv"; 
+    }
+    
+    block GoodsTransportedTextFileInterpreter oftype TextFileInterpreter { 
+        encoding: "utf8";  
+    }
+    
+    block TextLineDeleter oftype TextLineDeleter {
+        lines: [1, 2, 3, 4, 5, 6, 7, 8];  // Delete the first 9 rows
+    }
+    
+    block GoodsTransportedCSVInterpreter oftype CSVInterpreter { 
+        delimiter: ';'; 
+    }
+    
+    block ColumnSelector oftype ColumnDeleter {
+        delete: [ column F, column G , column AS, column AW]; 
+    }
+
+    block GoodsTransportedTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+             "year" oftype Year,
+            "month" oftype Month,
+            "goods_id" oftype GoodsID,
+            "goods_name" oftype text,
+            "goods_source" oftype text,
+            "abroad" oftype Quantity,
+            "total" oftype Quantity
+        ];
+    }
+   
+    
+    block GoodsTransportedLoader oftype SQLiteLoader { 
+        table: "goods"; 
+        file: "./goodsTransportedByTrain.sqlite"; 
+    }
+}
