@@ -2,13 +2,13 @@
 pipeline GoodsPipeline {
 
     GoodsExtractor
-   		-> GoodsTextFileInterpreter
+    	-> GoodsTextFileInterpreter
         -> GoodsCSVInterpreter
-		-> RowDeleter
+        -> RowDeleter
         -> NameHeaderWriter
         -> NameHeaderRenamer
-	   	-> GoodsTableInterpreter
-		-> GoodsLoader; 
+        -> GoodsTableInterpreter
+        -> GoodsLoader; 
 
 
 	block GoodsExtractor oftype HttpExtractor {
