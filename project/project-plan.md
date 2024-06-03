@@ -2,7 +2,7 @@
 
 ## Title
 <!-- Give your project a short title. -->
-The link between health status and net nreenhouse gas emissions in the EU: a cross-country analysis.
+The link between health status and net greenhouse gas emissions in the EU: a cross-country analysis.
 
 ## Main Question
 
@@ -20,14 +20,14 @@ Health condition of the population is one of the most important determinants of 
 
 <!-- Describe each datasources you plan to use in a section. Use the prefic "DatasourceX" where X is the id of the datasource. -->
 
-### Datasource1: Heath Dataset EU
+### Datasource1: Heathy life years
 * Metadata URL: https://ec.europa.eu/eurostat/cache/metadata/en/hlth_hlye_esms.htm#data_rev1715803061964
 * Data URL: https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_hlye$defaultview/?format=SDMX-CSV&compressed=true
 * Data Type: CSV
 
 The healthy life years (HLY) is an expectancy indicator that measures how many years a person of a certain age is expected to live without severe or moderate health problems. Health expectancies use the Sullivan method, which combines mortality and health status data. Mortality data includes age-specific death rates, probabilities of dying and surviving, the number left alive at a given age, person-years lived, and life expectancy. Health status is measured using the PH030 variable from the EU-SILC Survey, which asks about limitations in daily activities due to health problems for at least the last six months. Responses are categorized as severely limited, limited but not severely, or not limited at all. Proportions of healthy and unhealthy individuals are then calculated by sex and age.
 
-### Datasource2: ExampleSource
+### Datasource2: Net greenhouse gas emissions
 * Metadata URL: https://ec.europa.eu/eurostat/cache/metadata/en/sdg_13_10_esmsip2.htm
 * Data URL: https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/sdg_13_10/?format=SDMX-CSV&compressed=true
 * Data Type: CSV
@@ -40,6 +40,7 @@ The indicator measures national greenhouse gas emissions, including internationa
 
 1. Research on the topic and investigate available data [#1][i1]
 2. Download data and set up a pipeline in Python [#2][i2]
+
 3. Explore data [#3][i3]
 4. Clean and modify data [#4][i4]
 5. Evaluate data on the research questions [#5][i5]

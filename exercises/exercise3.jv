@@ -1,25 +1,13 @@
 
 pipeline GoodsPipeline {
 
-	transform UmlautTransform {
-        from inputName oftype text;
-        to outputName oftype text;
-
-        outputName: inputName replace /�|�|�|�|�|�|�|�|�|�|�/ with 'oe';
-    }
-
-
-    GoodsExtractor -> GoodsTextFileInterpreter;
-
-	GoodsTextFileInterpreter
-		-> GoodsCSVInterpreter
+    GoodsExtractor
+   		-> GoodsTextFileInterpreter
+        -> GoodsCSVInterpreter
 		-> RowDeleter
-        //-> GoodsColumnSelector
         -> NameHeaderWriter
         -> NameHeaderRenamer
 	   	-> GoodsTableInterpreter
-        -> UmlautTransform1
-        -> UmlautTransform2
 		-> GoodsLoader; 
 
 
@@ -29,12 +17,15 @@ pipeline GoodsPipeline {
 	}
   
 
-	block GoodsTextFileInterpreter oftype TextFileInterpreter { }
+	block GoodsTextFileInterpreter oftype TextFileInterpreter {
+        encoding: 'latin2';
+    }
 
 
 	block GoodsCSVInterpreter oftype CSVInterpreter {
 		delimiter: ';';
 	}
+
 
 	block RowDeleter oftype RowDeleter {
 		delete: [
@@ -45,23 +36,21 @@ pipeline GoodsPipeline {
             row 5,
             row 6,
             row 7
-            // remove also copyright notice in the footer!!!!!
         ];
 	}
 
-    //block GoodsColumnSelector oftype CellRangeSelector {
-        //select: range A1:AU*; // A1:E* and AT1:AU* !!!!
-    //}
 
 	block NameHeaderWriter oftype CellWriter {
         at: range A1:E1;
         write: ["year", "month", "goods_id", "goods_name", "goods_source"];
     }
 
+
     block NameHeaderRenamer oftype CellWriter {
         at: range AT1:AU1;
         write: ["abroad", "total"];
     }
+
 
 	block GoodsTableInterpreter oftype TableInterpreter {
 		header: true;
@@ -75,19 +64,7 @@ pipeline GoodsPipeline {
             "total" oftype integer
 		];
 	}
-  
     
-    // valuetype Goodsteil oftype text {
-    // constraints: [
-        //StadtteilAllowlist,
-    //];
-//}
-    
-	//constraint StadtteilAllowlist on text:
-	    //value matches /^(Goods-).*$/;
-
-
-
 	valuetype GoodsId oftype text {
         constraints: [
             GoodsIdFilter,
@@ -98,18 +75,6 @@ pipeline GoodsPipeline {
 		regex: /^(NST7-[0-9A-Z]{3}$)/;
     }
     
-    
-    block UmlautTransform1 oftype TableTransformer {
-        inputColumns: ['goods_name'];
-        outputColumn: 'goods_name';
-        use: UmlautTransform;
-    }
-
-    block UmlautTransform2 oftype TableTransformer {
-        inputColumns: ['goods_source'];
-        outputColumn: 'goods_source';
-        use: UmlautTransform;
-    }
 
 	block GoodsLoader oftype SQLiteLoader {
 		table: "goods";
