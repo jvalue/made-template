@@ -40,7 +40,7 @@ pipeline GoodsTransportedPipeline {
     }
     
     block GoodsTransportedTextFileInterpreter oftype TextFileInterpreter { 
-        encoding: "utf8";  
+        encoding: "latin2";  
     }
     
     block TextLineDeleter oftype TextLineDeleter {
@@ -52,7 +52,7 @@ pipeline GoodsTransportedPipeline {
     }
     
     block ColumnSelector oftype ColumnDeleter {
-        delete: [ column F, column G , column AS, column AW]; 
+        delete: [ column F, column G , column AS, column AM]; 
     }
 
     block GoodsTransportedTableInterpreter oftype TableInterpreter {
