@@ -53,7 +53,13 @@ pipeline GoodsTransportedPipeline {
     }
     
     block ColumnDeleter oftype ColumnDeleter {
-        delete: [ column F, column G, column H, column I, column J, column K, column L, column M, column N, column O, column P, column Q, column R, column S, column T, column U, column V, column W, column X, column Y, column Z, column AA, column AB, column AC, column AD, column AE, column AF, column AG, column AH, column AI, column AJ, column AK, column AL, column AM, column AN, column AO, column AP, column AQ, column AR, column AS]; // Delete all unnecessary columns
+        delete: [ 
+            column F, column G, column H, column I, column J, column K, column L, column M, column N, 
+            column O, column P, column Q, column R, column S, column T, column U, column V, column W, 
+            column X, column Y, column Z, column AA, column AB, column AC, column AD, column AE, column AF, 
+            column AG, column AH, column AI, column AJ, column AK, column AL, column AM, column AN, column AO, 
+            column AP, column AQ, column AR, column AS
+        ]; // Delete all unnecessary columns except A-E and AT-AU
     }
 
     block GoodsTransportedTableInterpreter oftype TableInterpreter {
