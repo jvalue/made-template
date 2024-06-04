@@ -11,6 +11,7 @@ Climate Disaster Trends and Inform Risk Correlation Analysis
 2. Which nations or regions experience particular kinds of climate-related disasters most frequently?
 3. Do more severe climate disasters occur in nations with higher inform risk indicators?
 
+
 ## Description
 
 <!-- Describe your  project in max. 200 words. Consider writing about why and how you attempt it. -->
