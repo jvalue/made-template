@@ -1,3 +1,7 @@
 .DS_Store
 /data/*
 !/data/.gitkeep
+.idea
+.ipynb_checkpoints/*
+__pycache__
+.pytest_cache
