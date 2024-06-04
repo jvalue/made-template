@@ -1,62 +1,76 @@
 pipeline GoodsTransportedByTrainPipeline {
 
     GoodsTransportedByTrainExtractor
-        -> GoodsTransportedByTrainTextFileInterpreter
-        -> GoodsTransportedByTrainCSVInterpreter
-        -> GoodsTransportedByTrainTableInterpreter
-        -> GoodsTransportedByTrainLoader;
+        ->GoodsTransportedByTrainTextFileInterpreter
+        ->GoodsTransportedByTrainCSVInterpreter
+        ->MetadataDeleter
+        ->GoodsTransportedByTrainColDeleter
+        ->GoodsTransportedByTrainTableInterpreter
+        ->GoodsTransportedByTrainLoader;
 
-    block GoodsTransportedByTrainExtractor oftype HttpExtractor {
-        url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
+    block GoodsTransportedByTrainExtractor oftype HttpExtractor{
+            url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
     }
 
-    block GoodsTransportedByTrainTextFileInterpreter oftype TextFileInterpreter {
-        encoding: "latin3";
-    }
-    
+    block GoodsTransportedByTrainTextFileInterpreter oftype TextFileInterpreter { encoding: "latin3";}
+
     block GoodsTransportedByTrainCSVInterpreter oftype CSVInterpreter {
         delimiter: ';';
     }
+    block MetadataDeleter oftype RowDeleter {
+        delete: [row 1, row 2, row 3, row 4, row 5, row 6, row 41337, row 41338, row 41339];
+    }
+    block GoodsTransportedByTrainColDeleter oftype ColumnDeleter {
+        delete: [column F, column G, column H, column I, column J, column K, column L, 
+                column M, column N, column O, column P, column Q, column R, column S, column T, 
+                column U, column V, column W, column X, column Y, column Z, column AA, column AB, 
+                column AC, column AD, column AE, column AF, column AG, column AH, column AI, column AJ, 
+                column AK, column AL, column AM, column AN, column AO, column AP, column AQ, column AR, 
+                column AS];
+    }
 
-valuetype positiveint oftype integer {
-    constraints : [
-        GreaterThanZero
-    ]; 
-}
+    constraint positiveintconstraint oftype RangeConstraint {
+        lowerBound: 0;
+        lowerBoundInclusive: false;
+    }
 
-constraint GreaterThanZero on decimal :
-    value >= 0;
+    valuetype positiveint oftype integer {
+        constraints: [
+            positiveintconstraint,
+        ];
+    }
 
-constraint goodsidregex oftype RegexConstraint {
+    constraint goodsidregex oftype RegexConstraint {
         regex: /^NST7-[A-Z0-9]{3}$/;
     }
 
-valuetype goodsidtype oftype text {
+    valuetype goodsidtype oftype text {
         constraints: [
             goodsidregex,
         ];
     }
-    
-constraint germanmonthconst oftype AllowlistConstraint {
+
+    constraint germanmonthconstraint oftype AllowlistConstraint {
         allowlist: ["Januar", "Februar",  "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
     }
 
-valuetype germanmonth oftype text {
+    valuetype germanmonthtype oftype text {
         constraints: [
-            germanmonthconst,
+            germanmonthconstraint,
         ];
     }
+
 
     block GoodsTransportedByTrainTableInterpreter oftype TableInterpreter {
         header: false;
         columns: [
-            'year' oftype positiveint,
-            'month' oftype germanmonth,
-            'goods_id' oftype goodsidtype,
-            'goods_name' oftype text,
-            'goods_source' oftype text,
-            'abroad' oftype positiveint,
-            'total' oftype positiveint
+            "year" oftype positiveint,
+            "month" oftype germanmonthtype,
+            "goods_id" oftype goodsidtype,
+            "goods_name" oftype text,
+            "goods_source" oftype text,
+            "abroad" oftype positiveint,
+            "total" oftype positiveint
         ];
     }
 
@@ -64,4 +78,5 @@ valuetype germanmonth oftype text {
         table: 'goods';
         file: './goodsTransportedByTrain.sqlite';
     }
-}
+
+}   
