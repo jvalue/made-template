@@ -3,7 +3,6 @@ pipeline GoodsTransportedByTrainPipeline {
     GoodsTransportedByTrainExtractor
         -> GoodsTransportedByTrainTextFileInterpreter
         -> GoodsTransportedByTrainCSVInterpreter
-        -> MetadataDeleter
         -> GoodsTransportedByTrainTableInterpreter
         -> GoodsTransportedByTrainLoader;
 
@@ -17,10 +16,6 @@ pipeline GoodsTransportedByTrainPipeline {
     
     block GoodsTransportedByTrainCSVInterpreter oftype CSVInterpreter {
         delimiter: ';';
-    }
-
-    block MetadataDeleter oftype RowDeleter {
-        delete: [row 1, row 2, row 3, row 4, row 5, row 6, row 41337, row 41338, row 41339];
     }
 
 valuetype positiveint oftype integer {
