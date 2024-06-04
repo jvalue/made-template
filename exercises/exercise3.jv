@@ -1,0 +1,72 @@
+pipeline GoodsTransportedByTrainPipeline {
+
+    GoodsTransportedByTrainExtractor
+        -> GoodsTransportedByTrainTextFileInterpreter
+        -> GoodsTransportedByTrainCSVInterpreter
+        -> MetadataDeleter
+        -> GoodsTransportedByTrainTableInterpreter
+        -> GoodsTransportedByTrainLoader;
+
+    block GoodsTransportedByTrainExtractor oftype HttpExtractor {
+        url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
+    }
+
+    block GoodsTransportedByTrainTextFileInterpreter oftype TextFileInterpreter {
+        encoding: "latin3";
+    }
+    
+    block GoodsTransportedByTrainCSVInterpreter oftype CSVInterpreter {
+        delimiter: ';';
+    }
+
+    block MetadataDeleter oftype RowDeleter {
+        delete: [row 1, row 2, row 3, row 4, row 5, row 6, row 41337, row 41338, row 41339];
+    }
+
+valuetype positiveint oftype integer {
+    constraints : [
+        GreaterThanZero
+    ]; 
+}
+
+constraint GreaterThanZero on decimal :
+    value >= 0;
+
+constraint goodsidregex oftype RegexConstraint {
+        regex: /^NST7-[A-Z0-9]{3}$/;
+    }
+
+valuetype goodsidtype oftype text {
+        constraints: [
+            goodsidregex,
+        ];
+    }
+    
+constraint germanmonthconst oftype AllowlistConstraint {
+        allowlist: ["Januar", "Februar",  "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+    }
+
+valuetype germanmonth oftype text {
+        constraints: [
+            germanmonthconst,
+        ];
+    }
+
+    block GoodsTransportedByTrainTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            'year' oftype positiveint,
+            'month' oftype germanmonth,
+            'goods_id' oftype goodsidtype,
+            'goods_name' oftype text,
+            'goods_source' oftype text,
+            'abroad' oftype positiveint,
+            'total' oftype positiveint
+        ];
+    }
+
+    block GoodsTransportedByTrainLoader oftype SQLiteLoader {
+        table: 'goods';
+        file: './goodsTransportedByTrain.sqlite';
+    }
+}
