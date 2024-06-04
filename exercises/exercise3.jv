@@ -29,8 +29,9 @@ constraint GoodsIDPattern oftype RegexConstraint {
 
 pipeline GoodsTransportedPipeline {
     GoodsTransportedExtractor -> GoodsTransportedTextFileInterpreter
-    -> TextLineDeleter
-    -> GoodsTransportedCSVInterpreter 
+     -> TextLineselector
+    -> GoodsTransportedCSVInterpreter
+ 
     -> ColumnDeleter
     -> GoodsTransportedTableInterpreter
     -> GoodsTransportedLoader
@@ -44,9 +45,9 @@ pipeline GoodsTransportedPipeline {
         encoding: "latin2";  
     }
     
-    block TextLineDeleter oftype TextLineDeleter {
-        lines: [1, 2, 3, 4, 5, 6, 7, 8, 9];  // Delete the first 9 rows
-    }
+    block TextLineselector oftype TextRangeSelector {
+         lineFrom:8;
+        lineTo:41336;    }
     
     block GoodsTransportedCSVInterpreter oftype CSVInterpreter { 
         delimiter: ';'; 
