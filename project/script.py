@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sqlalchemy import create_engine
 
 ####################################################
@@ -22,11 +23,18 @@ df1_new = df1.pivot(index='geo', columns='TIME_PERIOD')['OBS_VALUE']
 df1 = df1_new
 df1.reset_index(inplace=True)
 
+# fill in missing values by interpolating starting from the second column (skip "geo" columns of string type)
+df1.iloc[:, 1:] = df1.iloc[:, 1:].interpolate(method='linear', axis=1) # interpolate over country dimension (rows)
+
+# fill in the missing values for the first year with the next year's value
+df1.iloc[:, 1:] = df1.iloc[:, 1:].bfill(axis=1)
+
 # specify the directory where to load the dataset
 engine1 = create_engine('sqlite:///../data/dataset_hly.sqlite')
 
 # load the table into a sink (sqlite file)
 df1.to_sql('dataset_hly', engine1, if_exists='replace', index=False)
+
 
 
 
@@ -38,7 +46,7 @@ df2 = pd.read_csv( \
 )
 
 #look at the data to see what is in the dataframe
-print(df1)
+print(df2)
 
 # exclude index and other Total data, as I do not use it in my analysis (i use only tonnes per capita)
 df2 = df2[~df2['unit'].isin(['Index, 1990=100'])]
@@ -56,4 +64,4 @@ df2.reset_index(inplace=True)
 engine2 = create_engine('sqlite:///../data/dataset_gasem.sqlite')
 
 # load the table into a sink (sqlite file)
-df1.to_sql('dataset_gasem', engine2, if_exists='replace', index=False)
+df2.to_sql('dataset_gasem', engine2, if_exists='replace', index=False)
