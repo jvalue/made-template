@@ -17,12 +17,12 @@ def create_emissions_data(name, url, sql_engine):
     # filter rows
     # 1. Source sectors for greenhouse gas emissions:
     #    TOTXMEMONIA - Total (excluding memo items, including international aviation)
-    src_crf_mask = emissions_sheet['src_crf'] == 'TOTXMEMONIA'
+    src_crf_mask = emissions_sheet['src_crf'] != 'TOTXMEMONIA'
     drop_rows(emissions_sheet, src_crf_mask)
 
     # 2. Unit of measure
     #    T_HAB - Tonnes per capita
-    unit_mask = emissions_sheet['unit'] == 'T_HAB'
+    unit_mask = emissions_sheet['unit'] != 'T_HAB'
     drop_rows(emissions_sheet, unit_mask)
 
     # filter columns
@@ -41,7 +41,7 @@ def create_energy_consumption_data(name, url, sql_engine):
     # filter rows
     # 1. Unit of measure
     #    TOE_HAB - Tonnes of oil equivalent (TOE) per capita
-    unit_mask = energy_consumption_sheet['unit'] == 'TOE_HAB'
+    unit_mask = energy_consumption_sheet['unit'] != 'TOE_HAB'
     drop_rows(energy_consumption_sheet, unit_mask)
 
     # filter columns
@@ -60,7 +60,7 @@ def create_energy_share_data(name, url, sql_engine):
     # filter rows
     # 1. Energy balance
     #    REN - Renewable energy sources
-    nrg_bal_mask = energy_share_sheet['nrg_bal'] == 'TOE_HAB'
+    nrg_bal_mask = energy_share_sheet['nrg_bal'] != 'REN'
     drop_rows(energy_share_sheet, nrg_bal_mask)
 
     # filter columns
