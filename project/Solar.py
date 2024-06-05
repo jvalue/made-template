@@ -37,10 +37,10 @@ def convert_csv_to_sqlite(extract_to, csv_filename, db_filename, table_name):
         raise FileNotFoundError(f"{csv_filename} not found in {extract_to}")
 
 
-base_dir = 'C:/Users/hatef/OneDrive/Desktop/Made-fau'
+base_dir = '../data'
 zip_path = os.path.join(base_dir, 'archive.zip')
-extract_to = os.path.join(base_dir, 'data')
-url = 'https://storage.googleapis.com/kaggle-data-sets/1296/2322/bundle/archive.zip?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20240523%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240523T134509Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=1f64ab44a9aabe7f0785bd02d3bd6838fffb95d07ef73885e6f56c97125cfa965a44a31792352da9e1512826dfd766a6e24e0d61ca943990bfeee52278556531204f67a9bf67342af5585b3b68d866a974e6c9a23830aa2cec6f9ef3d6fea86a5979e01ee71fb088b814e34d509ba9ccc220ad3aeca2def6ec3a55d9a92822a58c916ac5650ab99f3119503e33915b0394cfb62206f5e6a32fb4dd72ed2d773857a7bc0aca55d6bec1219754f8d77863bdeeeb9ffa37e67effb571c54072aac4d55c7b5a20fce9dbd73a5de5412ac16d994067a39fbed875ef913c79808d9e4f55011cce14a6dc20ef085e347adb368e3ddf492d0a6f3e332463f5c3aeca348e'
+extract_to = os.path.join(base_dir)
+url = 'https://storage.googleapis.com/kaggle-data-sets/1296/2322/bundle/archive.zip?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20240605%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240605T131315Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=574161479b9e52681ae0e479ac5342d12712d6fd454216ac3db3fc49f217407e909ced47358bada13609b7c49bd1fcb157c82b62f4e2e56a2e57078af0bd3e0b2ec6a0be52aa14cbc579a59b50cfaac566e74f757e78bc1a98245cff85f6f1f166a9dc519c1aaf685bd29bcf4af211325f91b40be87343dc5f811df46966375357142c3293a7136e21655c62c0490d98f2f8dbaf5901667356e3d0486598e8f802bf16c564bcddd1016f307ca4d18444a7047a66a6d7e8266dee39d8d6d9c8794cc0aabe963f15dc6eb200509f777230ebf1e5b69e718d5760edf4bb1fd79ec729cfbcbe9652150122aa1704935e4a9571b15eac8c381bab076ef3d0a180da12'
 
 os.makedirs(extract_to, exist_ok=True)
 
@@ -53,5 +53,5 @@ table_name = 'solar_prediction'
 
 convert_csv_to_sqlite(extract_to, csv_filename, sqlite_filename, table_name)
 
-os.remove("C:/Users/hatef/OneDrive/Desktop/Made-fau/archive.zip")
-os.remove("C:/Users/hatef/OneDrive/Desktop/Made-fau/data/SolarPrediction.csv")
+os.remove("../data/archive.zip")
+os.remove("../data/SolarPrediction.csv")
