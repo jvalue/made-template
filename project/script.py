@@ -52,7 +52,7 @@ print(df2)
 df2 = df2[~df2['unit'].isin(['Index, 1990=100'])]
 df2 = df2[~df2['src_crf'].isin(['Total (excluding LULUCF and memo items, including international aviation)'])]
 
-# drop unnesessary columns
+# drop unnecessary columns
 df2.drop(columns=['DATAFLOW','LAST UPDATE', 'freq', 'airpol', 'unit', 'src_crf', 'OBS_FLAG'], inplace=True)
 
 # turn years into columns
