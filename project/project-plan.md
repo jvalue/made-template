@@ -40,15 +40,14 @@ The indicator measures national greenhouse gas emissions, including internationa
 
 1. Research on the topic and investigate available data [#1][i1]
 2. Download data and set up a pipeline in Python [#2][i2]
-
-3. Explore data [#3][i3]
-4. Clean and modify data [#4][i4]
+3. Clean and modify data [#3][i3]
+4. Explore data [#4][i4]
 5. Evaluate data on the research questions [#5][i5]
 6. Write final report [#6][i6]
 
 [i1]: https://github.com/segalanastasiia/made-template/issues/1
 [i2]: https://github.com/segalanastasiia/made-template/issues/2
-[i3]: https://github.com/segalanastasiia/made-template/issues/3
-[i4]: https://github.com/segalanastasiia/made-template/issues/4
+[i3]: https://github.com/segalanastasiia/made-template/issues/4
+[i4]: https://github.com/segalanastasiia/made-template/issues/3
 [i5]: https://github.com/segalanastasiia/made-template/issues/5
 [i6]: https://github.com/segalanastasiia/made-template/issues/6
