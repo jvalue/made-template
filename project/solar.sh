@@ -1,1 +1,2 @@
-python3 /project/Solar.py
+source MADELinux/Scripts/activate
+python3 Solar.py
