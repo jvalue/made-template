@@ -1,0 +1,87 @@
+pipeline GoodsTransportedPipeline {
+    GoodsTransportedExtractor -> GoodsTransportedTextFileInterpreter;
+
+    GoodsTransportedTextFileInterpreter
+        -> GoodsTransportedCSVInterpreter
+        -> MetaDataRowsRemover
+        -> ExtraColsDeleter
+        -> HeaderWriter
+        -> GoodsTransportedTableInterpreter
+        -> GoodsTransportedLoader;
+
+    block GoodsTransportedExtractor oftype HttpExtractor {
+
+        url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
+    }
+
+
+    block GoodsTransportedTextFileInterpreter oftype TextFileInterpreter { }
+
+    block GoodsTransportedCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    block MetaDataRowsRemover oftype RowDeleter {
+        delete: [row 1, row 2, row 3, row 4, row 5, row 6, row 7, row 41337, row 41338, row 41339];
+    }
+
+    block ExtraColsDeleter oftype ColumnDeleter {
+        delete: [column F, column G, column H, column I, column J, column K, column L, column M, column N, column O, column P,
+        column Q, column R, column S, column T, column U, column V, column W, column X, column Y, column Z, column AA, column AB, column AC,
+        column AD, column AE, column AF, column AG, column AH, column AI, column AJ, column AK, column AL, column AM, column AN, column AO, column AP,
+        column AQ, column AR, column AS];
+    }
+
+    block HeaderWriter oftype CellWriter {
+        at: range A1:G1;
+
+        write: ["year", "month", "goods_id", "goods_name", "goods_source", "abroad", "total"];
+    }
+    
+
+    block GoodsTransportedTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "month" oftype text,
+            "year" oftype integer,
+            "goods_name" oftype text,
+            "goods_id" oftype TextSpecificPattern,
+            "abroad" oftype PositiveIntegers,
+            "total" oftype PositiveIntegers,
+            "goods_source" oftype text
+        ];
+    }
+
+    block GoodsTransportedLoader oftype SQLiteLoader {
+        table: "goods";
+        file: "./goodsTransportedByTrain.sqlite";
+    }
+}
+
+valuetype PositiveIntegers oftype integer {
+	constraints: [
+		OnlyPositiveIntegers,
+	];
+}
+
+constraint OnlyPositiveIntegers oftype RangeConstraint {
+    lowerBound: 1;
+}
+
+valuetype TextSpecificPattern oftype text {
+	constraints: [
+		NSTSpecificPattern,
+	];
+}
+
+constraint NSTSpecificPattern on text:
+	value matches /^NST7-[0-9A-Z]{3}$/;
+
+valuetype GermanMonth oftype text {
+	constraints: [
+		OnlyGermanMonth,
+	];
+}
+
+constraint OnlyGermanMonth on text:
+	value matches /^(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)$/;
