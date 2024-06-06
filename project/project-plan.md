@@ -2,40 +2,43 @@
 
 ## Title
 
-Solar Radiation Prediction Analysis
+Correlation Between COVID-19 Deaths and Average Temperature in Alabama, 2020
 
 ## Main Question
 
-1. Will it be reasonable to invest on Solar Energy panels based on future Radiation Levels?
-2. Can we accurately predict solar radiation levels based on environmental conditions such as wind direction, wind speed, humidity, and temperature?
-## Description
+1. How did the average temperature in Alabama during the year 2020 correlate with the number of COVID-19 death cases in the state?
 
-This project aims to analyze the relationship between various  conditions and solar radiation to predict the efficiency of using solar panels in the near future. Using data collected over the past four months, this study will employ statistical adata to forecast solar radiation levels. 
+## Description
+This project aims to analyze the relationship between average temperature and COVID-19 death cases in Alabama throughout the year 2020. By examining temperature data alongside COVID-19 mortality rates, we seek to understand if and how variations in temperature increased or decreased the death cases in the state. The study will use statistical methods to explore potential correlations and draw insights from the data collected. 
 
 ## Datasources
 
-### Datasource: Solar Radiation Prediction
+### Datasource 1: COVID-19 Dataset
 
-* Metadata URL: https://www.kaggle.com/datasets/dronio/SolarEnergy/download?datasetVersionNumber=1
-* Data URL: https://storage.googleapis.com/kaggle-data-sets/1296/2322/bundle/archive.zip?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20240523%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240523T134509Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=1f64ab44a9aabe7f0785bd02d3bd6838fffb95d07ef73885e6f56c97125cfa965a44a31792352da9e1512826dfd766a6e24e0d61ca943990bfeee52278556531204f67a9bf67342af5585b3b68d866a974e6c9a23830aa2cec6f9ef3d6fea86a5979e01ee71fb088b814e34d509ba9ccc220ad3aeca2def6ec3a55d9a92822a58c916ac5650ab99f3119503e33915b0394cfb62206f5e6a32fb4dd72ed2d773857a7bc0aca55d6bec1219754f8d77863bdeeeb9ffa37e67effb571c54072aac4d55c7b5a20fce9dbd73a5de5412ac16d994067a39fbed875ef913c79808d9e4f55011cce14a6dc20ef085e347adb368e3ddf492d0a6f3e332463f5c3aeca348e
+* Metadata URL: https://www.kaggle.com/datasets/imdevskp/corona-virus-report/data
+* Data URL: https://storage.googleapis.com/kaggle-data-sets/494766/1402868/bundle/archive.zip?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=gcp-kaggle-com%40kaggle-161607.iam.gserviceaccount.com%2F20240606%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240606T080246Z&X-Goog-Expires=259200&X-Goog-SignedHeaders=host&X-Goog-Signature=6736e642731951c8a12b5d19e0f30241c71a13be8a04558423d7922a9abb03d1dcbbf16192b7415cbe730d65468874ff916dc5d0a9a1e0999def8f6591588fabf8f7109cc4867a2cc584738973546f6446622b6e25f8f4887c77fcb121225220a57ed53f521a533140ffbe1d3a6e75944da8c885e9959e536c518aee60da15dc4df56fc6f5493a38ac73438c3dd738f278bee0e8c143e84b058e218289ade0c5b4ee07dad37d1eb756fb5b427a9193e432d5b9cfe2c7b3a505cddec395bf7648cb16a1757dfc51f8ef8286bf090c53bb3e4b3dec4931a35c4fe1b638fe1117c8971b66ef339078b74d12bde2f932c47bb4ff59646ae713421b757e777c1f732f
 * Data Type: CSV
+
+### Datasource 1: Historical Weather and Climate for data Alabama
+
+* Metadata URL: https://meteostat.net/en/place/us/alabama?s=KGVQ0&t=2020-01-01/2020-12-31
 
 ## Work Packages
 
 1. **Data Collection and Preprocessing** [#1][i1]
-   - Tasks include data downloading, handling missing values, and initial preprocessing.
+   - Tasks include data downloading, handling missing values, and initial preprocessing of temperature and COVID-19 data.
 
 2. **Exploratory Data Analysis** [#2][i2]
-   - Aim to visualize and understand the relationships between different meteorological factors and solar radiation.
+   - Aim to visualize and understand the relationship between average temperature and COVID-19 death cases in Alabama.
 
 3. **Feature Engineering and Selection** [#3][i3]
-   - Develop new features that could enhance model accuracy and select the most impactful predictors.
+   - Perform statistical tests to determine the correlation between temperature variations and COVID-19 death cases.
 
 4. **Model Development** [#4][i4]
-   - Build and validate multiple models to predict solar radiation. Compare models to identify the best based on various performance metrics.
+   - Build models to predict the impact of temperature on COVID-19 death rates, comparing different approaches to identify the most accurate.
 
 5. **Results Interpretation and Reporting** [#5][i5]
-   - Document the analysis process, model performance, and potential implications for solar energy use.
+   - Document the analysis process, statistical findings, and model performance.
 
 [i1]: https://github.com/HatefRahimi/MADE-FAU/issues/1
 [i2]: https://github.com/HatefRahimi/MADE-FAU/issues/2
