@@ -4,12 +4,30 @@ import subprocess
 import zipfile
 import pandas as pd
 import sqlite3
+import json
+
+# Navigate to the parent directory
+parent_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
+
+# Read Kaggle API token information from .gitignore file in the parent directory
+kaggle_token_info = {}
+gitignore_path = os.path.join(parent_dir, '.gitignore')
+with open(gitignore_path) as f:
+    for line in f:
+        if line.strip().startswith('{'):
+            kaggle_token_info = json.loads(line.strip())
 
 # Set Kaggle environment variables
 os.environ['KAGGLE_CONFIG_DIR'] = os.path.expanduser('~/.kaggle')
-os.environ['KAGGLE_DATASETS_CACHE'] = os.path.expanduser('~/.kaggle/cache')
+os.makedirs(os.environ['KAGGLE_CONFIG_DIR'], exist_ok=True)
+
+# Create kaggle.json file with the token
+kaggle_config_path = os.path.join(os.environ['KAGGLE_CONFIG_DIR'], 'kaggle.json')
+with open(kaggle_config_path, 'w') as f:
+    json.dump(kaggle_token_info, f)
 
 # Ensure the cache directory exists
+os.environ['KAGGLE_DATASETS_CACHE'] = os.path.expanduser('~/.kaggle/cache')
 os.makedirs(os.environ['KAGGLE_DATASETS_CACHE'], exist_ok=True)
 
 # Kaggle datasets to download
@@ -67,7 +85,7 @@ merged_df.to_sql('merged_data', conn, if_exists='replace', index=False)
 conn.close()
 
 # Clean up cache and extracted folders
-shutil.rmtree('world-population-dataset')
-shutil.rmtree('temperature-change')
-for file in os.listdir(os.environ['KAGGLE_DATASETS_CACHE']):
-    os.remove(os.path.join(os.environ['KAGGLE_DATASETS_CACHE'], file))
+#shutil.rmtree('world-population-dataset')
+#shutil.rmtree('temperature-change')
+#for file in os.listdir(os.environ['KAGGLE_DATASETS_CACHE']):
+  #  os.remove(os.path.join(os.environ['KAGGLE_DATASETS_CACHE'], file))
