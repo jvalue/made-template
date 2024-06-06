@@ -1,6 +1,8 @@
 import os
 import requests
 import pandas as pd
+import zipfile
+import sqlite3
 
 def download_file(url, save_path):
     response = requests.get(url)
@@ -59,6 +61,12 @@ def process_baumkataster():
     df.to_csv(save_path, index=False)
     print("Baumkataster Columns:", df.columns.tolist())
     print(f"\nProcessed and saved Baumkataster data to {save_path}")
+
+   # Save to SQLite
+    conn = sqlite3.connect("../data/baumkataster.db")
+    df.to_sql('baumkataster', conn, if_exists='replace', index=False)
+    conn.close()
+    print("Baumkataster data saved to SQLite database.")
 
 
 def process_klimabaeume():
@@ -135,6 +143,12 @@ def process_klimabaeume():
     df.to_csv(save_path, index=False)
     print("Klimabaeume Columns:", df.columns.tolist())
     print(f"\nProcessed and saved Klimabaeume data to {save_path}")
+
+    # Save to SQLite
+    conn = sqlite3.connect("../data/klimabaeume.db")
+    df.to_sql('klimabaeume', conn, if_exists='replace', index=False)
+    conn.close()
+    print("Klimabaeume data saved to SQLite database.")
 
 if __name__ == "__main__":
     if not os.path.exists("../data"):
