@@ -11,7 +11,8 @@ pipeline TemperaturesPipeline {
 
         // now only the 6 required columns should be left
         -> TemperaturesTableInterpreter
-        -> CelsiusToFahrenheitTransformer
+        -> TemperatureToFahrenheitTransformer
+        -> BatteryTemperatureToFahrenheitTransformer
         -> TemperaturesLoader;
 
     block TemperaturesExtractor oftype HttpExtractor {
@@ -73,7 +74,13 @@ pipeline TemperaturesPipeline {
     constraint CelsiusConstraint on decimal:
          value >= -273.15; // the theoretical minimum of degree celsius
 
-    block CelsiusToFahrenheitTransformer oftype TableTransformer {
+    block TemperatureToFahrenheitTransformer oftype TableTransformer {
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
+        use: CelsiusToFahrenheit;
+    }
+
+    block BatteryTemperatureToFahrenheitTransformer oftype TableTransformer {
         inputColumns: ['temperature'];
         outputColumn: 'temperature';
         use: CelsiusToFahrenheit;
