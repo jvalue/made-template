@@ -1,0 +1,93 @@
+pipeline TemperaturesPipeline {
+    TemperaturesExtractor
+        -> ZipFileInterpreter
+        -> TemperaturesCSVFilePicker
+        -> TemperaturesTextFileInterpreter
+        -> TemperaturesCSVInterpreter
+
+        // remove unnecessary columns
+        -> GeraetAktivCutoffSelector
+        -> TemperaturesColumnDeleter
+
+        // now only the 6 required columns should be left
+        -> TemperaturesTableInterpreter
+        -> CelsiusToFahrenheitTransformer
+        -> TemperaturesLoader;
+
+    block TemperaturesExtractor oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    block ZipFileInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block TemperaturesCSVFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+    block TemperaturesTextFileInterpreter oftype TextFileInterpreter {}
+
+    block TemperaturesCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    block GeraetAktivCutoffSelector oftype CellRangeSelector {
+        select: range A2:J*;
+    }
+
+    block TemperaturesColumnDeleter oftype ColumnDeleter {
+        delete: [column F, column G, column H, column I];
+    }
+
+    block TemperaturesTableInterpreter oftype TableInterpreter {
+        header: false;
+        columns: [
+            "id" oftype PositiveInt,
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype Month,
+            "temperature" oftype Celsius,
+            "battery_temperature" oftype Celsius
+        ];
+    }
+
+    valuetype PositiveInt oftype integer {
+        constraints: [ PositiveIntConstraint ];
+    }
+
+    constraint PositiveIntConstraint on integer:
+        value >= 0;
+
+    valuetype Month oftype integer {
+        constraints: [ MonthConstraint ];
+    }
+
+    constraint MonthConstraint on integer:
+        value >= 0 and value <= 12;
+
+    valuetype Celsius oftype decimal {
+        constraints: [ CelsiusConstraint ];
+    }
+
+    constraint CelsiusConstraint on decimal:
+         value >= -273.15; // the theoretical minimum of degree celsius
+
+    block CelsiusToFahrenheitTransformer oftype TableTransformer {
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
+        use: CelsiusToFahrenheit;
+    }
+
+    transform CelsiusToFahrenheit {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius * 9/5) + 32;
+    }
+
+    block TemperaturesLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "temperatures.sqlite";
+        dropTable: true;
+    }
+}
