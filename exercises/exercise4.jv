@@ -80,7 +80,7 @@ pipeline TemperaturesPipeline {
     }
 
     transform CelsiusToFahrenheit {
-        from Celsius oftype decimal;
+        from Celsius oftype Celsius;
         to Fahrenheit oftype decimal;
         Fahrenheit: (Celsius * 9/5) + 32;
     }
