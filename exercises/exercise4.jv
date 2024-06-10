@@ -44,7 +44,7 @@ pipeline BatteryPipeline {
 	//}
 
     block BattryCoreDataSelector oftype CellRangeSelector {
-        select: range A1:F*;
+        select: range A1:K*;
     }
 
 
