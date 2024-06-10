@@ -1,0 +1,103 @@
+pipeline WeatherProcessingPipeline
+{
+
+    ExtractWeatherData
+        -> InterpretWeatherArchive-> SelectWeatherFile;
+
+      SelectWeatherFile  -> ParseWeatherTextFile
+        -> ParseWeatherCSV 
+        -> RemoveWeatherColumns
+        -> RemoveWeatherRows
+        -> SelectWeatherCells
+        -> InterpretWeatherTable
+        -> TransformTemperature
+        -> TransformBatteryTemperature
+        -> LoadWeatherData;
+
+    block ExtractWeatherData oftype HttpExtractor 
+    {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    } 
+
+    block InterpretWeatherArchive oftype ArchiveInterpreter 
+    {
+        archiveType: "zip";
+
+    }
+    block SelectWeatherFile oftype FilePicker      
+    {
+        // Specify the download path for the file.
+        path: "/data.csv";
+    }
+
+    block ParseWeatherTextFile oftype TextFileInterpreter { encoding: "utf8";}
+    block ParseWeatherCSV oftype CSVInterpreter 
+    {
+        delimiter: ";";
+    }
+    
+
+    block RemoveWeatherColumns oftype ColumnDeleter
+    {
+        delete: [column F, column G, column H, column I];
+    }
+
+    block RemoveWeatherRows oftype RowDeleter 
+    {
+        delete: [row 1];
+    }
+    // Select only a subset of cells
+    block SelectWeatherCells oftype CellRangeSelector   
+    {
+        select: range A1:J*;
+    }
+
+    block InterpretWeatherTable oftype TableInterpreter 
+    {
+        header: false;
+        columns: [
+            "id" oftype positiveInt,
+            "manufacturer" oftype text,
+            "deviceModel" oftype text,
+            "recordedMonth" oftype integer,
+            "tempCelsius" oftype decimal,
+            "batteryTempCelsius" oftype decimal,
+        ];
+    }
+    // ============================================================================
+    block LoadWeatherData oftype SQLiteLoader 
+    {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+    }
+  
+    block TransformTemperature oftype TableTransformer 
+    {
+        inputColumns: ['tempCelsius'];
+        outputColumn: 'tempFahrenheit';
+        use: CelsiusToFahrenheit;
+    }
+
+    block TransformBatteryTemperature oftype TableTransformer 
+    {
+        inputColumns: ['batteryTempCelsius'];
+        outputColumn: 'batteryTempFahrenheit';
+        use: CelsiusToFahrenheit;
+    }
+
+    transform CelsiusToFahrenheit 
+    {
+        from tempC oftype decimal;
+        to tempF oftype decimal;
+        tempF: (tempC * 9/5) + 32;
+    }
+
+    // Ensure positive IDs
+    valuetype positiveInt oftype integer
+    {
+        constraints: [ensurePositiveInt];
+    }
+    constraint ensurePositiveInt on decimal:
+        value > 0;
+
+}
