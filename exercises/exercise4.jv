@@ -1,8 +1,8 @@
 pipeline WeatherProcessingPipeline
 {
-    ExtractWeatherData
-        -> InterpretWeatherArchive
-        -> SelectWeatherFile
+    ExtractWeatherData-> InterpretWeatherArchive;
+
+      InterpretWeatherArchive  -> SelectWeatherFile
         ->WeatherTextFileInterpreter
         -> ParseWeatherCSV
         -> RemoveWeatherColumns
