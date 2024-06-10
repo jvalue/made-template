@@ -1,0 +1,89 @@
+
+pipeline BatteryPipeline {
+
+    BatteryExtractor
+    	-> BatteryZipArchiveInterpreter 
+        -> BatteryFilePicker
+        -> BatteryTextFileInterpreter
+        -> BatteryCSVInterpreter
+        -> NameHeaderRenamer
+        -> BatteryTableInterpreter
+        -> temperatureTransformer
+        -> battery_temperatureTransformer
+        -> BatteryLoader; 
+
+
+	block BatteryExtractor oftype HttpExtractor {
+		url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+	}
+
+    block BatteryZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+
+    block BatteryFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+    block BatteryTextFileInterpreter oftype TextFileInterpreter { }
+
+    
+	block BatteryCSVInterpreter oftype CSVInterpreter {
+		delimiter: ';';
+	}
+
+
+	block NameHeaderRenamer oftype CellWriter {
+        at: range A1:F1;
+        write: ["id", "producer", "model", "month", "temperature", "battery_temperature"];
+    }
+
+
+	block BatteryTableInterpreter oftype TableInterpreter {
+		header: true;
+		columns: [
+            "id" oftype Id,
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype text,
+            "temperature" oftype decimal,
+            "battery_temperature" oftype decimal,
+		];
+	}
+
+    valuetype Id oftype text {
+        constraints: [
+            IdValidator,
+        ];
+    }
+
+	constraint IdValidator oftype RangeConstraint {
+		lowerBound: 1;
+    }
+
+    block temperatureTransformer oftype TableTransformer {
+        inputColumns: ["temperature"];
+        outputColumn: "temperature";
+        use: CelsiusToFahrenheit;
+    }
+
+    block battery_temperatureTransformer oftype TableTransformer {
+        inputColumns: ["battery_temperature"];
+        outputColumn: "battery_temperature";
+        use: CelsiusToFahrenheit;
+    }
+    
+    transform CelsiusToFahrenheit {
+        from TemperatureInCelsius oftype decimal;
+        to TemperatureInFahrenheit oftype decimal;
+        
+        TemperatureInFahrenheit: (TemperatureInCelsius * 9/5) + 32;
+    }
+
+
+	block BatteryLoader oftype SQLiteLoader {
+		table: "temperatures";
+		file: "./temperatures.sqlite";
+	}
+}
