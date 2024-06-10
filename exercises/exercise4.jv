@@ -6,7 +6,7 @@ pipeline BatteryPipeline {
         -> BatteryFilePicker
         -> BatteryTextFileInterpreter
         -> BatteryCSVInterpreter
-        -> ColumnDeleter
+        -> BattryCoreDataSelector
         -> NameHeaderRenamer
         -> BatteryTableInterpreter
         -> temperatureTransformer
@@ -34,14 +34,19 @@ pipeline BatteryPipeline {
 		delimiter: ';';
 	}
 
-    block ColumnDeleter oftype ColumnDeleter {
-		delete: [
-            column K,
-            column L,
-            column M,
-            column N
-        ];
-	}
+    // block ColumnDeleter oftype ColumnDeleter {
+		//delete: [
+            //column K,
+            //column L,
+            //column M,
+            //column N
+        //];
+	//}
+
+    block BattryCoreDataSelector oftype CellRangeSelector {
+        select: range A1:F*;
+    }
+
 
 
 	block NameHeaderRenamer oftype CellWriter {
