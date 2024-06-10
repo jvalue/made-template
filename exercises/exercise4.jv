@@ -78,7 +78,7 @@ pipeline BatteryPipeline {
         from TemperatureInCelsius oftype decimal;
         to TemperatureInFahrenheit oftype decimal;
         
-        TemperatureInFahrenheit: (TemperatureInCelsius * 9/5) + 32;
+        TemperatureInFahrenheit: (TemperatureInCelsius * 9 / 5) + 32;
     }
 
 
