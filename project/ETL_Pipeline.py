@@ -137,7 +137,7 @@ class ETL_Cpi:
             raise
 
     #  Transformation --> DataSource-3: All Countries Temperature Statistics 1970-2021
-    def transform_data_temp(self,temperature_df):
+    def transform_data_temp(self, temperature_df):
         try:
             # list of years
             years = [str(i) for i in range(1970, 2020)]
@@ -216,20 +216,28 @@ class ETL_Cpi:
 
         return df
 
+    def extraction(self):
+        cpi_data_df = self.extract_data()
+        temp_data_df = self.extract_data_temp()
+        crop_data_df = self.extract_data_crop_prd()
+        return cpi_data_df, temp_data_df, crop_data_df
+
+    def transformation(self):
+        cpi_data_df_e, temp_data_df_e, crop_data_df_e = self.extraction()
+        cpi_data_df_t = cpi.transfrom_data(cpi_data_df_e)
+        temp_data_df_t = cpi.transform_data_temp(temp_data_df_e)
+        crop_data_df_t = cpi.transform_data_crop(crop_data_df_e)
+        return cpi_data_df_t, temp_data_df_t, crop_data_df_t
+
+    def load(self):
+        cpi_data_df_t, temp_data_df_t, crop_data_df_t = self.transformation()
+        self.load_data(cpi_data_df_t, '../data/made_db.db', 'cpi_data')
+        self.load_data(temp_data_df_t, '../data/made_db.db', 'temp_data')
+        self.load_data(crop_data_df_t, '../data/made_db.db', 'crop_data')
+        return
+
 
 cpi = ETL_Cpi()
 print('Extracting...')
-
-cpi_data_df = cpi.extract_data()
-temp_data_df = cpi.extract_data_temp()
-crop_data_df = cpi.extract_data_crop_prd()
-
-cpi_data_df = cpi.transfrom_data(cpi_data_df)
-temp_data_df = cpi.transform_data_temp(temp_data_df)
-crop_data_df = cpi.transform_data_crop(crop_data_df)
-
-cpi.load_data(cpi_data_df, '../data/made_db.db', 'cpi_data')
-cpi.load_data(temp_data_df, '../data/made_db.db', 'temp_data')
-cpi.load_data(crop_data_df, '../data/made_db.db', 'crop_data')
-
+cpi.load()
 print('COMPLETED!!!')
