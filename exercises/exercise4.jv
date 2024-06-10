@@ -49,6 +49,7 @@ pipeline BatteryPipeline {
             "month" oftype integer,
             "temperature" oftype decimal,
             "battery_temperature" oftype decimal,
+            "Geraet aktiv" oftype text,
 		];
 	}
 
