@@ -1,15 +1,14 @@
 pipeline WeatherProcessingPipeline
 {
-
     ExtractWeatherData
-        -> InterpretWeatherArchive-> SelectWeatherFile;
-
-      SelectWeatherFile  -> ParseWeatherTextFile
-        -> ParseWeatherCSV 
+        -> InterpretWeatherArchive
+        -> SelectWeatherFile
+        ->WeatherTextFileInterpreter
+        -> ParseWeatherCSV
         -> RemoveWeatherColumns
         -> RemoveWeatherRows
         -> SelectWeatherCells
-        -> InterpretWeatherTable
+        -> RenameColumns
         -> TransformTemperature
         -> TransformBatteryTemperature
         -> LoadWeatherData;
@@ -22,20 +21,19 @@ pipeline WeatherProcessingPipeline
     block InterpretWeatherArchive oftype ArchiveInterpreter 
     {
         archiveType: "zip";
-
     }
+
+
     block SelectWeatherFile oftype FilePicker      
     {
         // Specify the download path for the file.
         path: "/data.csv";
     }
-
-    block ParseWeatherTextFile oftype TextFileInterpreter { encoding: "utf8";}
+        block WeatherTextFileInterpreter oftype TextFileInterpreter { encoding: "utf8";}
     block ParseWeatherCSV oftype CSVInterpreter 
     {
         delimiter: ";";
     }
-    
 
     block RemoveWeatherColumns oftype ColumnDeleter
     {
@@ -46,42 +44,36 @@ pipeline WeatherProcessingPipeline
     {
         delete: [row 1];
     }
-    // Select only a subset of cells
+
     block SelectWeatherCells oftype CellRangeSelector   
     {
         select: range A1:J*;
     }
 
-    block InterpretWeatherTable oftype TableInterpreter 
+    block RenameColumns oftype TableInterpreter
     {
-        header: false;
-        columns: [
+        header : false;
+        columns : [
             "id" oftype positiveInt,
-            "manufacturer" oftype text,
-            "deviceModel" oftype text,
-            "recordedMonth" oftype integer,
-            "tempCelsius" oftype decimal,
-            "batteryTempCelsius" oftype decimal,
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype integer,
+            "temperature" oftype decimal,
+            "battery_temperature" oftype decimal,
         ];
     }
-    // ============================================================================
-    block LoadWeatherData oftype SQLiteLoader 
-    {
-        table: "temperatures";
-        file: "./temperatures.sqlite";
-    }
-  
+
     block TransformTemperature oftype TableTransformer 
     {
-        inputColumns: ['tempCelsius'];
-        outputColumn: 'tempFahrenheit';
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
         use: CelsiusToFahrenheit;
     }
 
     block TransformBatteryTemperature oftype TableTransformer 
     {
-        inputColumns: ['batteryTempCelsius'];
-        outputColumn: 'batteryTempFahrenheit';
+        inputColumns: ['battery_temperature'];
+        outputColumn: 'battery_temperature';
         use: CelsiusToFahrenheit;
     }
 
@@ -97,7 +89,12 @@ pipeline WeatherProcessingPipeline
     {
         constraints: [ensurePositiveInt];
     }
-    constraint ensurePositiveInt on decimal:
+    constraint ensurePositiveInt on integer:
         value > 0;
 
+    block LoadWeatherData oftype SQLiteLoader 
+    {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+    }
 }
