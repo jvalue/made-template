@@ -1,0 +1,81 @@
+
+
+pipeline TemperatureMeasurementPipeline{
+
+    ZipFileExtractor
+    -> TemperatureCSVInterpreter
+    -> TemperatureFileInterpreter
+    -> TemperatureCSVFileInterpreter
+    -> TemperatureHeaderRename
+    -> BatteryTemperatureRename
+    -> TemperatureDataStructure
+    -> BatteryTemperatureCelsiusToFahrenheitTransform
+    -> CelsiusToFahrenheitTransform
+    -> SavetoDatabase;
+
+    block ZipFileExtractor oftype GTFSExtractor{
+        url:"https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    block TemperatureCSVInterpreter oftype FilePicker{
+        path: "/data.csv";
+    }
+    
+    // from here onwards normal pipeline's block
+    
+    block TemperatureFileInterpreter oftype TextFileInterpreter{
+        
+    }
+
+    block TemperatureCSVFileInterpreter oftype CSVInterpreter{
+        delimiter:";";
+        enclosingEscape:'"';
+    }
+
+    block TemperatureHeaderRename oftype CellWriter{
+        at:range A1:E1;
+        write:["id","producer","model","month","temperature"];
+    }
+    block BatteryTemperatureRename oftype CellWriter{
+        at:cell J1;
+        write:["battery_temperature"];
+    }
+    block TemperatureDataStructure oftype TableInterpreter{
+        header:true;
+        columns:[
+            "id" oftype positive,
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype integer,
+            "temperature" oftype decimal,
+            "battery_temperature" oftype decimal
+        ];
+
+    }
+    transform CelsiusToFahrenheit{
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius*9/5)+32;
+    }
+
+    block CelsiusToFahrenheitTransform oftype TableTransformer{
+        inputColumns:["temperature"];
+        outputColumn:"temperature";
+        use: CelsiusToFahrenheit;
+    }
+    block BatteryTemperatureCelsiusToFahrenheitTransform oftype TableTransformer{
+        inputColumns:["battery_temperature"];
+        outputColumn:"battery_temperature";
+        use: CelsiusToFahrenheit;
+    }
+
+    block SavetoDatabase oftype SQLiteLoader{
+        table:"temperatures";
+        file:"./temperatures.sqlite";
+
+    }
+}
+valuetype positive oftype integer{
+    constraints:[PositiveValues];
+}
+constraint PositiveValues on integer: value>0;
