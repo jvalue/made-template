@@ -1,43 +1,72 @@
-pipeline PhoneBatteryTempPipeline
+pipeline TemperaturePipeline
 {
-    PhoneBatteryTempExtractor
-        ->PhoneBatteryTempZipInterpreter
-        ->PhoneBatteryTempDataPicker
-        ->PhoneBatteryTempTextInterpreter
-        ->PhoneBatteryTempCSVInterpreter
-        ->PhoneBatteryTempRenameTemperature
-        ->PhoneBatteryTempRenameBatterietemperatur
-        ->PhoneBatteryTempColDataSelector
-        ->PhoneBatteryTempColDeleter
-        ->PhoneBatteryTempTableDataInterpreter
-        ->PhoneBatteryTempTransformerA
-        ->PhoneBatteryTempTransformerB
-        ->PhoneBatteryTempLoader;
+    Temperature_Extractor
+        ->Temperature_ZipInterpreter
+        ->Temperature_DataPicker
+        ->Temperature_TextInterpreter
+        ->Temperature_CSVInterpreter
+        ->Temperature_Rename
+        ->BatteryTemperature_Rename
+        ->Temperature_ColDataSelector
+        ->Temperature_ColDeleter
+        ->Temperature_TableDataInterpreter
+        ->Temperature_CelsiusToFahrenheit
+        ->BatteryTemperature_CelsiusToFahrenheit
+        ->Temperature_Loader;
 
 
-    block PhoneBatteryTempExtractor oftype HttpExtractor {url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip"; }
-    block PhoneBatteryTempZipInterpreter oftype ArchiveInterpreter { archiveType: "zip";}
-    block PhoneBatteryTempDataPicker oftype FilePicker { path: "/data.csv";}
-    block PhoneBatteryTempTextInterpreter oftype TextFileInterpreter {}
-    block PhoneBatteryTempCSVInterpreter oftype CSVInterpreter {delimiter: ";"; }
+    block Temperature_Extractor oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip"; 
+    }
+    
+    block Temperature_ZipInterpreter oftype ArchiveInterpreter { 
+        archiveType: "zip";
+    }
 
-    block PhoneBatteryTempRenameTemperature oftype CellWriter {
+    block Temperature_DataPicker oftype FilePicker { 
+        path: "/data.csv";
+    }
+    
+    block Temperature_TextInterpreter oftype TextFileInterpreter {}
+
+    block Temperature_CSVInterpreter oftype CSVInterpreter {
+        delimiter: ";"; 
+    }
+
+    block Temperature_Rename oftype CellWriter {
         at: cell E1;
         write: ["temperature"]; 
     }
 
-    block PhoneBatteryTempRenameBatterietemperatur oftype CellWriter {
+    block BatteryTemperature_Rename oftype CellWriter {
         at: cell J1;
         write: ["battery_temperature"]; 
     }  
 
-    block PhoneBatteryTempColDeleter oftype ColumnDeleter { 
+    block Temperature_ColDataSelector oftype CellRangeSelector {
+        select: range A1:K*;
+    }
+
+    block Temperature_ColDeleter oftype ColumnDeleter { 
         delete: [column F, column G, column H, column I]; 
     }
 
-    block PhoneBatteryTempColDataSelector oftype CellRangeSelector {
-        select: range A1:K*;
-    }
+    transform CelsiusToFahrenheit {
+        from tempCelsius oftype decimal;
+        to tempFahrenheit oftype decimal;
+        tempFahrenheit: (tempCelsius * 9/5) + 32;
+   }
+   
+    block Temperature_CelsiusToFahrenheit oftype TableTransformer {
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
+        use: CelsiusToFahrenheit;
+   }
+   block BatteryTemperature_CelsiusToFahrenheit oftype TableTransformer {
+        inputColumns: ['battery_temperature'];
+        outputColumn: 'battery_temperature';
+        use: CelsiusToFahrenheit;
+   }
 
     constraint Valididconstraint oftype RangeConstraint {
         lowerBound: 0;
@@ -48,32 +77,19 @@ pipeline PhoneBatteryTempPipeline
         constraints: [ Valididconstraint ];
     } 
 
-    block PhoneBatteryTempTableDataInterpreter oftype TableInterpreter {
+    block Temperature_TableDataInterpreter oftype TableInterpreter {
         header: false;
         columns: [
-            "id" oftype Valididtype, "producer" oftype text, "model" oftype text, "month" oftype integer,
-            "temperature" oftype decimal, "battery_temperature" oftype decimal
+            "id" oftype Valididtype,
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype integer,
+            "temperature" oftype decimal,
+            "battery_temperature" oftype decimal
         ];
     }
     
-    transform CelsiusToFahrenheit {
-        from tempCelsius oftype decimal;
-        to tempFahrenheit oftype decimal;
-        tempFahrenheit: (tempCelsius * 9/5) + 32;
-   }
-   
-    block PhoneBatteryTempTransformerA oftype TableTransformer {
-        inputColumns: ['temperature'];
-        outputColumn: 'temperature';
-        use: CelsiusToFahrenheit;
-   }
-   block PhoneBatteryTempTransformerB oftype TableTransformer {
-        inputColumns: ['battery_temperature'];
-        outputColumn: 'battery_temperature';
-        use: CelsiusToFahrenheit;
-   }
-
-    block PhoneBatteryTempLoader oftype SQLiteLoader 
+    block Temperature_Loader oftype SQLiteLoader 
     { 
         table: "temperatures"; 
         file: "./temperatures.sqlite"; 
