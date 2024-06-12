@@ -1,3 +1,3 @@
 #!/bin/bash
-pip install -r ../project/requirements.txt
-python ../project/test.py
+pip3 install -r ../project/requirements.txt
+python3 ../project/test.py
