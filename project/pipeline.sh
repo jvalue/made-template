@@ -4,4 +4,5 @@
 
 
 #!/bin/bash
-python3 ../project/ETL_Pipeline.py
+pip install -r ../project/requirements.txt
+python ../project/ETL_Pipeline.py
