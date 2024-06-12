@@ -2,7 +2,7 @@ import sqlite3
 import pytest
 import os
 
-from project.ETL_Pipeline import ETL_Cpi
+from ETL_Pipeline import ETL_Cpi
 
 
 @pytest.fixture
@@ -23,7 +23,6 @@ def create_dbConnection():
         yield conn
     finally:
         conn.close()
-
 
 def test_is_table_present(create_dbCursor):
     create_dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table';")

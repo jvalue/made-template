@@ -4,4 +4,4 @@
 
 
 #!/bin/bash
-python3 ../project/ETL_Pipeline.py
+python ../project/ETL_Pipeline.py

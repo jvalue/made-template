@@ -93,7 +93,7 @@ class ETL_Cpi:
         # print(cpi_data_df)
         columns_to_drop = ['Country Code', 'Indicator Name', 'Indicator Code', '2023', '2010', 'Unnamed: 68']
         cpi_data_df.drop(columns_to_drop, axis=1, inplace=True)
-        cpi_data_df = self.remove_rows_with_all_null(cpi_data_df)
+        cpi_data_df = self. remove_rows_with_all_null(cpi_data_df)
         cpi_data_df = cpi_data_df.interpolate(method='linear')
         cpi_data_df = self.remove_uniterpolated_countries_data(cpi_data_df)
         cpi_data_df = self.impute_values_for_UAE(cpi_data_df)
