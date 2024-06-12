@@ -30,7 +30,7 @@ class ETL_Cpi:
         self.dataset_kaggle = "mdazizulkabirlovlu/all-countries-temperature-statistics-1970-2021"
         self.csv_file_name = "all countries global temperature.csv"
 
-    # DATA SOURCE 1 ;return: cpi_data_df ####################
+    # DATA SOURCE 1 ;return: cpi_data_df #
     def extract_data(self):
         try:
 
@@ -43,7 +43,7 @@ class ETL_Cpi:
                 os.remove(f)
 
             files_to_be_stored_pattern = 'API_FP.CPI.TOTL_DS2_en_csv*.csv'
-
+            logging.info(f"Successfully extracted 'CPI' data")
             for f in glob.glob(self.base_dir + files_to_be_stored_pattern):
                 cpi_data_df = pd.read_csv(f, skiprows=[0, 1, 2, 3])  # on_bad_lines='skip'
                 os.remove(f)
@@ -52,7 +52,7 @@ class ETL_Cpi:
             logging.error(f"An error occurred during extraction: {e}")
             raise
 
-    # DATA SOURCE 2 ;returns: crop_df####################
+    # DATA SOURCE 2 ;returns: crop_df #
     def extract_data_crop_prd(self):
         try:
             crop_df_list = []
@@ -98,8 +98,6 @@ class ETL_Cpi:
         cpi_data_df = self.remove_uniterpolated_countries_data(cpi_data_df)
         cpi_data_df = self.impute_values_for_UAE(cpi_data_df)
         return cpi_data_df
-        # print(cpi_data_df.isnull().sum().tolist())
-        # cpi_data_df.to_csv(self.base_dir + 'cpiData.csv', index=False)
 
     #  Transformation --> DataSource-2: Crop Production
 
