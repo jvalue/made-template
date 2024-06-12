@@ -1,7 +1,6 @@
 import os
 import requests
 import pandas as pd
-import zipfile
 import sqlite3
 
 def download_file(url, save_path):
@@ -13,7 +12,7 @@ def download_file(url, save_path):
     else:
         print(f"Failed to download file from {url}")
 
-def process_baumkataster():
+def process_baumkataster(sql_doc):
     url = "https://opendata.wuerzburg.de/api/v2/catalog/datasets/baumkataster_stadt_wuerzburg/exports/csv"
     save_path = "../data/baumkataster.csv"
     download_file(url, save_path)
@@ -56,20 +55,23 @@ def process_baumkataster():
     # Drop specified columns
     df.drop(['feature_type', 'source_id', 'category', 'city', 'geo_point'], axis=1, inplace=True)
 
-
     # Save the cleaned dataset
     df.to_csv(save_path, index=False)
     print("Baumkataster Columns:", df.columns.tolist())
     print(f"\nProcessed and saved Baumkataster data to {save_path}")
 
-   # Save to SQLite
-    conn = sqlite3.connect("../data/baumkataster.db")
+    # Save to SQLite
+    conn = sqlite3.connect(sql_doc)
     df.to_sql('baumkataster', conn, if_exists='replace', index=False)
+    conn.commit()
     conn.close()
+    
     print("Baumkataster data saved to SQLite database.")
 
 
-def process_klimabaeume():
+
+
+def process_klimabaeume(sql_doc):
     url = "https://opendata.wuerzburg.de/api/v2/catalog/datasets/sls-klimabaeume/exports/csv"
     save_path = "../data/klimabaeume.csv"
     download_file(url, save_path)
@@ -145,15 +147,17 @@ def process_klimabaeume():
     print(f"\nProcessed and saved Klimabaeume data to {save_path}")
 
     # Save to SQLite
-    conn = sqlite3.connect("../data/klimabaeume.db")
+    conn = sqlite3.connect(sql_doc)
     df.to_sql('klimabaeume', conn, if_exists='replace', index=False)
+    conn.commit()
     conn.close()
     print("Klimabaeume data saved to SQLite database.")
 
 if __name__ == "__main__":
     if not os.path.exists("../data"):
         os.makedirs("../data")
-    process_baumkataster()
-    process_klimabaeume()
-
-
+    
+    sql_doc = "../data/data.db"
+    
+    process_baumkataster(sql_doc)
+    process_klimabaeume(sql_doc)
