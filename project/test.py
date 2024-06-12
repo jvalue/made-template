@@ -24,7 +24,6 @@ def create_dbConnection():
     finally:
         conn.close()
 
-
 def test_is_table_present(create_dbCursor):
     create_dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     all_table_list = create_dbCursor.fetchall()
