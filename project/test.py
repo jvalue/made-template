@@ -2,7 +2,7 @@ import sqlite3
 import pytest
 import os
 
-from project.ETL_Pipeline import ETL_Cpi
+from ETL_Pipeline import ETL_Cpi
 
 
 @pytest.fixture
