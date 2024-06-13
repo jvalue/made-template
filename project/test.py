@@ -22,29 +22,31 @@ class ETLSystemTest(unittest.TestCase):
 
     @patch('pandas.read_csv')
     def test_load_and_clean_data(self, mock_read_csv):
-        mock_df = pd.DataFrame({
-            'A': [1, 2, None, 4],
-            'B': ['a', 'b', 'c', 'd']
+        mock_data = pd.DataFrame({
+            'Year': [1990, 1991, None, 1994],
+            'Savanna fires': [14.72, 12.1, None, None]
         })
-        mock_read_csv.return_value = mock_df
+        mock_read_csv.return_value = mock_data
 
         extract = ExtractData()
-        cleaned_df = extract.load_and_clean_data('Agrofood_co2_emission.csv')
+        cleaned_data = extract.load_and_clean_data('Agrofood_co2_emission.csv')
 
-        self.assertFalse(cleaned_df.isnull().values.any())
-        self.assertIn('A', cleaned_df.columns)
-        self.assertIn('B', cleaned_df.columns)
+        self.assertFalse(cleaned_data.isnull().values.any())
+        self.assertIn('Year', cleaned_data.columns)
+        self.assertIn('Savanna fires', cleaned_data.columns)
 
     @patch('ExtractData.create_engine')
     @patch('pandas.DataFrame.to_sql')
     def test_save_data(self, mock_to_sql, mock_create_engine):
         mock_engine = mock_create_engine.return_value
-        dataset = pd.DataFrame({'A': [1, 2, 3]})
-
+        mock_data = pd.DataFrame({
+             'Year': [1990, 1991, 1992, 1994],
+             'Savanna fires': [14.72, 12.1, 12.4, 0.45]
+         })
         extract = ExtractData()
-        extract.save_data('ClimateDB', dataset,'emission')
+        extract.save_data('ClimateDB', mock_data,'mock_db')
 
-        mock_to_sql.assert_called_once_with('emission', con=mock_engine, if_exists='replace', index=False)
+        mock_to_sql.assert_called_once_with('mock_db', con=mock_engine, if_exists='replace', index=False)
 
 
 
@@ -82,7 +84,7 @@ def test_table_size(dbConnect):
         df = pd.read_sql_query(f"select * from {table_name}",dbConnect)
         assert expected_shape==df.shape, f"{table_name} table has missing data."
         
-    
+
 if __name__ == '__main__':
     unittest.main()     
     
