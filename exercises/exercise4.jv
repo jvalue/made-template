@@ -10,6 +10,7 @@ pipeline Exercise4_Trees {
         -> CSVHandler
         -> ColumnHeaderWriter
         -> DataRangeSelector
+        -> DataTransformer
         -> TableInterpreter
         -> TemperatureTransformer
         -> BatteryTemperatureTransformer
@@ -48,10 +49,12 @@ pipeline Exercise4_Trees {
     }
 
     block DataRangeSelector oftype CellRangeSelector {
-        select: range A1:F*;
+        select: range A1:Z*; 
     }
 
- 
+    block DataTransformer oftype ColumnDeleter {
+        delete: [column G, column H, column I, column J, column K, column L, column M, column N, column O, column P, column Q, column R, column S, column T, column U, column V, column W, column X, column Y, column Z]; 
+    }
 
     block DataLoader oftype SQLiteLoader {
         table: "temperatures";
