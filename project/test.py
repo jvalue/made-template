@@ -9,7 +9,7 @@ class TestPipeline(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Run the pipeline before tests"""
-        subprocess.run(['python', 'pipeline.py'], check=True)
+        subprocess.run(['python3', 'pipeline.py'], check=True)
     
     def test_output_file_exists(self):
         """Test  SQLite database file is created"""
