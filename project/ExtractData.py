@@ -20,6 +20,7 @@ class ExtractData:
         self.data_dir = os.path.join(self.script_dir,'..','data')
         self.download_dir = os.path.abspath(self.data_dir)
         os.environ['KAGGLE_CONFIG_DIR'] = os.path.join(self.script_dir,".kaggle")
+
         
     # This will call kaggle api, perform authentication and download data in Data directory
     def download_dataset(self,dataset_name):
@@ -36,10 +37,10 @@ class ExtractData:
         dataset_imputed = pd.concat([dataset.select_dtypes(exclude=[np.number]),df_numeric_imputed],axis=1)
         return dataset_imputed
     
-    def save_data(self,database_name,dataset):
+    def save_data(self,database_name,dataset,table_name):
         print("Load into Sqlite\n")
-        engine = create_engine(r'sqlite:///'+str(self.download_dir) + '\\' + database_name + r'.sqlite')
-        dataset.to_sql(database_name,con=engine,schema=None,if_exists='replace',index=False)
+        engine = create_engine(f'sqlite:///{self.download_dir}/{database_name}.sqlite')
+        dataset.to_sql(table_name,con=engine,if_exists='replace',index=False)
     
     def remove_unnecessary_files(self):
         print("Removing Unnecessary Files")
@@ -52,17 +53,21 @@ class ExtractData:
                   print(f"file removed: {filename}")
         
         
+        
+        
+        
+        
 #pipeline
 if __name__ == '__main__':    
     extract = ExtractData()
     extract.download_dataset('alessandrolobello/agri-food-co2-emission-dataset-forecasting-ml')        
     dataset = extract.load_and_clean_data('Agrofood_co2_emission.csv')   
-    extract.save_data('emission', dataset)   
+    extract.save_data('ClimateDB', dataset,"emission")   
 
     print("Loading new data\n")             
     extract.download_dataset("rajkumarpandey02/2023-world-population-by-country")
     dataset = extract.load_and_clean_data("countries-table.csv")
-    extract.save_data('population', dataset)  
+    extract.save_data('ClimateDB', dataset,"population")  
     extract.remove_unnecessary_files()  
         
         
