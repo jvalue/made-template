@@ -1,3 +1,3 @@
 #!/bin/bash
-pip3 install -r ../project/requirements.txt
+#pip3 install -r ../project/requirements.txt
 python3 ../project/ETL_Pipeline.py
