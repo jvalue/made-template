@@ -1,16 +1,20 @@
 name : Project Executor
 
 on:
-  push:
-    branches:
-      -project
-    pull_request:
-      -project
+  workflow_dispatch:
+env:
+  kaggle_user: ${{secrets.KAGGLE_CRED}}
+
+#  push:
+#    branches:
+#      -project
+#    pull_request:
+#      -project
 #    paths:
 #      - project/**
 jobs:
   project-executor:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
