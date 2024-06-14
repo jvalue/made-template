@@ -1,19 +1,17 @@
 name : Project Executor
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - project
+
 env:
   kaggle_user: ${{secrets.KAGGLE_CRED}}
 
-#  push:
-#    branches:
-#      -project
-#    pull_request:
-#      -project
-#    paths:
-#      - project/**
 jobs:
   project-executor:
+    if: github.event.pull_request.merged == true
+
     runs-on: ubuntu-latest
 
     steps:
@@ -21,6 +19,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: project
+
       # Install python
       - name: Set up Python 3.11
         uses: actions/setup-python@v4
@@ -30,14 +29,11 @@ jobs:
         # Install Libraries
       - name: Setting Up Environment Requirements
         id: requirements-set-up
-        run: |
+        run:
           pip install -r ./project/requirements.txt
 
-  #      - name: Create badges ex5
-  #        uses: RubbaBoy/BYOB@v1.3.0
-  #        with:
-  #          NAME: score_ex5
-  #          LABEL: "Ex5"
-  #          STATUS: ${{ steps.ex_feedback.outputs.score_ex5 }}
-  #          COLOR: 84714F
-  #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #run test.sh
+      - name: Running automated test case
+        id: test-run
+        run:
+          ./project/tests.sh
