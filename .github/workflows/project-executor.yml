@@ -3,12 +3,15 @@ name : Project Executor
 on:
   push:
     branches:
-      - project
-    paths:
-      - project/**
+      -project
+    pull_request:
+      -project
+#    paths:
+#      - project/**
 jobs:
   project-executor:
     run-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -24,7 +27,7 @@ jobs:
       - name: Setting Up Environment Requirements
         id: requirements-set-up
         run: |
-          pip3 install -r ./project/requirements.txt
+          pip install -r ./project/requirements.txt
 
   #      - name: Create badges ex5
   #        uses: RubbaBoy/BYOB@v1.3.0
