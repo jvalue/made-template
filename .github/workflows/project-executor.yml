@@ -7,7 +7,6 @@ on:
     paths:
       - project/**
 jobs:
-
   project-executor:
     run-on: ubuntu-latest
     steps:
