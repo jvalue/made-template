@@ -1,9 +1,10 @@
 name : Project Executor
 
 on:
-  pull_request:
-    branches:
-      - project
+  workflow_dispatch:
+#  pull_request:
+#    branches:
+#      - project
 
 env:
   kaggle_user: ${{secrets.KAGGLE_CRED}}
