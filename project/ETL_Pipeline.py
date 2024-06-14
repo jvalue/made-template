@@ -11,29 +11,19 @@ class ETL_Cpi:
     def __init__(self):
         self.url = 'https://api.worldbank.org/v2/en/indicator/FP.CPI.TOTL?downloadformat=csv'
         self.base_dir = '../data/'
-        self.urls = [
-            'https://query.data.world/s/3ibkgfh656yrydhmsg4uboxxm7hysr?dws=00000',
-            'https://query.data.world/s/2x6uq5jmauvfnmfhc5ud4jv5amq4p6?dws=00000',
-            'https://query.data.world/s/nc25wfakg22iva2tmkx4icgfnufggx?dws=00000',
-            'https://query.data.world/s/fglgedqxdxc2giqvqgvbjxsqic2tuw?dws=00000',
-            'https://query.data.world/s/wva7g5yxspu3bninh4ucn7xrp4h6sc?dws=00000'
-        ]
-        self.col_to_str = ['Area', 'Item', 'Element', 'Unit']
-        self.col_to_str1 = ['Country Name', 'Change ', 'Unit']
-        self.col_to_drop = ['Area Code', 'Item Code', 'Element Code'] + [f'Y{i}F' for i in range(1961, 2020)] + [f'Y{i}'
+        self.col_to_drop_in_crop_data = ['Area Code', 'Item Code', 'Element Code'] + [f'Y{i}F' for i in range(1961, 2020)] + [f'Y{i}'
                                                                                                                  for i
                                                                                                                  in
                                                                                                                  range(
                                                                                                                      1961,
                                                                                                                      1970)]
-        self.col_to_drop1 = ['ObjectId', '2020', '2021']
-        self.dataset_kaggle = "mdazizulkabirlovlu/all-countries-temperature-statistics-1970-2021"
-        self.csv_file_name = "all countries global temperature.csv"
+        self.col_to_drop_in_temp_data = ['ObjectId', '2020', '2021']
+        self.dataset_kaggle_URI = "mdazizulkabirlovlu/all-countries-temperature-statistics-1970-2021"
+        self.kaggle_csv_file = "all countries global temperature.csv"
 
     # DATA SOURCE 1 ;return: cpi_data_df #
     def extract_data(self):
         try:
-
             r = requests.get(self.url)
             z = zipfile.ZipFile(io.BytesIO(r.content))
             z.extractall(self.base_dir)
@@ -56,33 +46,44 @@ class ETL_Cpi:
     def extract_data_crop_prd(self):
         try:
             crop_df_list = []
-            for n, url in enumerate(self.urls):
+            crop_data_urls = {
+                'urls': [
+                    'https://query.data.world/s/3ibkgfh656yrydhmsg4uboxxm7hysr?dws=00000',
+                    'https://query.data.world/s/2x6uq5jmauvfnmfhc5ud4jv5amq4p6?dws=00000',
+                    'https://query.data.world/s/nc25wfakg22iva2tmkx4icgfnufggx?dws=00000',
+                    'https://query.data.world/s/fglgedqxdxc2giqvqgvbjxsqic2tuw?dws=00000',
+                    'https://query.data.world/s/wva7g5yxspu3bninh4ucn7xrp4h6sc?dws=00000'
+                ]
+            }
+            #getting required urls
+            urls = crop_data_urls['urls']
+            for n, url in enumerate(urls):
                 try:
                     df = pd.read_csv(url, encoding='latin-1')
-                    # append 5 dataframes in total for crop production dataset
+                    # Combine a total of 5 dataframes for the crop production dataset
                     crop_df_list.append(df)
                     logging.info(f"Successfully extracted 'Crop Production' data {n + 1} from {url}")
-                    return crop_df_list
                 except Exception as e:
                     logging.error(f"Failed to extract data from {url}: {e}")
+            return crop_df_list
         except Exception as e:
             logging.error(f"An error occurred during extraction: {e}")
             raise
 
-    # DATA SOURCE 3 ;returns: temperature_df####################
+    # DATA SOURCE 3 ;returns: temperature_df #
     def extract_data_temp(self):
         try:
-            # Download the dataset from Kaggle
-            kaggle.api.dataset_download_files(self.dataset_kaggle, path='.', unzip=True)
-
-            # Check if the file was downloaded and extracted correctly
-            if os.path.exists(self.csv_file_name):
-                temperature_df = pd.read_csv(self.csv_file_name)
+            # Obtain the dataset from Kaggle
+            kaggle.api.dataset_download_files(self.dataset_kaggle_URI, path='.', unzip=True)
+            csv_file_from_kaggle_name = self.kaggle_csv_file
+            #Verify that the file was successfully downloaded and extracted.
+            if os.path.exists(csv_file_from_kaggle_name):
+                temperature_df = pd.read_csv(csv_file_from_kaggle_name)
                 # Remove the csv file
-                os.remove(self.csv_file_name)
-                logging.info(f"Successfully extracted 'Temperature Data' from {self.csv_file_name}")
+                os.remove(csv_file_from_kaggle_name)
+                logging.info(f"Successfully extracted 'Temperature Data' from {csv_file_from_kaggle_name}")
             else:
-                raise FileNotFoundError(f"File {self.csv_file_name} not found.")
+                raise FileNotFoundError(f"File {csv_file_from_kaggle_name} not found.")
             return temperature_df
         except Exception as e:
             logging.error(f"An error occurred during extraction: {e}")
@@ -97,10 +98,12 @@ class ETL_Cpi:
         cpi_data_df = cpi_data_df.interpolate(method='linear')
         cpi_data_df = self.remove_uniterpolated_countries_data(cpi_data_df)
         cpi_data_df = self.impute_values_for_UAE(cpi_data_df)
+        cpi_data_df = cpi_data_df.rename(columns={'Country Name': 'country_name'})
+        col_to_str = ['country_name']
+        cpi_data_df[col_to_str] = cpi_data_df[col_to_str].astype('string')
         return cpi_data_df
 
     #  Transformation --> DataSource-2: Crop Production
-
     def transform_data_crop(self, crop_df):
         try:
             Y_years = ["Y" + str(i) for i in range(1970, 2020)]
@@ -108,28 +111,39 @@ class ETL_Cpi:
 
             for df in crop_df:
                 try:
-                    # Convert specified columns to string type
-                    df[self.col_to_str] = df[self.col_to_str].astype('string')
-                    # Drop unnecessary columns
-                    df.drop(columns=self.col_to_drop, inplace=True)
-                    # linear interpolate columns with numeric missing values
+                    col_to_str = ['Area', 'Item', 'Element', 'Unit']
+                    df[col_to_str] = df[col_to_str].astype('string')
+                    df.drop(columns=self.col_to_drop_in_crop_data, inplace=True)
                     df[Y_years] = df[Y_years].interpolate(method='linear')
                     crop_dataframes.append(df)
                 except Exception as e:
                     logging.error(f"Failed to transform 'Crop Production' data: {e}")
-
             concatenated_df = pd.concat(crop_dataframes, axis=0, ignore_index=True)
-            crop_concatenated_df = concatenated_df.rename(columns={'Area': 'Country Name'})
+            crop_concatenated_df = concatenated_df.rename(columns={'Area': 'country_name'})
 
-            # Forward filling with remaining missing values
+            # Filled missing values using forward fill
             transformed_crop_df = crop_concatenated_df.interpolate(method='ffill')
-            # Filtered crops of interest
+
+            # Staple food crops of various countries based on global continents
             transformed_crop_df = transformed_crop_df[(transformed_crop_df['Item'].isin(
-                ['Maize', 'Wheat', 'Rice, paddy', 'Sugar cane', 'Potatoes', 'Coconuts', 'Grapes',
-                 'Dates']))].reset_index()
-
+                ['Yams', 'Bananas', 'Sweet potatoes', 'Maize', 'Beans, green', 'Beans, dry',
+                 'Soybeans', 'Potatoes', 'Tomatoes', 'Onions, dry', 'Onions, shallots, green', 'Rice, paddy',
+                 'Rice, paddy (rice milled equivalent)', 'Wheat', 'Groundnuts, with shell', 'Blueberries',
+                 'Cranberries','Gooseberries', 'Raspberries', 'Strawberries', 'Dates', 'Plums and sloes',
+                 'Millet', 'Coconuts']))].reset_index()
+            # rename name of the crops
+            transformed_crop_df = transformed_crop_df.replace(
+                {'Beans, green':'Green beans',
+                 'Beans, dry': 'Dry beans',
+                 'Onions, dry': 'Dry Onion',
+                 'Onions, shallots, green': 'Green Onion',
+                 'Rice, paddy':'Rice',
+                 'Rice, paddy (rice milled equivalent)':'Rice',
+                 'Groundnuts, with shell':'Peanuts',
+                 'Plums and sloes':'Plums',
+                 }
+            )
             return transformed_crop_df
-
         except Exception as e:
             logging.error(f"An error occurred during transformation: {e}")
             raise
@@ -137,14 +151,12 @@ class ETL_Cpi:
     #  Transformation --> DataSource-3: All Countries Temperature Statistics 1970-2021
     def transform_data_temp(self, temperature_df):
         try:
-            # list of years
             years = [str(i) for i in range(1970, 2020)]
-            # Drop unnecessary columns from temperature_df
-            temperature_df.drop(columns=self.col_to_drop1, inplace=True)
-            # Convert specified columns to string type
-            temperature_df[self.col_to_str1] = temperature_df[self.col_to_str1].astype('string')
-            # linear interpolate columns with numeric missing values
+            temperature_df.drop(columns=self.col_to_drop_in_temp_data, inplace=True)
+            col_to_str1 = ['Country Name', 'Change ', 'Unit']
+            temperature_df[col_to_str1] = temperature_df[col_to_str1].astype('string')
             temperature_df[years] = temperature_df[years].interpolate(method='linear')
+            temperature_df = temperature_df.rename(columns={'Country Name': 'country_name'})
             return temperature_df
 
         except Exception as e:
@@ -218,6 +230,8 @@ class ETL_Cpi:
         cpi_data_df = self.extract_data()
         temp_data_df = self.extract_data_temp()
         crop_data_df = self.extract_data_crop_prd()
+        # print(len(crop_data_df))
+        # print(crop_data_df[0].shape,crop_data_df[1].shape,crop_data_df[2].shape,crop_data_df[3].shape,crop_data_df[4].shape)
         return cpi_data_df, temp_data_df, crop_data_df
 
     def transformation(self):
@@ -229,6 +243,7 @@ class ETL_Cpi:
 
     def load(self):
         cpi_data_df_t, temp_data_df_t, crop_data_df_t = self.transformation()
+        # print(list(cpi_data_df_t.dtypes),list(temp_data_df_t.dtypes), list(crop_data_df_t.dtypes))
         self.load_data(cpi_data_df_t, '../data/made_db.db', 'cpi_data')
         self.load_data(temp_data_df_t, '../data/made_db.db', 'temp_data')
         self.load_data(crop_data_df_t, '../data/made_db.db', 'crop_data')

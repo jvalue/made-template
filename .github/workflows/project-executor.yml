@@ -1,0 +1,40 @@
+name : Project Executor
+
+on:
+  workflow_dispatch:
+#  pull_request:
+#    branches:
+#      - project
+
+env:
+  kaggle_user: ${{secrets.KAGGLE_CRED}}
+
+jobs:
+  project-executor:
+    if: github.event.pull_request.merged == true
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          path: project
+
+      # Install python
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+        # Install Libraries
+      - name: Setting Up Environment Requirements
+        id: requirements-set-up
+        run:
+          pip install -r ./project/requirements.txt
+
+      #run test.sh
+      - name: Running automated test case
+        id: test-run
+        run:
+          ./project/tests.sh
