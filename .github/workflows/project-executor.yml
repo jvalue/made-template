@@ -32,12 +32,13 @@ jobs:
         # Install Libraries
       - name: Setting Up Environment Requirements
         id: requirements-set-up
-        run: |
-          pip install -r ./requirements.txt
+        uses: py-actions/py-dependency-install@v4
+        with:
+          path: "requirements.txt"
 
       #run test.sh
       - name: Running automated test case
         id: test-run
         shell: bash
-        run:
-          ./project/tests.sh
+        working-directory: project
+        run: python3 ../project/test.py
