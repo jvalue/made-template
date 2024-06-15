@@ -34,7 +34,7 @@ jobs:
         id: requirements-set-up
         shell: bash
         run:
-          pip install -r requirements.txt
+          pip install -r ./requirements.txt
 
       #run test.sh
       - name: Running automated test case
