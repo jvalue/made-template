@@ -32,8 +32,7 @@ jobs:
         # Install Libraries
       - name: Setting Up Environment Requirements
         id: requirements-set-up
-        shell: bash
-        run:
+        run: |
           pip install -r ./requirements.txt
 
       #run test.sh
