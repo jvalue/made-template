@@ -3,10 +3,10 @@ name : Project Executor
 on:
   push:
     branches:
-      - project
+      - main
   pull_request:
     branches:
-      - project
+      - main
   workflow_dispatch:
 
 env:
@@ -44,6 +44,7 @@ jobs:
           mkdir -p ~/.kaggle
           echo "{\"username\":\"${{ secrets.KAGGLE_USER }}\",\"key\":\"${{ secrets.KAGGLE_TOEKN }}\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
+        
 
       #run test.sh
       - name: Running automated test case
