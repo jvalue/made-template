@@ -1,18 +1,20 @@
 name : Project Executor
 
 on:
+  push:
+    branches:
+      -project
+  pull_request:
+    branches:
+      - project
   workflow_dispatch:
-#  pull_request:
-#    branches:
-#      - project
 
 env:
   kaggle_user: ${{secrets.KAGGLE_CRED}}
 
 jobs:
   project-executor:
-    if: github.event.pull_request.merged == true
-
+#    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -30,11 +32,13 @@ jobs:
         # Install Libraries
       - name: Setting Up Environment Requirements
         id: requirements-set-up
+        shell: bash
         run:
           pip install -r ./project/requirements.txt
 
       #run test.sh
       - name: Running automated test case
         id: test-run
+        shell: bash
         run:
           ./project/tests.sh
