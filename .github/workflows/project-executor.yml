@@ -44,12 +44,10 @@ jobs:
           mkdir -p ~/.kaggle
           echo "{\"username\":\"${{ secrets.KAGGLE_USER }}\",\"key\":\"${{ secrets.KAGGLE_TOEKN }}\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
-        
 
       #run test.sh
       - name: Running automated test case
         id: test-run
         shell: bash
-#        working-directory: project
-        run: ./project/test.sh
+        run: ./project/tests.sh
 
