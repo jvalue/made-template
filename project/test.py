@@ -31,6 +31,7 @@ def create_dbConnection():
 
 # test case for kaggle dataset availability
 def test_is_kaggle_link_available():
+    print("Checking if kaggle link is available")
     response = requests.get(
         "https://www.kaggle.com/datasets/mdazizulkabirlovlu/all-countries-temperature-statistics-1970-2021/data?select=all+countries+global+temperature.csv")
     assert response.status_code == 200
@@ -38,6 +39,7 @@ def test_is_kaggle_link_available():
 
 # checks for extractions
 def test_data_extraction():
+    print("Checking if extraction functionality is available")
     pipeline = ETL_Cpi()
     result = pipeline.extraction()
     assert isinstance(result, tuple)
@@ -49,6 +51,7 @@ def test_data_extraction():
 
 # check for crop data extraction
 def test_crop_data_extraction():
+    print("Checking crop data extraction from FAO")
     pipeline = ETL_Cpi()
     result = pipeline.extract_data_crop_prd()
     assert isinstance(result, list)
@@ -57,6 +60,7 @@ def test_crop_data_extraction():
 
 # checks for transformations
 def test_data_transformation():
+    print("Checking data transformation")
     pipeline = ETL_Cpi()
     result = pipeline.transformation()
     assert isinstance(result, tuple)
@@ -68,11 +72,13 @@ def test_data_transformation():
 
 # test for number of items in crop database should be 23
 def test_num_of_crop_categories(create_dbCursor):
+    print("Performing Data Validation")
     create_dbCursor.execute("SELECT DISTINCT Item from crop_data")
 
 
 # check for columns in all data frames
 def test_column_names_in_data():
+    print("Performing data consistency - Step1")
     pipeline = ETL_Cpi()
     result = pipeline.transformation()
     actual_columns_cpi_data = ['country_name', '1960', '1961', '1962', '1963', '1964', '1965', '1966',
@@ -108,6 +114,8 @@ def test_column_names_in_data():
 
 # check for data types of columns
 def test_data_types_of_cpi_data():
+    print("Performing data consistency - Step2")
+
     pipeline = ETL_Cpi()
     
     actual_data_type_cpi_data = ['string', 'float64', 'float64', 'float64', 'float64', 'float64',
@@ -154,6 +162,7 @@ def test_data_types_of_cpi_data():
 
 
 def test_is_table_cpi_present(create_dbCursor):
+    print("Validating DB Availability")
     create_dbCursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     all_table_list = create_dbCursor.fetchall()
     assert ('cpi_data',) in all_table_list
@@ -172,6 +181,7 @@ def test_is_table_crop_present(create_dbCursor):
 
 
 def test_is_pipeline_running(create_dbConnection):
+    print("Validating Pipeline Performance")
     pipeline = ETL_Cpi()
     pipeline.load()
     cursor = create_dbConnection.cursor()
