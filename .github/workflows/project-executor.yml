@@ -49,5 +49,9 @@ jobs:
       - name: Running automated test case
         id: test-run
         shell: bash
-        run: chmod +x ./project/tests.sh
+        run: | 
+          chmod +x ./project/tests.sh
+          ./project/tests.sh
+        
+        
 
