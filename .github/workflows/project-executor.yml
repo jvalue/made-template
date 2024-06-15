@@ -1,25 +1,27 @@
 name : Project Executor
 
 on:
+  push:
+    branches:
+      -project
+  pull_request:
+    branches:
+      - project
   workflow_dispatch:
-#  pull_request:
-#    branches:
-#      - project
 
 env:
   kaggle_user: ${{secrets.KAGGLE_CRED}}
 
 jobs:
   project-executor:
-    if: github.event.pull_request.merged == true
-
+#    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          path: project
+#        with:
+#          path: project
 
       # Install python
       - name: Set up Python 3.11
@@ -30,11 +32,23 @@ jobs:
         # Install Libraries
       - name: Setting Up Environment Requirements
         id: requirements-set-up
-        run:
-          pip install -r ./project/requirements.txt
+        uses: py-actions/py-dependency-install@v4
+        with:
+          path: "requirements.txt"
+
+      - name: Kaggle credentials
+        env:
+          KAGGLE_USER: ${{ secrets.KAGGLE_USER }}
+          KAGGLE_TOKEN: ${{ secrets.KAGGLE_TOKEN }}
+        run: |
+          mkdir -p ~/.kaggle
+          echo "{\"username\":\"${{ secrets.KAGGLE_USER }}\",\"key\":\"${{ secrets.KAGGLE_TOEKN }}\"}" > ~/.kaggle/kaggle.json
+          chmod 600 ~/.kaggle/kaggle.json
 
       #run test.sh
       - name: Running automated test case
         id: test-run
-        run:
-          ./project/tests.sh
+        shell: bash
+        working-directory: project
+        run: python3 ../project/test.py
+
