@@ -21,7 +21,7 @@ pipeline Stops{
         path: "/stops.txt";
     }
     block GTFSTextFileInterpreter oftype TextFileInterpreter{
-        encoding: "latin4";
+        encoding: "utf8";
     }
 
     block GTFSCSVInterpreter oftype CSVInterpreter{
