@@ -106,7 +106,9 @@ class ETL_Cpi:
     #  Transformation --> DataSource-2: Crop Production
     def transform_data_crop(self, crop_df):
         try:
-            Y_years = ["Y" + str(i) for i in range(1970, 2020)]
+            Y_years = []
+            for i in range(1970, 2020):
+                Y_years.append("Y" + str(i))
             crop_dataframes = []
 
             for df in crop_df:
@@ -151,7 +153,9 @@ class ETL_Cpi:
     #  Transformation --> DataSource-3: All Countries Temperature Statistics 1970-2021
     def transform_data_temp(self, temperature_df):
         try:
-            years = [str(i) for i in range(1970, 2020)]
+            years = []
+            for i in range(1970, 2020):
+                years.append(str(i))
             temperature_df.drop(columns=self.col_to_drop_in_temp_data, inplace=True)
             col_to_str1 = ['Country Name', 'Change ', 'Unit']
             temperature_df[col_to_str1] = temperature_df[col_to_str1].astype('string')
