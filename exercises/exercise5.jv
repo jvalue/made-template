@@ -7,7 +7,7 @@ pipeline greenEnergy
     }
     constraint FilterData on integer:
         value == 1645;
-    valuetype zoneFilter oftype integer {
+    valuetype zoneType oftype integer {
         constraints:[FilterData];
     }
        
@@ -50,7 +50,7 @@ pipeline greenEnergy
             "stop_name" oftype text,
             "stop_lat" oftype Geometry,
             "stop_lon" oftype Geometry,
-            "zone_id" oftype integer,
+            "zone_id" oftype zoneType,
         ];
     }
     block sqlLoader oftype SQLiteLoader 
