@@ -1,0 +1,33 @@
+name: Test Action
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          cd project
+          pip install --upgrade pip
+          pip install pandas
+          pip install SQLAlchemy
+           pip install kaggle
+       
+      -  name: Run tests
+         run: |
+          cd project
+          chmod +x tests.sh
+          ./tests.sh
