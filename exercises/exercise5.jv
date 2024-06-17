@@ -1,0 +1,66 @@
+pipeline greenEnergy
+{
+    constraint validateGeometry on decimal:
+        value >= -90 and value <= 90;
+    valuetype Geometry oftype decimal {
+        constraints:[validateGeometry];
+    }
+    constraint FilterData on integer:
+        value == 1645;
+    valuetype zoneFilter oftype integer {
+        constraints:[FilterData];
+    }
+       
+ HttpExtractor->ZipInterpreter;
+         ZipInterpreter
+        -> selectFile
+        -> textfileInterpreter
+        -> CSVInterpreter 
+        -> StopsTableInterpreter
+        -> sqlLoader;
+   
+
+    block HttpExtractor oftype HttpExtractor 
+    {
+        url: "https://gtfs.rhoenenergie-bus.de/GTFS.zip";
+    } 
+
+    block ZipInterpreter oftype ArchiveInterpreter 
+    {
+        archiveType: "zip";
+
+    }
+    block selectFile oftype FilePicker      
+    {
+        path: "/stops.txt";
+    }
+    block textfileInterpreter oftype TextFileInterpreter {encoding:"utf8";}
+    block CSVInterpreter oftype CSVInterpreter 
+    {
+        delimiter: ",";
+        enclosing: '"';
+    }
+    
+
+    block StopsTableInterpreter oftype TableInterpreter 
+    {
+        header : true;
+        columns : [
+            "stop_id" oftype integer,
+            "stop_name" oftype text,
+            "stop_lat" oftype Geometry,
+            "stop_lon" oftype Geometry,
+            "zone_id" oftype integer,
+        ];
+    }
+    block sqlLoader oftype SQLiteLoader 
+    {
+        file: "gtfs.sqlite";
+        table: "stops";
+
+    }
+  
+    
+
+}
+    
