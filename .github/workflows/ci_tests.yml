@@ -3,9 +3,9 @@ name: CI Test
 on:
   push:
     branches:
-    - main
+      - main
     paths:
-    - project/**
+      - project/**
     
 permissions:
   contents: read
@@ -18,7 +18,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    # Install python
+    # Install Python
     - name: Set up Python 3.11
       uses: actions/setup-python@v4
       with:
@@ -27,11 +27,10 @@ jobs:
     - name: Install dependencies
       run: |
         cd project
-        python -m pip install pandas==1.3.5 requests==2.32.3r requirements.txt
+        python -m pip install pandas==1.3.5 requests==2.32.3
       
-    # Run test.sh
+    # Run tests.sh
     - name: Project Test
       run: |
         cd project  
         ./tests.sh
-
