@@ -30,6 +30,11 @@ jobs:
         python -m pip install pandas==1.3.5 requests==2.32.3
       
     # Run tests.sh
+    - name: Make tests.sh executable
+      run: |
+        cd project
+        chmod +x tests.sh
+    
     - name: Project Test
       run: |
         cd project  
