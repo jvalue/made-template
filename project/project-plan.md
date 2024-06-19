@@ -42,9 +42,12 @@ Sensor data from selected trees planted in different soil types across Würzburg
 2. Development of an Automated Data Pipeline [#2][i2]
 3. Data Report [#3][i3]
 4. Implementation of Automated Tests [#4][i4]
+5. Implementation of CI [#5][i5]
 
 
 [i1]: https://github.com/iremhalac/made-template/issues/1
 [i2]: https://github.com/iremhalac/made-template/issues/2
 [i3]: https://github.com/iremhalac/made-template/issues/3
 [i4]: https://github.com/iremhalac/made-template/issues/4
+[i5]: https://github.com/iremhalac/made-template/issues/5
+
