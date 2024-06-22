@@ -1,0 +1,106 @@
+
+pipeline BusPipeline {
+
+    BusExtractor
+    	-> BusZipArchiveInterpreter 
+        -> BusFilePicker
+        -> BusTextFileInterpreter
+        -> BusCSVInterpreter
+        //-> BattryCoreDataSelector
+        //-> ColumnDeleter
+        //-> NameHeaderRenamer
+        -> BusTableInterpreter
+        -> BusLoader; 
+
+
+	block BusExtractor oftype HttpExtractor {
+		url: "https://gtfs.rhoenenergie-bus.de/GTFS.zip";
+	}
+
+    block BusZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+
+    block BusFilePicker oftype FilePicker {
+        path: "/stops.txt";
+    }
+
+    block BusTextFileInterpreter oftype TextFileInterpreter { }
+
+    
+	block BusCSVInterpreter oftype CSVInterpreter {
+		delimiter: ';';
+	}
+
+
+    // block BattryCoreDataSelector oftype CellRangeSelector {
+        //select: range A1:K*;
+    //}
+
+    //block ColumnDeleter oftype ColumnDeleter {
+		//delete: [
+            //column F,
+            //column G,
+            //column H,
+            //column I
+        //];
+	//}
+
+
+	//block NameHeaderRenamer oftype CellWriter {
+        //at: range A1:F1;
+        //write: ["id", "producer", "model", "month", "temperature", "battery_temperature"];
+    //}
+
+
+	block BusTableInterpreter oftype TableInterpreter {
+		header: true;
+		columns: [
+            "stop_id" oftype text,
+            "stop_name" oftype text,
+            "stop_lat" oftype LatLon,
+            "stop_lon" oftype LatLon,
+            "zone_id" oftype ZoneId,
+		];
+	}
+
+    //valuetype Name oftype text {
+        //constraints: [
+            //NameValidator,
+        //];
+    //}
+
+	//constraint NameValidator oftype RangeConstraint {
+		//lowerBound: 1;
+    //}
+
+
+    valuetype LatLon oftype decimal {
+        constraints: [
+            LatLonValidator,
+        ];
+    }
+
+	constraint LatLonValidator oftype RangeConstraint {
+		lowerBound: -90;
+        upperBound: 90;
+    }
+
+
+    valuetype ZoneId oftype decimal {
+        constraints: [
+            ZoneIdValidator,
+        ];
+    }
+
+	constraint ZoneIdValidator oftype RangeConstraint {
+		lowerBound: 1645;
+    }
+
+
+	block BusLoader oftype SQLiteLoader {
+		table: "stops";
+		file: "./gtfs.sqlite";
+	}
+}
