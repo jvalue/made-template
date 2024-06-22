@@ -62,8 +62,8 @@ pipeline BusPipeline {
         ];
     }
 
-	constraint ZoneIdValidator oftype RangeConstraint {
-		lowerBound: 1645;
+    constraint ZoneIdValidator oftype AllowlistConstraint {
+        allowlist: ["1645"];
     }
 
 
