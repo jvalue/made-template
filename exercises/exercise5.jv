@@ -6,9 +6,6 @@ pipeline BusPipeline {
         -> BusFilePicker
         -> BusTextFileInterpreter
         -> BusCSVInterpreter
-        //-> BattryCoreDataSelector
-        //-> ColumnDeleter
-        //-> NameHeaderRenamer
         -> BusTableInterpreter
         -> BusLoader; 
 
@@ -26,33 +23,14 @@ pipeline BusPipeline {
         path: "/stops.txt";
     }
 
-    block BusTextFileInterpreter oftype TextFileInterpreter { }
-
+    block BusTextFileInterpreter oftype TextFileInterpreter {
+        encoding: 'utf8';
+    }
     
-	block BusCSVInterpreter oftype CSVInterpreter {
-		delimiter: ';';
-	}
-
-
-    // block BattryCoreDataSelector oftype CellRangeSelector {
-        //select: range A1:K*;
-    //}
-
-    //block ColumnDeleter oftype ColumnDeleter {
-		//delete: [
-            //column F,
-            //column G,
-            //column H,
-            //column I
-        //];
-	//}
-
-
-	//block NameHeaderRenamer oftype CellWriter {
-        //at: range A1:F1;
-        //write: ["id", "producer", "model", "month", "temperature", "battery_temperature"];
-    //}
-
+    block BusCSVInterpreter oftype CSVInterpreter {
+        delimiter: ',';
+        enclosing: '"';
+    }
 
 	block BusTableInterpreter oftype TableInterpreter {
 		header: true;
@@ -65,17 +43,7 @@ pipeline BusPipeline {
 		];
 	}
 
-    //valuetype Name oftype text {
-        //constraints: [
-            //NameValidator,
-        //];
-    //}
-
-	//constraint NameValidator oftype RangeConstraint {
-		//lowerBound: 1;
-    //}
-
-
+    
     valuetype LatLon oftype decimal {
         constraints: [
             LatLonValidator,
