@@ -35,7 +35,7 @@ pipeline BusPipeline {
 	block BusTableInterpreter oftype TableInterpreter {
 		header: true;
 		columns: [
-            "stop_id" oftype decimal,
+            "stop_id" oftype integer,
             "stop_name" oftype text,
             "stop_lat" oftype LatLon,
             "stop_lon" oftype LatLon,
@@ -62,8 +62,9 @@ pipeline BusPipeline {
         ];
     }
 
-    constraint ZoneIdValidator oftype AllowlistConstraint {
-        allowlist: ["1645"];
+    constraint ZoneIdValidator oftype RangeConstraint {
+		lowerBound: 1645;
+        upperBound: 1645;
     }
 
 
