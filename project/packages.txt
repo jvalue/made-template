@@ -1,2 +1,4 @@
-numpy==1.26.2
-pandas==2.2.2
+pandas
+numpy
+sqlite3
+sqlalchemy
