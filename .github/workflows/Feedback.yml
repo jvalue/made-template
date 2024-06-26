@@ -26,13 +26,14 @@ jobs:
         pip install kaggle
         pip install SQLAlchemy
 
-    - name: Set up Kaggle credentials
+    - name: Kaggle Credentials
       run: |
           mkdir -p ~/.kaggle
           echo "{\"username\":\"${{ secrets.USER_KAGGLE }}\",\"key\":\"${{ secrets.PASSWORD_KAGGLE }}\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
 
-    - name: Run tests
-      run: |
-        chmod +x ./project/tests.sh
-        ./project/tests.sh
+    - name: Execute Tests
+      run: chmod +x project/Tests.sh
+
+    - name: Execute Test Script
+      run: ./project/Tests.sh
