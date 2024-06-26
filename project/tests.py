@@ -41,7 +41,7 @@ def test_load_hly():
         '2013': [3, 4, 5]
     })
     
-    test_path = '../project/test_load_hly.sqlite'
+    test_path = './project/test_load_hly.sqlite'
     load_hly(data, test_path)
     
     conn = sqlite3.connect(test_path)
@@ -83,7 +83,7 @@ def test_load_gasem():
         '2013': [2, 4.0, 7]
     })
     
-    test_path = '../project/test_load_gasem.sqlite'
+    test_path = './project/test_load_gasem.sqlite'
     load_gasem(data, test_path)
     
     conn = sqlite3.connect(test_path)
