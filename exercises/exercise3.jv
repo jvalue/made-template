@@ -19,6 +19,7 @@ pipeline GoodsTransportedPipeline {
 
     block GoodsTransportedCSVInterpreter oftype CSVInterpreter {
         delimiter: ";";
+
     }
 
     block MetaDataRowsRemover oftype RowDeleter {
