@@ -1,4 +1,4 @@
-from numpy import NaN
+import numpy as np
 from script import transform_hly, load_hly, transform_gasem, load_gasem
 
 import pandas as pd
@@ -13,7 +13,7 @@ def test_transform_hly():
     data = pd.DataFrame({
         'geo': ['Place1', 'Place1', 'Place1', 'Place2', 'Place2', 'Place2'],
         'TIME_PERIOD': [2011, 2012, 2013, 2011, 2012, 2013],
-        'OBS_VALUE': [1.0, 2, NaN, 4.0, NaN, 6],
+        'OBS_VALUE': [1.0, 2, np.NaN, 4.0, np.NaN, 6],
         'sex': ['male', 'female', 'total', 'male', 'female', 'total'],
         'DATAFLOW': ['a', 'b', 'c', 'd', 'e', 'f'],
         'LAST UPDATE': ['2024', '2024', '2024', '2024', '2024', '2024'],
@@ -37,7 +37,7 @@ def test_transform_hly():
 def test_load_hly():
     data = pd.DataFrame({
         'geo': ['x', 'y', 'z'],
-        '2012': [5, NaN, 6],
+        '2012': [5, np.NaN, 6],
         '2013': [3, 4, 5]
     })
     
@@ -58,7 +58,7 @@ def test_transform_gasem():
     data = pd.DataFrame({
         'geo': ['Place1', 'Place1', 'Place1', 'Place2', 'Place2', 'Place2'],
         'TIME_PERIOD': [2011, 2012, 2013, 2011, 2012, 2013],
-        'OBS_VALUE': [1.0, 2, NaN, 4.0, NaN, 6],
+        'OBS_VALUE': [1.0, 2, np.NaN, 4.0, np.NaN, 6],
         'DATAFLOW': ['a', 'b', 'c', 'd', 'e', 'f'],
         'LAST UPDATE': ['2024', '2024', '2024', '2024', '2024', '2024'],
         'freq': ['y', 'y', 'y', 'y', 'y', 'y'],
@@ -79,7 +79,7 @@ def test_transform_gasem():
 def test_load_gasem():
     data = pd.DataFrame({
         'geo': ['a', 'b', 'c'],
-        '2012': [8, NaN, 9],
+        '2012': [8, np.NaN, 9],
         '2013': [2, 4.0, 7]
     })
     
