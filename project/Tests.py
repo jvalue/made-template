@@ -13,7 +13,7 @@ class TestDataPipeline(unittest.TestCase):
 
     def test_database_tables_exist(self):
 
-        path = os.path.join('data', 'result.db')
+        path = 'data/result.db'
         connection = sqlite3.connect(path)
         cursor = connection.cursor()
 
