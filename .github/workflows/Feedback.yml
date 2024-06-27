@@ -32,12 +32,12 @@ jobs:
           echo "{\"username\":\"${{ secrets.USER_KAGGLE }}\",\"key\":\"${{ secrets.PASSWORD_KAGGLE }}\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
     - name: Allow pipeline execute permission
-      run: chmod +x pipeline.sh
-      
-    - name: Execute pipeline
       run: |
           cd project
-          ./pipeline.py
+          chmod +x pipeline.sh
+      
+    - name: Execute pipeline
+      run: ./pipeline.py
     
     - name: Execute Tests
       run: chmod +x Tests.sh
