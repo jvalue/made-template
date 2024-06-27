@@ -55,7 +55,7 @@ pipeline GoodsTransportedPipeline {
 
     block GoodsTransportedLoader oftype SQLiteLoader {
         table: "goods";
-        file: "./goodsTransportedByTrain.sqlite";
+        file: "goodsTransportedByTrain.sqlite";
     }
 }
 
