@@ -36,4 +36,4 @@ jobs:
       run: chmod +x project/Tests.sh
 
     - name: Execute Test Script
-      run: ./project/Tests.sh
+      run: bash project/Tests.sh
