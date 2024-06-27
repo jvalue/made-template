@@ -1,0 +1,56 @@
+// This pipeline extracts data from the provided URL, interprets it, and loads it into a SQLite database.
+// Adapted from the cars.jv example.
+
+
+pipeline AirportsPipeline {
+
+    //Defines the structure of the pipeline by connecting blocks with pipes, usually at the top of the pipeline. 
+    DataExtractor
+    ->AirportsTextFileInterpreter
+    -> AirportsCSVInterpreter
+    -> AirportsTableInterpreter
+    -> DatabaseLoader;
+    
+
+    // Extracts data from the specified URL.
+    block DataExtractor oftype HttpExtractor {
+        url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
+    }
+
+    // Interprets the text file.
+    block AirportsTextFileInterpreter oftype TextFileInterpreter {}
+
+    // Interprets the CSV file, specifying the delimiter as ';'.
+    block AirportsCSVInterpreter oftype CSVInterpreter {
+        delimiter: ';';
+        
+    }
+
+    // Interprets the CSV data into a table format, defining column names and types.
+    block AirportsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Lfd. Nummer" oftype integer,
+            "Name des Flughafens" oftype text,
+			"Ort" oftype text,
+			"Land" oftype text,
+			"IATA" oftype text,
+			"ICAO" oftype text,
+			"Latitude" oftype decimal,
+			"Longitude" oftype decimal,
+			"Altitude" oftype integer,
+			"Zeitzone" oftype decimal,
+            "DST" oftype text,
+			"Zeitzonen-Datenbank" oftype text,
+            "geo_punkt" oftype text
+        ];
+    }
+
+    // Loads the interpreted data into the SQLite database.
+    block DatabaseLoader oftype SQLiteLoader {
+        table: "airports";
+        file: "./airports.sqlite";
+    }
+
+    
+}

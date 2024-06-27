@@ -1,0 +1,91 @@
+pipeline TemperaturesPipeline {
+    TemperaturesExtractor
+    -> TemperaturesZipArchiveInterpreter
+    -> TemperaturesFilePicker
+    -> TemperaturesTextFileInterpreter
+    -> TemperaturesCSVInterpreter
+    -> ExtraColumnDeleter
+    -> RenameHeaders
+    -> TemperatureTableInterpreter
+    -> TemperatureToFahrenheitTransformer
+    -> BatteryTemperatureToFahrenheitTransformer
+    -> TemperaturesLoader;
+
+    block TemperaturesExtractor oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    block TemperaturesZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block TemperaturesFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+    block TemperaturesTextFileInterpreter oftype TextFileInterpreter {}
+
+    block TemperaturesCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+
+    block ExtraColumnDeleter oftype ColumnDeleter {
+        delete: [column F, column G, column H, column I];
+    }
+
+    block RenameHeaders oftype CellWriter {
+        at: range A1:F1;
+        write: ['id', 'producer', 'model', 'month', 'temperature', 'battery_temperature'];
+    }
+
+    block TemperatureTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "id" oftype PositiveInt,
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype Month,
+            "temperature" oftype decimal,
+            "battery_temperature" oftype decimal
+        ];
+    }
+
+    valuetype PositiveInt oftype integer {
+        constraints: [ PositiveIntConstraint ];
+    }
+
+    constraint PositiveIntConstraint on integer:
+        value > 0;
+
+    valuetype Month oftype integer {
+        constraints: [ MonthConstraint ];
+    }
+
+    constraint MonthConstraint on integer:
+        value >= 1 and value <= 12;
+
+    transform CelsiusToFahrenheit {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius * 9/5) + 32;
+    }
+
+    block TemperatureToFahrenheitTransformer oftype TableTransformer {
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
+        use: CelsiusToFahrenheit;
+    }
+
+    block BatteryTemperatureToFahrenheitTransformer oftype TableTransformer {
+        inputColumns: ['battery_temperature'];
+        outputColumn: 'battery_temperature';
+        use: CelsiusToFahrenheit;
+    }
+
+    block TemperaturesLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+        dropTable: true;
+    }
+}
