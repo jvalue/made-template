@@ -31,12 +31,12 @@ jobs:
           mkdir -p ~/.kaggle
           echo "{\"username\":\"${{ secrets.USER_KAGGLE }}\",\"key\":\"${{ secrets.PASSWORD_KAGGLE }}\"}" > ~/.kaggle/kaggle.json
           chmod 600 ~/.kaggle/kaggle.json
-          
+
     - name: Run the pipeline
       run: |
           cd project
           chmod +x pipeline.sh
-          ./pipeline.py
+          ./pipeline.sh
     
     - name: Execute Tests
       run: |
