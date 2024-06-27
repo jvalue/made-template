@@ -7,13 +7,14 @@ class TestDataPipeline(unittest.TestCase):
 
     def test_output_files_exist(self):
 
-        self.assertTrue(os.path.isfile('../data/KGVQ0.csv'))
+        self.assertTrue(os.path.isfile('data/KGVQ0.csv'))
 
-        self.assertTrue(os.path.isfile('../data/result.db'))
+        self.assertTrue(os.path.isfile('data/result.db'))
 
     def test_database_tables_exist(self):
 
-        connection = sqlite3.connect('../data/result.db')
+        path = os.path.join('data', 'result.db')
+        connection = sqlite3.connect(path)
         cursor = connection.cursor()
 
         cursor.execute(
