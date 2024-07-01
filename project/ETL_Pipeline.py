@@ -11,13 +11,14 @@ class ETL_Cpi:
     def __init__(self):
         self.url = 'https://api.worldbank.org/v2/en/indicator/FP.CPI.TOTL?downloadformat=csv'
         self.base_dir = '../data/'
-        self.col_to_drop_in_crop_data = ['Area Code', 'Item Code', 'Element Code'] + [f'Y{i}F' for i in range(1961, 2020)] + [f'Y{i}'
-                                                                                                                 for i
-                                                                                                                 in
-                                                                                                                 range(
-                                                                                                                     1961,
-                                                                                                                     1970)]
-        self.col_to_drop_in_temp_data = ['ObjectId', '2020', '2021']
+        self.col_to_drop_in_crop_data = ['Area Code', 'Item Code', 'Element Code'] + [f'Y{i}F' for i in
+                                                                                      range(1961, 2020)] + [f'Y{i}'
+                                                                                                            for i
+                                                                                                            in
+                                                                                                            range(
+                                                                                                                1961,
+                                                                                                                1970)]
+        self.col_to_drop_in_temp_data = ['ObjectId', '2020', '2021','Unit','Change ']
         self.dataset_kaggle_URI = "mdazizulkabirlovlu/all-countries-temperature-statistics-1970-2021"
         self.kaggle_csv_file = "all countries global temperature.csv"
 
@@ -55,7 +56,7 @@ class ETL_Cpi:
                     'https://query.data.world/s/wva7g5yxspu3bninh4ucn7xrp4h6sc?dws=00000'
                 ]
             }
-            #getting required urls
+            # getting required urls
             urls = crop_data_urls['urls']
             for n, url in enumerate(urls):
                 try:
@@ -76,7 +77,7 @@ class ETL_Cpi:
             # Obtain the dataset from Kaggle
             kaggle.api.dataset_download_files(self.dataset_kaggle_URI, path='.', unzip=True)
             csv_file_from_kaggle_name = self.kaggle_csv_file
-            #Verify that the file was successfully downloaded and extracted.
+            # Verify that the file was successfully downloaded and extracted.
             if os.path.exists(csv_file_from_kaggle_name):
                 temperature_df = pd.read_csv(csv_file_from_kaggle_name)
                 # Remove the csv file
@@ -101,6 +102,9 @@ class ETL_Cpi:
         cpi_data_df = cpi_data_df.rename(columns={'Country Name': 'country_name'})
         col_to_str = ['country_name']
         cpi_data_df[col_to_str] = cpi_data_df[col_to_str].astype('string')
+        columns = cpi_data_df.columns.tolist()[1:]
+        cpi_data_df = pd.melt(cpi_data_df, id_vars=['country_name'], value_vars=columns, var_name='year',
+                              value_name='cpi')
         return cpi_data_df
 
     #  Transformation --> DataSource-2: Crop Production
@@ -131,21 +135,51 @@ class ETL_Cpi:
                 ['Yams', 'Bananas', 'Sweet potatoes', 'Maize', 'Beans, green', 'Beans, dry',
                  'Soybeans', 'Potatoes', 'Tomatoes', 'Onions, dry', 'Onions, shallots, green', 'Rice, paddy',
                  'Rice, paddy (rice milled equivalent)', 'Wheat', 'Groundnuts, with shell', 'Blueberries',
-                 'Cranberries','Gooseberries', 'Raspberries', 'Strawberries', 'Dates', 'Plums and sloes',
+                 'Cranberries', 'Gooseberries', 'Raspberries', 'Strawberries', 'Dates', 'Plums and sloes',
                  'Millet', 'Coconuts']))].reset_index()
             # rename name of the crops
             transformed_crop_df = transformed_crop_df.replace(
-                {'Beans, green':'Green beans',
+                {'Beans, green': 'Green beans',
                  'Beans, dry': 'Dry beans',
                  'Onions, dry': 'Dry Onion',
                  'Onions, shallots, green': 'Green Onion',
-                 'Rice, paddy':'Rice',
-                 'Rice, paddy (rice milled equivalent)':'Rice',
-                 'Groundnuts, with shell':'Peanuts',
-                 'Plums and sloes':'Plums',
+                 'Rice, paddy': 'Rice',
+                 'Rice, paddy (rice milled equivalent)': 'Rice',
+                 'Groundnuts, with shell': 'Peanuts',
+                 'Plums and sloes': 'Plums',
                  }
             )
-            return transformed_crop_df
+            area_harvested_df = pd.DataFrame()
+            yield_df = pd.DataFrame()
+            production_df = pd.DataFrame()
+
+            for i in range(len(transformed_crop_df)):
+                if transformed_crop_df.iloc[i]['Element']== "Area harvested":
+                    area_harvested_df = area_harvested_df._append(transformed_crop_df.iloc[i], ignore_index=True)
+                elif transformed_crop_df.iloc[i]['Element']== "Yield":
+                    yield_df = yield_df._append(transformed_crop_df.iloc[i], ignore_index=True)
+                else:
+                    production_df = production_df._append(transformed_crop_df.iloc[i], ignore_index=True)
+
+            columns = area_harvested_df.columns.tolist()
+            vars = columns[1:3]
+            vals = columns[5:]
+            area_harvested_df = pd.melt(area_harvested_df,id_vars=vars,value_vars=vals,var_name='Year',
+                                     value_name='Area in Hectare')
+
+            columns = yield_df.columns.tolist()
+            vars = columns[1:3]
+            vals = columns[5:]
+            yield_df = pd.melt(yield_df,id_vars=vars,value_vars=vals,var_name='Year',
+                                     value_name='Yield (hg/ha)')
+
+            columns = production_df.columns.tolist()
+            vars = columns[1:3]
+            vals = columns[5:]
+            production_df = pd.melt(production_df,id_vars=vars,value_vars=vals,var_name='Year',
+                                     value_name='Item production in Tonnes')
+            data_frame_list = [area_harvested_df, yield_df, production_df]
+            return data_frame_list
         except Exception as e:
             logging.error(f"An error occurred during transformation: {e}")
             raise
@@ -156,11 +190,16 @@ class ETL_Cpi:
             years = []
             for i in range(1970, 2020):
                 years.append(str(i))
+            # cols = temperature_df.columns.tolist()
+            # print(cols)
             temperature_df.drop(columns=self.col_to_drop_in_temp_data, inplace=True)
-            col_to_str1 = ['Country Name', 'Change ', 'Unit']
+            col_to_str1 = ['Country Name']
             temperature_df[col_to_str1] = temperature_df[col_to_str1].astype('string')
             temperature_df[years] = temperature_df[years].interpolate(method='linear')
             temperature_df = temperature_df.rename(columns={'Country Name': 'country_name'})
+            columns = temperature_df.columns.tolist()[1:]
+            temperature_df = pd.melt(temperature_df, id_vars=['country_name'], value_vars=columns, var_name='year',
+                                     value_name='Surface Temperature Change in °C')
             return temperature_df
 
         except Exception as e:
@@ -242,15 +281,17 @@ class ETL_Cpi:
         cpi_data_df_e, temp_data_df_e, crop_data_df_e = self.extraction()
         cpi_data_df_t = cpi.transfrom_data(cpi_data_df_e)
         temp_data_df_t = cpi.transform_data_temp(temp_data_df_e)
-        crop_data_df_t = cpi.transform_data_crop(crop_data_df_e)
-        return cpi_data_df_t, temp_data_df_t, crop_data_df_t
+        crop_data_df_t_list = cpi.transform_data_crop(crop_data_df_e)
+        return cpi_data_df_t, temp_data_df_t, crop_data_df_t_list
 
     def load(self):
-        cpi_data_df_t, temp_data_df_t, crop_data_df_t = self.transformation()
+        cpi_data_df_t, temp_data_df_t, crop_data_df_t_list = self.transformation()
         # print(list(cpi_data_df_t.dtypes),list(temp_data_df_t.dtypes), list(crop_data_df_t.dtypes))
         self.load_data(cpi_data_df_t, '../data/made_db.db', 'cpi_data')
         self.load_data(temp_data_df_t, '../data/made_db.db', 'temp_data')
-        self.load_data(crop_data_df_t, '../data/made_db.db', 'crop_data')
+        self.load_data(crop_data_df_t_list[0], '../data/made_db.db', 'area_harvested_data')
+        self.load_data(crop_data_df_t_list[1], '../data/made_db.db', 'yield_data')
+        self.load_data(crop_data_df_t_list[2], '../data/made_db.db', 'production_data')
         return
 
 
