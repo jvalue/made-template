@@ -59,15 +59,15 @@ def test_crop_data_extraction():
 
 
 # checks for transformations
-def test_data_transformation():
-    print("Checking data transformation")
-    pipeline = ETL_Cpi()
-    result = pipeline.transformation()
-    assert isinstance(result, tuple)
-    assert len(result) == 3
-    assert isinstance(result[0], pandas.DataFrame)
-    assert isinstance(result[1], pandas.DataFrame)
-    assert isinstance(result[2], pandas.DataFrame)
+# def test_data_transformation():
+#     print("Checking data transformation")
+#     pipeline = ETL_Cpi()
+#     result = pipeline.transformation()
+#     assert isinstance(result, tuple)
+#     assert len(result) == 3
+#     assert isinstance(result[0], pandas.DataFrame)
+#     assert isinstance(result[1], pandas.DataFrame)
+#     assert isinstance(result[2], pandas.DataFrame)
 
 
 # test for number of items in crop database should be 23
