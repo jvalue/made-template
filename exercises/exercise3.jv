@@ -1,0 +1,142 @@
+// Goods transported (rail freight transport): Germany, months, dispatch region, receiving region, goods groups
+
+
+pipeline GoodsTransportedPipeline {
+
+    GoodsTransportedExtractor
+         -> GoodsTransportedTextFileInterpreter
+         -> GoodsTransportedCSVInterpreter
+         -> RemoveRows
+         -> DataSelector
+         -> DeleteColumns
+         -> NameHeaderFirstColumnsWriter
+         -> GoodsTransportedTableInterpreter
+         -> GoodsTransportedLoader;
+
+    // HttpExtractor = Input type: None, Output type: File
+    //extracting data
+    block GoodsTransportedExtractor oftype HttpExtractor{
+        url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46131-0014_00.csv";
+        
+    }
+    // TextFileInterpreter = Input type: File, Output type: TextFile
+    block GoodsTransportedTextFileInterpreter oftype TextFileInterpreter {
+        encoding: "latin4";
+        }
+
+
+    // CSVInterpreter = Input type: TextFile, Output type: Sheet
+    block GoodsTransportedCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+     }
+     
+    // Remove metadata rows
+    block RemoveRows oftype RowDeleter {
+        delete: [row 1, row 2, row 3, row 4, row 5, row 6, row 7];
+        }
+
+    // Select only a subset of columns
+    // Data about time and transported goods: Column A-E
+    block DataSelector oftype CellRangeSelector {
+        select: range A1:AU*;
+         
+        }    
+
+    block DeleteColumns oftype ColumnDeleter {
+		delete: [
+			column F,
+			column G,
+			column H,
+			column I,
+			column J,
+			column K,
+			column L,
+			column M,
+			column N,
+			column O,
+			column P,
+			column Q,
+			column R,
+			column S,
+			column T,
+			column U,
+			column V,
+			column W,
+			column X,
+			column Y,
+			column Z,
+			column AA,
+			column AB,
+			column AC,
+			column AD,
+			column AE,
+			column AF,
+			column AG,
+			column AH,
+			column AI,
+			column AJ,
+			column AK,
+			column AL,
+			column AM,
+			column AN,
+			column AO,
+			column AP,
+			column AQ,
+			column AR,
+			column AS
+		];
+	}	
+
+    // Add header names for the first columns A-E
+    // New names: 'year', 'month', 'goods_id', 'goods_name', 'goods_source'
+    block NameHeaderFirstColumnsWriter oftype CellWriter {
+       at: range A1:G1;
+       write: ['year', 'month', 'goods_id', 'goods_name', 'goods_source','abroad', 'total'];
+    }
+    
+    // Assign fitting built-in SQLite types (e.g., BIGINT, TEXT or FLOAT) to all columns
+    // TableInterpreter = Input type: Sheet, Output type: Table
+    block GoodsTransportedTableInterpreter oftype TableInterpreter { 
+        header: true;
+         
+        columns: [
+            "year" oftype PositiveInteger,
+            "month" oftype text,
+            "goods_id" oftype GoodsID,
+            "goods_name" oftype text,
+            "goods_source" oftype text,
+            "abroad" oftype PositiveInteger,
+            "total" oftype PositiveInteger,
+
+
+        ];
+    }
+
+    valuetype PositiveInteger oftype integer {
+        constraints: [PositvieNumber];
+    }
+    constraint PositvieNumber oftype RangeConstraint {
+        lowerBound: 0;
+        lowerBoundInclusive: false;
+    }
+
+    // 'month' must be a German month, capitalized
+    valuetype GerMonthCap oftype text {
+		constraints: [GMC];}
+	constraint GMC on text:
+        value matches /\b(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\b/;
+
+
+    // 'goods_id' must start with NST7-, followed by three numbers or capital letters
+    valuetype GoodsID oftype text {
+		constraints: [StartWithNST7];}
+	constraint StartWithNST7 on text:
+        value matches /^NST7-[0-9A-Z]{3}$/;
+
+    
+    block GoodsTransportedLoader oftype SQLiteLoader { 
+        table: "goods";
+        file: "./goodsTransportedByTrain.sqlite";
+    }
+
+}

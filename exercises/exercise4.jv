@@ -1,0 +1,110 @@
+pipeline BatteryTemperaturePipeline {
+
+    BatteryTemperatureExtractor
+         -> BatteryTemperatureZipArchiveInterpreter
+         -> BatteryTemperatureFilePicker
+         -> BatteryTemperatureTextFileInterpreter
+         -> BatteryTemperatureCSVInterpreter
+         -> BatteryDataSelector
+         -> DeleteColumns
+         -> NameHeaderFirstColumnsWriter
+         -> BatteryDataTableInterpreter
+         -> CelsiusToFahrenheitTransformer1
+         -> CelsiusToFahrenheitTransformer2
+         -> BatteryDataLoader;
+
+    
+    //output file File - zip
+    block BatteryTemperatureExtractor oftype HttpExtractor{
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    // Input  - zip file
+    // Output - File System
+    block BatteryTemperatureZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    //Input type: FileSystem
+    //Output type: File
+    block BatteryTemperatureFilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+    // TextFileInterpreter = Input type: File, Output type: TextFile
+    block BatteryTemperatureTextFileInterpreter oftype TextFileInterpreter {
+        encoding: "latin4";
+    }
+
+    // CSVInterpreter = Input type: TextFile, Output type: Sheet
+    block BatteryTemperatureCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+     }
+
+    // Select only a subset of columns
+    // Data about time and transported goods: Column A-E
+    block BatteryDataSelector oftype CellRangeSelector {
+        select: range A1:J*;     
+    }    
+
+    block DeleteColumns oftype ColumnDeleter {
+		delete: [
+			column F,
+			column G,
+			column H,
+			column I,
+		];
+	}
+
+    block NameHeaderFirstColumnsWriter oftype CellWriter {
+       at: range A1:F1;
+       write: ['id', 'producer', 'model', 'month', 'temperature','battery_temperature'];
+    }
+
+    	
+
+    // // Assign fitting built-in SQLite types (e.g., BIGINT, TEXT or FLOAT) to all columns
+    // // TableInterpreter = Input type: Sheet, Output type: Table
+    block BatteryDataTableInterpreter oftype TableInterpreter { 
+        header: true;
+          
+        columns: [
+            "id" oftype PositiveInteger,
+            "producer" oftype text, 
+            "model" oftype text, 
+            'month' oftype integer, 
+            'temperature' oftype decimal,
+            'battery_temperature' oftype decimal
+        ];
+    }
+
+    transform CelsiusToFahrenheit {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius * 9/5) + 32;
+    }
+    block CelsiusToFahrenheitTransformer1 oftype TableTransformer {
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
+        use: CelsiusToFahrenheit;
+    }
+
+    block CelsiusToFahrenheitTransformer2 oftype TableTransformer {
+        inputColumns: ['battery_temperature'];
+        outputColumn: 'battery_temperature';
+        use: CelsiusToFahrenheit;
+    }
+
+    valuetype PositiveInteger oftype integer {
+        constraints: [PositvieNumber];
+    }
+    constraint PositvieNumber oftype RangeConstraint {
+        lowerBound: 0;
+        lowerBoundInclusive: false;
+    }
+    
+    block BatteryDataLoader oftype SQLiteLoader { 
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+    }
+}
