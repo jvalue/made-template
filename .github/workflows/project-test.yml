@@ -29,7 +29,10 @@ jobs:
           pip install seaborn
           pip install simplejson
           
-       
+      - name: Set Kaggle credentials
+        run: |
+            echo "export KAGGLE_USERNAME=${{ secrets.KAGGLE_USERNAME }}" >> $GITHUB_ENV
+            echo "export KAGGLE_KEY=${{ secrets.KAGGLE_KEY }}" >> $GITHUB_ENV
       -  name: Run tests
          run: |
           cd project
