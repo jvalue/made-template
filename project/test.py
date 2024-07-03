@@ -31,7 +31,7 @@ class TestPipeline(unittest.TestCase):
         # Print actual columns for debugging
         print("Actual columns:", df.columns.tolist())
         
-        expected_columns = ['Decade', 'Population', 'Temperaturechange']
+        expected_columns = ['Decade', 'Population', 'Average-Temperaturechange']
         self.assertTrue(all(column in df.columns for column in expected_columns), "Column mismatch in 'merged_data' table")
         
         # Check Decade column values
@@ -40,7 +40,7 @@ class TestPipeline(unittest.TestCase):
         
         # Check null values in Population and Temperaturechange
         self.assertTrue(df['Population'].notnull().all(), "Population column contains null values")
-        self.assertTrue(df['Temperaturechange'].notnull().all(), "Temperaturechange column contains null values")
+        self.assertTrue(df['Average-Temperaturechange'].notnull().all(), "Temperaturechange column contains null values")
 
         conn.close()
 

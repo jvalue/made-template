@@ -1,21 +1,12 @@
 import os
 import shutil
-import subprocess
-import zipfile
 import pandas as pd
 import sqlite3
 from kaggle import KaggleApi
-import matplotlib.pyplot as plt
-import seaborn as sns
-import json
 
-# Set Kaggle environment variables (not necessary anymore)
-# os.environ['KAGGLE_CONFIG_DIR'] = os.path.expanduser('~/.kaggle')
-# os.makedirs(os.environ['KAGGLE_CONFIG_DIR'], exist_ok=True)
-
-# Instantiate Kaggle API with environment variables
+# Instantiate Kaggle API
 api = KaggleApi()
-api.authenticate()  # This will use environment variables KAGGLE_USERNAME and KAGGLE_KEY
+api.authenticate()
 
 # Download and extract population dataset
 dataset = 'iamsouravbanerjee/world-population-dataset'
@@ -47,6 +38,9 @@ pop_df = pop_df.melt(id_vars=['Country'], var_name='Year', value_name='Populatio
 pop_df['Decade'] = pop_df['Year'].str.extract(r'(\d+)').astype(int)
 pop_df = pop_df.groupby((pop_df['Decade'] // 10) * 10)['Population'].sum().reset_index()
 
+# Calculate population growth rate
+pop_df['Population-Growth-Rate'] = pop_df['Population'].pct_change() * 100
+
 # Download and extract temperature dataset
 dataset = 'sevgisarac/temperature-change'
 folder = 'temperature-change'
@@ -67,13 +61,20 @@ temp_df['Year'] = temp_df['Year'].str.extract(r'(\d+)').astype(float)
 temp_df = temp_df.dropna(subset=['Year']).astype({'Year': int})
 temp_df['Decade'] = (temp_df['Year'] // 10) * 10
 
+# Calculate average temperature change per decade
 avg_temp_decade = temp_df.groupby('Decade')['Temperaturechange'].mean().reset_index()
 avg_temp_2011_to_2019 = temp_df[temp_df['Year'].between(2011, 2019)]['Temperaturechange'].mean()
 avg_temp_decade = pd.concat([avg_temp_decade, pd.DataFrame({'Decade': [2020], 'Temperaturechange': [avg_temp_2011_to_2019]})], ignore_index=True)
-avg_temp_decade = avg_temp_decade[avg_temp_decade['Decade'] != 1960]
+
+# Calculate standard deviation of temperature change for each decade
+std_temp_decade = temp_df.groupby('Decade')['Temperaturechange'].std().reset_index()
 
 # Merge datasets
 merged_df = pd.merge(pop_df, avg_temp_decade, on='Decade')
+merged_df = pd.merge(merged_df, std_temp_decade, on='Decade')
+
+# Rename columns to reflect clarity
+merged_df = merged_df.rename(columns={'Temperaturechange_x': 'Average-Temperaturechange', 'Temperaturechange_y': 'STD-Temperaturechange'})
 
 # Save merged data to SQLite database
 os.makedirs('data', exist_ok=True)
@@ -84,4 +85,3 @@ conn.close()
 # Clean up cache and extracted folders
 shutil.rmtree('world-population-dataset')
 shutil.rmtree('temperature-change')
-# No need to clean up Kaggle cache since it's managed by Kaggle API
