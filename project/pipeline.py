@@ -9,28 +9,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import json
 
-# Set Kaggle environment variables
-os.environ['KAGGLE_CONFIG_DIR'] = os.path.expanduser('~/.kaggle')
-os.makedirs(os.environ['KAGGLE_CONFIG_DIR'], exist_ok=True)
+# Set Kaggle environment variables (not necessary anymore)
+# os.environ['KAGGLE_CONFIG_DIR'] = os.path.expanduser('~/.kaggle')
+# os.makedirs(os.environ['KAGGLE_CONFIG_DIR'], exist_ok=True)
 
-# Read Kaggle API token information from .gitignore or parent folder file
-kaggle_token_info = {}
-with open('../.gitignore') as f:
-    for line in f:
-        if line.strip().startswith('{'):
-            kaggle_token_info = json.loads(line.strip())
-
-# Create kaggle.json file with the token
-kaggle_config_path = os.path.join(os.environ['KAGGLE_CONFIG_DIR'], 'kaggle.json')
-with open(kaggle_config_path, 'w') as f:
-    json.dump(kaggle_token_info, f)
-
-# Ensure the cache directory exists
-cache_dir = os.path.join(os.environ['KAGGLE_CONFIG_DIR'], 'cache')
-os.makedirs(cache_dir, exist_ok=True)
-
-# Instantiate Kaggle API
+# Instantiate Kaggle API with environment variables
 api = KaggleApi()
+api.authenticate()  # This will use environment variables KAGGLE_USERNAME and KAGGLE_KEY
 
 # Download and extract population dataset
 dataset = 'iamsouravbanerjee/world-population-dataset'
@@ -61,8 +46,6 @@ pop_df = pop_df.rename(columns={'Country/Territory': 'Country'})
 pop_df = pop_df.melt(id_vars=['Country'], var_name='Year', value_name='Population')
 pop_df['Decade'] = pop_df['Year'].str.extract(r'(\d+)').astype(int)
 pop_df = pop_df.groupby((pop_df['Decade'] // 10) * 10)['Population'].sum().reset_index()
-#pop_df['Population Growth Rate'] = pop_df['Population'].pct_change() * 100
-
 
 # Download and extract temperature dataset
 dataset = 'sevgisarac/temperature-change'
@@ -89,7 +72,6 @@ avg_temp_2011_to_2019 = temp_df[temp_df['Year'].between(2011, 2019)]['Temperatur
 avg_temp_decade = pd.concat([avg_temp_decade, pd.DataFrame({'Decade': [2020], 'Temperaturechange': [avg_temp_2011_to_2019]})], ignore_index=True)
 avg_temp_decade = avg_temp_decade[avg_temp_decade['Decade'] != 1960]
 
-
 # Merge datasets
 merged_df = pd.merge(pop_df, avg_temp_decade, on='Decade')
 
@@ -102,5 +84,4 @@ conn.close()
 # Clean up cache and extracted folders
 shutil.rmtree('world-population-dataset')
 shutil.rmtree('temperature-change')
-for file in os.listdir(cache_dir):
-    os.remove(os.path.join(cache_dir, file))
+# No need to clean up Kaggle cache since it's managed by Kaggle API
