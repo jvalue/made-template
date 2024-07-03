@@ -4,7 +4,7 @@ import subprocess
 import zipfile
 import pandas as pd
 import sqlite3
-from kaggle.api.kaggle_api_extended import KaggleApi
+from kaggle import KaggleApi
 import matplotlib.pyplot as plt
 import seaborn as sns
 import json
