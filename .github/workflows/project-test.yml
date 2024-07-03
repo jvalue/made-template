@@ -27,7 +27,7 @@ jobs:
           pip install kaggle
           pip install matplotlib
           pip install seaborn
-          pip install unittest
+          pip install unittest2
           pip install json
           
        
