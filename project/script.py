@@ -17,16 +17,11 @@ def transform_hly(df1):
 
     # drop unnecessary columns
     df1.drop(columns=['DATAFLOW','LAST UPDATE', 'freq', 'unit', 'indic_he', 'OBS_FLAG', 'sex'], inplace=True)
+ 
+    # Interpolate missing values starting from the second column (skip "geo" column)
+    df1.iloc[:, 1:] = df1.iloc[:, 1:].interpolate(method='linear', axis=1)
 
-    # turn years into columns
-    df1_new = df1.pivot(index='geo', columns='TIME_PERIOD')['OBS_VALUE']
-    df1 = df1_new
-    df1.reset_index(inplace=True)
-
-    # fill in missing values by interpolating starting from the second column (skip "geo" columns of string type)
-    df1.iloc[:, 1:] = df1.iloc[:, 1:].interpolate(method='linear', axis=1) # interpolate over country dimension (rows)
-
-    # fill in the missing values for the first year with the next year's value
+    # Fill in the missing values for the first year with the next year's value
     df1.iloc[:, 1:] = df1.iloc[:, 1:].bfill(axis=1)
     
     return df1
@@ -52,18 +47,15 @@ def extract_gasem():
 
 
 def transform_gasem(df2):
-    # exclude index and other Total data, as I do not use it in my analysis (i use only tonnes per capita)
+    # exclude index and other Total data, as I do not use it in my analysis (I use only tonnes per capita)
     df2 = df2[~df2['unit'].isin(['Index, 1990=100'])].copy()
     df2 = df2[~df2['src_crf'].isin(['Total (excluding LULUCF and memo items, including international aviation)'])].copy()
-
+    # drop rows with years 1990-2010, as there is no data for these years in the hly dataset
+    df2 = df2[~df2['TIME_PERIOD'].isin(range(1990, 2011))]
+    
     # drop unnecessary columns
     df2.drop(columns=['DATAFLOW','LAST UPDATE', 'freq', 'airpol', 'unit', 'src_crf', 'OBS_FLAG'], inplace=True)
-
-    # turn years into columns
-    df2_new = df2.pivot(index='geo', columns='TIME_PERIOD')['OBS_VALUE']
-    df2 = df2_new
-    df2.reset_index(inplace=True)
-    
+   
     return df2
 
 
@@ -75,6 +67,11 @@ def load_gasem(df2, path):
     df2.to_sql('dataset_gasem', engine_gasem, if_exists='replace', index=False)
 
 
+def merge_datasets(df1, df2):
+    merged_df = pd.merge(df1, df2, on=['geo', 'TIME_PERIOD'], suffixes=('_hly', '_gasem'))
+    return merged_df
+
+
 def pipeline():
     df1 = extract_hly()
     df1 = transform_hly(df1)  
@@ -83,6 +80,10 @@ def pipeline():
     df2 = extract_gasem()
     df2 = transform_gasem(df2)
     load_gasem(df2, '../data/dataset_gasem.sqlite')
+
+    merged_df = merge_datasets(df1, df2)
+    
+    load_hly(merged_df, '../data/merged_dataset.sqlite')
 
 
 if __name__ == '__main__':
