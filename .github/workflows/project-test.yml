@@ -24,7 +24,12 @@ jobs:
           pip install --upgrade pip
           pip install pandas
           pip install SQLAlchemy
-           pip install kaggle
+          pip install kaggle
+          pip install matplotlib
+          pip install seaborn
+          pip install unittest
+          pip install json
+          
        
       -  name: Run tests
          run: |
