@@ -17,13 +17,22 @@ def transform_hly(df1):
 
     # drop unnecessary columns
     df1.drop(columns=['DATAFLOW','LAST UPDATE', 'freq', 'unit', 'indic_he', 'OBS_FLAG', 'sex'], inplace=True)
- 
-    # Interpolate missing values starting from the second column (skip "geo" column)
-    df1.iloc[:, 1:] = df1.iloc[:, 1:].interpolate(method='linear', axis=1)
-
-    # Fill in the missing values for the first year with the next year's value
-    df1.iloc[:, 1:] = df1.iloc[:, 1:].bfill(axis=1)
-    
+  
+    # add new empty entries for Iceland, as there are missing values for 2019-2022
+    if not df1[(df1['geo'] == 'Iceland') & (df1['TIME_PERIOD'] >= 2019)].any().any():
+        missing_rows = pd.DataFrame({
+            'geo': ['Iceland']*4,
+            'TIME_PERIOD': [2019, 2020, 2021, 2022],
+            'OBS_VALUE': [None]*4
+        })
+        df1 = pd.concat([df1, missing_rows])
+        
+    # interpolate missing values in the dataset
+    df1['TIME_PERIOD'] = pd.to_numeric(df1['TIME_PERIOD'])
+    df1.sort_values(by=['geo', 'TIME_PERIOD'], inplace=True)
+    df1['OBS_VALUE'] = df1.groupby('geo')['OBS_VALUE'].apply(lambda x: x.interpolate())
+    df1['OBS_VALUE'] = df1.groupby('geo')['OBS_VALUE'].ffill().bfill()
+           
     return df1
 
 
