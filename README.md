@@ -20,11 +20,11 @@ Your data engineering project will run alongside lectures during the semester. W
 ### Exporting a Jupyter Notebook
 Jupyter Notebooks can be exported using `nbconvert` (`pip install nbconvert`). For example, to export the example notebook to html: `jupyter nbconvert --to html examples/final-report-example.ipynb --embed-images --output final-report.html`
 
-##Project Title
+## Project Title
 
 Urban Tree Management for Climate Resilience in Würzburg
 
-##Project Description
+## Project Description
 
 This project aims to enhance climate resilience and improve living conditions in Würzburg, Germany, by leveraging detailed urban tree data. Through the analysis of data on tree species, sizes, locations, and soil moisture levels, the project seeks to understand how strategic urban forestry can contribute to sustainable city planning and climate adaptation strategies. Key aspects of the project include analyzing the distribution of tree species, investigating the correlation between tree health and growth patterns, and exploring the relationships between various tree characteristics and overall health.
 
