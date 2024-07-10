@@ -43,6 +43,8 @@ Sensor data from selected trees planted in different soil types across Würzburg
 3. Data Report [#3][i3]
 4. Implementation of Automated Tests [#4][i4]
 5. Implementation of CI [#5][i5]
+6. Compilation of the Final Report [#6][i6]
+7. Repository Organization and Presentation [#7][i7]
 
 
 [i1]: https://github.com/iremhalac/made-template/issues/1
@@ -50,4 +52,6 @@ Sensor data from selected trees planted in different soil types across Würzburg
 [i3]: https://github.com/iremhalac/made-template/issues/3
 [i4]: https://github.com/iremhalac/made-template/issues/4
 [i5]: https://github.com/iremhalac/made-template/issues/5
+[i6]: https://github.com/iremhalac/made-template/issues/6
+[i7]: https://github.com/iremhalac/made-template/issues/7
 
