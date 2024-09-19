@@ -48,5 +48,5 @@ jobs:
       - name: Upload feedback
         uses: actions/upload-artifact@v4
         with:
-          name: feedback-log.txt
-          path: ./grading/feedback-log.txt
+          name: exercise-feedback
+          path: ./grading/feedback-ex?.txt
