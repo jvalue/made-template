@@ -1,0 +1,82 @@
+
+// For creating automated data-pipeline for extracting, processing, and storing tree planting data for Herbst 2023
+
+pipeline HerbstPflanzungDatenPipeline {
+    block HerbstPflanzungDatenExtractor oftype HttpExtractor {
+        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+    }
+
+// For converting the extracted text formatted data into a better format
+
+    block HerbstPflanzungDatenTextInterpreter oftype TextFileInterpreter {}
+
+// For interpreting the text data as a CSV file by using ';' as the delimiter
+
+    block HerbstPflanzungDatenCSVInterpreter oftype CSVInterpreter {
+        delimiter: ';';
+    }
+
+// For deleting the colomn "baumart_deutsch" as it has no impact on the further processing
+
+    block HerbstPflanzungDatenColumnDeleter oftype ColumnDeleter {
+        delete: [column E];
+    }
+
+// For filtering and validating the table data and specifying the expected column types
+
+    block HerbstPflanzungDatenValidFilter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "lfd_nr" oftype integer,
+            "stadtteil" oftype StadtteilVogelsang,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            "id" oftype GeoPattern,
+            "baumfamilie" oftype text
+        ];
+    }
+
+// For defining a value type for the geographic coordinates in the pattern
+
+    valuetype GeoPattern oftype text {
+        constraints: [
+            IDGeoPattern
+        ];
+    }
+
+// For ensuring that the geographic coordinates are formatted correctly
+
+    constraint IDGeoPattern oftype RegexConstraint {
+        regex: /^\d{1,3}\.\d+, \d{1,3}\.\d+$/;
+    }
+
+// For defining a value type for the 'stadtteil' column specifically for the 'Vogelsang' entries
+
+    valuetype StadtteilVogelsang oftype text {
+        constraints: [
+            Vogelsang
+        ];
+    }
+
+// For ensuring that the 'stadtteil' starts with 'Vogelsang'
+
+    constraint Vogelsang oftype RegexConstraint {
+        regex: /^Vogelsang.*/;
+    }
+
+// For loading the processed data into a SQLite database table called 'trees'
+
+    block HerbstPflanzungDatenSQLiteLoader oftype SQLiteLoader {
+        table: "trees";
+        file: "trees.sqlite";
+    }
+
+// For defining the sequence of data processing from extraction to loading
+    
+    HerbstPflanzungDatenExtractor -> HerbstPflanzungDatenTextInterpreter; 
+    HerbstPflanzungDatenTextInterpreter
+    -> HerbstPflanzungDatenCSVInterpreter 
+    -> HerbstPflanzungDatenColumnDeleter 
+    -> HerbstPflanzungDatenValidFilter 
+    -> HerbstPflanzungDatenSQLiteLoader;
+}

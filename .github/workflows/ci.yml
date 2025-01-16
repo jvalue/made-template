@@ -1,0 +1,49 @@
+name: CI for Windows Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest  # Use Windows runner
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.12.4
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12.4'
+
+    - name: Install SQLite CLI
+      run: |
+        echo "Installing SQLite..."
+        choco install sqlite --no-progress
+        echo "SQLite version:"
+        sqlite3 --version
+
+    - name: Check Python and SQLite Versions
+      run: |
+        python --version
+        python -c "import sqlite3; print(f'SQLite version: {sqlite3.sqlite_version}')"
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas requests
+        if (Test-Path -Path requirements.txt) { pip install -r requirements.txt }
+
+    - name: List Project Directory
+      run: |
+        echo "Project directory structure:"
+        dir project/
+
+    - name: Run Tests
+      run: |
+        echo "Setting tests.sh as executable..."
+        bash -c "chmod +x project/tests.sh"
+        echo "Running tests..."
+        bash project/tests.sh

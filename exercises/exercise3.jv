@@ -1,0 +1,93 @@
+pipeline EconomicMetricsPipeline {
+
+    // To define the custom value types with constraints
+    valuetype decimalBetweenZeroAndOne oftype decimal {
+        constraints: [WithinZeroToOne];
+    }
+
+    valuetype nonNegativeDecimal oftype decimal {
+        constraints: [GreaterThanOrEqualToZero];
+    }
+
+    constraint WithinZeroToOne oftype RangeConstraint {
+        lowerBound: 0;
+        upperBound: 1;
+    }
+
+    constraint GreaterThanOrEqualToZero oftype RangeConstraint {
+        lowerBound: 0;
+    }
+
+    // To download the file from a specific URL
+    block DataDownloader oftype HttpExtractor {
+        url: 'https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx';
+        retries: 3;
+    }
+
+    block FileInterpreter oftype XLSXInterpreter { }
+
+    // To select the sheet that is to be processed
+    block TargetSheetSelector oftype SheetPicker {
+        sheetName: "Figure S5.1.2";
+    }
+
+    // To extract the specific cell range for performing data processing
+    block CellRangeExtractor oftype CellRangeSelector {
+        select: range P2:S45;
+    }
+
+    // To rename the columns to get clarity
+    block HeaderRenamer oftype CellWriter {
+        at: range A1:D1;
+        write: [
+            'Country Code',
+            'Economy',
+            'GDP per Capita',
+            'Bond Issuance Share'
+        ];
+    }
+
+    // To parse GDP-related data with mentioned column types
+    block GDPDataParser oftype TableInterpreter {
+        header: true;
+        columns: [
+            'Country Code' oftype CountryCodeAlpha3,
+            'GDP per Capita' oftype nonNegativeDecimal,
+        ];
+    }
+
+    // To parse Bond-related data along with the specified column types
+    block BondDataParser oftype TableInterpreter {
+        header: true;
+        columns: [
+            'Country Code' oftype CountryCodeAlpha3,
+            'Bond Issuance Share' oftype decimalBetweenZeroAndOne,
+        ];
+    }
+
+    // To load GDP data into SQLite database
+    block GDPSaver oftype SQLiteLoader {
+        table: 'gdpPerCapita';
+        file: 'country-stats.sqlite';
+    }
+
+    // To load Bond data into SQLite database
+    block BondSaver oftype SQLiteLoader {
+        table: 'bondIssuance';
+        file: 'country-stats.sqlite';
+    }
+
+    DataDownloader
+        -> FileInterpreter
+        -> TargetSheetSelector
+        -> CellRangeExtractor
+        -> HeaderRenamer;
+
+    HeaderRenamer
+        -> GDPDataParser
+        -> GDPSaver;
+
+    HeaderRenamer
+        -> BondDataParser
+        -> BondSaver;
+}

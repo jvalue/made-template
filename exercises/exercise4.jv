@@ -1,0 +1,108 @@
+// Defines the pipeline named "temperaturePipeline" to process the temperature data
+pipeline temperaturePipeline {
+
+    tempExtractor
+        -> tempZipInterpreter
+        -> tempFilePicker
+        -> tempTextFileInterpreter
+        -> tempCSVInterpreter
+        -> headerRename
+        -> batteryHeaderRename
+        -> tempTableInterpretor
+        -> tempToFahrenheit
+        -> batteryTempToFahrenheit
+        -> tempLoader;
+
+    // Downloads dataset from the specified URL as a ZIP file
+    block tempExtractor oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    // Interprets the downloaded ZIP archive and extracts its contents
+    block tempZipInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    // Picks the specific file data.csv from the extracted archive
+    block tempFilePicker oftype FilePicker {
+        path: '/data.csv';
+    }
+
+    // Reads the content of the selected file as text
+    block tempTextFileInterpreter oftype TextFileInterpreter {}
+
+    // Parses the text file as a CSV, using ';' as the delimiter
+    block tempCSVInterpreter oftype CSVInterpreter {
+        delimiter: ";";
+    }
+
+    // Renames the headers of the table from German to English
+    block headerRename oftype CellWriter {
+        at: range A1:E1;
+        write: ["id", "producer", "model", "month", "temperature"];
+    }
+
+    // Adds a header for the "battery_temperature" column
+    block batteryHeaderRename oftype CellWriter {
+        at: cell J1;
+        write: ["battery_temperature"];
+    }
+
+    // Interprets the data as a table with specific columns and their respective types
+    block tempTableInterpretor oftype TableInterpreter {
+        header: true;
+        columns: [
+            "id" oftype PositiveInteger,
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype MonthType,
+            "temperature" oftype decimal,
+            "battery_temperature" oftype decimal
+        ];
+    }
+
+    // Converts Celsius to Fahrenheit using the specified formula
+    transform CtoF {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius * 9/5) + 32;
+    }
+
+    // Transforms the "temperature" column values from Celsius to Fahrenheit
+    block tempToFahrenheit oftype TableTransformer {
+        inputColumns: ['temperature'];
+        outputColumn: 'temperature';
+        uses: CtoF;
+    }
+
+    // Transforms the "battery_temperature" column values from Celsius to Fahrenheit
+    block batteryTempToFahrenheit oftype TableTransformer {
+        inputColumns: ['battery_temperature'];
+        outputColumn: 'battery_temperature';
+        uses: CtoF;
+    }
+
+    // Loads the processed data into an SQLite database
+    block tempLoader oftype SQLiteLoader {
+        table: 'temperatures';
+        file: 'temperatures.sqlite';
+    }
+
+    // Constraint ensuring integer values are non-negative
+    constraint PositiveConstraint on integer:
+        value >= 0;
+
+    // Defines a custom positive integer type
+    valuetype PositiveInteger oftype integer {
+        constraints: [PositiveConstraint];
+    }
+
+    // Constraint ensuring month values are within the valid range (1-12)
+    constraint MonthConstraint on integer:
+        value >= 1 and value <= 12;
+
+    // Defines a custom type for valid month values
+    valuetype MonthType oftype integer {
+        constraints: [MonthConstraint];
+    }
+}

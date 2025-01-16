@@ -1,0 +1,74 @@
+// To build an automated pipeline for processing GTFS data
+pipeline PublicTransportDataPipeline {
+
+    GTFSDataExtractor -> ZipFileProcessor;
+
+    ZipFileProcessor
+        -> StopsFileSelector
+        -> TextFileProcessor
+        -> CSVFileProcessor
+        -> DataTableProcessor
+        -> SQLiteDataSaver;
+
+// To extract GTFS ZIP file from the provided URL
+    block GTFSDataExtractor oftype HttpExtractor {
+        url: "https://gtfs.rhoenenergie-bus.de/GTFS.zip";
+    }
+
+    block ZipFileProcessor oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+// To select the stops.txt file from the extracted content
+    block StopsFileSelector oftype FilePicker {
+        path: "/stops.txt";
+    }
+
+// To process the text file with UTF-8 to maintain german umlauts
+    block TextFileProcessor oftype TextFileInterpreter {
+        encoding: "utf8";
+    }
+
+    block CSVFileProcessor oftype CSVInterpreter {
+        delimiter: ',';
+        enclosing: '"';
+		enclosingEscape: '"';
+    }
+
+// To setup constraints and data types for specific zone filtering
+    valuetype Zone1925 oftype integer {
+        constraints: [SpecificZoneConstraint];
+    }
+
+    constraint SpecificZoneConstraint on integer:
+        value == 1925;
+
+    valuetype GeoLatLonConstraint oftype decimal {
+        constraints: [LatitudeLongitudeRange];
+    }
+
+    constraint LatitudeLongitudeRange oftype RangeConstraint {
+        lowerBound: -90;
+        lowerBoundInclusive: true;
+        upperBound: 90;
+        upperBoundInclusive: true;
+    }
+
+// To convert filtered data into a structured table
+    block DataTableProcessor oftype TableInterpreter {
+        header: true;
+        columns: [
+            "stop_id" oftype integer,
+            "stop_name" oftype text,
+            "stop_lat" oftype GeoLatLonConstraint,
+            "stop_lon" oftype GeoLatLonConstraint,
+            "zone_id" oftype Zone1925,
+        ];
+    }
+
+// To save the processed data into an SQLite database
+    block SQLiteDataSaver oftype SQLiteLoader {
+        table: "stops";
+        file: "gtfs.sqlite";
+    }
+}

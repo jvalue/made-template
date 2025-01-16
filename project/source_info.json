@@ -1,0 +1,17 @@
+{
+  "data_sources": [
+    {
+      "source_name": "Los Angeles Data Portal",
+      "source_address": "https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8/about_data",
+      "data_details": "This dataset contains records of crime incidents in Los Angeles, with details on crime type, location, date, time, etc.",
+      "data_urls": "https://data.lacity.org/resource/2nrs-mtv8.csv",
+      "data_type": "csv"},
+    {
+      "source_name": "Meteostat",
+      "source_address": "https://meteostat.net/en/",
+      "data_details": "This dataset contains monthly weather records for Los Angeles, including key  variables that provide a clear view of climatic conditions over time.",
+      "api_endpoint": "https://bulk.meteostat.net/v2/monthly/72295.csv.gz",
+      "data_type": "gzip"
+    }
+  ]
+}
