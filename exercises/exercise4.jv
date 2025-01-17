@@ -1,0 +1,111 @@
+pipeline MobiliThek{
+
+    block DataExtractor oftype HttpExtractor {
+                url : "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    block DataInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+    block FilePicker oftype FilePicker {
+        path: "/data.csv";
+    }
+
+    block TextFileInterpreter oftype TextFileInterpreter { }
+
+    
+    block CSVInterpreter oftype CSVInterpreter {
+        delimiter: ';';
+    }
+
+    // block CellRangeSelector oftype CellRangeSelector {
+    //     select: range A1:J4873;
+    // }
+
+    block DeleteSomeColumns oftype ColumnDeleter {
+        delete: [column F, column G, column H, column I, column K, column L, column M, column N, column O, column P, column Q, 
+            column R, column S, column T, column U, column V, column W, column X, column Y, column Z, 
+            column AA, column AB, column AC, column AD, column AE, column AF, column AG, column AH, column AI, 
+            column AJ, column AK, column AL, column AM, column AN, column AO, column AP, column AQ, column AR, 
+            column AS, column AT, column AU, column AV, column AW, column AX, column AY, column AZ, column BA, 
+            column BB, column BC, column BD, column BE, column BF, column BG, column BH, column BI, column BJ, 
+            column BK, column BL, column BM, column BN, column BO, column BP, column BQ, column BR, column BS, 
+            column BT, column BU, column BV, column BW, column BX, column BY, column BZ, column CA, column CB, 
+            column CC, column CD, column CE, column CF, column CG, column CH, column CI, column CJ, column CK, 
+            column CL, column CM, column CN, column CO, column CP, column CQ, column CR, column CS, column CT, 
+            column CU, column CV, column CW, column CX, column CY, column CZ, column DA, column DB, column DC, 
+            column DD, column DE, column DF, column DG, column DH, column DI, column DJ, column DK, column DL, 
+            column DM, column DN, column DO, column DP, column DQ, column DR, column DS, column DT, column DU, 
+            column DV, column DW, column DX, column DY, column DZ, column EA, column EB, column EC, column ED, 
+            column EE, column EF, column EG, column EH, column EI, column EJ, column EK, column EL, column EM, 
+            column EN, column EO, column EP, column EQ, column ER, column ES, column ET, column EU, column EV, 
+            column EW, column EX, column EY];
+    }
+
+    block RenameColumns oftype CellWriter {
+        at: range A1:F1;
+        write: ["id", "producer", "model", "month", "temperature", "battery_temperature"];
+    }
+
+    block TempMeasurementTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "id" oftype integer,
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype BetweenOneAndTwelve,
+            "temperature" oftype decimal,
+            "battery_temperature" oftype decimal,
+        ];
+    }
+
+    block TempMeasurementTransformer oftype TableTransformer {
+        inputColumns: [
+            "temperature",
+        ];
+        outputColumn: "temperature";
+        uses: FahrenheitUnit;
+    }
+
+    block TempMeausurementBatteryTransformer oftype TableTransformer {
+        inputColumns: [
+            "battery_temperature",
+        ];
+        outputColumn: "battery_temperature";
+        uses: FahrenheitUnit;
+    }
+
+    transform FahrenheitUnit {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: Celsius * 9/5 + 32;
+    }
+
+    valuetype BetweenOneAndTwelve oftype integer {
+        constraints: [
+            BetweenOneAndTwelveConstraint
+        ];
+    }
+
+    constraint BetweenOneAndTwelveConstraint on integer: value >= 1 and value <= 12;
+    
+
+    block DataLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "temperatures.sqlite";
+    }
+
+    DataExtractor 
+        -> DataInterpreter 
+        -> FilePicker 
+        -> TextFileInterpreter 
+        -> CSVInterpreter 
+        // -> CommaSeparator
+        -> DeleteSomeColumns
+        -> RenameColumns
+        -> TempMeasurementTableInterpreter
+        -> TempMeasurementTransformer
+        -> TempMeausurementBatteryTransformer
+        -> DataLoader;
+}

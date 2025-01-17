@@ -1,0 +1,1 @@
+python3 ./project/run_tests.py

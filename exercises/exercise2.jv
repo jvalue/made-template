@@ -1,0 +1,85 @@
+pipeline TreePlanting{
+
+    //1. TreePlanting Pipeline connects the blocks via pipes to extract data from a CSV file
+    // in the web to a SQLite file sink.    
+    TreePlantingHttpExtractor 
+        -> TreePlantingTextFileInterpreter;
+    
+    //2. The TreePlantingTextFileInterpreter output is used as input for the TreePlantingCsvFileInterpreter
+    // block which is then used as input for the TreePlantingDataSelector block.
+    TreePlantingTextFileInterpreter
+        -> TreePlantingCsvFileInterpreter
+        // -> TreePlantingDatabaseWriter
+        -> TreePlantingBaumartDeutschDeleter
+        -> TreePlantingTableInterpreter
+        -> TreePlantingLoader;
+
+    //3. The TreePlantingHttpExtractor block is of type HttpExtractor and the URL is specified.
+    block TreePlantingHttpExtractor oftype HttpExtractor {
+        // URL of the data source
+        url: "https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets/stadt-neuss-herbstpflanzung-2023/exports/csv";
+    }
+
+    //4. The TreePlantingTextFileInterpreter block is of type TextFileInterpreter.
+    block TreePlantingTextFileInterpreter oftype TextFileInterpreter { }
+
+    //6. The TreePlantingCsvFileInterpreter block is of type CSVInterpreter and the delimiter is specified.
+    block TreePlantingCsvFileInterpreter oftype CSVInterpreter {
+        // Specify the separator as a semicolon for the CSV
+        delimiter: ';';
+    }
+
+    //5. The TreePlantingBaumartDeutschDeleter block is of type ColumnDeleter and the column to be deleted is specified.
+    block TreePlantingBaumartDeutschDeleter oftype ColumnDeleter {
+        // The name of the column
+        delete: [column E];
+    }
+
+    //7. The TreePlantingTableInterpreter block is of type TableInterpreter and the necessary columns are specified.
+    block TreePlantingTableInterpreter oftype TableInterpreter {
+        // The first row contains the header
+        header: true;
+        // The columns of the table
+        columns: [
+            "lfd_nr" oftype integer,
+            "stadtteil" oftype Vogelsang,
+            "standort" oftype text,
+            "baumart_botanisch" oftype text,
+            "id" oftype GeoCoordinate,
+            "baumfamilie" oftype text,
+
+        ];
+    }
+
+    block TreePlantingLoader oftype SQLiteLoader {
+        // The name of the table
+        table: "trees";
+        // The name of the file
+        file: "trees.sqlite";
+     }
+
+
+    valuetype Vogelsang oftype text {
+        // The value of the column
+        constraints: [
+            // only allow column values that start with "Vogelsang"
+            VogelsangStadteil
+        ];
+    }
+
+    valuetype GeoCoordinate oftype text {
+        // The value of the column
+        constraints: [
+            // only allow column values that match the pattern of a geo coordinate
+            Geopoints
+        ];
+    }
+
+    constraint VogelsangStadteil on text: value matches(/^Vogelsang*/);
+    //8. Finally the TreePlantingLoader block is of type SQLiteLoader and the table name and file name are specified.
+    
+    constraint Geopoints on text: value matches(/^\d{1,3}\.\d+,\s*\d{1,3}\.\d+$/);
+ 
+
+}
+

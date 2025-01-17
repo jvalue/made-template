@@ -1,0 +1,92 @@
+pipeline WorldBank {
+
+    // 1. Block to extract an XLSX file from the web
+    block WorldBankHttpExtractor oftype HttpExtractor {
+        // URL of the source file containing the data
+        url: "https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx";
+    }
+
+    // 2. Block to interpret the downloaded file as an XLSX workbook
+    block WorldBankTextXLSXInterpreter oftype XLSXInterpreter { }
+
+    // 3. Block to select the specific sheet "Figure S5.1.2" from the workbook
+    block DataCellSheetpicker oftype SheetPicker {
+        sheetName: "Figure S5.1.2";
+    }
+
+    // 4. Block to specify the cell range of interest in the selected sheet
+    block WorldBankRangeSelector oftype CellRangeSelector {
+        select: range P2:S45;
+    }
+
+    // 5. Block to rename columns for clarity and standardization
+    block NameHeaderWriter oftype CellWriter {
+        at: range A1:D1;
+        write: ["Country Code", "Economy", "GDP per Capita", "Bond Issuance Share"];
+    }
+
+    // 6. Block to interpret and filter the "Bond Issuance Share" column data
+    block BondIssuanceTableInterpreter oftype TableInterpreter {
+        columns: [
+            "Country Code" oftype CountryCodeAlpha3,
+            "Bond Issuance Share" oftype BetweenZeroAndOne,
+        ];
+    }
+
+    // 7. Block to interpret and filter the "GDP per Capita" column data
+    block GDPTableInterpreter oftype TableInterpreter {
+        columns: [
+            "Country Code" oftype CountryCodeAlpha3,
+            "GDP per Capita" oftype PositiveDecimal,
+        ];
+    }
+
+    // 8. Block to load "Bond Issuance Share" data into a SQLite table
+    block BondIssuanceTableLoader oftype SQLiteLoader {
+        table: "bondIssuance"; // Table name in the SQLite database
+        file: "country-stats.sqlite"; // SQLite database file
+    }
+
+    // 9. Block to load "GDP per Capita" data into a SQLite table
+    block GDPTableLoader oftype SQLiteLoader {
+        table: "gdpPerCapita"; // Table name in the SQLite database
+        file: "country-stats.sqlite"; // SQLite database file
+    }
+
+    // 10. Value type to enforce positive decimal values
+    valuetype PositiveDecimal oftype decimal {
+        constraints: [
+            OnlyPositiveDecimal // Constraint: Values must be > 0
+        ];
+    }
+
+    // 11. Value type to enforce decimal values between 0 and 1
+    valuetype BetweenZeroAndOne oftype decimal {
+        constraints: [
+            BetweenZeroAndOneConstraint // Constraint: 0 <= value <= 1
+        ];
+    }
+
+    // 12. Constraints definitions
+    constraint OnlyPositiveDecimal on decimal: value > 0;
+    constraint BetweenZeroAndOneConstraint on decimal: value >= 0 and value <= 1;
+
+    // Pipeline connections
+    WorldBankHttpExtractor
+        -> WorldBankTextXLSXInterpreter;
+
+    WorldBankTextXLSXInterpreter
+        -> DataCellSheetpicker
+        -> WorldBankRangeSelector
+        -> NameHeaderWriter;
+
+    // Bond Issuance pipeline
+    NameHeaderWriter
+        -> BondIssuanceTableInterpreter
+        -> BondIssuanceTableLoader;
+
+    // GDP per Capita pipeline
+    NameHeaderWriter
+        -> GDPTableInterpreter
+        -> GDPTableLoader;
+}

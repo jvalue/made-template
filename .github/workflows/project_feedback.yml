@@ -1,0 +1,31 @@
+name: Run Tests
+run-name: ${{ github.actor }} is running tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # project and exercise feedbacks
+      - name: Make test executable
+        run: chmod +x /home/runner/work/made-template/made-template/project/tests.sh
+
+      - name: Run project tests 
+        run: /home/runner/work/made-template/made-template/project/tests.sh

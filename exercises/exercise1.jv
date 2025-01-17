@@ -1,0 +1,74 @@
+pipeline FlugHafen{
+
+    //1. FlugHafen Pipeline connects the blocks via pipes to extract data from a CSV file
+    // in the web to a SQLite file sink.    
+    FlugHafenHttpExtractor 
+        -> FlugHafenTextFileInterpreter;
+    
+    //2. The FlugHafenTextFileInterpreter output is used as input for the FlugHafenCsvFileInterpreter
+    // block which is then used as input for the FlugHafenDataSelector block.
+    FlugHafenTextFileInterpreter
+        -> FlugHafenCsvFileInterpreter
+        // -> FlugHafenDatabaseWriter
+        -> FlugHafenDataSelector
+        -> FlugHafenTableInterpreter
+        -> FlugHafenLoader;
+
+    //3. The FlugHafenHttpExtractor block is of type HttpExtractor and the URL is specified.
+    block FlugHafenHttpExtractor oftype HttpExtractor {
+        // URL of the data source
+        url: "https://opendata.rhein-kreis-neuss.de/api/explore/v2.1/catalog/datasets/rhein-kreis-neuss-flughafen-weltweit/exports/csv?lang=en&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B";
+    }
+
+    //4. The FlugHafenTextFileInterpreter block is of type TextFileInterpreter.
+    block FlugHafenTextFileInterpreter oftype TextFileInterpreter { }
+
+    //5. Since we only need a specific range of the data, we use the CellRangeSelector block.
+    block FlugHafenDataSelector oftype CellRangeSelector {
+        // The name of the sheet
+        select: range A1:I*;
+    }
+
+    //6. The FlugHafenCsvFileInterpreter block is of type CSVInterpreter and the delimiter is specified.
+    block FlugHafenCsvFileInterpreter oftype CSVInterpreter {
+        // Specify the separator as a semicolon for the CSV
+        delimiter: ';';
+    }
+
+    // block FlugHafenDatabaseWriter oftype DatabaseWriter {
+    //     // The name of the database
+    //     database: "flughafen.db";
+    //     // The name of the table
+    //     table: "flughafen";
+    // }
+
+    //7. The FlugHafenTableInterpreter block is of type TableInterpreter and the necessary columns are specified.
+    block FlugHafenTableInterpreter oftype TableInterpreter {
+        // The first row contains the header
+        header: true;
+        // The columns of the table
+        columns: [
+            "Lfd. Nummmer" oftype integer,
+            "Name des Flughafens" oftype text,
+            "Ort" oftype text,
+            "Land" oftype text,
+            "IATA" oftype text,
+            "ICAO" oftype text,
+            "Latitude" oftype decimal,
+            "Longitude" oftype decimal,
+            "Altitude" oftype integer,
+
+        ];
+    }
+
+    //8. Finally the FlugHafenLoader block is of type SQLiteLoader and the table name and file name are specified.
+    block FlugHafenLoader oftype SQLiteLoader {
+        // The name of the table
+        table: "airports";
+        // The name of the file
+        file: "airports.sqlite";
+     }
+ 
+
+}
+

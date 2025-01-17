@@ -1,37 +1,55 @@
-# Methods of Advanced Data Engineering Template Project
+## A comparative analysis of North America and Latin America & Caribbean’s contribution to renewable energy; and their adoption to climate mitigation efforts from 1960 to 2023
 
-This template project provides some structure for your open data project in the MADE module at FAU.
-This repository contains (a) a data science project that is developed by the student over the course of the semester, and (b) the exercises that are submitted over the course of the semester.
+This report presents a comparative analysis of the contributions and progress of North America and Latin America & Caribbean in renewable energy
+adoption and climate mitigation efforts over the period 1960 to 2023.
 
-To get started, please follow these steps:
-1. Create your own fork of this repository. Feel free to rename the repository right after creation, before you let the teaching instructors know your repository URL. **Do not rename the repository during the semester**.
+## Data License
+The World Bank strives to enhance public access to and use of data that it collects and publishes. The data are organized in datasets listed in The World Bank Data Catalog (the “Datasets”).[Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets) It spans multiple countries, enabling both regional and country-level analysis. The data spans from 1960 to 2023. 
 
-## Project Work
-Your data engineering project will run alongside lectures during the semester. We will ask you to regularly submit project work as milestones, so you can reasonably pace your work. All project work submissions **must** be placed in the `project` folder.
+| Region                  | Data Source                                                                 |
+|-------------------------|-----------------------------------------------------------------------------|
+| North America           | [Download](https://api.worldbank.org/v2/en/country/NAC?downloadformat=csv) |
+| Latin America & Caribbean | [Download](https://api.worldbank.org/v2/en/country/LCN?downloadformat=csv) |
+| Metadata URL            | [Link](https://data.worldbank.org/country)                                 |
+| Data Type               | csv                                                                        |
 
-### Exporting a Jupyter Notebook
-Jupyter Notebooks can be exported using `nbconvert` (`pip install nbconvert`). For example, to export the example notebook to HTML: `jupyter nbconvert --to html examples/final-report-example.ipynb --embed-images --output final-report.html`
 
 
-## Exercises
-During the semester you will need to complete exercises using [Jayvee](https://github.com/jvalue/jayvee). You **must** place your submission in the `exercises` folder in your repository and name them according to their number from one to five: `exercise<number from 1-5>.jv`.
+### Description of Directories and Files
 
-In regular intervals, exercises will be given as homework to complete during the semester. Details and deadlines will be discussed in the lecture, also see the [course schedule](https://made.uni1.de/).
+- **data**: Contains all the datasets used in the project.
+- **examples**: Includes example files provided by the course facilitators for reference.
+- **exercises**: Contains solutions to exercises from the WinSem2024 course.
+- **project**: This directory holds all the analysis work done during the semester, including reports, scripts, and temporary files.
+  - **analysis-report.pdf**: The final analysis report.
+  - **data-report.pdf**: A report on the data used in the project.
+  - **final_report.ipynb**: The final report in Jupyter Notebook format.
+  - **pipeline.sh**: A shell script for running the data processing pipeline.
+  - **prepare_data.py**: A Python script for preparing the data.
+  - **project-plan-example.md**: An example of a project plan.
+  - **run_tests.py**: A Python script for running tests.
+  - **temp_dir**: A temporary directory for intermediate files.
+  - **tests.sh**: A shell script for running tests.
+  - **version_check.py**: A Python script for checking package versions.
+project.
+- **requirements.txt**: A file listing the dependencies required for the project.
 
-### Exercise Feedback
-We provide automated exercise feedback using a GitHub action (that is defined in `.github/workflows/exercise-feedback.yml`). 
+### Usage
 
-To view your exercise feedback, navigate to Actions → Exercise Feedback in your repository.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+2. Create virtual environment
+	```bash
+	python -m venv <env_name>
+3. Install the dependencies
+	```bash 
+	pip install -r requirements.txt
+4. Run the data pipeline using `project/pipeline.sh`
+4. You can now open `final_report.ipynb` and explore.
 
-The exercise feedback is executed whenever you make a change in files in the `exercise` folder and push your local changes to the repository on GitHub. To see the feedback, open the latest GitHub Action run, open the `exercise-feedback` job and `Exercise Feedback` step. You should see command line output that contains output like this:
 
-```sh
-Found exercises/exercise1.jv, executing model...
-Found output file airports.sqlite, grading...
-Grading Exercise 1
-	Overall points 17 of 17
-	---
-	By category:
-		Shape: 4 of 4
-		Types: 13 of 13
-```
+
+## License
+
+This project is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to share and adapt the work as long as you provide appropriate credit. For more details, see the [LICENSE](LICENSE) file or visit [Creative Commons](https://creativecommons.org/licenses/by/4.0/).

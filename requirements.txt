@@ -1,0 +1,8 @@
+numpy==1.26.4
+pandas==1.5.3
+scikit-learn==1.2.2
+matplotlib==3.8.0
+sqlalchemy==2.0.25
+seaborn
+pytest
+requests
