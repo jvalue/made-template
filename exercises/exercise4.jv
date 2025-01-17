@@ -1,0 +1,94 @@
+valuetype id_range oftype integer {
+    constraints: [ over_zero ];
+}
+
+constraint over_zero on integer:
+    value > 0;
+
+valuetype month_range oftype integer {
+    constraints: [ range1to12 ];
+}
+
+constraint range1to12 on integer:
+    value >= 1 and value <= 12;
+
+pipeline MobilPipeline1 {
+  
+    MobilExtractor
+        -> ZipArchiveInterpreter
+        -> ZipFilePicker
+        -> MobilTextFileInterpreter
+        -> MobilCSVInterpreter
+        -> MobilSequenceWriter
+        -> MobilHeaderWriter
+        -> MobilTableInterpreter
+        -> CelsiusToFahrenheitTransformer1
+        -> CelsiusToFahrenheitTransformer2
+        -> MobilLoader;
+
+    block MobilExtractor oftype HttpExtractor {
+        url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip";
+    }
+
+    //interpretes a file into a XLSX file
+     block ZipArchiveInterpreter oftype ArchiveInterpreter {
+        archiveType: "zip";
+    }
+
+     block ZipFilePicker oftype FilePicker {
+        path: "./data.csv";
+    }
+
+    block MobilTextFileInterpreter oftype TextFileInterpreter { }
+
+    block MobilCSVInterpreter oftype CSVInterpreter {
+        delimiter: ';';
+    }
+
+    //Rename the cells
+    //"Geraet", "Hersteller", "Model", "Monat", "Temperatur in °C (DWD)"
+    block MobilSequenceWriter oftype CellWriter {
+        at: range A1:E1;
+        write: ["id", "producer", "model", "month", "temperature"];
+    }
+
+    block MobilHeaderWriter oftype CellWriter {
+        at: cell J1;
+        write: ["battery_temperature"]; //"Batterietemperatur in °C"
+    }
+
+    block MobilTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "id" oftype id_range, // Jayvee 0.6.4 has a CountryCodeAlpha3 value type
+            "producer" oftype text,
+            "model" oftype text,
+            "month" oftype month_range,
+            "temperature" oftype decimal,
+            "battery_temperature" oftype decimal
+        ];
+    }
+
+    transform CelsiusToFahrenheit {
+        from Celsius oftype decimal;
+        to Fahrenheit oftype decimal;
+        Fahrenheit: (Celsius * 9/5) + 32;
+    }
+
+    block CelsiusToFahrenheitTransformer1 oftype TableTransformer {
+        inputColumns: ["temperature"];
+        outputColumn: "temperature";
+        uses: CelsiusToFahrenheit;
+    }
+
+    block CelsiusToFahrenheitTransformer2 oftype TableTransformer {
+        inputColumns: ["battery_temperature"];
+        outputColumn: "battery_temperature";
+        uses: CelsiusToFahrenheit;
+    }
+  
+    block MobilLoader oftype SQLiteLoader {
+        table: "temperatures";
+        file: "./temperatures.sqlite";
+    }
+}

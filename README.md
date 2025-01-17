@@ -35,3 +35,19 @@ Grading Exercise 1
 		Shape: 4 of 4
 		Types: 13 of 13
 ```
+  ## A visual analysis of the security situation and potential crime influencing factors in California‘s cities
+  California is not only the most economically developed state in the U.S., but also the most populous state in the U.S. Its stunning scenery, booming economy, advanced technology and excellent educational resources combine to attract visitors from all over the world. While the security situation in California is an important consideration for people before traveling, California's security situation presents complexity. In this regard, this project puts forward the following questions to study the security situation in California cities and tries to answer them through data engineering methods:
+   1. What types of crimes are most common in all California cities? Is there a type of crime that is
+ predominant in most cities?
+   2. Which cities in California have the highest crime rate (per 100000 residents)?
+   3. Do all California cities have similar ratios of the number of law enforcement officers to the number
+ of crimes? Or are the ratios of the number of law enforcement to the population similar?
+   4. Do California cities with higher median household incomes or high school graduation rates have
+ lower crime rates?
+   5. Do cities with high poverty rates have higher crime rates?
+      
+The answers to these questions can provide a safety index for people who want to travel or settle in California, and can also help policymakers and government officials develop personalized crime prevention measures in specific cities. See [analysis-report.pdf](https://github.com/Jackie-Soo/made-template/blob/Jackie-Soo-patch-1/project/analysis-report.pdf) for details.
+
+  ## License
+  This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0).
+  See the [LICENSE](https://github.com/Jackie-Soo/made-template/blob/Jackie-Soo-patch-1/LICENSE) file for details.

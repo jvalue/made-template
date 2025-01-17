@@ -1,0 +1,41 @@
+name: Run Project3
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - project/project3.py  # only files under project directory will activate this action
+  workflow_dispatch: # Manual activation possible
+
+jobs:
+  run-project3:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r project/requirements.txt
+
+    - name: Start to run project3
+      env:
+        KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+        KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      run: |
+        python project/project3.py
+    
+    - name: output
+      uses: actions/upload-artifact@v3
+      with:
+        name: database_and_logging
+        path: ./data
+

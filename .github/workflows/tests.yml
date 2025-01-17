@@ -1,0 +1,42 @@
+name: Run Project3 Tests
+
+on:
+  push:
+    branches:
+      - main # for every push to main
+  workflow_dispatch:
+
+jobs:
+  test-system:
+    runs-on: ubuntu-latest
+
+    steps:
+    # check code
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # set up environment
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    # install all dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r project/requirements.txt
+
+    - name: Make tests.sh executable
+      run: chmod +x project/tests.sh
+
+    # run tests.sh
+    - name: Run tests
+      run: ./project/tests.sh
+
+    - name: Upload project3.log
+      if: always() # save the logging anyways
+      uses: actions/upload-artifact@v3
+      with:
+        name: project3-log
+        path: ./data

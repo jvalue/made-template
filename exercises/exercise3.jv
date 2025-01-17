@@ -1,0 +1,124 @@
+valuetype GDP oftype decimal {
+    constraints: [ GDPRange ];
+}
+
+constraint GDPRange on decimal:
+    value > 0;
+
+valuetype Share oftype decimal {
+    constraints: [ ShareRange ];
+}
+
+constraint ShareRange oftype RangeConstraint {
+    lowerBound: 0;
+    lowerBoundInclusive: true;
+    upperBound: 1;
+    upperBoundInclusive: true;
+}
+
+pipeline CsPipeline1 {
+  
+    CsExtractor
+        -> CsXLSXInterpreter
+        -> CsSheetPicker
+        -> CsHeaderWriter1
+        -> CsHeaderWriter2
+        -> CsDataSelector // should be after headerwriter
+        -> CsTableInterpreter
+        -> CsLoader;
+
+    block CsExtractor oftype HttpExtractor {
+        url: "https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx";
+    }
+
+    //interpretes a file into a XLSX file
+    block CsXLSXInterpreter oftype XLSXInterpreter { }
+
+    //Selects the Sheet from the XLSX Workbook
+    block CsSheetPicker oftype SheetPicker {
+        sheetName: "Figure S5.1.2";
+    }
+
+    //Selects a subset of a Sheet
+    block CsDataSelector oftype CellRangeSelector {
+        select: range P2:S45;
+    }
+
+    //Rename the cells
+    block CsHeaderWriter1 oftype CellWriter {
+        at: cell P2;
+        write: ["Country Code"];
+    }
+    block CsHeaderWriter2 oftype CellWriter {
+        at: cell S2;
+        write: ["Bond Issuance Share"];
+    }
+
+    block CsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Country Code" oftype CountryCodeAlpha3, // Jayvee 0.6.4 has a CountryCodeAlpha3 value type
+            "Bond Issuance Share" oftype Share
+        ];
+    }
+  
+    block CsLoader oftype SQLiteLoader {
+        table: "bondIssuance";
+        file: "./country-stats.sqlite";
+    }
+    
+}
+// build two pipelines
+
+pipeline CsPipeline2 {
+  
+    CsExtractor
+        -> CsXLSXInterpreter
+        -> CsSheetPicker
+        -> CsHeaderWriter1
+        -> CsHeaderWriter2
+        -> CsDataSelector // should be after headerwriter
+        -> CsTableInterpreter
+        -> CsLoader;
+
+    block CsExtractor oftype HttpExtractor {
+        url: "https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx";
+    }
+
+    //interpretes a file into a XLSX file
+    block CsXLSXInterpreter oftype XLSXInterpreter { }
+
+    //Selects the Sheet from the XLSX Workbook
+    block CsSheetPicker oftype SheetPicker {
+        sheetName: "Figure S5.1.2";
+    }
+
+    //Selects a subset of a Sheet
+    block CsDataSelector oftype CellRangeSelector {
+        select: range P2:S45;
+    }
+
+    //Rename the cells
+    block CsHeaderWriter1 oftype CellWriter {
+        at: cell P2;
+        write: ["Country Code"];
+    }
+    block CsHeaderWriter2 oftype CellWriter {
+        at: cell R2;
+        write: ["GDP per Capita"];
+    }
+
+    block CsTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Country Code" oftype CountryCodeAlpha3,
+            "GDP per Capita" oftype GDP
+        ];
+    }
+  
+    block CsLoader oftype SQLiteLoader {
+        table: "gdpPerCapita";
+        file: "./country-stats.sqlite";
+    }
+    
+}

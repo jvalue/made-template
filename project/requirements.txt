@@ -1,0 +1,5 @@
+chardet==4.0.0
+kagglehub==0.2.7
+pandas==1.5.2
+Requests==2.32.3
+tenacity==9.0.0
